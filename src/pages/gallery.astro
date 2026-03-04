@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const photos = [
+  { src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80", alt: "Wedding couple on stairs" },
+  { src: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=80", alt: "Couple embrace" },
+  { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1600&q=80", alt: "Wedding flowers" },
+  { src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=80", alt: "Ceremony venue with lights" },
+  { src: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1600&q=80", alt: "Couple at sunset" },
+  { src: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1600&q=80", alt: "Garden ceremony" },
+  { src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1600&q=80", alt: "Grand venue exterior" },
+  { src: "https://images.unsplash.com/photo-1478146059778-26028b07395a?auto=format&fit=crop&w=1600&q=80", alt: "Wedding rings" },
+  { src: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1600&q=80", alt: "Wedding details" },
+  { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80", alt: "Portrait" },
+];
+---
+
+<Layout title="Gallery | A & S Wedding">
+  <!-- Back navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 gallery-nav transition-all duration-500">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="group flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300">
+        <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span class="text-xs tracking-widest uppercase">Back</span>
+      </a>
+      <span class="font-serif text-sm tracking-widest uppercase text-white drop-shadow-sm">Gallery</span>
+    </div>
+  </nav>
+
+  <!-- Hero / intro -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="parallax-photo absolute inset-[-30%]" data-speed="0.3">
+      <img
+        src={photos[0].src}
+        alt={photos[0].alt}
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-charcoal/50"></div>
+    <div class="relative text-center text-white px-6">
+      <p class="text-xs tracking-[0.3em] uppercase text-white/60 mb-6">A & S</p>
+      <h1 class="font-serif text-5xl md:text-7xl drop-shadow-lg mb-4">Our Day</h1>
+      <p class="text-sm text-white/50 tracking-widest">2026.05.02</p>
+    </div>
+  </section>
+
+  <!-- Parallax photo stream -->
+  {photos.slice(1).map((photo, i) => (
+    <section class="relative overflow-hidden photo-section" style={`height: ${i % 3 === 0 ? '100vh' : '80vh'}`}>
+      <div class="parallax-photo absolute inset-[-30%]" data-speed={0.15 + (i % 3) * 0.1}>
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div class="absolute inset-0 bg-charcoal/10"></div>
+      <!-- Optional caption overlay at bottom -->
+      {i % 2 === 0 && (
+        <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-charcoal/50 to-transparent">
+          <p class="text-white/60 text-xs tracking-widest uppercase">{photo.alt}</p>
+        </div>
+      )}
+    </section>
+  ))}
+
+  <!-- End card -->
+  <section class="relative py-32 bg-charcoal text-white text-center px-6">
+    <div class="max-w-md mx-auto">
+      <div class="w-12 h-12 rounded-full bg-lime/20 flex items-center justify-center mx-auto mb-8">
+        <svg class="w-6 h-6 text-lime" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      </div>
+      <p class="font-serif text-3xl mb-4">Thank You</p>
+      <p class="text-sm text-white/50 mb-10">for being part of our story</p>
+      <a href="/" class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-white/50 hover:text-white transition-colors border border-white/20 hover:border-white/40 rounded-full px-6 py-3">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to invitation
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .gallery-nav {
+    background: transparent;
+  }
+  .gallery-nav.scrolled {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .parallax-photo {
+    will-change: transform;
+    transition: none;
+  }
+
+  .photo-section {
+    /* Clip overflow so parallax images don't bleed */
+    clip-path: inset(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-photo {
+      transform: none !important;
+      inset: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  // ── Parallax scroll for gallery photos ──
+  const parallaxPhotos = document.querySelectorAll('.parallax-photo') as NodeListOf<HTMLElement>;
+  const nav = document.querySelector('.gallery-nav');
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      const viewH = window.innerHeight;
+
+      parallaxPhotos.forEach((el) => {
+        const parent = el.parentElement;
+        if (!parent) return;
+
+        const rect = parent.getBoundingClientRect();
+        // Only compute parallax for sections near the viewport
+        if (rect.bottom < -viewH || rect.top > viewH * 2) return;
+
+        const speed = parseFloat(el.dataset.speed || '0.2');
+        // Center-based offset: 0 when section is centered in viewport
+        const centerOffset = rect.top + rect.height / 2 - viewH / 2;
+        const yOffset = -(centerOffset * speed);
+        el.style.transform = `translate3d(0, ${yOffset}px, 0)`;
+      });
+
+      // Nav background
+      if (nav) {
+        nav.classList.toggle('scrolled', scrollY > 60);
+      }
+
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

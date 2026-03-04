@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lime: #e1ff00;
+  --color-lime-dark: #c8e600;
+  --color-charcoal: #1a1a1a;
+  --color-warm-white: #faf9f6;
+  --color-warm-gray: #f0eeeb;
+  --color-muted: #6b6b6b;
+
+  --font-sans: "Inter", "Noto Sans JP", sans-serif;
+  --font-serif: "Playfair Display", "Noto Serif JP", serif;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+  background-color: var(--color-warm-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
