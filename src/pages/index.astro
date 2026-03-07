@@ -40,7 +40,7 @@ const bgImages = [
             <a href="#greeting" class="nav-link relative hover:text-white transition-colors duration-300">Greeting</a>
             <a href="/gallery" class="nav-link relative hover:text-white transition-colors duration-300">Gallery</a>
             <a href="#details" class="nav-link relative hover:text-white transition-colors duration-300">Details</a>
-            <a href="#schedule" class="nav-link relative hover:text-white transition-colors duration-300">Schedule</a>
+            <a href="#schedule" class="nav-link relative hover:text-white transition-colors duration-300">Timeline</a>
             <a href="#access" class="nav-link relative hover:text-white transition-colors duration-300">Access</a>
             <a href="#rsvp" class="nav-link relative hover:text-white transition-colors duration-300">RSVP</a>
           </div>
@@ -105,7 +105,7 @@ const bgImages = [
             <p class="mt-8 text-sm leading-loose text-muted tracking-wide reveal">
               つきましては 日頃お世話になっている<br />
               皆様にお集まりいただき<br />
-              ささやかな披露宴を催したいと存じます
+              挙式を執り行いたいと存じます
             </p>
 
             <p class="mt-8 text-sm leading-loose text-muted tracking-wide reveal">
@@ -119,10 +119,6 @@ const bgImages = [
               <p class="text-xs tracking-[0.3em] text-muted">2026年 春</p>
               <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
             </div>
-
-            <p class="mt-6 font-serif text-sm tracking-widest reveal">
-              山田 悠斗 ・ 鈴木 美花
-            </p>
           </div>
 
           <div class="lang-en">
@@ -134,7 +130,7 @@ const bgImages = [
             <p class="mt-8 text-sm leading-relaxed text-muted tracking-wide reveal">
               We would be honored to have you,<br />
               our dear family and friends,<br />
-              join us for a celebration of our union.
+              join us as we celebrate our ceremony.
             </p>
 
             <p class="mt-8 text-sm leading-relaxed text-muted tracking-wide reveal">
@@ -259,8 +255,8 @@ const bgImages = [
               <span class="text-xs tracking-[0.2em] uppercase font-medium">Details</span>
             </div>
             <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">挙式・披露宴</span>
-              <span class="lang-en">Ceremony & Reception</span>
+              <span class="lang-mix">挙式</span>
+              <span class="lang-en">Ceremony</span>
             </h2>
           </div>
 
@@ -274,11 +270,9 @@ const bgImages = [
               <div class="space-y-1 text-sm text-muted">
                 <span class="lang-mix">
                   <p>挙式　14:00〜</p>
-                  <p>披露宴 15:00〜</p>
                 </span>
                 <span class="lang-en">
                   <p>Ceremony: 2:00 PM</p>
-                  <p>Reception: 3:00 PM</p>
                 </span>
               </div>
             </div>
@@ -321,18 +315,16 @@ const bgImages = [
               <span class="text-xs tracking-[0.2em] uppercase font-medium">Schedule</span>
             </div>
             <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">当日のスケジュール</span>
-              <span class="lang-en">Schedule</span>
+              <span class="lang-mix">当日のタイムライン</span>
+              <span class="lang-en">Timeline</span>
             </h2>
           </div>
 
           <div class="space-y-0">
             {[
-              { time: "1:30 PM", label: "受付開始", labelEn: "Reception Opens" },
+              { time: "1:30 PM", label: "受付開始", labelEn: "Doors Open" },
               { time: "2:00 PM", label: "挙式", labelEn: "Ceremony" },
               { time: "2:30 PM", label: "集合写真", labelEn: "Group Photo" },
-              { time: "3:00 PM", label: "披露宴", labelEn: "Reception Party" },
-              { time: "5:30 PM", label: "お開き", labelEn: "Closing" },
             ].map((item, i) => (
               <div class="flex items-start gap-8 group timeline-item reveal">
                 <div class="w-20 text-right shrink-0">
@@ -340,7 +332,7 @@ const bgImages = [
                 </div>
                 <div class="flex flex-col items-center shrink-0">
                   <div class="w-3 h-3 rounded-full bg-lime border-2 border-charcoal/20 transition-all duration-300 group-hover:scale-150 group-hover:bg-lime group-hover:border-lime group-hover:shadow-[0_0_12px_rgba(225,255,0,0.5)]"></div>
-                  {i < 4 && <div class="w-px h-16 bg-charcoal/10 transition-colors duration-300 group-hover:bg-lime/40"></div>}
+                  {i < 2 && <div class="w-px h-16 bg-charcoal/10 transition-colors duration-300 group-hover:bg-lime/40"></div>}
                 </div>
                 <div class="pb-16 last:pb-0 transition-transform duration-300 group-hover:translate-x-1">
                   <p class="font-medium">
