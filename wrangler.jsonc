@@ -1,0 +1,7 @@
+{
+  "name": "as-spring-2026",
+  "compatibility_date": "2026-03-07", // Update to the day you deploy
+  "assets": {
+    "directory": "./dist",
+  }
+}
