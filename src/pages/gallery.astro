@@ -17,7 +17,7 @@ const photos = [
 
 <Layout title="Gallery | A & S Wedding">
   <!-- Back navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 gallery-nav transition-all duration-500">
+  <nav data-auto-scroll-header class="fixed top-0 left-0 right-0 z-50 gallery-nav transition-all duration-500">
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="/" class="group flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300">
         <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -30,7 +30,7 @@ const photos = [
   </nav>
 
   <!-- Hero / intro -->
-  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <section data-auto-scroll-section class="relative h-screen flex items-center justify-center overflow-hidden">
     <div class="parallax-photo absolute inset-[-30%]" data-speed="0.3">
       <img
         src={photos[0].src}
@@ -49,7 +49,7 @@ const photos = [
 
   <!-- Parallax photo stream -->
   {photos.slice(1).map((photo, i) => (
-    <section class="relative overflow-hidden photo-section" style={`height: ${i % 3 === 0 ? '100vh' : '80vh'}`}>
+    <section data-auto-scroll-section class="relative overflow-hidden photo-section" style={`height: ${i % 3 === 0 ? '100vh' : '80vh'}`}>
       <div class="parallax-photo absolute inset-[-30%]" data-speed={0.15 + (i % 3) * 0.1}>
         <img
           src={photo.src}
@@ -69,7 +69,7 @@ const photos = [
   ))}
 
   <!-- End card -->
-  <section class="relative py-32 bg-charcoal text-white text-center px-6">
+  <section data-auto-scroll-section class="relative py-32 bg-charcoal text-white text-center px-6">
     <div class="max-w-md mx-auto">
       <div class="w-12 h-12 rounded-full bg-lime/20 flex items-center justify-center mx-auto mb-8">
         <svg class="w-6 h-6 text-lime" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">

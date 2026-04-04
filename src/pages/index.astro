@@ -1,38 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const bgImages = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1478146059778-26028b07395a?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2000&q=80",
-];
 ---
 
 <Layout>
-  <!-- Fixed background slideshow -->
-  <div id="bg-slideshow" class="fixed inset-0 z-0">
-    {bgImages.map((src, i) => (
-      <img
-        src={src}
-        alt=""
-        class:list={["bg-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out", i === 0 ? "opacity-100" : "opacity-0"]}
-        data-index={i}
-        loading={i === 0 ? "eager" : "lazy"}
-      />
-    ))}
-    <!-- Overlay that darkens/lightens based on content -->
-    <div id="bg-overlay" class="absolute inset-0 bg-charcoal/40 transition-opacity duration-700"></div>
+  <!-- Fixed background artwork -->
+  <div id="bg-main" class="fixed inset-0 z-0" aria-hidden="true">
+    <img
+      src="/assets/p1.png"
+      alt=""
+      class="main-bg-image absolute inset-0 h-full w-full object-cover object-center"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/18 to-charcoal/32 transition-opacity duration-700"></div>
   </div>
 
   <!-- Scrollable content layer -->
   <div id="content-layer" class="relative z-10">
 
     <!-- Navigation -->
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav id="main-nav" data-auto-scroll-header class="fixed top-0 left-0 right-0 z-9999 transition-all duration-500">
+      <div class="nav-shell desktop-shell max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <span class="font-serif text-sm tracking-widest uppercase nav-logo text-white drop-shadow-sm">A & S</span>
         <div class="flex items-center gap-6">
           <div class="hidden md:flex gap-8 text-xs tracking-widest uppercase text-white/70">
@@ -46,19 +34,33 @@ const bgImages = [
           </div>
           <!-- Language toggle -->
           <button id="lang-toggle" class="lang-toggle flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-300" aria-label="Toggle language">
-            <span class="lang-label-mix">JP / EN</span>
+            <span class="lang-label-mix">ID / EN</span>
             <span class="lang-label-en hidden">EN</span>
-            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-            </svg>
+            
           </button>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section — transparent, shows background -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center">
-      <div class="relative text-center px-6 pt-20 hero-content text-white">
+    <section id="home" data-auto-scroll-section class="hero-section relative min-h-screen flex items-center justify-center">
+      <div class="hero-scene" aria-hidden="true">
+        <div class="hero-scene__mountain"></div>
+        <img
+          src="/assets/p1%20b%20crop.png"
+          alt=""
+          class="hero-scene__couple translateY-30"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="">
+          <img src="/assets/gio2.webp"  alt="" class="hero-scene__cat hero-scene__cat--left"   loading="lazy" decoding="async"/>
+          <img src="/assets/coco2.webp"  alt="" class="hero-scene__cat hero-scene__cat--right"  loading="lazy" decoding="async"/>
+          <img src="/assets/ucil2.webp"   alt="" class="hero-scene__cat hero-scene__cat--center" loading="lazy" decoding="async"/>
+        </div>
+      </div>
+
+      <div class="hero-content hero-shell relative text-center px-6 pt-20 text-white">
         <div class="inline-block mb-8 reveal" data-delay="0">
           <span class="text-xs tracking-[0.3em] uppercase text-white/70">Wedding Invitation</span>
         </div>
@@ -74,11 +76,17 @@ const bgImages = [
           <p class="text-xs tracking-[0.3em] uppercase text-white/60">Saturday</p>
         </div>
 
-        <div class="mt-20 animate-bounce reveal" data-delay="1200">
-          <svg class="w-5 h-5 mx-auto text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <button
+          type="button"
+          data-auto-scroll-next
+          class="mt-20 inline-flex items-center justify-center animate-bounce reveal cursor-pointer bg-transparent p-0 text-white/40 transition-colors duration-300 hover:text-white focus:outline-none"
+          data-delay="1200"
+          aria-label="Scroll to next section"
+        >
+          <svg class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7" />
           </svg>
-        </div>
+        </button>
       </div>
     </section>
 
@@ -86,33 +94,38 @@ const bgImages = [
     <div class="content-cards">
 
       <!-- Greeting Section -->
-      <section id="greeting" class="content-card py-32 px-6">
-        <div class="max-w-2xl mx-auto text-center">
+      <section
+        id="greeting"
+        data-auto-scroll-section
+        class="min-h-screen px-6 py-20 md:py-24 flex items-end"
+      >
+        <div class="greeting-panel" aria-hidden="true"></div>
+        <!-- <div class="max-w-2xl mx-auto text-center">
           <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-12 reveal">
             <span class="text-xs tracking-[0.2em] uppercase font-medium">Greeting</span>
           </div>
 
           <div class="lang-mix">
             <p class="font-serif text-lg md:text-xl leading-loose tracking-wide reveal">
-              このたび 私たちは<br />
-              結婚式を挙げることになりました
+              Dengan penuh kebahagiaan kami<br />
+              akan melangsungkan pernikahan
             </p>
 
             <p class="mt-8 text-sm leading-loose text-muted tracking-wide reveal">
-              つきましては 日頃お世話になっている<br />
-              皆様にお集まりいただき<br />
-              挙式を執り行いたいと存じます
+              Bersama keluarga tercinta kami bermaksud<br />
+              mengundang Bapak/Ibu/Saudara/i<br />
+              untuk hadir menyaksikan hari bahagia kami
             </p>
 
             <p class="mt-8 text-sm leading-loose text-muted tracking-wide reveal">
-              おいそがしいところ 誠に恐縮ではございますが<br />
-              ぜひご出席くださいますよう<br />
-              お願い申し上げます
+              Merupakan kebahagiaan yang besar bagi kami<br />
+              apabila Anda berkenan hadir<br />
+              dan memberikan doa restu
             </p>
 
             <div class="mt-12 flex items-center justify-center gap-4 reveal">
               <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
-              <p class="text-xs tracking-[0.3em] text-muted">2026年 春</p>
+              <p class="text-xs tracking-[0.3em] text-muted">Musim Semi 2026</p>
               <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
             </div>
           </div>
@@ -145,16 +158,56 @@ const bgImages = [
               Affrian & Sherly
             </p>
           </div>
+        </div> -->
+
+        <div class="greeting-content desktop-reading-block mx-auto max-w-full text-center pb-[30vh] md:pb-[10vh]">
+          <p class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal">
+            &ldquo;Dan di antara tanda-tanda (kebesaran)-Nya ialah<br />
+            Dia menciptakan pasangan-pasangan untukmu dari<br />
+            jenismu sendiri, agar kamu cenderung dan merasa<br />
+            tenteram kepadanya, dan Dia menjadikan di antaramu rasa<br />
+            kasih dan sayang. Sesungguhnya pada yang demikian itu<br />
+            benar-benar terdapat tanda-tanda (kebesaran Allah) bagi<br />
+            kaum yang berpikir.&rdquo;
+          </p>
+          <p class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal">(QS. Ar-Rum: 21)</p>
+        </div>
+        <div class="greeting-cats" aria-hidden="true">
+          <img
+            src="/assets/gio2.webp"
+            alt=""
+            class="greeting-cat greeting-cat--gio"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="/assets/coco2.webp"
+            alt=""
+            class="greeting-cat greeting-cat--coco"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="/assets/ucil2.webp"
+            alt=""
+            class="greeting-cat greeting-cat--ucil"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </section>
+    <!-- Transparent spacer — background shows through -->
+      <div class="ambient-spacer ambient-spacer--after-greeting h-[50vh]"></div>
 
-      <!-- Transparent spacer — background shows through -->
-      <div class="h-[50vh]"></div>
-
-      <!-- Special Thanks / Gallery teaser -->
-      <section id="gallery" class="py-16 px-6 relative">
-        <div class="max-w-3xl mx-auto reveal">
-          <a href="/gallery" class="gallery-teaser group block relative overflow-hidden rounded-2xl bg-lime transition-transform duration-500 hover:-translate-y-1">
+      <!-- Countdown / Calendar teaser -->
+      <section id="gallery" data-auto-scroll-section class="py-16 px-6 relative">
+        <div class="calendar-shell desktop-shell max-w-3xl mx-auto reveal">
+          <a
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Affrian+%26+Sherly+Wedding+Ceremony&dates=20260502T140000/20260502T153000&details=Join+us+for+the+wedding+ceremony+of+Affrian+and+Sherly.&location=Masjid+Besar+Riyadhus+Sholihin%2C+Perumahan+Bumi+Sumekar+Asri%2C+Kec.+Kota+Sumenep&ctz=Asia%2FJakarta"
+            target="_blank"
+            rel="noreferrer"
+            class="gallery-teaser calendar-card group block relative overflow-hidden rounded-2xl bg-lime transition-transform duration-500 hover:-translate-y-1"
+          >
             <!-- Decorative sparkles -->
             <svg class="sparkle absolute top-6 right-12 w-4 h-4 text-lime-dark/40" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"/>
@@ -170,30 +223,45 @@ const bgImages = [
               <path d="M-20 250 Q150 100 300 180 Q450 260 620 80" stroke="currentColor" stroke-width="1.5" class="text-lime-dark"/>
             </svg>
 
-            <div class="flex flex-col md:flex-row items-stretch gap-0">
-              <!-- Photo placeholder (will be replaced with real photos after the wedding) -->
-              <div class="relative md:w-[55%] aspect-[4/3] md:aspect-auto overflow-hidden m-4 md:m-5 md:mr-0 rounded-xl bg-charcoal/10 flex items-center justify-center min-h-[220px]">
-                <div class="text-center px-6" id="gallery-photo-area">
-                  <svg class="w-12 h-12 mx-auto mb-3 text-charcoal/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <div class="calendar-card__layout flex flex-col md:flex-row items-stretch gap-0">
+              <!-- Calendar visual -->
+              <div class="calendar-card__visual relative md:w-[55%] aspect-[4/3] md:aspect-auto overflow-hidden m-4 md:m-5 md:mr-0 rounded-xl bg-charcoal/10 flex items-center justify-center min-h-[220px]">
+                <div class="text-center px-6" id="calendar-card-visual">
+                  <svg class="w-12 h-12 mx-auto mb-4 text-charcoal/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3.5 9.5h17M5 5.5h14A1.5 1.5 0 0120.5 7v12A1.5 1.5 0 0119 20.5H5A1.5 1.5 0 013.5 19V7A1.5 1.5 0 015 5.5z" />
                   </svg>
-                  <p class="text-xs tracking-widest uppercase text-charcoal/30">
-                    <span class="lang-mix">結婚式後に公開</span>
-                    <span class="lang-en">Coming after the wedding</span>
+                  <p class="text-xs tracking-[0.28em] uppercase text-charcoal/40">
+                    <span class="lang-mix">2 Mei 2026</span>
+                    <span class="lang-en">May 2, 2026</span>
+                  </p>
+                  <p class="mt-3 font-serif text-2xl text-charcoal">
+                    <span class="lang-mix">14.00 WIB</span>
+                    <span class="lang-en">2:00 PM</span>
+                  </p>
+                  <p class="mt-3 text-sm leading-relaxed text-charcoal/65">
+                    <span class="lang-mix">Masjid Besar Riyadhus Sholihin</span>
+                    <span class="lang-en">Masjid Besar Riyadhus Sholihin</span>
                   </p>
                 </div>
               </div>
 
               <!-- Text content -->
-              <div class="flex-1 flex flex-col justify-between p-6 md:p-8">
+              <div class="calendar-card__body flex-1 flex flex-col justify-between p-6 md:p-8">
                 <div>
-                  <p class="font-serif italic text-2xl md:text-3xl text-charcoal mb-2">Special Thanks</p>
+                  <p class="calendar-card__title font-serif italic text-2xl md:text-3xl text-charcoal mb-2">
+                    <span class="lang-mix">Save it to calendar</span>
+                    <span class="lang-en">Save it to calendar</span>
+                  </p>
+                  <p class="calendar-card__copy text-sm leading-relaxed text-charcoal/70 max-w-sm">
+                    <span class="lang-mix">Simpan tanggal akad kami ke Google Calendar agar tidak terlewat.</span>
+                    <span class="lang-en">Add our ceremony to Google Calendar so the date stays on your schedule.</span>
+                  </p>
                   <!-- Countdown -->
-                  <div id="countdown" class="flex gap-3 mt-3">
+                  <div id="countdown" class="calendar-countdown flex gap-3 mt-3">
                     <div class="text-center">
                       <span id="cd-days" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
                       <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
-                        <span class="lang-mix">日</span>
+                        <span class="lang-mix">Hari</span>
                         <span class="lang-en">Days</span>
                       </span>
                     </div>
@@ -201,7 +269,7 @@ const bgImages = [
                     <div class="text-center">
                       <span id="cd-hours" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
                       <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
-                        <span class="lang-mix">時</span>
+                        <span class="lang-mix">Jam</span>
                         <span class="lang-en">Hrs</span>
                       </span>
                     </div>
@@ -209,7 +277,7 @@ const bgImages = [
                     <div class="text-center">
                       <span id="cd-mins" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
                       <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
-                        <span class="lang-mix">分</span>
+                        <span class="lang-mix">Menit</span>
                         <span class="lang-en">Min</span>
                       </span>
                     </div>
@@ -217,16 +285,16 @@ const bgImages = [
                     <div class="text-center">
                       <span id="cd-secs" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
                       <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
-                        <span class="lang-mix">秒</span>
+                        <span class="lang-mix">Detik</span>
                         <span class="lang-en">Sec</span>
                       </span>
                     </div>
                   </div>
                 </div>
-                <div class="flex items-center justify-between mt-6">
-                  <p class="text-sm text-charcoal/70 leading-snug" id="gallery-link-text">
-                    <span class="lang-mix">結婚式当日の<br/>様子はこちら</span>
-                    <span class="lang-en">View our wedding<br/>day photos</span>
+                <div class="calendar-card__footer flex items-center justify-between mt-6">
+                  <p class="text-sm text-charcoal/70 leading-snug" id="calendar-link-text">
+                    <span class="lang-mix">Buka Google Calendar<br/>dan simpan acaranya</span>
+                    <span class="lang-en">Open Google Calendar<br/>and save the event</span>
                   </p>
                   <div class="w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center transition-all duration-300 group-hover:bg-charcoal group-hover:border-charcoal">
                     <svg class="w-5 h-5 text-charcoal transition-colors duration-300 group-hover:text-lime" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -240,32 +308,112 @@ const bgImages = [
         </div>
       </section>
 
+      <!-- Couple Introduction -->
+      <section id="introduction" data-auto-scroll-section class="content-card content-card--transparent py-32 px-6">
+        <div class="couple-shell desktop-shell max-w-5xl mx-auto">
+          <div class="text-center mb-6">
+            <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
+              <span class="text-xs tracking-[0.2em] uppercase font-medium">
+                <span >The Couple</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid gap-10 md:gap-14">
+            <div class="couple-card-group reveal">
+              <article class="couple-card rounded-[2rem] p-4 md:p-8">
+                <div class="couple-card__text text-left">
+                  <p class="couple-card__eyebrow mb-5">
+                    <span class="lang-mix">Mempelai Wanita</span>
+                    <span class="lang-en">Bride</span>
+                  </p>
+                  <h3 class="couple-card__name font-serif mb-5">
+                    Syafazerlinda
+                  </h3>
+                  <div class="lang-mix couple-card__meta space-y-2">
+                    <p>Putri kedua dari</p>
+                    <p>Bpk. Moch. Syafi'i &amp; Ibu Fatimah Umar</p>
+                  </div>
+                  <div class="lang-en couple-card__meta space-y-2">
+                    <p>Second daughter of</p>
+                    <p>Mr. Moch. Syafi'i &amp; Mrs. Fatimah Umar</p>
+                  </div>
+                </div>
+              </article>
+
+              <div class="couple-card__portrait" aria-hidden="true">
+                <img
+                  src="/assets/sherly.png"
+                  alt=""
+                  class="couple-card__portrait-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            <div class="couple-card-group reveal">
+              <div class="couple-card__portrait couple-card__portrait--left" aria-hidden="true">
+                <img
+                  src="/assets/rian.png"
+                  alt=""
+                  class="couple-card__portrait-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <article class="couple-card rounded-[2rem] p-6 md:p-8">
+                <div class="couple-card__text text-left">
+                  <p class="couple-card__eyebrow mb-5">
+                    <span class="lang-mix">Mempelai Pria</span>
+                    <span class="lang-en">Groom</span>
+                  </p>
+                  <h3 class="couple-card__name font-serif mb-5">
+                    Affrian Rachmansyah
+                  </h3>
+                  <div class="lang-mix couple-card__meta space-y-2">
+                    <p>Putra pertama dari</p>
+                    <p>Bpk. Yanuk Fatchorrahman (Alm.) &amp; Ibu Dinar Rahmawati</p>
+                  </div>
+                  <div class="lang-en couple-card__meta space-y-2">
+                    <p>First son of</p>
+                    <p>Mr. Yanuk Fatchorrahman (late) &amp; Mrs. Dinar Rahmawati</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  
       <!-- Transparent spacer -->
-      <div class="h-[50vh]"></div>
+      <div class="ambient-spacer h-[50vh]"></div>
 
       <!-- Details Section -->
-      <section id="details" class="content-card py-32 px-6">
-        <div class="max-w-3xl mx-auto">
-          <div class="text-center mb-16">
+      <section id="details" data-auto-scroll-section class="content-card py-32 px-6">
+        <div class="details-layout desktop-shell max-w-3xl mx-auto">
+          <div class="details-header text-center mb-16">
             <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
               <span class="text-xs tracking-[0.2em] uppercase font-medium">Details</span>
             </div>
             <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">挙式</span>
+              <span class="lang-mix">Akad</span>
               <span class="lang-en">Ceremony</span>
             </h2>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+          <div class="details-grid grid md:grid-cols-2 gap-12 md:gap-16">
             <div class="detail-card text-center md:text-left p-8 rounded-2xl transition-all duration-500 reveal">
               <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-4">Date & Time</h3>
               <p class="font-serif text-xl mb-2">
-                <span class="lang-mix">2026年 5月 2日（土）</span>
+                <span class="lang-mix">2 Mei 2026 (Sabtu)</span>
                 <span class="lang-en">May 2, 2026 (Sat)</span>
               </p>
               <div class="space-y-1 text-sm text-muted">
                 <span class="lang-mix">
-                  <p>挙式　14:00〜</p>
+                  <p>Akad: 14.00 WIB</p>
                 </span>
                 <span class="lang-en">
                   <p>Ceremony: 2:00 PM</p>
@@ -275,52 +423,50 @@ const bgImages = [
 
             <div class="detail-card text-center md:text-left p-8 rounded-2xl transition-all duration-500 reveal">
               <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-4">Venue</h3>
-              <p class="font-serif text-xl mb-2">The Grand Garden</p>
+              <p class="font-serif text-xl mb-2">Masjid Besar Riyadhus Sholihin</p>
               <p class="text-sm text-muted">
                 <span class="lang-mix">
-                  〒150-0001<br />
-                  東京都渋谷区神宮前1-2-3<br />
-                  グランドガーデン 3F
+                  Perumahan Bumi Sumekar Asri<br />
+                  Kec. Kota Sumenep
                 </span>
                 <span class="lang-en">
-                  1-2-3 Jingumae, Shibuya-ku<br />
-                  Tokyo 150-0001<br />
-                  Grand Garden, 3F
+                  Perumahan Bumi Sumekar Asri<br />
+                  Kec. Kota Sumenep
                 </span>
               </p>
             </div>
           </div>
 
-          <div class="mt-16 text-center border-t border-charcoal/10 pt-12 reveal">
+          <div class="details-dress mt-16 text-center border-t border-charcoal/10 pt-12 reveal">
             <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-4">Dress Code</h3>
             <p class="font-serif text-lg">
-              <span class="lang-mix">セミフォーマル</span>
+              <span class="lang-mix">Semi Formal</span>
               <span class="lang-en">Semi-Formal</span>
             </p>
-            <p class="mt-2 text-sm text-muted lang-mix">Semi-Formal</p>
+            <p class="mt-2 text-sm text-muted lang-mix">Busana semi formal</p>
             <p class="mt-2 text-sm text-muted lang-en">Cocktail attire welcome</p>
           </div>
         </div>
       </section>
 
       <!-- Schedule Section -->
-      <section id="schedule" class="content-card py-32 px-6">
-        <div class="max-w-2xl mx-auto">
+      <section id="schedule" data-auto-scroll-section class="content-card py-32 px-6">
+        <div class="schedule-shell desktop-reading-block max-w-2xl mx-auto">
           <div class="text-center mb-16">
             <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
               <span class="text-xs tracking-[0.2em] uppercase font-medium">Schedule</span>
             </div>
             <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">当日のタイムライン</span>
+              <span class="lang-mix">Rangkaian Acara</span>
               <span class="lang-en">Timeline</span>
             </h2>
           </div>
 
           <div class="space-y-0">
             {[
-              { time: "1:30 PM", label: "受付開始", labelEn: "Doors Open" },
-              { time: "2:00 PM", label: "挙式", labelEn: "Ceremony" },
-              { time: "2:30 PM", label: "集合写真", labelEn: "Group Photo" },
+              { time: "1:30 PM", label: "Registrasi dibuka", labelEn: "Doors Open" },
+              { time: "2:00 PM", label: "Akad", labelEn: "Ceremony" },
+              { time: "2:30 PM", label: "Foto bersama", labelEn: "Group Photo" },
             ].map((item, i) => (
               <div class="flex items-start gap-8 group timeline-item reveal">
                 <div class="w-20 text-right shrink-0">
@@ -344,48 +490,48 @@ const bgImages = [
       </section>
 
       <!-- Transparent spacer -->
-      <div class="h-[50vh]"></div>
+      <div class="ambient-spacer h-[50vh]"></div>
 
       <!-- Access Section -->
-      <section id="access" class="content-card py-32 px-6">
-        <div class="max-w-3xl mx-auto">
-          <div class="text-center mb-16">
+      <section id="access" data-auto-scroll-section class="content-card py-32 px-6">
+        <div class="access-layout desktop-shell max-w-3xl mx-auto">
+          <div class="access-header text-center mb-16">
             <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
               <span class="text-xs tracking-[0.2em] uppercase font-medium">Access</span>
             </div>
             <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">アクセス</span>
+              <span class="lang-mix">Lokasi</span>
               <span class="lang-en">Getting There</span>
             </h2>
           </div>
 
-          <div class="map-card aspect-video rounded-xl overflow-hidden mb-12 transition-all duration-500 reveal relative group">
+          <div class="access-map map-card aspect-video rounded-xl overflow-hidden mb-12 transition-all duration-500 reveal relative group">
             <img
-              src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1400&q=80"
+              src="assets/masjid-riyadhus-salihin-sumenep.webp"
               alt="Wedding venue exterior"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent"></div>
             <div class="absolute bottom-6 left-6 text-white">
-              <p class="font-serif text-lg drop-shadow-md">The Grand Garden</p>
+              <p class="font-serif text-lg drop-shadow-md">Masjid Besar Riyadhus Sholihin</p>
               <p class="text-xs text-white/70 mt-1">
-                <span class="lang-mix">東京都渋谷区神宮前</span>
-                <span class="lang-en">Jingumae, Shibuya, Tokyo</span>
+                <span class="lang-mix">Perumahan Bumi Sumekar Asri, Kec. Kota Sumenep</span>
+                <span class="lang-en">Perumahan Bumi Sumekar Asri, Kec. Kota Sumenep</span>
               </p>
             </div>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-8 text-sm">
+          <div class="access-grid grid md:grid-cols-2 gap-8 text-sm">
             <div class="access-card p-6 rounded-xl transition-all duration-400 reveal">
               <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-3">
-                <span class="lang-mix">電車でお越しの方</span>
+                <span class="lang-mix">Datang dengan kereta</span>
                 <span class="lang-en">By Train</span>
               </h3>
               <p class="text-muted leading-relaxed">
                 <span class="lang-mix">
-                  JR山手線「原宿」駅 竹下口より徒歩5分<br />
-                  東京メトロ千代田線「明治神宮前」駅 2番出口より徒歩3分
+                  5 menit berjalan kaki dari Stasiun JR Harajuku (Pintu Keluar Takeshita)<br />
+                  3 menit berjalan kaki dari Stasiun Meiji-jingumae (Pintu Keluar 2)
                 </span>
                 <span class="lang-en">
                   5 min walk from JR Harajuku Station (Takeshita Exit)<br />
@@ -395,13 +541,13 @@ const bgImages = [
             </div>
             <div class="access-card p-6 rounded-xl transition-all duration-400 reveal">
               <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-3">
-                <span class="lang-mix">お車でお越しの方</span>
+                <span class="lang-mix">Datang dengan mobil</span>
                 <span class="lang-en">By Car</span>
               </h3>
               <p class="text-muted leading-relaxed">
                 <span class="lang-mix">
-                  会場敷地内に駐車場がございます（20台）<br />
-                  満車の場合は近隣のコインパーキングをご利用ください
+                  Tersedia area parkir di lokasi acara (20 mobil)<br />
+                  Jika penuh, silakan gunakan area parkir umum terdekat
                 </span>
                 <span class="lang-en">
                   On-site parking available (20 spaces)<br />
@@ -414,20 +560,20 @@ const bgImages = [
       </section>
 
       <!-- RSVP Section — semi-transparent dark -->
-      <section id="rsvp" class="content-card content-card--dark py-32 px-6">
-        <div class="max-w-xl mx-auto text-center">
+      <section id="rsvp" data-auto-scroll-section class="content-card content-card--dark py-32 px-6">
+        <div class="rsvp-shell desktop-reading-block max-w-xl mx-auto text-center">
           <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
             <span class="text-xs tracking-[0.2em] uppercase font-medium text-lime">RSVP</span>
           </div>
           <h2 class="font-serif text-3xl md:text-4xl mb-6 text-white reveal">
-            <span class="lang-mix">出欠のご連絡</span>
+            <span class="lang-mix">Konfirmasi Kehadiran</span>
             <span class="lang-en">RSVP</span>
           </h2>
           <p class="text-sm text-white/60 leading-relaxed mb-12 reveal">
             <span class="lang-mix">
-              お手数ではございますが<br />
-              <span class="text-white/80 font-medium">2026年 3月 15日</span>までに<br />
-              ご返信いただけますと幸いです
+              Mohon kesediaannya untuk mengisi konfirmasi<br />
+              paling lambat <span class="text-white/80 font-medium">15 Maret 2026</span><br />
+              agar kami dapat mempersiapkan hari istimewa ini
             </span>
             <span class="lang-en">
               We would appreciate your reply<br />
@@ -441,7 +587,7 @@ const bgImages = [
               href="#"
               class="rsvp-btn inline-flex items-center gap-3 bg-lime text-charcoal px-10 py-4 rounded-full text-sm font-medium tracking-widest uppercase transition-all duration-300"
             >
-              <span class="lang-mix">出席・欠席を回答する</span>
+              <span class="lang-mix">Kirim RSVP</span>
               <span class="lang-en">Respond Now</span>
               <svg class="w-4 h-4 rsvp-arrow transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -454,8 +600,8 @@ const bgImages = [
       </section>
 
       <!-- Footer -->
-      <footer class="content-card py-16 px-6 text-center">
-        <div class="space-y-4">
+      <footer data-auto-scroll-section class="content-card py-16 px-6 text-center">
+        <div class="footer-shell desktop-reading-block space-y-4">
           <p class="font-serif text-2xl tracking-widest footer-logo">A & S</p>
           <p class="text-xs tracking-[0.3em] uppercase text-muted">2026.05.02</p>
           <div class="flex items-center justify-center gap-4 mt-6">
@@ -474,18 +620,13 @@ const bgImages = [
 </Layout>
 
 <style>
-  /* ── Fixed background slideshow ── */
-  #bg-slideshow {
+  /* ── Fixed background artwork ── */
+  #bg-main {
+    background: linear-gradient(180deg, #92d8e0 0%, #1489af 52%, #a6e4db 100%);
     will-change: auto;
   }
-  .bg-slide {
-    will-change: opacity;
-    /* Subtle slow zoom on the active slide */
-    animation: bg-ken-burns 12s ease-in-out infinite alternate;
-  }
-  @keyframes bg-ken-burns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.08); }
+  .main-bg-image {
+    object-position: center center;
   }
 
   /* ── Content cards float above background ── */
@@ -496,9 +637,137 @@ const bgImages = [
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
   }
+  .content-card + .content-card {
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
   .content-card--dark {
     background: rgba(26, 26, 26, 0.88);
     border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .content-card--transparent {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-top: none;
+  }
+  #greeting {
+    position: relative;
+  }
+  .greeting-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 40%;
+    background: #aed15d;
+    z-index: 0;
+  }
+  .greeting-content {
+    position: relative;
+    z-index: 50;
+  }
+  .greeting-cats,
+  .greeting-cat {
+    display: none;
+  }
+  .couple-card {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 18px 48px rgba(9, 71, 96, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease;
+  }
+  .couple-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 24px 58px rgba(9, 71, 96, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .couple-card-group {
+    --couple-group-gap: clamp(0.75rem, 2vw, 1.25rem);
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--couple-group-gap);
+  }
+  .couple-card-group > .couple-card {
+    flex: 0 1 calc(50% - (var(--couple-group-gap) / 2));
+    max-width: calc(50% - (var(--couple-group-gap) / 2));
+    min-width: 0;
+  }
+  .couple-card__text {
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .couple-card-group .couple-card__eyebrow {
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+  }
+  .couple-card-group .couple-card__name {
+    font-size: clamp(1.05rem, 1.7vw, 1.75rem);
+    line-height: 1.05;
+    letter-spacing: 0.035em;
+    text-wrap: balance;
+  }
+  .couple-card-group .couple-card__meta {
+    font-size: clamp(0.68rem, 0.98vw, 0.84rem);
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+  .couple-card__eyebrow {
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .couple-card__name {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+  }
+  .couple-card__meta {
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.7;
+    color: rgba(26, 26, 26, 0.8);
+  }
+  .couple-card__portrait {
+    display: flex;
+    flex: 0 0 calc(50% - (var(--couple-group-gap) / 2));
+    max-width: calc(50% - (var(--couple-group-gap) / 2));
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-width: 0;
+  }
+  .couple-card__portrait--left {
+    justify-content: flex-start;
+  }
+  .couple-card__portrait-image {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 28px rgba(26, 26, 26, 0.1));
+  }
+  .couple-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 8vw, 5rem);
+    line-height: 1;
+    color: rgba(26, 26, 26, 0.8);
   }
 
   /* ── Scroll reveal animations ── */
@@ -628,8 +897,35 @@ const bgImages = [
   }
 
   /* ── Hero ── */
+  .hero-section {
+  }
+  .hero-scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-scene__mountain {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: clamp(17rem, 34vw, 26rem);
+    background: url('/assets/gunung.png') center bottom / cover no-repeat;
+  }
+  .hero-scene__couple {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    filter: drop-shadow(0 18px 32px rgba(26, 26, 26, 0.12));
+  }
   .hero-content {
+    z-index: 1;
     will-change: transform;
+    padding-bottom: clamp(13rem, 26vw, 19rem);
+    text-shadow: 0 10px 30px rgba(16, 66, 86, 0.18);
   }
 
   /* ── Language toggle ── */
@@ -666,39 +962,428 @@ const bgImages = [
       transform: none;
       transition: none;
     }
-    .bg-slide {
-      animation: none;
-    }
     .footer-dot {
       animation: none;
     }
   }
-</style>
 
-<script define:vars={{ imageCount: bgImages.length }}>
-  // ── Background image slideshow ──
-  const slides = document.querySelectorAll('.bg-slide');
-  let currentSlide = 0;
-  const SLIDE_INTERVAL = 6000; // 6 seconds per image
+  /* ── Cat images on the couple illustration ── */
+  
 
-  function shuffleSlide() {
-    // Pick a random next slide (not the same as current)
-    let next;
-    do {
-      next = Math.floor(Math.random() * imageCount);
-    } while (next === currentSlide && imageCount > 1);
+  @media (min-width: 1024px) {
+    .desktop-shell {
+      max-width: 1280px;
+    }
+    .desktop-reading-block {
+      max-width: 40rem;
+    }
+    .nav-shell {
+      max-width: 1280px;
+      padding-inline: clamp(2rem, 3vw, 3rem);
+    }
+    .ambient-spacer {
+      height: clamp(10rem, 18vw, 15rem);
+    }
+    .ambient-spacer--after-greeting {
+      height: 0;
+    }
+    #gallery,
+    #introduction,
+    #details,
+    #schedule,
+    #access,
+    #rsvp {
+      padding-block: clamp(5.25rem, 8vw, 7rem);
+    }
+    footer[data-auto-scroll-section] {
+      padding-block: clamp(3.25rem, 5vw, 4.5rem);
+    }
+    .content-card + .content-card {
+      margin-top: clamp(1.5rem, 2vw, 2.25rem);
+    }
+    #gallery {
+      position: relative;
+      z-index: 5;
+    }
 
-    // Crossfade
-    slides[currentSlide].classList.remove('opacity-100');
-    slides[currentSlide].classList.add('opacity-0');
-    slides[next].classList.remove('opacity-0');
-    slides[next].classList.add('opacity-100');
+    .hero-section {
+      justify-content: flex-start;
+      overflow: visible;
+      z-index: 2;
+    }
+    
+    .main-bg-image {
+      object-position: 68% 22%;
+      transform: scale(1.025);
+    }
+    .hero-shell {
+      width: min(38rem, 42vw);
+      max-width: 38rem;
+      margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+      margin-right: auto;
+      padding-inline: 0;
+      padding-top: clamp(5rem, 10vh, 7rem);
+      padding-bottom: clamp(7rem, 12vw, 10rem);
+      text-align: left;
+      z-index: 2;
+    }
+    .hero-shell h1 {
+      max-width: 32rem;
+      font-size: clamp(5.75rem, 8vw, 8rem);
+      line-height: 0.92;
+    }
+    .hero-shell .space-y-2 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .hero-scene {
+      z-index: 1;
+    }
+    .hero-scene__mountain {
+      display: none;
+    }
+    .hero-scene__couple {
+      display: block;
+      top: -15%;
+      left: 50%;
+      right: auto;
+      bottom: clamp(-18rem, -10vw, -8rem);
+      width: min(100vw, 106rem);
+      max-width: none;
+      filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
+      transform: translateX(-50%);
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .hero-scene__cat {
+      display: none;
+    }
 
-    currentSlide = next;
+    #greeting {
+      padding-inline: 0;
+      overflow: clip;
+      justify-content: flex-start;
+    }
+    .greeting-panel {
+      display: none;
+    }
+    .greeting-content {
+      width: min(40rem, 42vw);
+      max-width: 40rem;
+      margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+      margin-right: auto;
+      margin-bottom: clamp(4rem, 7vw, 5.5rem);
+      padding: clamp(2rem, 3vw, 3rem);
+      text-align: left;
+      background: rgba(174, 209, 93, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 2rem;
+      box-shadow: 0 24px 60px rgba(32, 72, 48, 0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .greeting-cats {
+      display: grid;
+      position: absolute;
+      left: calc(max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 42vw) + clamp(1.5rem, 3vw, 3rem));
+      bottom: clamp(4rem, 7vw, 6rem);
+      width: clamp(15rem, 18vw, 19rem);
+      grid-template-columns: 0.9fr 1.05fr;
+      grid-template-areas:
+        "gio coco"
+        "ucil coco";
+      align-items: end;
+      gap: clamp(0.5rem, 1vw, 0.9rem);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .greeting-cat {
+      display: block;
+      width: 100%;
+      max-width: none;
+      filter: drop-shadow(0 16px 24px rgba(26, 26, 26, 0.14));
+    }
+    .greeting-cat--gio {
+      grid-area: gio;
+      width: 86%;
+      justify-self: start;
+      transform: translateY(0.35rem) rotate(-3deg);
+    }
+    .greeting-cat--coco {
+      grid-area: coco;
+      width: 100%;
+      align-self: center;
+    }
+    .greeting-cat--ucil {
+      grid-area: ucil;
+      width: 98%;
+      justify-self: end;
+      transform: translateY(0.4rem);
+    }
+    .greeting-content > p:first-child {
+      max-width: 32rem;
+      font-size: clamp(1.2rem, 1.45vw, 1.45rem);
+      line-height: 1.7;
+    }
+    .greeting-content > p:last-child {
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .greeting-content br {
+      display: none;
+    }
+
+    .calendar-shell {
+      max-width: 1180px;
+    }
+    .calendar-card__layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+      align-items: stretch;
+    }
+    .calendar-card__visual {
+      width: auto;
+      min-height: 100%;
+      margin: clamp(1.5rem, 2vw, 1.75rem);
+      border-radius: 1.75rem;
+    }
+    .calendar-card__body {
+      gap: 2rem;
+      padding: clamp(2rem, 3vw, 3rem);
+      text-align: left;
+    }
+    .calendar-card__title {
+      font-size: clamp(2.25rem, 3vw, 3.35rem);
+      margin-bottom: 0.75rem;
+    }
+    .calendar-card__copy {
+      max-width: 28rem;
+      font-size: 0.98rem;
+    }
+    .calendar-countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.75rem;
+      max-width: 28rem;
+    }
+    .calendar-countdown > span {
+      display: none;
+    }
+    .calendar-countdown > div {
+      text-align: left;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(26, 26, 26, 0.14);
+    }
+    .calendar-card__footer {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(26, 26, 26, 0.12);
+      align-items: flex-end;
+    }
+
+    .couple-shell {
+      max-width: 1280px;
+    }
+    #introduction .grid {
+      gap: clamp(4rem, 7vw, 6rem);
+    }
+    .couple-card-group {
+      --couple-group-gap: clamp(2rem, 4vw, 4rem);
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      align-items: end;
+    }
+    .couple-card-group > .couple-card,
+    .couple-card__portrait {
+      max-width: none;
+    }
+    .couple-card {
+      padding: clamp(2.25rem, 3vw, 3rem);
+    }
+    .couple-card__name {
+      font-size: clamp(2.75rem, 4vw, 4rem);
+      letter-spacing: 0.04em;
+    }
+    .couple-card__meta {
+      font-size: clamp(1rem, 1.15vw, 1.1rem);
+      line-height: 1.75;
+    }
+    .couple-card__portrait {
+      min-height: clamp(28rem, 40vw, 38rem);
+    }
+    .couple-card__portrait-image {
+      width: min(100%, 34rem);
+    }
+
+    .details-layout {
+      max-width: 1280px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem clamp(1.5rem, 2.6vw, 2.5rem);
+      align-items: stretch;
+    }
+    .details-header {
+      grid-column: 1 / -1;
+      margin-bottom: 0.5rem;
+    }
+    .details-grid {
+      grid-column: 1 / span 2;
+      gap: clamp(1.5rem, 2vw, 2rem);
+    }
+    .details-grid .detail-card {
+      height: 100%;
+      background: rgba(255, 255, 255, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .details-dress {
+      grid-column: 3;
+      margin-top: 0;
+      padding: 2.25rem;
+      border-top: none;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .schedule-shell {
+      max-width: 56rem;
+    }
+    .schedule-shell > .text-center {
+      margin-bottom: clamp(2.75rem, 4vw, 3.5rem);
+    }
+    #schedule .space-y-0 {
+      max-width: 44rem;
+      margin: 0 auto;
+    }
+    .timeline-item {
+      gap: clamp(1.5rem, 2vw, 2rem);
+    }
+    .timeline-item > div:first-child {
+      width: 6rem;
+    }
+    .timeline-item > div:last-child {
+      max-width: 26rem;
+      padding-bottom: 3rem;
+    }
+
+    .access-layout {
+      max-width: 1280px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.85fr);
+      gap: clamp(1.5rem, 2.5vw, 2.5rem);
+      align-items: start;
+    }
+    .access-header {
+      grid-column: 1 / -1;
+      margin-bottom: 0.5rem;
+    }
+    .access-map {
+      grid-column: 1;
+      margin-bottom: 0;
+      min-height: 30rem;
+      aspect-ratio: auto;
+    }
+    .access-grid {
+      grid-column: 2;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      align-content: start;
+    }
+    .access-card {
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .rsvp-shell {
+      max-width: 44rem;
+    }
+    .footer-shell {
+      max-width: 30rem;
+      margin-inline: auto;
+    }
   }
 
-  setInterval(shuffleSlide, SLIDE_INTERVAL);
-</script>
+  @media (min-width: 1440px) {
+    .hero-shell {
+      width: min(40rem, 38vw);
+    }
+    .main-bg-image {
+      object-position: 72% 20%;
+    }
+    .hero-scene__couple {
+      width: 100%;
+      top: -40%;
+      bottom: clamp(-20rem, -11vw, -10rem);
+    }
+    .greeting-content {
+      margin-bottom: clamp(5rem, 8vw, 7rem);
+    }
+    .calendar-shell {
+      max-width: 1240px;
+    }
+    .greeting-cats {
+      left: calc(max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 38vw) + clamp(2rem, 3.2vw, 3.5rem));
+      bottom: clamp(5rem, 7vw, 7rem);
+      width: clamp(17rem, 18.5vw, 21rem);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-scene__mountain {
+      height: 50%;
+      background-position: center bottom;
+    }
+    .hero-scene__couple {
+      top: 63%;
+      width: 100%;
+    }
+    .hero-content {
+      padding-bottom: 10.5rem;
+    }
+    .couple-card-group {
+      --couple-group-gap: 1rem;
+    }
+    .couple-separator {
+      margin-block: -0.5rem;
+    }
+
+    .hero-scene__cat {
+    position: absolute;
+    width: 22%;
+    max-width: none;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+    z-index: 1;
+  }
+  /* Left cat (gio) — upper-left on the meadow */
+  .hero-scene__cat--left {
+    top: 110%;
+    left: 5%;
+    width: 30%;
+  }
+  /* Right cat (coco) — upper-right on the meadow */
+  .hero-scene__cat--right {
+    top: 100%;
+    right: 8%;
+    width: 25%;
+  }
+  /* Center cat (ucil) — bottom-center, largest */
+  .hero-scene__cat--center {
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+  }
+  }
+</style>
 
 <script>
   // ── Scroll reveal with IntersectionObserver ──
@@ -767,8 +1452,6 @@ const bgImages = [
   const cdHours = document.getElementById('cd-hours');
   const cdMins = document.getElementById('cd-mins');
   const cdSecs = document.getElementById('cd-secs');
-  const photoArea = document.getElementById('gallery-photo-area');
-  const linkText = document.getElementById('gallery-link-text');
   let weddingPassed = false;
 
   function updateCountdown() {
@@ -778,21 +1461,6 @@ const bgImages = [
     if (diff <= 0) {
       if (!weddingPassed) {
         weddingPassed = true;
-        // Swap placeholder to real photo
-        const parent = photoArea?.parentElement;
-        if (parent && photoArea) {
-          parent.classList.remove('bg-charcoal/10', 'flex', 'items-center', 'justify-center');
-          parent.innerHTML = `<img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Wedding day" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />`;
-        }
-        // Update link text
-        if (linkText) {
-          linkText.innerHTML = `<span class="lang-mix">結婚式当日の<br/>様子はこちら</span><span class="lang-en">View our wedding<br/>day photos</span>`;
-          // Re-apply current lang
-          const lang = document.documentElement.getAttribute('data-lang');
-          if (lang === 'en') {
-            document.documentElement.setAttribute('data-lang', 'en');
-          }
-        }
       }
       if (cdDays) cdDays.textContent = '0';
       if (cdHours) cdHours.textContent = '0';
