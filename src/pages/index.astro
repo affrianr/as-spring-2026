@@ -43,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
     </nav>
 
     <!-- Hero Section — transparent, shows background -->
-    <section id="home" data-auto-scroll-section class="hero-section relative min-h-screen flex items-center justify-center">
+    <section id="home" data-auto-scroll-section class="hero-section relative flex items-center justify-center">
       <div class="hero-scene" aria-hidden="true">
         <div class="hero-scene__mountain"></div>
         <img
@@ -97,7 +97,7 @@ import Layout from '../layouts/Layout.astro';
       <section
         id="greeting"
         data-auto-scroll-section
-        class="min-h-screen px-6 py-20 md:py-24 flex items-end"
+        class="px-6 py-20 md:py-24 flex items-end"
       >
         <div class="greeting-panel" aria-hidden="true"></div>
         <!-- <div class="max-w-2xl mx-auto text-center">
@@ -160,7 +160,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div> -->
 
-        <div class="greeting-content desktop-reading-block mx-auto max-w-full text-center pb-[30vh] md:pb-[10vh]">
+        <div class="greeting-content desktop-reading-block mx-auto max-w-full text-center">
           <p class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal">
             &ldquo;Dan di antara tanda-tanda (kebesaran)-Nya ialah<br />
             Dia menciptakan pasangan-pasangan untukmu dari<br />
@@ -197,7 +197,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </section>
     <!-- Transparent spacer — background shows through -->
-      <div class="ambient-spacer ambient-spacer--after-greeting h-[50vh]"></div>
+      <div class="ambient-spacer ambient-spacer--after-greeting"></div>
 
       <!-- Countdown / Calendar teaser -->
       <section id="gallery" data-auto-scroll-section class="py-16 px-6 relative">
@@ -389,7 +389,7 @@ import Layout from '../layouts/Layout.astro';
 
   
       <!-- Transparent spacer -->
-      <div class="ambient-spacer h-[50vh]"></div>
+      <div class="ambient-spacer"></div>
 
       <!-- Details Section -->
       <section id="details" data-auto-scroll-section class="content-card py-32 px-6">
@@ -490,7 +490,7 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- Transparent spacer -->
-      <div class="ambient-spacer h-[50vh]"></div>
+      <div class="ambient-spacer"></div>
 
       <!-- Access Section -->
       <section id="access" data-auto-scroll-section class="content-card py-32 px-6">
@@ -620,6 +620,10 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
+  :root {
+    --mobile-section-padding: clamp(4.5rem, 10svh, 6.5rem);
+  }
+
   /* ── Fixed background artwork ── */
   #bg-main {
     background: linear-gradient(180deg, #92d8e0 0%, #1489af 52%, #a6e4db 100%);
@@ -650,29 +654,112 @@ import Layout from '../layouts/Layout.astro';
     -webkit-backdrop-filter: none;
     border-top: none;
   }
+  .ambient-spacer {
+    height: clamp(6rem, 15svh, 10rem);
+  }
+  .ambient-spacer--after-greeting {
+    height: clamp(2rem, 8svh, 5rem);
+  }
+  .hero-section {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  @supports (min-height: 100dvh) {
+    .hero-section {
+      min-height: 100dvh;
+    }
+  }
+  .hero-section {
+    overflow: visible;
+    align-items: center;
+    z-index: 2;
+  }
+  .hero-shell {
+    width: min(100%, 28rem);
+  }
+  .hero-shell h1 {
+    font-size: clamp(3.35rem, 13vw, 5.15rem);
+    line-height: 0.94;
+  }
   #greeting {
     position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: clamp(20rem, 46svh, 27rem);
+    padding-bottom: clamp(3rem, 7svh, 4.5rem);
+    align-items: flex-start;
+    overflow: hidden;
+  }
+  @supports (min-height: 100dvh) {
+    #greeting {
+      min-height: 100dvh;
+    }
   }
   .greeting-panel {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    top: 40%;
+    top: 0;
     background: #aed15d;
     z-index: 0;
   }
   .greeting-content {
     position: relative;
     z-index: 50;
+    width: min(100%, 29rem);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 1.5rem);
+    padding-top: 0;
+    padding-bottom: 0;
   }
-  .greeting-cats,
-  .greeting-cat {
+  .greeting-content > p:first-child {
+    font-size: clamp(0.98rem, 3.4vw, 1.12rem);
+    line-height: 1.9;
+    text-wrap: pretty;
+  }
+  .greeting-content > p:last-child {
+    margin-top: 0.75rem;
+    font-size: clamp(0.92rem, 3vw, 1rem);
+  }
+  .greeting-content br {
     display: none;
+  }
+  .greeting-cats {
+    position: absolute;
+    inset: 0 0 auto;
+    height: clamp(18rem, 42svh, 24rem);
+    z-index: 20;
+    pointer-events: none;
+  }
+  .greeting-cat {
+    position: absolute;
+    display: block;
+    width: auto;
+    max-width: none;
+    filter: drop-shadow(0 14px 20px rgba(26, 26, 26, 0.16));
+  }
+  .greeting-cat--gio {
+    left: clamp(1.25rem, 5vw, 2rem);
+    top: clamp(9rem, 23svh, 13rem);
+    width: clamp(4.75rem, 21vw, 6.25rem);
+    transform: rotate(-10deg);
+  }
+  .greeting-cat--coco {
+    right: clamp(2rem, 8vw, 3rem);
+    top: clamp(3.75rem, 10svh, 7rem);
+    width: clamp(5.5rem, 24vw, 7.5rem);
+  }
+  .greeting-cat--ucil {
+    left: 50%;
+    top: clamp(12.5rem, 29svh, 17rem);
+    width: clamp(5.5rem, 24vw, 7.25rem);
+    transform: translateX(-50%) rotate(-4deg);
   }
   .couple-card {
     box-sizing: border-box;
     width: 100%;
+    border-radius: 1.25rem;
     border: 1px solid rgba(255, 255, 255, 0.28);
     box-shadow:
       0 18px 48px rgba(9, 71, 96, 0.12),
@@ -691,18 +778,16 @@ import Layout from '../layouts/Layout.astro';
     border-color: rgba(255, 255, 255, 0.4);
   }
   .couple-card-group {
-    --couple-group-gap: clamp(0.75rem, 2vw, 1.25rem);
-    display: flex;
+    --couple-group-gap: clamp(1.25rem, 5vw, 2rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     width: 100%;
     min-width: 0;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: start;
     gap: var(--couple-group-gap);
   }
   .couple-card-group > .couple-card {
-    flex: 0 1 calc(50% - (var(--couple-group-gap) / 2));
-    max-width: calc(50% - (var(--couple-group-gap) / 2));
+    max-width: none;
     min-width: 0;
   }
   .couple-card__text {
@@ -711,18 +796,18 @@ import Layout from '../layouts/Layout.astro';
     overflow-wrap: anywhere;
   }
   .couple-card-group .couple-card__eyebrow {
-    font-size: 0.52rem;
-    letter-spacing: 0.22em;
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
   }
   .couple-card-group .couple-card__name {
-    font-size: clamp(1.05rem, 1.7vw, 1.75rem);
-    line-height: 1.05;
-    letter-spacing: 0.035em;
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: 0.05em;
     text-wrap: balance;
   }
   .couple-card-group .couple-card__meta {
-    font-size: clamp(0.68rem, 0.98vw, 0.84rem);
-    line-height: 1.45;
+    font-size: clamp(0.95rem, 3.6vw, 1.05rem);
+    line-height: 1.65;
     text-wrap: pretty;
   }
   .couple-card__eyebrow {
@@ -743,18 +828,17 @@ import Layout from '../layouts/Layout.astro';
   }
   .couple-card__portrait {
     display: flex;
-    flex: 0 0 calc(50% - (var(--couple-group-gap) / 2));
-    max-width: calc(50% - (var(--couple-group-gap) / 2));
-    justify-content: flex-end;
+    max-width: none;
+    justify-content: center;
     align-items: flex-end;
     min-width: 0;
   }
   .couple-card__portrait--left {
-    justify-content: flex-start;
+    justify-content: center;
   }
   .couple-card__portrait-image {
     display: block;
-    width: 100%;
+    width: min(100%, 20rem);
     max-width: none;
     height: auto;
     object-fit: contain;
@@ -910,22 +994,37 @@ import Layout from '../layouts/Layout.astro';
     left: 0;
     right: 0;
     bottom: -1px;
-    height: clamp(17rem, 34vw, 26rem);
+    height: 50%;
     background: url('/assets/gunung.png') center bottom / cover no-repeat;
   }
   .hero-scene__couple {
     position: absolute;
-    top: 70%;
+    top: 63%;
     left: 0;
+    bottom: auto;
     width: 100%;
     max-width: none;
-    filter: drop-shadow(0 18px 32px rgba(26, 26, 26, 0.12));
+    transform: none;
   }
   .hero-content {
     z-index: 1;
+    display: flex;
+    width: min(100%, 28rem);
+    margin-inline: auto;
+    flex-direction: column;
+    align-items: center;
     will-change: transform;
-    padding-bottom: clamp(13rem, 26vw, 19rem);
+    padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
+    padding-bottom: 10.5rem;
     text-shadow: 0 10px 30px rgba(16, 66, 86, 0.18);
+  }
+  .hero-content .space-y-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-content [data-auto-scroll-next] {
+    margin-top: clamp(2.5rem, 8svh, 5rem);
   }
 
   /* ── Language toggle ── */
@@ -955,6 +1054,55 @@ import Layout from '../layouts/Layout.astro';
     transform: scale(0.95);
   }
 
+  #gallery,
+  #introduction,
+  #details,
+  #schedule,
+  #access,
+  #rsvp {
+    padding-block: var(--mobile-section-padding);
+  }
+  footer[data-auto-scroll-section] {
+    padding-block: clamp(3rem, 8svh, 4.5rem);
+  }
+  .calendar-card__body {
+    gap: 1.5rem;
+  }
+  .calendar-countdown {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+    margin-top: 1rem;
+  }
+  .calendar-countdown > span {
+    display: none;
+  }
+  .calendar-countdown > div {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.14);
+  }
+  .calendar-card__footer {
+    gap: 1rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .timeline-item {
+    gap: clamp(0.9rem, 4vw, 1.25rem);
+  }
+  .timeline-item > div:first-child {
+    width: 4.75rem;
+  }
+  .timeline-item > div:last-child {
+    padding-bottom: 2.5rem;
+  }
+  .access-map {
+    aspect-ratio: 4 / 5;
+  }
+  .rsvp-btn {
+    width: min(100%, 20rem);
+    justify-content: center;
+  }
+
   /* ── Reduce motion ── */
   @media (prefers-reduced-motion: reduce) {
     .reveal {
@@ -968,7 +1116,86 @@ import Layout from '../layouts/Layout.astro';
   }
 
   /* ── Cat images on the couple illustration ── */
-  
+  @media (max-width: 1023px) {
+    .hero-scene__cat {
+      display: none;
+    }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-shell,
+    .hero-content {
+      width: min(100%, 31rem);
+    }
+    .hero-scene__couple {
+      top: 60%;
+      width: 100%;
+    }
+    .calendar-countdown {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .calendar-card__footer {
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    .couple-card__portrait-image {
+      width: min(100%, 24rem);
+    }
+    .access-map {
+      aspect-ratio: 16 / 10;
+    }
+    #greeting {
+      padding-top: clamp(22rem, 42svh, 28rem);
+      padding-bottom: clamp(3.5rem, 7svh, 5rem);
+    }
+    .greeting-content {
+      width: min(100%, 32rem);
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .greeting-cats {
+      height: clamp(19rem, 36svh, 25rem);
+    }
+    .greeting-cat--gio {
+      left: clamp(2rem, 7vw, 3rem);
+      top: clamp(9rem, 18svh, 12rem);
+      width: clamp(5rem, 14vw, 6rem);
+    }
+    .greeting-cat--coco {
+      right: clamp(2.5rem, 8vw, 3.25rem);
+      top: clamp(5rem, 10svh, 7rem);
+      width: clamp(6rem, 15vw, 7rem);
+    }
+    .greeting-cat--ucil {
+      top: clamp(12rem, 24svh, 16rem);
+      width: clamp(6rem, 15vw, 7rem);
+    }
+  }
+  @media (max-width: 389px), (max-height: 739px) {
+    .hero-scene__couple {
+      top: 61%;
+    }
+    .hero-content {
+      padding-bottom: 8rem;
+    }
+    .hero-content [data-auto-scroll-next] {
+      margin-top: 2rem;
+    }
+    #greeting {
+      padding-top: clamp(17rem, 44svh, 22rem);
+    }
+    .greeting-cats {
+      height: clamp(15rem, 38svh, 20rem);
+    }
+    .greeting-cat--gio {
+      top: clamp(8.25rem, 22svh, 11rem);
+    }
+    .greeting-cat--coco {
+      top: clamp(3.25rem, 9svh, 5rem);
+    }
+    .greeting-cat--ucil {
+      top: clamp(10.5rem, 28svh, 14rem);
+    }
+  }
 
   @media (min-width: 1024px) {
     .desktop-shell {
@@ -1009,6 +1236,7 @@ import Layout from '../layouts/Layout.astro';
     .hero-section {
       justify-content: flex-start;
       overflow: visible;
+      align-items: center;
       z-index: 2;
     }
     
@@ -1026,6 +1254,9 @@ import Layout from '../layouts/Layout.astro';
       padding-bottom: clamp(7rem, 12vw, 10rem);
       text-align: left;
       z-index: 2;
+    }
+    .hero-content {
+      display: block;
     }
     .hero-shell h1 {
       max-width: 32rem;
@@ -1061,8 +1292,10 @@ import Layout from '../layouts/Layout.astro';
     }
 
     #greeting {
+      min-height: 100vh;
+      min-height: 100dvh;
       padding-inline: 0;
-      overflow: clip;
+      overflow: hidden;
       justify-content: flex-start;
     }
     .greeting-panel {
@@ -1100,6 +1333,10 @@ import Layout from '../layouts/Layout.astro';
     }
     .greeting-cat {
       display: block;
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
       width: 100%;
       max-width: none;
       filter: drop-shadow(0 16px 24px rgba(26, 26, 26, 0.14));
@@ -1202,6 +1439,19 @@ import Layout from '../layouts/Layout.astro';
     }
     .couple-card {
       padding: clamp(2.25rem, 3vw, 3rem);
+    }
+    .couple-card-group .couple-card__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+    }
+    .couple-card-group .couple-card__name {
+      font-size: clamp(2.75rem, 4vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+    }
+    .couple-card-group .couple-card__meta {
+      font-size: clamp(1rem, 1.15vw, 1.1rem);
+      line-height: 1.75;
     }
     .couple-card__name {
       font-size: clamp(2.75rem, 4vw, 4rem);
@@ -1342,46 +1592,12 @@ import Layout from '../layouts/Layout.astro';
       height: 50%;
       background-position: center bottom;
     }
-    .hero-scene__couple {
-      top: 63%;
-      width: 100%;
-    }
-    .hero-content {
-      padding-bottom: 10.5rem;
-    }
     .couple-card-group {
-      --couple-group-gap: 1rem;
+      --couple-group-gap: 1.25rem;
     }
     .couple-separator {
       margin-block: -0.5rem;
     }
-
-    .hero-scene__cat {
-    position: absolute;
-    width: 22%;
-    max-width: none;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
-    z-index: 1;
-  }
-  /* Left cat (gio) — upper-left on the meadow */
-  .hero-scene__cat--left {
-    top: 110%;
-    left: 5%;
-    width: 30%;
-  }
-  /* Right cat (coco) — upper-right on the meadow */
-  .hero-scene__cat--right {
-    top: 100%;
-    right: 8%;
-    width: 25%;
-  }
-  /* Center cat (ucil) — bottom-center, largest */
-  .hero-scene__cat--center {
-    top: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30%;
-  }
   }
 </style>
 
