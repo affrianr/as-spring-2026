@@ -1,7 +1,18 @@
 {
   "name": "as-spring-2026",
   "compatibility_date": "2026-03-07", // Update to the day you deploy
+  "main": "./dist/_worker.js/index.js",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
+    "binding": "ASSETS",
     "directory": "./dist",
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "as-spring-2026-wishes",
+      "database_id": "00000000-0000-0000-0000-000000000000", // Replace before deploy
+      "preview_database_id": "00000000-0000-0000-0000-000000000000", // Replace for preview/local
+    },
+  ],
 }

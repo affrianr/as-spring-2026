@@ -24,6 +24,143 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <style>
+      /* ── Cover page ── */
+      #page-cover {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(160deg, #f5f6ef 0%, #eef2e4 40%, #e8edda 100%);
+        color: #1a1a1a;
+        text-align: center;
+        cursor: default;
+      }
+      .cover__greeting {
+        font-size: clamp(0.75rem, 2vw, 0.9rem);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(26, 26, 26, 0.4);
+        margin-bottom: 0.75rem;
+      }
+      .cover__guest {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.8rem, 5.5vw, 3rem);
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1.2;
+        color: rgba(26, 26, 26, 0.85);
+        margin-bottom: 1rem;
+      }
+      .cover__subtitle {
+        font-size: clamp(0.875rem, 2.2vw, 1.1rem);
+        line-height: 1.5;
+        color: rgba(26, 26, 26, 0.6);
+        margin-bottom: 2.5rem;
+        max-width: 20rem;
+      }
+      .cover__open {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 2rem;
+        border: 1px solid rgba(26, 26, 26, 0.15);
+        border-radius: 9999px;
+        background: transparent;
+        color: rgba(26, 26, 26, 0.6);
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .cover__open:hover {
+        border-color: rgba(26, 26, 26, 0.4);
+        color: rgba(26, 26, 26, 0.9);
+        transform: translateY(-2px);
+      }
+      .cover__open svg {
+        width: 1rem;
+        height: 1rem;
+        transition: transform 0.3s ease;
+      }
+      .cover__open:hover svg {
+        transform: translateX(2px);
+      }
+      /* Cover exit animations */
+      .cover--exiting {
+        pointer-events: none;
+      }
+      .cover--exiting .cover__greeting,
+      .cover--exiting .cover__guest,
+      .cover--exiting .cover__subtitle {
+        animation: cover-text-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+      }
+      .cover--exiting .cover__guest {
+        animation-delay: 0.06s;
+      }
+      .cover--exiting .cover__subtitle {
+        animation-delay: 0.12s;
+      }
+      .cover--exiting .cover__open {
+        animation: cover-btn-out 0.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+      }
+      .cover--exiting {
+        animation: cover-bg-fade 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.3s forwards;
+      }
+      @keyframes cover-text-up {
+        0%   { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-2rem); }
+      }
+      @keyframes cover-btn-out {
+        0%   { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.9); }
+      }
+      @keyframes cover-bg-fade {
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      /* ── Intro panels (behind cover, revealed after cover exits) ── */
+      #page-intro {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .page-intro__panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 51%;
+        background: #eef2e4;
+      }
+      .page-intro__panel--left {
+        left: 0;
+      }
+      .page-intro__panel--right {
+        right: 0;
+      }
+      .page-intro__panel--exit-left {
+        animation: intro-panel-left 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+      }
+      .page-intro__panel--exit-right {
+        animation: intro-panel-right 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        animation-delay: 0.06s;
+      }
+      @keyframes intro-panel-left {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-102%); }
+      }
+      @keyframes intro-panel-right {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(102%); }
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,10 +168,87 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body class="min-h-screen">
+  <body class="min-h-screen overflow-hidden">
+    <!-- Cover page — user must click to enter -->
+    <div id="page-cover">
+      <p class="cover__greeting">With joy & love</p>
+      <p class="cover__guest" id="cover-guest-name">Guest</p>
+      <p class="cover__subtitle">We invite you to celebrate our special day</p>
+      <button id="cover-open" class="cover__open" type="button">
+        <span>Open Invitation</span>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Intro panels (slide open after cover exits) -->
+    <div id="page-intro" aria-hidden="true">
+      <div class="page-intro__panel page-intro__panel--left"></div>
+      <div class="page-intro__panel page-intro__panel--right"></div>
+    </div>
     <slot />
 
     <script>
+      // ── Cover: read guest name from ?to= query param ──
+      const pageCover = document.getElementById('page-cover');
+      const guestEl   = document.getElementById('cover-guest-name');
+      const openBtn   = document.getElementById('cover-open');
+
+      const params    = new URLSearchParams(window.location.search);
+      const guestName = params.get('to');
+      if (guestEl && guestName) {
+        guestEl.textContent = decodeURIComponent(guestName);
+      }
+
+      // ── Intro panels ──
+      const panelLeft  = document.querySelector('.page-intro__panel--left') as HTMLElement | null;
+      const panelRight = document.querySelector('.page-intro__panel--right') as HTMLElement | null;
+      const pageIntro  = document.getElementById('page-intro');
+
+      const runIntro = () => {
+        // slide panels open
+        window.setTimeout(() => {
+          panelLeft?.classList.add('page-intro__panel--exit-left');
+          panelRight?.classList.add('page-intro__panel--exit-right');
+
+          // panels halfway → trigger hero bg → mountain → couple
+          window.setTimeout(() => {
+            const heroSection = document.getElementById('home');
+            heroSection?.classList.add('hero-section--loaded');
+          }, 400);
+
+          // after scene elements done → trigger text reveals
+          window.setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('intro-done'));
+          }, 2200);
+
+          // remove overlay
+          window.setTimeout(() => pageIntro?.remove(), 1200);
+        }, 300);
+      };
+
+      // ── Open button: start music → fade cover → run intro ──
+      openBtn?.addEventListener('click', () => {
+        // start music
+        const bgMusic = document.getElementById('bg-music') as HTMLAudioElement | null;
+        if (bgMusic) {
+          bgMusic.volume = 0.42;
+          bgMusic.play().catch(() => {});
+          window.dispatchEvent(new CustomEvent('music-started'));
+        }
+
+        // animate cover out
+        pageCover?.classList.add('cover--exiting');
+        window.setTimeout(() => {
+          pageCover?.remove();
+          // unlock scroll
+          document.body.classList.remove('overflow-hidden');
+          // run the panel intro sequence
+          runIntro();
+        }, 800);
+      });
+
       const prefersReducedMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)',
       );
@@ -44,13 +258,10 @@ const {
 
       if (sections.length > 1) {
         const AUTO_SNAP_ENABLED = !prefersReducedMotion.matches;
-        const SNAP_THRESHOLD = 0.35;
-        const SNAP_SETTLE_DELAY = 90;
         const SNAP_LOCK_MS = 700;
 
         let currentSnapIndex = 0;
         let isAutoScrolling = false;
-        let scrollEndTimer: number | undefined;
 
         const getHeaderOffset = () => {
           const header = document.querySelector<HTMLElement>(
@@ -156,31 +367,8 @@ const {
         bindDirectionalTriggers('[data-auto-scroll-prev]', -1);
         bindDirectionalTriggers('[data-auto-scroll-next]', 1);
 
-        const handleScrollEnd = () => {
-          if (isAutoScrolling || !AUTO_SNAP_ENABLED) return;
-
-          const nextIndex = getSnapIndex();
-          if (nextIndex === currentSnapIndex) return;
-
-          snapToIndex(nextIndex);
-        };
-
-        const queueSnapCheck = () => {
-          if (scrollEndTimer) {
-            window.clearTimeout(scrollEndTimer);
-          }
-
-          scrollEndTimer = window.setTimeout(
-            handleScrollEnd,
-            SNAP_SETTLE_DELAY,
-          );
-        };
-
         const handleScroll = () => {
           syncCurrentIndex();
-          if (AUTO_SNAP_ENABLED) {
-            queueSnapCheck();
-          }
         };
 
         window.addEventListener('load', syncCurrentIndex);

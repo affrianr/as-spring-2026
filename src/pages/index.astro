@@ -1,8 +1,43 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import type { WeddingWish } from '../lib/wedding-wishes';
+import { listWeddingWishes } from '../lib/wedding-wishes';
+
+const wishDateFormatterId = new Intl.DateTimeFormat('id-ID', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const wishDateFormatterEn = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const formatWishDate = (timestamp: number, locale: 'id' | 'en') =>
+  (locale === 'id' ? wishDateFormatterId : wishDateFormatterEn).format(
+    new Date(timestamp),
+  );
+
+let initialWishes: WeddingWish[] = [];
+
+try {
+  initialWishes = await listWeddingWishes(Astro.locals.runtime?.env?.DB, 6);
+} catch (error) {
+  console.error('Failed to render wedding wishes', error);
+}
 ---
 
 <Layout>
+  <audio
+    id="bg-music"
+    src="/music/love-wins-all.mp3"
+    preload="auto"
+    autoplay
+    loop
+    playsinline></audio>
+
   <!-- Scrollable content layer -->
   <div id="content-layer" class="relative z-10">
     <!-- Navigation -->
@@ -53,20 +88,64 @@ import Layout from '../layouts/Layout.astro';
               >Access</a
             >
             <a
-              href="#rsvp"
+              href="#wishes"
               class="nav-link relative hover:text-white transition-colors duration-300"
-              >RSVP</a
+              ><span class="lang-mix">Ucapan</span><span class="lang-en"
+                >Wish</span
+              ></a
             >
           </div>
           <!-- Language toggle -->
-          <button
-            id="lang-toggle"
-            class="lang-toggle flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-300"
-            aria-label="Toggle language"
-          >
-            <span class="lang-label-mix">ID / EN</span>
-            <span class="lang-label-en hidden">EN</span>
-          </button>
+          <div class="flex items-center gap-2.5">
+            <button
+              id="music-toggle"
+              type="button"
+              class="music-toggle"
+              aria-label="Mute"
+              data-state="playing"
+            >
+              <span class="music-toggle__pulse" aria-hidden="true"></span>
+              <!-- Sound on icon -->
+              <svg
+                class="music-toggle__icon music-toggle__icon--on"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.536 8.464a5 5 0 010 7.072M17.95 6.05a8 8 0 010 11.9M6.5 8.5H4a1 1 0 00-1 1v5a1 1 0 001 1h2.5l4.5 4V4.5l-4.5 4z"
+                ></path>
+              </svg>
+              <!-- Muted icon -->
+              <svg
+                class="music-toggle__icon music-toggle__icon--off"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.5 8.5H4a1 1 0 00-1 1v5a1 1 0 001 1h2.5l4.5 4V4.5l-4.5 4zM17 9.5l5 5m0-5l-5 5"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              id="lang-toggle"
+              class="lang-toggle flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-300"
+              aria-label="Toggle language"
+            >
+              <span class="lang-label-mix">ID / EN</span>
+              <span class="lang-label-en hidden">EN</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -81,7 +160,7 @@ import Layout from '../layouts/Layout.astro';
         <img
           src="/assets/p1.webp"
           alt=""
-          class="main-bg-image absolute inset-0 h-full w-full object-cover object-center"
+          class="main-bg-image hero-bg-image absolute inset-0 h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
         />
@@ -682,89 +761,246 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </div>
         </section>
-      </div>
 
-      <!-- RSVP Section — semi-transparent dark -->
-      <section
-        id="rsvp"
-        data-auto-scroll-section
-        class="content-card content-card--dark py-32 px-6"
-      >
-        <div
-          class="rsvp-shell desktop-reading-block max-w-xl mx-auto text-center"
+        <!-- Wedding Wish Section -->
+        <section
+          id="wishes"
+          data-auto-scroll-section
+          class="content-card content-card--transparent wish-section py-32 px-6"
         >
-          <div
-            class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal"
-          >
-            <span
-              class="text-xs tracking-[0.2em] uppercase font-medium text-lime"
-              >RSVP</span
-            >
-          </div>
-          <h2 class="font-display text-3xl md:text-4xl mb-6 text-white reveal">
-            <span class="lang-mix">Konfirmasi Kehadiran</span>
-            <span class="lang-en">RSVP</span>
-          </h2>
-          <p class="text-sm text-white/60 leading-relaxed mb-12 reveal">
-            <span class="lang-mix">
-              Mohon kesediaannya untuk mengisi konfirmasi<br />
-              paling lambat <span class="text-white/80 font-medium"
-                >15 Maret 2026</span
-              ><br />
-              agar kami dapat mempersiapkan hari istimewa ini
-            </span>
-            <span class="lang-en">
-              We would appreciate your reply<br />
-              by <span class="text-white/80 font-medium">March 15, 2026</span
-              ><br />
-              so we can prepare for our special day.
-            </span>
-          </p>
-
-          <div class="reveal">
-            <a
-              href="#"
-              class="rsvp-btn inline-flex items-center gap-3 bg-lime text-charcoal px-10 py-4 rounded-full text-sm font-medium tracking-widest uppercase transition-all duration-300"
-            >
-              <span class="lang-mix">Kirim RSVP</span>
-              <span class="lang-en">Respond Now</span>
-              <svg
-                class="w-4 h-4 rsvp-arrow transition-transform duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </a>
+          <div class="wish-scene reveal" aria-hidden="true">
+            <img
+              src="/assets/p4a%20crop.webp"
+              alt=""
+              class="wish-scene__image"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
-          <p class="mt-6 text-xs text-white/40 reveal">Reply by RSVP form</p>
-        </div>
-      </section>
+          <div class="wish-shell">
+            <div class="wish-shell__inner mx-auto">
+              <div class="wish-grid">
+                <div class="wish-panel wish-panel--form reveal">
+                  <div class="wish-panel__body">
+                    <div class="wish-panel__heading">
+                      <h3 class="wish-panel__title font-serif">
+                        <span class="lang-mix"
+                          >Tuliskan doa dan ucapan manis untuk hari kami</span
+                        >
+                        <span class="lang-en"
+                          >Leave a sweet note for our day</span
+                        >
+                      </h3>
+
+                      <p class="wish-panel__copy">
+                        <span class="lang-mix">
+                          Nama dan pesan Anda akan langsung tampil di buku
+                          ucapan ini.
+                        </span>
+                        <span class="lang-en">
+                          Your name and message will appear instantly in this
+                          guestbook.
+                        </span>
+                      </p>
+                    </div>
+
+                    <form
+                      id="wish-form"
+                      class="wish-form"
+                      method="post"
+                      action="/api/wishes"
+                    >
+                      <label class="wish-field">
+                        <span class="wish-field__label">
+                          <span class="lang-mix">Nama</span>
+                          <span class="lang-en">Name</span>
+                        </span>
+                        <input
+                          id="wish-name"
+                          name="name"
+                          type="text"
+                          maxlength="80"
+                          autocomplete="name"
+                          required
+                          class="wish-input"
+                          data-placeholder-mix="Nama Anda"
+                          data-placeholder-en="Your name"
+                        />
+                      </label>
+
+                      <label class="wish-field">
+                        <span class="wish-field__label">
+                          <span class="lang-mix">Ucapan</span>
+                          <span class="lang-en">Message</span>
+                        </span>
+                        <textarea
+                          id="wish-message"
+                          name="message"
+                          rows="5"
+                          maxlength="500"
+                          required
+                          class="wish-textarea"
+                          data-placeholder-mix="Tuliskan doa, harapan, atau pesan manis Anda di sini."
+                          data-placeholder-en="Write your prayer, blessing, or a short note here."
+                        ></textarea>
+                      </label>
+
+                      <div class="wish-form__footer">
+                        <button
+                          type="submit"
+                          class="wish-submit rsvp-btn inline-flex items-center gap-3 px-10 py-4 rounded-full text-sm font-medium tracking-widest uppercase transition-all duration-300"
+                        >
+                          <span class="lang-mix">Kirim Ucapan</span>
+                          <span class="lang-en">Send Wish</span>
+                          <svg
+                            class="w-4 h-4 rsvp-arrow transition-transform duration-300"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                          </svg>
+                        </button>
+
+                        <p class="wish-form__note">
+                          <span class="lang-mix">
+                            Ucapan akan tampil segera setelah berhasil dikirim.
+                          </span>
+                          <span class="lang-en">
+                            Your note will show up here as soon as it is sent.
+                          </span>
+                        </p>
+                      </div>
+
+                      <p
+                        id="wish-status"
+                        class="wish-status hidden"
+                        role="status"
+                        aria-live="polite"
+                      >
+                      </p>
+                    </form>
+                  </div>
+                </div>
+
+                <div
+                  class="wish-panel wish-panel--list reveal"
+                  data-delay="120"
+                >
+                  <div class="wish-list__top">
+                    <div>
+                      <h3 class="wish-list__title font-serif">
+                        <span class="lang-mix"
+                          >Ucapan hangat yang sudah sampai ke kami</span
+                        >
+                        <span class="lang-en"
+                          >Warm wishes that have already reached us</span
+                        >
+                      </h3>
+
+                      <p class="wish-list__deck">
+                        <span class="lang-mix">
+                          Geser kartu untuk melihat ucapan lainnya.
+                        </span>
+                        <span class="lang-en">
+                          Swipe through the cards to see more wishes.
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div id="wish-stage" class="wish-stage">
+                    <div id="wish-list" class="wish-list">
+                      {
+                        initialWishes.map((wish) => (
+                          <article class="wish-card" data-wish-id={wish.id}>
+                            <div class="wish-card__head">
+                              <div>
+                                <p class="wish-card__name">{wish.name}</p>
+                                <p class="wish-card__date">
+                                  <span class="lang-mix">
+                                    {formatWishDate(wish.createdAt, 'id')}
+                                  </span>
+                                  <span class="lang-en">
+                                    {formatWishDate(wish.createdAt, 'en')}
+                                  </span>
+                                </p>
+                              </div>
+
+                              <span class="wish-card__glyph" aria-hidden="true">
+                                ✦
+                              </span>
+                            </div>
+
+                            <p class="wish-card__message">{wish.message}</p>
+                          </article>
+                        ))
+                      }
+                    </div>
+
+                    <p
+                      id="wish-empty"
+                      class={initialWishes.length > 0
+                        ? 'wish-empty hidden'
+                        : 'wish-empty'}
+                    >
+                      <span class="lang-mix">
+                        Jadilah orang pertama yang meninggalkan ucapan untuk
+                        kami.
+                      </span>
+                      <span class="lang-en">
+                        Be the first to leave a note for our celebration.
+                      </span>
+                    </p>
+                  </div>
+
+                  <template id="wish-card-template">
+                    <article class="wish-card" data-wish-id="">
+                      <div class="wish-card__head">
+                        <div>
+                          <p class="wish-card__name"></p>
+                          <p class="wish-card__date">
+                            <span class="lang-mix"></span>
+                            <span class="lang-en"></span>
+                          </p>
+                        </div>
+
+                        <span class="wish-card__glyph" aria-hidden="true"
+                          >✦</span
+                        >
+                      </div>
+
+                      <p class="wish-card__message"></p>
+                    </article>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <!-- Footer -->
       <footer
         data-auto-scroll-section
         class="content-card py-16 px-6 text-center"
       >
-        <div class="footer-shell desktop-reading-block space-y-4">
-          <p class="font-display text-2xl tracking-widest footer-logo">A & S</p>
-          <p class="text-xs tracking-[0.3em] uppercase text-muted">
-            2026.05.02
+        <div class="footer-shell desktop-reading-block space-y-4 font-serif">
+          <p class="text-xs mt-8">
+            Thank you for being part of our special day
           </p>
           <div class="flex items-center justify-center gap-4 mt-6">
             <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
             <div class="w-2 h-2 rounded-full bg-lime footer-dot"></div>
             <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
           </div>
-          <p class="text-xs text-muted/50 mt-8">
-            Thank you for being part of our special day
-          </p>
+
+          <p class="text-xs">© 2026 · Made with love ❤️</p>
         </div>
       </footer>
     </div><!-- .content-cards -->
@@ -1443,18 +1679,481 @@ import Layout from '../layouts/Layout.astro';
     transform: translateY(-2px);
   }
 
-  /* ── RSVP button ── */
-  .rsvp-btn:hover {
-    background: #c8e600;
+  /* ── Wedding wish guestbook ── */
+  .wish-section {
+    overflow: visible;
+    background: transparent;
+    border-top: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  #wishes.wish-section {
+    padding-bottom: 0;
+  }
+  .wish-shell {
+    position: relative;
+    width: 100vw;
+    max-width: none;
+    margin-inline: calc(50% - 50vw);
+    margin-top: -1px;
+    padding: clamp(1.15rem, 3vw, 1.6rem)
+      max(1.5rem, calc(env(safe-area-inset-right) + 1.5rem))
+      clamp(2.5rem, 5vw, 3.5rem)
+      max(1.5rem, calc(env(safe-area-inset-left) + 1.5rem));
+    background: rgba(174, 209, 93, 1);
+    border-top: none;
+    overflow: hidden;
+  }
+  .wish-shell__inner {
+    position: relative;
+    max-width: min(100%, 74rem);
+    margin-inline: auto;
+    isolation: isolate;
+    --wish-accent: #b8cf92;
+    --wish-accent-strong: #dbe8b3;
+    --wish-accent-ink: #273618;
+    --wish-accent-soft: #eef4dd;
+    --wish-accent-line: rgba(61, 86, 28, 0.16);
+    --wish-paper: #fffdf5;
+    --wish-paper-soft: rgba(255, 252, 243, 0.72);
+    --wish-shadow: rgba(74, 99, 40, 0.16);
+  }
+  .wish-shell__inner::before,
+  .wish-shell__inner::after {
+    content: '';
+    position: absolute;
+    inset: auto;
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(24px);
+    opacity: 0.75;
+  }
+  .wish-shell__inner::before {
+    width: 14rem;
+    height: 14rem;
+    top: -3rem;
+    right: -2rem;
+    /* background: radial-gradient(
+      circle,
+      rgba(249, 248, 231, 0.6) 0%,
+      rgba(249, 248, 231, 0) 72%
+    ); */
+  }
+  .wish-shell__inner::after {
+    width: 13rem;
+    height: 13rem;
+    bottom: -2rem;
+    left: -1rem;
+    background: radial-gradient(
+      circle,
+      rgba(142, 183, 76, 0.18) 0%,
+      rgba(142, 183, 76, 0) 72%
+    );
+  }
+  .wish-grid {
+    display: grid;
+    gap: 1.35rem;
+    align-items: start;
+  }
+  .wish-panel {
+    position: relative;
+    overflow: hidden;
+    /* border-radius: 2rem; */
+    /* border: 1px solid var(--wish-accent-line); */
+    /* background: var(--wish-paper-soft); */
+    padding: clamp(1.35rem, 3vw, 2rem);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .wish-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+  }
+  .wish-panel:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(225, 255, 0, 0.3);
+  }
+  .wish-panel--form {
+    padding: 0;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .wish-panel--form::after {
+    display: none;
+  }
+  .wish-panel--form:hover {
+    transform: none;
+    border-color: transparent;
+  }
+  .wish-panel--list {
+    background: rgba(174, 209, 93, 1);
+  }
+  .wish-panel__body {
+    display: grid;
+    gap: 1.35rem;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    position: relative;
+    z-index: 1;
+  }
+  .wish-scene {
+    position: relative;
+    z-index: 2;
+    width: 100vw;
+    max-width: none;
+    margin-inline: calc(50% - 50vw);
+    margin-bottom: 0;
+    pointer-events: none;
+  }
+  .wish-scene::before {
+    content: '';
+    position: absolute;
+    inset: 8% 20% 12%;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0) 72%
+    );
+    filter: blur(26px);
+    z-index: -1;
+  }
+  .wish-scene__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    /* filter: drop-shadow(0 24px 28px rgba(72, 95, 33, 0.22)); */
+  }
+  .wish-panel__heading {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .wish-panel__eyebrow,
+  .wish-list__eyebrow {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(39, 54, 24, 0.54);
+  }
+  .wish-panel__title {
+    font-size: clamp(2.35rem, 9vw, 3.8rem);
+    line-height: 0.92;
+    max-width: 10ch;
+    color: var(--wish-accent-ink);
+  }
+  .wish-panel__copy,
+  .wish-list__deck {
+    margin-top: 0.9rem;
+    color: rgba(39, 54, 24, 0.7);
+    line-height: 1.75;
+    text-align: left;
+  }
+  .wish-form {
+    display: grid;
+    gap: 1rem;
+  }
+  .wish-field {
+    display: grid;
+    gap: 0.6rem;
+    text-align: left;
+  }
+  .wish-field__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(39, 54, 24, 0.6);
+  }
+  .wish-input,
+  .wish-textarea {
+    width: 100%;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(61, 86, 28, 0.12);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--wish-accent-ink);
+    padding: 1rem 1.1rem;
+    font-size: 0.95rem;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+  }
+  .wish-input::placeholder,
+  .wish-textarea::placeholder {
+    color: rgba(39, 54, 24, 0.36);
+  }
+  .wish-input:focus,
+  .wish-textarea:focus {
+    outline: none;
+    border-color: rgba(61, 86, 28, 0.26);
+    box-shadow:
+      0 0 0 4px rgba(131, 161, 63, 0.12),
+      0 14px 28px rgba(74, 99, 40, 0.1);
+    background: #fff;
+  }
+  .wish-textarea {
+    min-height: 9.5rem;
+    resize: vertical;
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 255, 255, 0.96)
+      ),
+      repeating-linear-gradient(
+        180deg,
+        rgba(39, 54, 24, 0) 0,
+        rgba(39, 54, 24, 0) 1.82rem,
+        rgba(61, 86, 28, 0.07) 1.82rem,
+        rgba(61, 86, 28, 0.07) 1.9rem
+      );
+  }
+  .wish-form__footer {
+    display: grid;
+    gap: 0.85rem;
+    justify-items: start;
+    margin-top: 0.25rem;
+  }
+  .wish-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  .wish-submit[disabled] {
+    opacity: 0.7;
+    cursor: wait;
+    box-shadow: none;
+  }
+  .wish-submit {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #445d25 0%, #31451a 100%);
+    color: #faf8ef;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      0 16px 28px rgba(66, 90, 28, 0.18);
+  }
+  .wish-submit::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+  }
+  .wish-form__note {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: rgba(39, 54, 24, 0.58);
+    text-align: left;
+  }
+  .wish-status {
+    border-radius: 1rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .wish-status[data-state='pending'] {
+    border: 1px solid rgba(61, 86, 28, 0.1);
+    background: rgba(255, 255, 255, 0.68);
+    color: rgba(39, 54, 24, 0.78);
+  }
+  .wish-status[data-state='success'] {
+    border: 1px solid rgba(61, 86, 28, 0.12);
+    background: rgba(68, 93, 37, 0.1);
+    color: rgba(39, 54, 24, 0.9);
+  }
+  .wish-status[data-state='error'] {
+    border: 1px solid rgba(177, 84, 56, 0.16);
+    background: rgba(215, 146, 120, 0.14);
+    color: rgba(113, 44, 22, 0.9);
+  }
+  .wish-list__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    text-align: left;
+  }
+  .wish-list__tools {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .wish-list__title {
+    margin-top: 0.4rem;
+    font-size: clamp(2.15rem, 7vw, 3.4rem);
+    line-height: 1.05;
+    max-width: 12ch;
+  }
+
+  .wish-stage {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1.2rem;
+    --wish-peek: clamp(2.6rem, 9vw, 4.75rem);
+    --wish-gap: clamp(0.85rem, 2vw, 1.1rem);
+    touch-action: pan-y;
+    user-select: none;
+  }
+  .wish-stage::before,
+  .wish-stage::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1.1rem;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .wish-stage::before {
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(227, 236, 196, 0.95),
+      rgba(227, 236, 196, 0)
+    );
+  }
+  .wish-stage::after {
+    right: 0;
+    background: linear-gradient(
+      270deg,
+      rgba(227, 236, 196, 0.95),
+      rgba(227, 236, 196, 0)
+    );
+  }
+  .wish-list {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    will-change: transform;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .wish-list:not(.wish-list--solo) {
+    gap: var(--wish-gap);
+  }
+  .wish-empty {
+    border-radius: 1.15rem;
+    border: 1px dashed rgba(61, 86, 28, 0.18);
+    background: rgba(255, 255, 255, 0.54);
+    padding: 1.15rem 1.2rem;
+    color: rgba(39, 54, 24, 0.68);
+    line-height: 1.8;
+    text-align: left;
+  }
+  .wish-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 calc(100% - var(--wish-peek));
+    min-height: clamp(17rem, 42vw, 19.5rem);
+    max-height: clamp(17rem, 42vw, 19.5rem);
+    border-radius: 1.35rem;
+    border: 1px solid rgba(61, 86, 28, 0.12);
+    background: linear-gradient(180deg, #fffdf6 0%, #f8f6ec 100%);
+    padding: 1.2rem 1.25rem 1.15rem;
+    margin-inline: 0;
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.25s ease;
+  }
+  .wish-list--solo .wish-card {
+    flex-basis: 100%;
+  }
+  .wish-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: linear-gradient(
+      180deg,
+      rgba(127, 154, 69, 0.88) 0%,
+      rgba(127, 154, 69, 0) 100%
+    );
+    opacity: 0.72;
+  }
+  .wish-card::after {
+    content: '';
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    width: 2.2rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: rgba(186, 208, 129, 0.34);
+    transform: rotate(10deg);
+    pointer-events: none;
+  }
+  .wish-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(61, 86, 28, 0.18);
+  }
+  .wish-card__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.85rem;
+    flex-shrink: 0;
+  }
+  .wish-card__name {
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wish-accent-ink);
+  }
+  .wish-card__date {
+    margin-top: 0.35rem;
+    font-size: 0.73rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(39, 54, 24, 0.42);
+  }
+  .wish-card__glyph {
+    color: rgba(127, 154, 69, 0.82);
+    font-size: 1rem;
+    transform: translateY(0.15rem);
+  }
+  .wish-card__message {
+    margin-top: 0.9rem;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-right: 0.35rem;
+    color: rgba(39, 54, 24, 0.84);
+    line-height: 1.8;
+    white-space: pre-line;
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(127, 154, 69, 0.42) rgba(61, 86, 28, 0.06);
+  }
+  .wish-card__message::-webkit-scrollbar {
+    width: 0.35rem;
+  }
+  .wish-card__message::-webkit-scrollbar-track {
+    background: rgba(61, 86, 28, 0.06);
+    border-radius: 999px;
+  }
+  .wish-card__message::-webkit-scrollbar-thumb {
+    background: rgba(127, 154, 69, 0.42);
+    border-radius: 999px;
+  }
+  .rsvp-btn:hover {
+    background: linear-gradient(180deg, #c9dbab 0%, #b1c788 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(68, 99, 79, 0.22);
   }
   .rsvp-btn:hover .rsvp-arrow {
     transform: translateX(4px);
   }
   .rsvp-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(225, 255, 0, 0.2);
+    box-shadow: 0 2px 10px rgba(68, 99, 79, 0.14);
   }
 
   /* ── Divider line expand ── */
@@ -1490,12 +2189,21 @@ import Layout from '../layouts/Layout.astro';
 
   /* ── Hero ── */
   .hero-section {
+    --hero-couple-transform: translateX(0);
   }
   .hero-scene {
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 0;
+  }
+  /* ── Hero load sequence: bg → mountain → couple → cats → text ── */
+  .hero-bg-image {
+    opacity: 0;
+    transform: scale(1.04);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .hero-scene__mountain {
     position: absolute;
@@ -1504,6 +2212,11 @@ import Layout from '../layouts/Layout.astro';
     bottom: -1px;
     height: 60%;
     background: url('/assets/gunung.webp') center bottom / cover no-repeat;
+    opacity: 0;
+    transform: translate3d(0, 2.4rem, 0) scale(1.04);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s,
+      transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
   }
   .hero-scene__couple {
     position: absolute;
@@ -1512,9 +2225,52 @@ import Layout from '../layouts/Layout.astro';
     bottom: auto;
     width: 100%;
     max-width: none;
-    transform: none;
+    opacity: 0;
+    transform: var(--hero-couple-transform) translate3d(0, 3rem, 0) scale(0.94);
+    filter: blur(12px);
     background-repeat: no-repeat;
+    transition:
+      opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 1s,
+      transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1s,
+      filter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s;
   }
+  .hero-scene__cat {
+    opacity: 0;
+    transform: translate3d(0, 1.4rem, 0) scale(0.92);
+    filter: blur(10px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hero-scene__cat--left {
+    transition-delay: 0s;
+  }
+  .hero-scene__cat--right {
+    transition-delay: 0.1s;
+  }
+  .hero-scene__cat--center {
+    transition-delay: 0.2s;
+  }
+  .hero-scene__cat--visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  .hero-section--loaded .hero-bg-image {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .hero-section--loaded .hero-scene__mountain {
+    opacity: 0.98;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  .hero-section--loaded .hero-scene__couple {
+    opacity: 1;
+    transform: var(--hero-couple-transform) translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  /* cats are revealed on scroll via .hero-scene__cat--visible */
   .hero-content {
     z-index: 1;
     display: flex;
@@ -1534,6 +2290,79 @@ import Layout from '../layouts/Layout.astro';
   }
   .hero-content [data-auto-scroll-next] {
     margin-top: clamp(2.5rem, 8svh, 5rem);
+  }
+
+  /* ── Music toggle ── */
+  .music-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.68);
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .music-toggle__icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .music-toggle__icon--off {
+    display: none;
+  }
+  .music-toggle[data-state='muted'] .music-toggle__icon--on {
+    display: none;
+  }
+  .music-toggle[data-state='muted'] .music-toggle__icon--off {
+    display: block;
+  }
+  .music-toggle__pulse {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.58rem;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: rgba(184, 207, 146, 0.9);
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgba(184, 207, 146, 0.32);
+    transition: opacity 0.2s ease;
+  }
+  .music-toggle[data-state='playing'] {
+    color: rgba(244, 248, 234, 0.92);
+    border-color: rgba(184, 207, 146, 0.28);
+    background: rgba(184, 207, 146, 0.12);
+    box-shadow: 0 8px 22px rgba(68, 99, 79, 0.14);
+  }
+  .music-toggle[data-state='playing'] .music-toggle__pulse {
+    opacity: 1;
+    animation: music-pulse 1.8s ease-in-out infinite;
+  }
+  .music-toggle:hover {
+    transform: translateY(-1px);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .music-toggle:active {
+    transform: scale(0.96);
+  }
+  @keyframes music-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(184, 207, 146, 0.32);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(184, 207, 146, 0);
+    }
   }
 
   /* ── Language toggle ── */
@@ -1567,11 +2396,15 @@ import Layout from '../layouts/Layout.astro';
   #details,
   #schedule,
   #access,
-  #rsvp {
+  #wishes {
     padding-block: var(--mobile-section-padding);
   }
   footer[data-auto-scroll-section] {
     padding-block: clamp(3rem, 8svh, 4.5rem);
+    background: rgba(174, 209, 93, 1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-top: none;
   }
   .calendar-countdown {
     display: flex;
@@ -1611,7 +2444,6 @@ import Layout from '../layouts/Layout.astro';
     aspect-ratio: 4 / 5;
   }
   .rsvp-btn {
-    width: min(100%, 20rem);
     justify-content: center;
   }
 
@@ -1620,6 +2452,20 @@ import Layout from '../layouts/Layout.astro';
     .reveal {
       opacity: 1;
       transform: none;
+      transition: none;
+    }
+    .hero-bg-image,
+    .hero-scene__mountain,
+    .hero-scene__cat {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+    .hero-scene__couple {
+      opacity: 1;
+      transform: var(--hero-couple-transform);
+      filter: none;
       transition: none;
     }
     .footer-dot {
@@ -1631,6 +2477,11 @@ import Layout from '../layouts/Layout.astro';
   @media (max-width: 1023px) {
     .hero-scene__cat {
       display: none;
+    }
+    .wish-hero__caption {
+      position: static;
+      margin-top: 1rem;
+      text-align: center;
     }
   }
   /* ── Small tablet + up (≥640px): iPad Mini (768), iPad Air (820), Surface Duo (540) ── */
@@ -1773,6 +2624,17 @@ import Layout from '../layouts/Layout.astro';
       min-width: 0;
       text-align: center;
     }
+    .wish-hero__title {
+      font-size: clamp(2.2rem, 12vw, 3rem);
+    }
+    .wish-card:nth-child(2n),
+    .wish-card:nth-child(3n) {
+      transform: none;
+    }
+    .wish-card {
+      min-height: 18.5rem;
+      max-height: 18.5rem;
+    }
   }
 
   /* ── Desktop (≥1024px): iPad Pro portrait (1024×1366), MacBook 13" (1280×800), 1080p (1920×1080), 2K/4K monitors ── */
@@ -1797,7 +2659,7 @@ import Layout from '../layouts/Layout.astro';
     #details,
     #schedule,
     #access,
-    #rsvp {
+    #wishes {
       padding-block: clamp(5.25rem, 8vw, 7rem);
     }
     footer[data-auto-scroll-section] {
@@ -1867,7 +2729,7 @@ import Layout from '../layouts/Layout.astro';
       width: 100%;
       max-width: none;
       filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
-      transform: none;
+      --hero-couple-transform: translateX(0);
       -webkit-mask-image: none;
       mask-image: none;
     }
@@ -1916,7 +2778,7 @@ import Layout from '../layouts/Layout.astro';
         top: -40%;
         left: 50%;
         bottom: clamp(-20rem, -11vw, -10rem);
-        transform: translateX(-50%);
+        --hero-couple-transform: translateX(-50%);
         filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
       }
     }
@@ -2187,8 +3049,32 @@ import Layout from '../layouts/Layout.astro';
       font-size: clamp(1.1rem, 1.45vw, 1.35rem);
     }
 
-    .rsvp-shell {
-      max-width: 44rem;
+    .wish-grid {
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: clamp(1.5rem, 2.4vw, 2rem);
+      align-items: start;
+    }
+    .wish-scene {
+      margin-bottom: 0;
+    }
+    .wish-hero {
+      grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
+      align-items: center;
+      text-align: left;
+      padding: clamp(1.9rem, 3vw, 2.6rem);
+    }
+    .wish-hero__labels {
+      justify-content: flex-start;
+    }
+    .wish-hero__lead {
+      margin-inline: 0;
+    }
+    .wish-hero__art {
+      min-height: 14rem;
+    }
+    .wish-hero__caption {
+      right: 0.5rem;
+      bottom: 0.5rem;
     }
     .footer-shell {
       max-width: 30rem;
@@ -2213,6 +3099,7 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
+
   // ── Scroll reveal with IntersectionObserver ──
   const reveals = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver(
@@ -2228,7 +3115,32 @@ import Layout from '../layouts/Layout.astro';
     },
     { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
   );
-  reveals.forEach((el) => revealObserver.observe(el));
+
+  // Wait for loader panels to finish before starting hero text reveals.
+  // Non-hero reveals (below the fold) start immediately since they won't
+  // fire until the user scrolls to them anyway.
+  const heroReveals = Array.from(reveals).filter((el) =>
+    el.closest('#home')
+  );
+  const otherReveals = Array.from(reveals).filter((el) =>
+    !el.closest('#home')
+  );
+
+  otherReveals.forEach((el) => revealObserver.observe(el));
+
+  const startHeroReveals = () => heroReveals.forEach((el) => revealObserver.observe(el));
+  window.addEventListener('intro-done', startHeroReveals, { once: true });
+
+  // ── Cats appear on scroll ──
+  const heroCats = document.querySelectorAll<HTMLElement>('.hero-scene__cat');
+  let catsRevealed = false;
+  const revealCats = () => {
+    if (catsRevealed) return;
+    catsRevealed = true;
+    heroCats.forEach((cat) => cat.classList.add('hero-scene__cat--visible'));
+    window.removeEventListener('scroll', revealCats);
+  };
+  window.addEventListener('scroll', revealCats, { passive: true });
 
   // ── Hero parallax + fade on scroll ──
   const heroContent = document.querySelector(
@@ -2261,7 +3173,7 @@ import Layout from '../layouts/Layout.astro';
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ── Magnetic hover on RSVP button ──
+  // ── Magnetic hover on wish button ──
   const rsvpBtn = document.querySelector('.rsvp-btn') as HTMLElement | null;
   if (rsvpBtn) {
     rsvpBtn.addEventListener('mousemove', (e: MouseEvent) => {
@@ -2331,6 +3243,53 @@ import Layout from '../layouts/Layout.astro';
     });
   }
 
+  const getActiveLanguage = () =>
+    document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'mix';
+
+  const bgMusic = document.getElementById(
+    'bg-music',
+  ) as HTMLAudioElement | null;
+  const musicToggle = document.getElementById(
+    'music-toggle',
+  ) as HTMLButtonElement | null;
+  const MUTE_PREF_KEY = 'wedding-music-muted';
+
+  const syncMuteUi = () => {
+    if (!bgMusic || !musicToggle) return;
+    const isMuted = bgMusic.muted;
+    musicToggle.dataset.state = isMuted ? 'muted' : 'playing';
+    musicToggle.setAttribute('aria-label', isMuted ? 'Unmute' : 'Mute');
+  };
+
+  if (bgMusic && musicToggle) {
+    // Restore mute preference
+    bgMusic.muted = window.localStorage.getItem(MUTE_PREF_KEY) === 'true';
+    syncMuteUi();
+
+    // Music starts when cover "Open" is clicked (Layout dispatches 'music-started').
+    // If already playing, just sync UI.
+    window.addEventListener('music-started', () => syncMuteUi(), { once: true });
+
+    musicToggle.addEventListener('click', () => {
+      bgMusic.muted = !bgMusic.muted;
+      window.localStorage.setItem(MUTE_PREF_KEY, String(bgMusic.muted));
+      syncMuteUi();
+    });
+  }
+
+  const syncWishFieldPlaceholders = () => {
+    const fields = document.querySelectorAll<
+      HTMLInputElement | HTMLTextAreaElement
+    >('[data-placeholder-mix][data-placeholder-en]');
+
+    fields.forEach((field) => {
+      field.placeholder =
+        getActiveLanguage() === 'en'
+          ? (field.dataset.placeholderEn ?? '')
+          : (field.dataset.placeholderMix ?? '');
+    });
+  };
+
   // ── Language toggle ──
   const langToggle = document.getElementById('lang-toggle');
   if (langToggle) {
@@ -2339,6 +3298,8 @@ import Layout from '../layouts/Layout.astro';
     if (saved === 'en') {
       document.documentElement.setAttribute('data-lang', 'en');
     }
+
+    syncWishFieldPlaceholders();
 
     langToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-lang');
@@ -2349,6 +3310,244 @@ import Layout from '../layouts/Layout.astro';
         document.documentElement.removeAttribute('data-lang');
       }
       localStorage.setItem('wedding-lang', next);
+      syncWishFieldPlaceholders();
+    });
+  }
+
+  // ── Wedding wish form ──
+  const wishForm = document.getElementById(
+    'wish-form',
+  ) as HTMLFormElement | null;
+  const wishList = document.getElementById('wish-list') as HTMLElement | null;
+  const wishStage = document.getElementById('wish-stage') as HTMLElement | null;
+  const wishEmpty = document.getElementById('wish-empty') as HTMLElement | null;
+  const wishStatus = document.getElementById(
+    'wish-status',
+  ) as HTMLElement | null;
+  const wishPrev = document.getElementById(
+    'wish-prev',
+  ) as HTMLButtonElement | null;
+  const wishNext = document.getElementById(
+    'wish-next',
+  ) as HTMLButtonElement | null;
+  const wishCardTemplate = document.getElementById(
+    'wish-card-template',
+  ) as HTMLTemplateElement | null;
+  const wishSubmit = wishForm?.querySelector(
+    '.wish-submit',
+  ) as HTMLButtonElement | null;
+  let activeWishIndex = 0;
+
+  const wishMessages = {
+    mix: {
+      validation: 'Mohon isi nama dan ucapan terlebih dahulu.',
+      pending: 'Ucapan Anda sedang kami kirim...',
+      success: 'Terima kasih. Ucapan Anda sudah tampil di buku ucapan.',
+      error: 'Maaf, ucapan belum bisa dikirim sekarang.',
+    },
+    en: {
+      validation: 'Please enter your name and message first.',
+      pending: 'Sending your wish...',
+      success: 'Thank you. Your note is now live in the guestbook.',
+      error: 'Sorry, your wish could not be sent right now.',
+    },
+  } as const;
+
+  const setWishStatus = (state: 'idle' | 'pending' | 'success' | 'error') => {
+    if (!wishStatus) return;
+
+    if (state === 'idle') {
+      wishStatus.textContent = '';
+      wishStatus.classList.add('hidden');
+      wishStatus.removeAttribute('data-state');
+      return;
+    }
+
+    wishStatus.dataset.state = state;
+    wishStatus.textContent = wishMessages[getActiveLanguage()][state];
+    wishStatus.classList.remove('hidden');
+  };
+
+  const getWishCards = () =>
+    wishList
+      ? Array.from(wishList.querySelectorAll<HTMLElement>('[data-wish-id]'))
+      : [];
+
+  const syncWishDeck = () => {
+    if (!wishList) return;
+
+    const cards = getWishCards();
+    const total = cards.length;
+
+    if (wishEmpty) {
+      wishEmpty.classList.toggle('hidden', total > 0);
+    }
+
+    if (total === 0) {
+      activeWishIndex = 0;
+      wishList.style.transform = 'translate3d(0, 0, 0)';
+      wishList.classList.add('wish-list--solo');
+      if (wishPrev) wishPrev.disabled = true;
+      if (wishNext) wishNext.disabled = true;
+      return;
+    }
+
+    activeWishIndex = ((activeWishIndex % total) + total) % total;
+    wishList.classList.toggle('wish-list--solo', total === 1);
+
+    const activeCard = cards[activeWishIndex];
+    const offset = activeCard?.offsetLeft ?? 0;
+    wishList.style.transform = `translate3d(${-offset}px, 0, 0)`;
+
+    cards.forEach((card, index) => {
+      card.setAttribute(
+        'aria-hidden',
+        index === activeWishIndex ? 'false' : 'true',
+      );
+    });
+
+    const canCycle = total > 1;
+    if (wishPrev) wishPrev.disabled = !canCycle;
+    if (wishNext) wishNext.disabled = !canCycle;
+  };
+
+  const formatWishCardDate = (timestamp: number, language: 'mix' | 'en') =>
+    new Intl.DateTimeFormat(language === 'en' ? 'en-US' : 'id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(new Date(timestamp));
+
+  const createWishCard = (wish: {
+    id: string;
+    name: string;
+    message: string;
+    createdAt: number;
+  }) => {
+    const card =
+      wishCardTemplate?.content.firstElementChild?.cloneNode(true) ??
+      document.createElement('article');
+
+    if (!(card instanceof HTMLElement)) {
+      throw new Error('Failed to create wedding wish card');
+    }
+
+    card.dataset.wishId = wish.id;
+
+    const name = card.querySelector('.wish-card__name');
+    const dateMix = card.querySelector('.wish-card__date .lang-mix');
+    const dateEn = card.querySelector('.wish-card__date .lang-en');
+    const message = card.querySelector('.wish-card__message');
+
+    if (name) name.textContent = wish.name;
+    if (dateMix) {
+      dateMix.textContent = formatWishCardDate(Number(wish.createdAt), 'mix');
+    }
+    if (dateEn) {
+      dateEn.textContent = formatWishCardDate(Number(wish.createdAt), 'en');
+    }
+    if (message) message.textContent = wish.message;
+
+    return card;
+  };
+
+  if (wishForm && wishList && wishSubmit) {
+    syncWishDeck();
+
+    const moveWishDeck = (direction: -1 | 1) => {
+      const total = getWishCards().length;
+      if (total < 2) return;
+      activeWishIndex = (activeWishIndex + direction + total) % total;
+      syncWishDeck();
+    };
+
+    wishPrev?.addEventListener('click', () => moveWishDeck(-1));
+    wishNext?.addEventListener('click', () => moveWishDeck(1));
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    wishStage?.addEventListener(
+      'touchstart',
+      (event) => {
+        const touch = event.changedTouches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      },
+      { passive: true },
+    );
+
+    wishStage?.addEventListener(
+      'touchend',
+      (event) => {
+        const total = getWishCards().length;
+        if (total < 2) return;
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        if (Math.abs(deltaX) < 40 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+          return;
+        }
+
+        moveWishDeck(deltaX < 0 ? 1 : -1);
+      },
+      { passive: true },
+    );
+
+    window.addEventListener('resize', syncWishDeck);
+
+    wishForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setWishStatus('idle');
+
+      const formData = new FormData(wishForm);
+      const name = String(formData.get('name') ?? '').trim();
+      const message = String(formData.get('message') ?? '').trim();
+
+      if (!name || !message) {
+        setWishStatus('error');
+        if (wishStatus) {
+          wishStatus.textContent = wishMessages[getActiveLanguage()].validation;
+        }
+        return;
+      }
+
+      wishSubmit.disabled = true;
+      wishSubmit.setAttribute('aria-busy', 'true');
+      setWishStatus('pending');
+
+      try {
+        const response = await fetch(wishForm.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ name, message }),
+        });
+
+        const payload = await response.json().catch(() => null);
+
+        if (!response.ok || !payload?.wish) {
+          throw new Error('Guestbook submission failed');
+        }
+
+        wishEmpty?.classList.add('hidden');
+        wishList.prepend(createWishCard(payload.wish));
+        activeWishIndex = 0;
+        syncWishDeck();
+        wishForm.reset();
+        syncWishFieldPlaceholders();
+        setWishStatus('success');
+      } catch (error) {
+        console.error('Failed to submit wedding wish', error);
+        setWishStatus('error');
+      } finally {
+        wishSubmit.disabled = false;
+        wishSubmit.removeAttribute('aria-busy');
+      }
     });
   }
 
