@@ -14,13 +14,8 @@
 		{
 			"binding": "DB",
 			"database_name": "as-spring-2026-wishes",
-			"database_id": "00000000-0000-0000-0000-000000000000", // Replace before deploy
-			"preview_database_id": "00000000-0000-0000-0000-000000000000", // Replace for preview/local
-		},
-		{
-			"binding": "as_spring_2026_wishes",
-			"database_name": "as-spring-2026-wishes",
-			"database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d"
+			"database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d",
+			"preview_database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d",
 		},
 	],
 }
