@@ -19,3 +19,5 @@ bun-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+.playwright-mcp

@@ -3,77 +3,157 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <!-- Fixed background artwork -->
-  <div id="bg-main" class="fixed inset-0 z-0" aria-hidden="true">
-    <img
-      src="/assets/p1.png"
-      alt=""
-      class="main-bg-image absolute inset-0 h-full w-full object-cover object-center"
-      loading="eager"
-      decoding="async"
-    />
-    <div class="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/18 to-charcoal/32 transition-opacity duration-700"></div>
-  </div>
-
   <!-- Scrollable content layer -->
   <div id="content-layer" class="relative z-10">
-
     <!-- Navigation -->
-    <nav id="main-nav" data-auto-scroll-header class="fixed top-0 left-0 right-0 z-9999 transition-all duration-500">
-      <div class="nav-shell desktop-shell max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-        <span class="font-serif text-sm tracking-widest uppercase nav-logo text-white drop-shadow-sm">A & S</span>
+    <nav
+      id="main-nav"
+      data-auto-scroll-header
+      class="fixed top-0 left-0 right-0 z-9999 transition-all duration-500"
+    >
+      <div
+        class="nav-shell desktop-shell max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <span
+          class="font-display text-sm tracking-widest uppercase nav-logo text-white drop-shadow-sm"
+          >A & S</span
+        >
         <div class="flex items-center gap-6">
-          <div class="hidden md:flex gap-8 text-xs tracking-widest uppercase text-white/70">
-            <a href="#home" class="nav-link relative hover:text-white transition-colors duration-300">Top</a>
-            <a href="#greeting" class="nav-link relative hover:text-white transition-colors duration-300">Greeting</a>
-            <a href="/gallery" class="nav-link relative hover:text-white transition-colors duration-300">Gallery</a>
-            <a href="#details" class="nav-link relative hover:text-white transition-colors duration-300">Details</a>
-            <a href="#schedule" class="nav-link relative hover:text-white transition-colors duration-300">Timeline</a>
-            <a href="#access" class="nav-link relative hover:text-white transition-colors duration-300">Access</a>
-            <a href="#rsvp" class="nav-link relative hover:text-white transition-colors duration-300">RSVP</a>
+          <div
+            class="hidden md:flex gap-8 text-xs tracking-widest uppercase text-white/70"
+          >
+            <a
+              href="#home"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >Top</a
+            >
+            <a
+              href="#greeting"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >Greeting</a
+            >
+            <a
+              href="/gallery"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >Gallery</a
+            >
+            <a
+              href="#details"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >Details</a
+            >
+            <a
+              href="#schedule"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >Timeline</a
+            >
+            <a
+              href="#access"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >Access</a
+            >
+            <a
+              href="#rsvp"
+              class="nav-link relative hover:text-white transition-colors duration-300"
+              >RSVP</a
+            >
           </div>
           <!-- Language toggle -->
-          <button id="lang-toggle" class="lang-toggle flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-300" aria-label="Toggle language">
+          <button
+            id="lang-toggle"
+            class="lang-toggle flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-300"
+            aria-label="Toggle language"
+          >
             <span class="lang-label-mix">ID / EN</span>
             <span class="lang-label-en hidden">EN</span>
-            
           </button>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section — transparent, shows background -->
-    <section id="home" data-auto-scroll-section class="hero-section relative flex items-center justify-center">
+    <section
+      id="home"
+      data-auto-scroll-section
+      class="hero-section relative flex items-center justify-center"
+    >
+      <div id="bg-main" class="absolute inset-0 z-0" aria-hidden="true">
+        <img
+          src="/assets/p1.webp"
+          alt=""
+          class="main-bg-image absolute inset-0 h-full w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/18 to-charcoal/32 transition-opacity duration-700"
+        >
+        </div>
+      </div>
+
       <div class="hero-scene" aria-hidden="true">
         <div class="hero-scene__mountain"></div>
         <img
-          src="/assets/p1%20b%20crop.png"
+          src="/assets/p1%20b%20crop.webp"
           alt=""
           class="hero-scene__couple translateY-30"
           loading="eager"
           decoding="async"
         />
         <div class="">
-          <img src="/assets/gio2.webp"  alt="" class="hero-scene__cat hero-scene__cat--left"   loading="lazy" decoding="async"/>
-          <img src="/assets/coco2.webp"  alt="" class="hero-scene__cat hero-scene__cat--right"  loading="lazy" decoding="async"/>
-          <img src="/assets/ucil2.webp"   alt="" class="hero-scene__cat hero-scene__cat--center" loading="lazy" decoding="async"/>
+          <img
+            src="/assets/gio2.webp"
+            alt=""
+            class="hero-scene__cat hero-scene__cat--left"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="/assets/coco2.webp"
+            alt=""
+            class="hero-scene__cat hero-scene__cat--right"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="/assets/ucil2.webp"
+            alt=""
+            class="hero-scene__cat hero-scene__cat--center"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
 
-      <div class="hero-content hero-shell relative text-center px-6 pt-20 text-white">
+      <div
+        class="hero-content hero-shell relative text-center px-6 pt-20 text-white"
+      >
         <div class="inline-block mb-8 reveal" data-delay="0">
-          <span class="text-xs tracking-[0.3em] uppercase text-white/70">Wedding Invitation</span>
+          <span class="text-xs tracking-[0.3em] uppercase text-white/70"
+            >Wedding Invitation</span
+          >
         </div>
 
-        <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-normal tracking-tight mb-6 drop-shadow-lg">
+        <h1
+          class="font-display text-6xl md:text-8xl lg:text-9xl font-normal tracking-tight mb-6 drop-shadow-lg"
+        >
           <span class="block reveal" data-delay="200">Affrian</span>
-          <span class="block text-2xl md:text-3xl text-white/70 font-sans font-light my-4 reveal" data-delay="400">&</span>
+          <span
+            class="block text-2xl md:text-3xl text-white/70 font-sans font-light my-4 reveal"
+            data-delay="400">&</span
+          >
           <span class="block reveal" data-delay="600">Sherly</span>
         </h1>
 
         <div class="space-y-2 reveal" data-delay="1000">
-          <p class="font-serif text-2xl md:text-3xl tracking-widest drop-shadow-md">2026.05.02</p>
-          <p class="text-xs tracking-[0.3em] uppercase text-white/60">Saturday</p>
+          <p
+            class="font-serif text-2xl md:text-3xl tracking-widest drop-shadow-md"
+          >
+            2026.05.02
+          </p>
+          <p class="text-xs tracking-[0.3em] uppercase text-white/60">
+            Saturday
+          </p>
         </div>
 
         <button
@@ -83,8 +163,17 @@ import Layout from '../layouts/Layout.astro';
           data-delay="1200"
           aria-label="Scroll to next section"
         >
-          <svg class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7" />
+          <svg
+            class="w-5 h-5 mx-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 14l-7 7m0 0l-7-7"></path>
           </svg>
         </button>
       </div>
@@ -92,14 +181,23 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Content card sections float above the background -->
     <div class="content-cards">
-
       <!-- Greeting Section -->
       <section
         id="greeting"
         data-auto-scroll-section
         class="px-6 py-20 md:py-24 flex items-end"
       >
-        <div class="greeting-panel" aria-hidden="true"></div>
+        <div class="greeting-panel" aria-hidden="true">
+          <div class="greeting-panel__scene">
+            <img
+              src="/assets/p1%20b%20crop.webp"
+              alt=""
+              class="greeting-panel__art"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
         <!-- <div class="max-w-2xl mx-auto text-center">
           <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-12 reveal">
             <span class="text-xs tracking-[0.2em] uppercase font-medium">Greeting</span>
@@ -160,8 +258,12 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div> -->
 
-        <div class="greeting-content desktop-reading-block mx-auto max-w-full text-center">
-          <p class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal">
+        <div
+          class="greeting-content desktop-reading-block mx-auto max-w-full text-center"
+        >
+          <p
+            class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal"
+          >
             &ldquo;Dan di antara tanda-tanda (kebesaran)-Nya ialah<br />
             Dia menciptakan pasangan-pasangan untukmu dari<br />
             jenismu sendiri, agar kamu cenderung dan merasa<br />
@@ -170,7 +272,11 @@ import Layout from '../layouts/Layout.astro';
             benar-benar terdapat tanda-tanda (kebesaran Allah) bagi<br />
             kaum yang berpikir.&rdquo;
           </p>
-          <p class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal">(QS. Ar-Rum: 21)</p>
+          <p
+            class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal"
+          >
+            (QS. Ar-Rum: 21)
+          </p>
         </div>
         <div class="greeting-cats" aria-hidden="true">
           <img
@@ -196,110 +302,170 @@ import Layout from '../layouts/Layout.astro';
           />
         </div>
       </section>
-    <!-- Transparent spacer — background shows through -->
-      <div class="ambient-spacer ambient-spacer--after-greeting"></div>
 
       <!-- Countdown / Calendar teaser -->
-      <section id="gallery" data-auto-scroll-section class="py-16 px-6 relative">
-        <div class="calendar-shell desktop-shell max-w-3xl mx-auto reveal">
+      <section
+        id="gallery"
+        data-auto-scroll-section
+        class="py-16 relative"
+        style="background:#aed15d"
+      >
+        <div class="desktop-shell max-w-3xl mx-auto reveal">
           <a
             href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Affrian+%26+Sherly+Wedding+Ceremony&dates=20260502T140000/20260502T153000&details=Join+us+for+the+wedding+ceremony+of+Affrian+and+Sherly.&location=Masjid+Besar+Riyadhus+Sholihin%2C+Perumahan+Bumi+Sumekar+Asri%2C+Kec.+Kota+Sumenep&ctz=Asia%2FJakarta"
             target="_blank"
             rel="noreferrer"
-            class="gallery-teaser calendar-card group block relative overflow-hidden rounded-2xl bg-lime transition-transform duration-500 hover:-translate-y-1"
+            class="gallery-teaser calendar-card group block relative overflow-hidden rounded-2xl transition-transform duration-500 hover:-translate-y-1"
           >
             <!-- Decorative sparkles -->
-            <svg class="sparkle absolute top-6 right-12 w-4 h-4 text-lime-dark/40" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"/>
+            <svg
+              class="sparkle absolute top-6 right-12 w-4 h-4 text-lime-dark/40"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"
+              ></path>
             </svg>
-            <svg class="sparkle absolute top-16 right-24 w-3 h-3 text-lime-dark/30" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"/>
+            <svg
+              class="sparkle absolute top-16 right-24 w-3 h-3 text-lime-dark/30"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"
+              ></path>
             </svg>
-            <svg class="sparkle absolute bottom-20 left-8 w-3 h-3 text-lime-dark/25" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"/>
+            <svg
+              class="sparkle absolute bottom-20 left-8 w-3 h-3 text-lime-dark/25"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41Z"
+              ></path>
             </svg>
             <!-- Decorative curved line -->
-            <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" viewBox="0 0 600 300" fill="none" preserveAspectRatio="none">
-              <path d="M-20 250 Q150 100 300 180 Q450 260 620 80" stroke="currentColor" stroke-width="1.5" class="text-lime-dark"/>
+            <svg
+              class="absolute inset-0 w-full h-full pointer-events-none opacity-20"
+              viewBox="0 0 600 300"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M-20 250 Q150 100 300 180 Q450 260 620 80"
+                stroke="currentColor"
+                stroke-width="1.5"
+                class="text-lime-dark"></path>
             </svg>
 
-            <div class="calendar-card__layout flex flex-col md:flex-row items-stretch gap-0">
-              <!-- Calendar visual -->
-              <div class="calendar-card__visual relative md:w-[55%] aspect-[4/3] md:aspect-auto overflow-hidden m-4 md:m-5 md:mr-0 rounded-xl bg-charcoal/10 flex items-center justify-center min-h-[220px]">
-                <div class="text-center px-6" id="calendar-card-visual">
-                  <svg class="w-12 h-12 mx-auto mb-4 text-charcoal/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3.5 9.5h17M5 5.5h14A1.5 1.5 0 0120.5 7v12A1.5 1.5 0 0119 20.5H5A1.5 1.5 0 013.5 19V7A1.5 1.5 0 015 5.5z" />
-                  </svg>
-                  <p class="text-xs tracking-[0.28em] uppercase text-charcoal/40">
-                    <span class="lang-mix">2 Mei 2026</span>
-                    <span class="lang-en">May 2, 2026</span>
-                  </p>
-                  <p class="mt-3 font-serif text-2xl text-charcoal">
-                    <span class="lang-mix">14.00 WIB</span>
-                    <span class="lang-en">2:00 PM</span>
-                  </p>
-                  <p class="mt-3 text-sm leading-relaxed text-charcoal/65">
-                    <span class="lang-mix">Masjid Besar Riyadhus Sholihin</span>
-                    <span class="lang-en">Masjid Besar Riyadhus Sholihin</span>
-                  </p>
-                </div>
-              </div>
-
+            <div class="flex flex-col md:flex-row items-stretch gap-0">
               <!-- Text content -->
-              <div class="calendar-card__body flex-1 flex flex-col justify-between p-6 md:p-8">
+              <div
+                class="calendar-card__body flex-1 flex flex-col justify-between p-6 md:p-8"
+              >
                 <div>
-                  <p class="calendar-card__title font-serif italic text-2xl md:text-3xl text-charcoal mb-2">
-                    <span class="lang-mix">Save it to calendar</span>
-                    <span class="lang-en">Save it to calendar</span>
-                  </p>
-                  <p class="calendar-card__copy text-sm leading-relaxed text-charcoal/70 max-w-sm">
-                    <span class="lang-mix">Simpan tanggal akad kami ke Google Calendar agar tidak terlewat.</span>
-                    <span class="lang-en">Add our ceremony to Google Calendar so the date stays on your schedule.</span>
-                  </p>
+                  <div class="calendar-card__header flex items-center">
+                    <div class="calendar-card__copy-wrap">
+                      <p
+                        class="calendar-card__title font-serif italic text-2xl md:text-3xl text-charcoal mb-2"
+                      >
+                        <span class="lang-mix">Save it to calendar</span>
+                        <span class="lang-en">Save it to calendar</span>
+                      </p>
+                      <p
+                        class="calendar-card__copy text-sm leading-relaxed text-charcoal/70 max-w-sm"
+                      >
+                        <span class="lang-mix"
+                          >Simpan tanggal akad kami ke Google Calendar agar
+                          tidak terlewat.</span
+                        >
+                        <span class="lang-en"
+                          >Add our ceremony to Google Calendar so the date stays
+                          on your schedule.</span
+                        >
+                      </p>
+                    </div>
+                    <div
+                      class="calendar-card__arrow w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center transition-all duration-300 group-hover:bg-charcoal group-hover:border-charcoal"
+                    >
+                      <svg
+                        class="w-5 h-5 text-charcoal transition-colors duration-300 group-hover:text-lime"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                      </svg>
+                    </div>
+                  </div>
                   <!-- Countdown -->
-                  <div id="countdown" class="calendar-countdown flex gap-3 mt-3">
+                  <div id="countdown" class="calendar-countdown">
                     <div class="text-center">
-                      <span id="cd-days" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
-                      <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
+                      <span
+                        id="cd-days"
+                        class="block text-2xl font-serif text-charcoal tabular-nums"
+                        >--</span
+                      >
+                      <span
+                        class="text-[9px] tracking-widest uppercase text-charcoal/50"
+                      >
                         <span class="lang-mix">Hari</span>
                         <span class="lang-en">Days</span>
                       </span>
                     </div>
-                    <span class="text-xl text-charcoal/30 font-light mt-0.5">:</span>
+                    <span class="text-xl text-charcoal/30 font-light mt-0.5"
+                      >:</span
+                    >
                     <div class="text-center">
-                      <span id="cd-hours" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
-                      <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
+                      <span
+                        id="cd-hours"
+                        class="block text-2xl font-serif text-charcoal tabular-nums"
+                        >--</span
+                      >
+                      <span
+                        class="text-[9px] tracking-widest uppercase text-charcoal/50"
+                      >
                         <span class="lang-mix">Jam</span>
                         <span class="lang-en">Hrs</span>
                       </span>
                     </div>
-                    <span class="text-xl text-charcoal/30 font-light mt-0.5">:</span>
+                    <span class="text-xl text-charcoal/30 font-light mt-0.5"
+                      >:</span
+                    >
                     <div class="text-center">
-                      <span id="cd-mins" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
-                      <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
+                      <span
+                        id="cd-mins"
+                        class="block text-2xl font-serif text-charcoal tabular-nums"
+                        >--</span
+                      >
+                      <span
+                        class="text-[9px] tracking-widest uppercase text-charcoal/50"
+                      >
                         <span class="lang-mix">Menit</span>
                         <span class="lang-en">Min</span>
                       </span>
                     </div>
-                    <span class="text-xl text-charcoal/30 font-light mt-0.5">:</span>
+                    <span class="text-xl text-charcoal/30 font-light mt-0.5"
+                      >:</span
+                    >
                     <div class="text-center">
-                      <span id="cd-secs" class="block text-2xl font-serif text-charcoal tabular-nums">--</span>
-                      <span class="text-[9px] tracking-widest uppercase text-charcoal/50">
+                      <span
+                        id="cd-secs"
+                        class="block text-2xl font-serif text-charcoal tabular-nums"
+                        >--</span
+                      >
+                      <span
+                        class="text-[9px] tracking-widest uppercase text-charcoal/50"
+                      >
                         <span class="lang-mix">Detik</span>
                         <span class="lang-en">Sec</span>
                       </span>
                     </div>
-                  </div>
-                </div>
-                <div class="calendar-card__footer flex items-center justify-between mt-6">
-                  <p class="text-sm text-charcoal/70 leading-snug" id="calendar-link-text">
-                    <span class="lang-mix">Buka Google Calendar<br/>dan simpan acaranya</span>
-                    <span class="lang-en">Open Google Calendar<br/>and save the event</span>
-                  </p>
-                  <div class="w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center transition-all duration-300 group-hover:bg-charcoal group-hover:border-charcoal">
-                    <svg class="w-5 h-5 text-charcoal transition-colors duration-300 group-hover:text-lime" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
                   </div>
                 </div>
               </div>
@@ -308,276 +474,249 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </section>
 
-      <!-- Couple Introduction -->
-      <section id="introduction" data-auto-scroll-section class="content-card content-card--transparent py-32 px-6">
-        <div class="couple-shell desktop-shell max-w-5xl mx-auto">
-          <div class="text-center mb-6">
-            <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
-              <span class="text-xs tracking-[0.2em] uppercase font-medium">
-                <span >The Couple</span>
-              </span>
-            </div>
+      <div class="story-background">
+        <div class="story-background__backdrop" aria-hidden="true">
+          <img
+            src="/assets/p1.webp"
+            alt=""
+            class="main-bg-image absolute inset-0 h-full w-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/18 to-charcoal/32 transition-opacity duration-700"
+          >
           </div>
-
-          <div class="grid gap-10 md:gap-14">
-            <div class="couple-card-group reveal">
-              <article class="couple-card rounded-[2rem] p-4 md:p-8">
+        </div>
+        <!-- Couple Introduction -->
+        <section
+          id="introduction"
+          data-auto-scroll-section
+          data-auto-scroll-align="start"
+          class="content-card content-card--transparent py-32 px-6 z-[99]"
+        >
+          <div class="couple-shell desktop-shell max-w-5xl mx-auto">
+            <div class="grid gap-28 md:gap-20">
+              <div class="couple-card-group reveal">
+                <figure
+                  class="couple-card__image-frame couple-card__image-frame--single"
+                  aria-hidden="true"
+                >
+                  <img
+                    src="/assets/sherly.webp"
+                    alt=""
+                    class="couple-card__image couple-card__image--single"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
                 <div class="couple-card__text text-left">
-                  <p class="couple-card__eyebrow mb-5">
-                    <span class="lang-mix">Mempelai Wanita</span>
-                    <span class="lang-en">Bride</span>
-                  </p>
-                  <h3 class="couple-card__name font-serif mb-5">
+                  <h3 class="couple-card__name font-serif italic">
                     Syafazerlinda
                   </h3>
-                  <div class="lang-mix couple-card__meta space-y-2">
-                    <p>Putri kedua dari</p>
-                    <p>Bpk. Moch. Syafi'i &amp; Ibu Fatimah Umar</p>
-                  </div>
-                  <div class="lang-en couple-card__meta space-y-2">
-                    <p>Second daughter of</p>
-                    <p>Mr. Moch. Syafi'i &amp; Mrs. Fatimah Umar</p>
-                  </div>
-                </div>
-              </article>
-
-              <div class="couple-card__portrait" aria-hidden="true">
-                <img
-                  src="/assets/sherly.png"
-                  alt=""
-                  class="couple-card__portrait-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </div>
-
-            <div class="couple-card-group reveal">
-              <div class="couple-card__portrait couple-card__portrait--left" aria-hidden="true">
-                <img
-                  src="/assets/rian.png"
-                  alt=""
-                  class="couple-card__portrait-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-
-              <article class="couple-card rounded-[2rem] p-6 md:p-8">
-                <div class="couple-card__text text-left">
-                  <p class="couple-card__eyebrow mb-5">
-                    <span class="lang-mix">Mempelai Pria</span>
-                    <span class="lang-en">Groom</span>
+                  <p class="lang-mix couple-card__meta">
+                    Putri kedua dari Bpk. Moch. Syafi'i &amp; Ibu Fatimah Umar
                   </p>
-                  <h3 class="couple-card__name font-serif mb-5">
+                  <p class="lang-en couple-card__meta">
+                    Second daughter of Mr. Moch. Syafi'i &amp; Mrs. Fatimah Umar
+                  </p>
+                </div>
+              </div>
+
+              <div class="couple-card-group reveal">
+                <figure
+                  class="couple-card__image-frame couple-card__image-frame--single"
+                  aria-hidden="true"
+                >
+                  <img
+                    src="/assets/rian.webp"
+                    alt=""
+                    class="couple-card__image couple-card__image--single"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+
+                <div class="couple-card__text text-left">
+                  <h3 class="couple-card__name font-serif italic">
                     Affrian Rachmansyah
                   </h3>
-                  <div class="lang-mix couple-card__meta space-y-2">
-                    <p>Putra pertama dari</p>
-                    <p>Bpk. Yanuk Fatchorrahman (Alm.) &amp; Ibu Dinar Rahmawati</p>
-                  </div>
-                  <div class="lang-en couple-card__meta space-y-2">
-                    <p>First son of</p>
-                    <p>Mr. Yanuk Fatchorrahman (late) &amp; Mrs. Dinar Rahmawati</p>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-  
-      <!-- Transparent spacer -->
-      <div class="ambient-spacer"></div>
-
-      <!-- Details Section -->
-      <section id="details" data-auto-scroll-section class="content-card py-32 px-6">
-        <div class="details-layout desktop-shell max-w-3xl mx-auto">
-          <div class="details-header text-center mb-16">
-            <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
-              <span class="text-xs tracking-[0.2em] uppercase font-medium">Details</span>
-            </div>
-            <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">Akad</span>
-              <span class="lang-en">Ceremony</span>
-            </h2>
-          </div>
-
-          <div class="details-grid grid md:grid-cols-2 gap-12 md:gap-16">
-            <div class="detail-card text-center md:text-left p-8 rounded-2xl transition-all duration-500 reveal">
-              <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-4">Date & Time</h3>
-              <p class="font-serif text-xl mb-2">
-                <span class="lang-mix">2 Mei 2026 (Sabtu)</span>
-                <span class="lang-en">May 2, 2026 (Sat)</span>
-              </p>
-              <div class="space-y-1 text-sm text-muted">
-                <span class="lang-mix">
-                  <p>Akad: 14.00 WIB</p>
-                </span>
-                <span class="lang-en">
-                  <p>Ceremony: 2:00 PM</p>
-                </span>
-              </div>
-            </div>
-
-            <div class="detail-card text-center md:text-left p-8 rounded-2xl transition-all duration-500 reveal">
-              <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-4">Venue</h3>
-              <p class="font-serif text-xl mb-2">Masjid Besar Riyadhus Sholihin</p>
-              <p class="text-sm text-muted">
-                <span class="lang-mix">
-                  Perumahan Bumi Sumekar Asri<br />
-                  Kec. Kota Sumenep
-                </span>
-                <span class="lang-en">
-                  Perumahan Bumi Sumekar Asri<br />
-                  Kec. Kota Sumenep
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <div class="details-dress mt-16 text-center border-t border-charcoal/10 pt-12 reveal">
-            <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-4">Dress Code</h3>
-            <p class="font-serif text-lg">
-              <span class="lang-mix">Semi Formal</span>
-              <span class="lang-en">Semi-Formal</span>
-            </p>
-            <p class="mt-2 text-sm text-muted lang-mix">Busana semi formal</p>
-            <p class="mt-2 text-sm text-muted lang-en">Cocktail attire welcome</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Schedule Section -->
-      <section id="schedule" data-auto-scroll-section class="content-card py-32 px-6">
-        <div class="schedule-shell desktop-reading-block max-w-2xl mx-auto">
-          <div class="text-center mb-16">
-            <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
-              <span class="text-xs tracking-[0.2em] uppercase font-medium">Schedule</span>
-            </div>
-            <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">Rangkaian Acara</span>
-              <span class="lang-en">Timeline</span>
-            </h2>
-          </div>
-
-          <div class="space-y-0">
-            {[
-              { time: "1:30 PM", label: "Registrasi dibuka", labelEn: "Doors Open" },
-              { time: "2:00 PM", label: "Akad", labelEn: "Ceremony" },
-              { time: "2:30 PM", label: "Foto bersama", labelEn: "Group Photo" },
-            ].map((item, i) => (
-              <div class="flex items-start gap-8 group timeline-item reveal">
-                <div class="w-20 text-right shrink-0">
-                  <span class="font-serif text-lg transition-colors duration-300 group-hover:text-charcoal">{item.time}</span>
-                </div>
-                <div class="flex flex-col items-center shrink-0">
-                  <div class="w-3 h-3 rounded-full bg-lime border-2 border-charcoal/20 transition-all duration-300 group-hover:scale-150 group-hover:bg-lime group-hover:border-lime group-hover:shadow-[0_0_12px_rgba(225,255,0,0.5)]"></div>
-                  {i < 2 && <div class="w-px h-16 bg-charcoal/10 transition-colors duration-300 group-hover:bg-lime/40"></div>}
-                </div>
-                <div class="pb-16 last:pb-0 transition-transform duration-300 group-hover:translate-x-1">
-                  <p class="font-medium">
-                    <span class="lang-mix">{item.label}</span>
-                    <span class="lang-en">{item.labelEn}</span>
+                  <p class="lang-mix couple-card__meta">
+                    Putra pertama dari Bpk. Yanuk Fatchorrahman (Alm.) &amp; Ibu
+                    Dinar Rahmawati
                   </p>
-                  <p class="text-xs text-muted mt-1 lang-mix">{item.labelEn}</p>
+                  <p class="lang-en couple-card__meta">
+                    First son of Mr. Yanuk Fatchorrahman (late) &amp; Mrs. Dinar
+                    Rahmawati
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- Transparent spacer -->
-      <div class="ambient-spacer"></div>
-
-      <!-- Access Section -->
-      <section id="access" data-auto-scroll-section class="content-card py-32 px-6">
-        <div class="access-layout desktop-shell max-w-3xl mx-auto">
-          <div class="access-header text-center mb-16">
-            <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
-              <span class="text-xs tracking-[0.2em] uppercase font-medium">Access</span>
-            </div>
-            <h2 class="font-serif text-3xl md:text-4xl reveal">
-              <span class="lang-mix">Lokasi</span>
-              <span class="lang-en">Getting There</span>
-            </h2>
-          </div>
-
-          <div class="access-map map-card aspect-video rounded-xl overflow-hidden mb-12 transition-all duration-500 reveal relative group">
-            <img
-              src="assets/masjid-riyadhus-salihin-sumenep.webp"
-              alt="Wedding venue exterior"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent"></div>
-            <div class="absolute bottom-6 left-6 text-white">
-              <p class="font-serif text-lg drop-shadow-md">Masjid Besar Riyadhus Sholihin</p>
-              <p class="text-xs text-white/70 mt-1">
-                <span class="lang-mix">Perumahan Bumi Sumekar Asri, Kec. Kota Sumenep</span>
-                <span class="lang-en">Perumahan Bumi Sumekar Asri, Kec. Kota Sumenep</span>
-              </p>
             </div>
           </div>
+        </section>
 
-          <div class="access-grid grid md:grid-cols-2 gap-8 text-sm">
-            <div class="access-card p-6 rounded-xl transition-all duration-400 reveal">
-              <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-3">
-                <span class="lang-mix">Datang dengan kereta</span>
-                <span class="lang-en">By Train</span>
-              </h3>
-              <p class="text-muted leading-relaxed">
-                <span class="lang-mix">
-                  5 menit berjalan kaki dari Stasiun JR Harajuku (Pintu Keluar Takeshita)<br />
-                  3 menit berjalan kaki dari Stasiun Meiji-jingumae (Pintu Keluar 2)
-                </span>
-                <span class="lang-en">
-                  5 min walk from JR Harajuku Station (Takeshita Exit)<br />
-                  3 min walk from Meiji-jingumae Station (Exit 2)
-                </span>
-              </p>
-            </div>
-            <div class="access-card p-6 rounded-xl transition-all duration-400 reveal">
-              <h3 class="text-xs tracking-[0.2em] uppercase text-muted mb-3">
-                <span class="lang-mix">Datang dengan mobil</span>
-                <span class="lang-en">By Car</span>
-              </h3>
-              <p class="text-muted leading-relaxed">
-                <span class="lang-mix">
-                  Tersedia area parkir di lokasi acara (20 mobil)<br />
-                  Jika penuh, silakan gunakan area parkir umum terdekat
-                </span>
-                <span class="lang-en">
-                  On-site parking available (20 spaces)<br />
-                  Nearby coin parking available if full
-                </span>
-              </p>
+        <!-- Details Section -->
+        <section
+          id="details"
+          data-auto-scroll-section
+          class="content-card content-card--transparent py-32 px-6"
+        >
+          <div class="details-layout desktop-shell w-full">
+            <div class="details-composition reveal">
+              <div class="details-line">
+                <div class="details-line__intro">
+                  <p class="details-line__label font-serif">
+                    <span class="lang-mix">Hari</span>
+                    <span class="lang-en">Day</span>
+                  </p>
+                  <p class="details-line__meta">
+                    <span class="lang-mix">Tanggal</span>
+                    <span class="lang-en">Date</span>
+                  </p>
+                </div>
+                <p
+                  class="details-line__value details-line__value--date font-serif"
+                >
+                  <span class="lang-mix">2026.05.02 Sab</span>
+                  <span class="lang-en">2026.05.02 Sat</span>
+                </p>
+              </div>
+
+              <div class="details-line details-line--secondary">
+                <div class="details-line__intro">
+                  <p class="details-line__label font-serif">
+                    <span class="lang-mix">Akad</span>
+                    <span class="lang-en">Ceremony</span>
+                  </p>
+                  <p class="details-line__meta">
+                    <span class="lang-mix">Wedding</span>
+                    <span class="lang-en">Wedding</span>
+                  </p>
+                </div>
+                <p
+                  class="details-line__value details-line__value--time font-serif"
+                >
+                  <span class="lang-mix">09:00 WIB</span>
+                  <span class="lang-en">09:00 AM</span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <!-- Access Section -->
+        <section
+          id="access"
+          data-auto-scroll-section
+          class="content-card content-card--transparent py-32 px-6"
+        >
+          <div class="access-layout desktop-shell max-w-5xl mx-auto">
+            <div class="access-composition reveal">
+              <div class="access-composition__top">
+                <div class="access-composition__label-block">
+                  <p class="access-composition__label font-serif">
+                    <span class="lang-mix">Tempat</span>
+                    <span class="lang-en">Place</span>
+                  </p>
+                  <p class="access-composition__meta">
+                    <span class="lang-mix">Lokasi akad</span>
+                    <span class="lang-en">Ceremony venue</span>
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Masjid+Besar+Riyadhus+Sholihin+Perumahan+Bumi+Sumekar+Asri+Kec.+Kota+Sumenep"
+                target="_blank"
+                rel="noreferrer"
+                class="access-composition__title-row"
+                aria-label="Open venue in Google Maps"
+              >
+                <p class="access-composition__title font-serif">
+                  Masjid Besar<br />
+                  Riyadhus<br />
+                  Sholihin
+                </p>
+                <span class="access-composition__link" aria-hidden="true">
+                  <svg
+                    class="w-12 h-12"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="rgba(174, 209, 93, 0.94)"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M14 5h5m0 0v5m0-5L10 14"></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 14v4a1 1 0 01-1 1h-12a1 1 0 01-1-1V6a1 1 0 011-1h4"
+                    ></path>
+                  </svg>
+                </span>
+              </a>
+
+              <div class="access-composition__body">
+                <p class="access-composition__address font-serif">
+                  <span class="lang-mix"
+                    >Perumahan Bumi Sumekar Asri, Kec. Kota Sumenep</span
+                  >
+                  <span class="lang-en"
+                    >Perumahan Bumi Sumekar Asri, Kec. Kota Sumenep</span
+                  >
+                </p>
+
+                <p class="access-composition__notes">
+                  <span class="lang-mix">
+                    Parkir tersedia di area sekitar lokasi acara.<br />
+                    Silakan gunakan Google Maps untuk rute terbaik menuju venue.
+                  </span>
+                  <span class="lang-en">
+                    Parking is available around the venue.<br />
+                    Please use Google Maps for the best route to the venue.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <!-- RSVP Section — semi-transparent dark -->
-      <section id="rsvp" data-auto-scroll-section class="content-card content-card--dark py-32 px-6">
-        <div class="rsvp-shell desktop-reading-block max-w-xl mx-auto text-center">
-          <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal">
-            <span class="text-xs tracking-[0.2em] uppercase font-medium text-lime">RSVP</span>
+      <section
+        id="rsvp"
+        data-auto-scroll-section
+        class="content-card content-card--dark py-32 px-6"
+      >
+        <div
+          class="rsvp-shell desktop-reading-block max-w-xl mx-auto text-center"
+        >
+          <div
+            class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-6 reveal"
+          >
+            <span
+              class="text-xs tracking-[0.2em] uppercase font-medium text-lime"
+              >RSVP</span
+            >
           </div>
-          <h2 class="font-serif text-3xl md:text-4xl mb-6 text-white reveal">
+          <h2 class="font-display text-3xl md:text-4xl mb-6 text-white reveal">
             <span class="lang-mix">Konfirmasi Kehadiran</span>
             <span class="lang-en">RSVP</span>
           </h2>
           <p class="text-sm text-white/60 leading-relaxed mb-12 reveal">
             <span class="lang-mix">
               Mohon kesediaannya untuk mengisi konfirmasi<br />
-              paling lambat <span class="text-white/80 font-medium">15 Maret 2026</span><br />
+              paling lambat <span class="text-white/80 font-medium"
+                >15 Maret 2026</span
+              ><br />
               agar kami dapat mempersiapkan hari istimewa ini
             </span>
             <span class="lang-en">
               We would appreciate your reply<br />
-              by <span class="text-white/80 font-medium">March 15, 2026</span><br />
+              by <span class="text-white/80 font-medium">March 15, 2026</span
+              ><br />
               so we can prepare for our special day.
             </span>
           </p>
@@ -589,8 +728,17 @@ import Layout from '../layouts/Layout.astro';
             >
               <span class="lang-mix">Kirim RSVP</span>
               <span class="lang-en">Respond Now</span>
-              <svg class="w-4 h-4 rsvp-arrow transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <svg
+                class="w-4 h-4 rsvp-arrow transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </a>
           </div>
@@ -600,10 +748,15 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- Footer -->
-      <footer data-auto-scroll-section class="content-card py-16 px-6 text-center">
+      <footer
+        data-auto-scroll-section
+        class="content-card py-16 px-6 text-center"
+      >
         <div class="footer-shell desktop-reading-block space-y-4">
-          <p class="font-serif text-2xl tracking-widest footer-logo">A & S</p>
-          <p class="text-xs tracking-[0.3em] uppercase text-muted">2026.05.02</p>
+          <p class="font-display text-2xl tracking-widest footer-logo">A & S</p>
+          <p class="text-xs tracking-[0.3em] uppercase text-muted">
+            2026.05.02
+          </p>
           <div class="flex items-center justify-center gap-4 mt-6">
             <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
             <div class="w-2 h-2 rounded-full bg-lime footer-dot"></div>
@@ -614,7 +767,6 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
       </footer>
-
     </div><!-- .content-cards -->
   </div><!-- #content-layer -->
 </Layout>
@@ -629,7 +781,8 @@ import Layout from '../layouts/Layout.astro';
     background: linear-gradient(180deg, #92d8e0 0%, #1489af 52%, #a6e4db 100%);
     will-change: auto;
   }
-  .main-bg-image {
+  .main-bg-image,
+  .story-background__image {
     object-position: center center;
   }
 
@@ -643,6 +796,10 @@ import Layout from '../layouts/Layout.astro';
   }
   .content-card + .content-card {
     margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .content-cards {
+    position: relative;
+    z-index: 1;
   }
   .content-card--dark {
     background: rgba(26, 26, 26, 0.88);
@@ -672,7 +829,7 @@ import Layout from '../layouts/Layout.astro';
   .hero-section {
     overflow: visible;
     align-items: center;
-    z-index: 2;
+    z-index: 0;
   }
   .hero-shell {
     width: min(100%, 28rem);
@@ -681,19 +838,21 @@ import Layout from '../layouts/Layout.astro';
     font-size: clamp(3.35rem, 13vw, 5.15rem);
     line-height: 0.94;
   }
+  #gallery {
+    padding-top: clamp(2.5rem, 7svh, 4rem);
+    padding-bottom: clamp(2.5rem, 7svh, 4rem);
+  }
   #greeting {
+    --greeting-scene-height: clamp(14rem, 34svh, 19rem);
     position: relative;
-    min-height: 100vh;
-    min-height: 100svh;
-    padding-top: clamp(20rem, 46svh, 27rem);
-    padding-bottom: clamp(3rem, 7svh, 4.5rem);
+    min-height: unset;
+    padding-top: calc(
+      var(--greeting-scene-height) + clamp(0.35rem, 1.4svh, 0.9rem)
+    );
+    padding-bottom: clamp(2rem, 5svh, 3rem);
     align-items: flex-start;
     overflow: hidden;
-  }
-  @supports (min-height: 100dvh) {
-    #greeting {
-      min-height: 100dvh;
-    }
+    /* background: #aed15d; */
   }
   .greeting-panel {
     position: absolute;
@@ -704,18 +863,36 @@ import Layout from '../layouts/Layout.astro';
     background: #aed15d;
     z-index: 0;
   }
+  .greeting-panel__scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .greeting-panel__mountain {
+    position: absolute;
+    inset: 0;
+    background: url('/assets/gunung.webp') center top / cover no-repeat;
+  }
+  .greeting-panel__art {
+    position: absolute;
+    top: -23.25rem;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
   .greeting-content {
     position: relative;
     z-index: 50;
     width: min(100%, 29rem);
     margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 1.5rem);
-    padding-top: 0;
+    padding-inline: clamp(0.9rem, 4vw, 1.35rem);
+    padding-top: 2;
     padding-bottom: 0;
   }
   .greeting-content > p:first-child {
-    font-size: clamp(0.98rem, 3.4vw, 1.12rem);
-    line-height: 1.9;
+    font-size: clamp(0.98rem, 3.15vw, 1.08rem);
+    line-height: 1.8;
     text-wrap: pretty;
   }
   .greeting-content > p:last-child {
@@ -728,7 +905,7 @@ import Layout from '../layouts/Layout.astro';
   .greeting-cats {
     position: absolute;
     inset: 0 0 auto;
-    height: clamp(18rem, 42svh, 24rem);
+    height: var(--greeting-scene-height);
     z-index: 20;
     pointer-events: none;
   }
@@ -741,7 +918,7 @@ import Layout from '../layouts/Layout.astro';
   }
   .greeting-cat--gio {
     left: clamp(1.25rem, 5vw, 2rem);
-    top: clamp(9rem, 23svh, 13rem);
+    top: clamp(6.25rem, 17svh, 10rem);
     width: clamp(4.75rem, 21vw, 6.25rem);
     transform: rotate(-10deg);
   }
@@ -752,7 +929,7 @@ import Layout from '../layouts/Layout.astro';
   }
   .greeting-cat--ucil {
     left: 50%;
-    top: clamp(12.5rem, 29svh, 17rem);
+    top: clamp(9rem, 21.5svh, 13.5rem);
     width: clamp(5.5rem, 24vw, 7.25rem);
     transform: translateX(-50%) rotate(-4deg);
   }
@@ -766,9 +943,10 @@ import Layout from '../layouts/Layout.astro';
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
     backdrop-filter: blur(18px) saturate(135%);
     -webkit-backdrop-filter: blur(18px) saturate(135%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.4s ease;
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s ease;
   }
   .couple-card:hover {
     transform: translateY(-4px);
@@ -778,71 +956,79 @@ import Layout from '../layouts/Layout.astro';
     border-color: rgba(255, 255, 255, 0.4);
   }
   .couple-card-group {
-    --couple-group-gap: clamp(1.25rem, 5vw, 2rem);
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     width: 100%;
-    min-width: 0;
+    gap: clamp(1.25rem, 4vw, 1.75rem);
     align-items: start;
-    gap: var(--couple-group-gap);
   }
-  .couple-card-group > .couple-card {
-    max-width: none;
-    min-width: 0;
+  .story-background {
+    position: relative;
+    isolation: isolate;
+  }
+  .story-background__backdrop {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    margin-bottom: -100vh;
+    margin-bottom: -100svh;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @supports (height: 100dvh) {
+    .story-background__backdrop {
+      height: 100dvh;
+      margin-bottom: -100dvh;
+    }
+  }
+  .story-background__image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .story-background > section {
+    position: relative;
+    z-index: 1;
+  }
+  .couple-card__image-frame {
+    overflow: hidden;
+  }
+  .couple-card__image-frame--single {
+    aspect-ratio: 3 / 4;
+    width: min(100%, 22rem);
+  }
+  .couple-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .couple-card__image--single {
+    object-position: center 14%;
   }
   .couple-card__text {
-    width: 100%;
+    width: min(100%, 18rem);
     min-width: 0;
-    overflow-wrap: anywhere;
-  }
-  .couple-card-group .couple-card__eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 0.24em;
-  }
-  .couple-card-group .couple-card__name {
-    font-size: clamp(2rem, 9vw, 3rem);
-    line-height: 1.02;
-    letter-spacing: 0.05em;
-    text-wrap: balance;
-  }
-  .couple-card-group .couple-card__meta {
-    font-size: clamp(0.95rem, 3.6vw, 1.05rem);
-    line-height: 1.65;
-    text-wrap: pretty;
-  }
-  .couple-card__eyebrow {
-    font-size: 0.625rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--color-muted);
+    text-align: left;
   }
   .couple-card__name {
-    font-size: clamp(2rem, 4vw, 2.9rem);
-    line-height: 1.05;
-    letter-spacing: 0.08em;
+    font-size: clamp(3.2rem, 12vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: 0;
+    color: rgba(26, 26, 26, 0.94);
+    text-wrap: balance;
   }
   .couple-card__meta {
-    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-    line-height: 1.7;
-    color: rgba(26, 26, 26, 0.8);
-  }
-  .couple-card__portrait {
-    display: flex;
-    max-width: none;
-    justify-content: center;
-    align-items: flex-end;
-    min-width: 0;
-  }
-  .couple-card__portrait--left {
-    justify-content: center;
-  }
-  .couple-card__portrait-image {
-    display: block;
-    width: min(100%, 20rem);
-    max-width: none;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 18px 28px rgba(26, 26, 26, 0.1));
+    margin-top: 1.25rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 3.8vw, 1.15rem);
+    line-height: 1.85;
+    color: rgba(26, 26, 26, 0.84);
+    max-width: 16rem;
   }
   .couple-separator {
     display: flex;
@@ -858,8 +1044,9 @@ import Layout from '../layouts/Layout.astro';
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.visible {
     opacity: 1;
@@ -875,8 +1062,9 @@ import Layout from '../layouts/Layout.astro';
     width: 0;
     height: 1px;
     background: #e1ff00;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .nav-link:hover::after {
     width: 100%;
@@ -892,47 +1080,361 @@ import Layout from '../layouts/Layout.astro';
     background: rgba(26, 26, 26, 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 1px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.15);
   }
 
-  /* ── Detail cards hover ── */
-  .detail-card {
-    background: transparent;
-    border: 1px solid transparent;
+  .details-layout {
+    max-width: 72rem;
+    width: 100%;
+    margin-inline: auto;
   }
-  .detail-card:hover {
-    background: rgba(225, 255, 0, 0.04);
-    border-color: rgba(225, 255, 0, 0.15);
+  .details-composition {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+    width: 100%;
+  }
+  .details-line {
+    display: block;
+    width: 100%;
+  }
+  .details-line__intro {
+    display: grid;
+    gap: 0.4rem;
+    transform: translateY(2rem);
+  }
+  .details-line__label {
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    line-height: 0.95;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.34);
+  }
+  .details-line__meta {
+    font-size: clamp(1rem, 2.6vw, 1.4rem);
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.34);
+  }
+  .details-line__value {
+    font-style: italic;
+    font-weight: 400;
+    line-height: 0.92;
+    color: rgba(255, 255, 255, 0.98);
+    text-wrap: balance;
+    text-align: right;
+    display: block;
+    width: 100%;
+  }
+  .details-line__value--date {
+    font-size: clamp(3.5rem, 12vw, 6rem);
+  }
+  .details-line__value--time {
+    font-size: clamp(3.2rem, 10vw, 5rem);
+  }
+  .details-venue {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .details-venue__name {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: rgba(255, 255, 255, 0.94);
+  }
+  .details-venue__copy {
+    margin-top: 0.75rem;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.58);
+    max-width: 34rem;
+  }
+
+  .access-layout {
+    max-width: 72rem;
+  }
+  .access-composition {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  .access-composition__top {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .access-composition__label-block {
+    display: grid;
+    gap: 0.25rem;
+    text-align: right;
+    transform: translateY(3rem);
+  }
+  .access-composition__label {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    line-height: 0.95;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.34);
+  }
+  .access-composition__meta {
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.34);
+  }
+  .access-composition__title-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .access-composition__title-row {
+    transition: transform 0.25s ease;
+  }
+  .access-composition__title-row:hover .access-composition__title {
+    color: rgba(174, 209, 93, 0.94);
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(225, 255, 0, 0.06);
   }
-
-  /* ── Access cards hover ── */
-  .access-card {
-    background: transparent;
-    border: 1px solid transparent;
+  .access-composition__title-row:hover .access-composition__link {
+    transform: translateY(-4px);
   }
-  .access-card:hover {
-    background: rgba(225, 255, 0, 0.04);
-    border-color: rgba(225, 255, 0, 0.12);
+  .access-composition__title {
+    transition:
+      color 0.25s ease,
+      transform 0.25s ease;
+  }
+  .access-composition__title {
+    font-size: clamp(3.8rem, 15vw, 6.4rem);
+    line-height: 0.88;
+    color: rgba(255, 255, 255, 0.98);
+    text-wrap: balance;
+    flex: 1;
+  }
+  .access-composition__body {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .access-composition__address {
+    font-size: clamp(1.55rem, 4.5vw, 2.2rem);
+    line-height: 1.15;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .access-composition__link {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-lime);
+    text-decoration: none;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  /* .access-composition__link:hover {
     transform: translateY(-2px);
+    background: rgba(225, 255, 0, 0.06);
+  } */
+  .access-composition__notes {
+    grid-column: 1 / -1;
+    max-width: 46rem;
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.76);
   }
 
   /* ── Gallery teaser card ── */
-  .gallery-teaser {
-    box-shadow: 0 4px 30px rgba(225, 255, 0, 0.15);
+  .gallery-anchor {
+    height: 0;
   }
-  .gallery-teaser:hover {
-    box-shadow: 0 12px 40px rgba(225, 255, 0, 0.25);
+  .gallery-teaser {
+    color: inherit;
+  }
+  .calendar-card {
+    /* background: #aed15d; */
+  }
+  .calendar-card__body {
+    gap: 1.5rem;
+  }
+  .calendar-card__header {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.9rem;
+  }
+  .calendar-card__copy-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .calendar-card__arrow {
+    flex: 0 0 auto;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-top: 0.1rem;
+  }
+  .gallery-teaser--floating {
+    position: fixed;
+    right: max(0.875rem, calc(env(safe-area-inset-right) + 0.875rem));
+    bottom: max(0.875rem, calc(env(safe-area-inset-bottom) + 0.875rem));
+    z-index: 55;
+    width: 4rem;
+    height: 4rem;
+    overflow: visible;
+  }
+  .gallery-teaser__summary {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(225, 255, 0, 0.94);
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+    box-shadow:
+      0 14px 36px rgba(26, 26, 26, 0.16),
+      0 10px 30px rgba(225, 255, 0, 0.22);
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s ease,
+      background-color 0.35s ease;
+  }
+  .gallery-teaser__summary::-webkit-details-marker {
+    display: none;
+  }
+  .gallery-teaser__summary::marker {
+    content: '';
+  }
+  .gallery-teaser__summary-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-charcoal);
+    opacity: 0.78;
+  }
+  .gallery-teaser__expanded {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 0.5rem);
+    z-index: 1;
+    width: min(19rem, calc(100vw - 1rem));
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 1rem;
+    background: rgba(225, 255, 0, 0.94);
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+    box-shadow:
+      0 18px 46px rgba(26, 26, 26, 0.16),
+      0 12px 30px rgba(225, 255, 0, 0.22);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(0.75rem) scale(0.96);
+    transform-origin: bottom right;
+    transition:
+      opacity 0.28s ease,
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0.28s ease;
+  }
+  .gallery-teaser__expanded .calendar-card__title {
+    font-size: 1.55rem;
+    line-height: 1.08;
+    margin-bottom: 0.5rem;
+  }
+  .gallery-teaser__expanded .calendar-card__copy {
+    max-width: none;
+    font-size: 0.88rem;
+  }
+  .gallery-teaser__expanded .calendar-card__footer {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.12);
+  }
+  .gallery-teaser__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(26, 26, 26, 0.14);
+    border-radius: 0.5rem;
+    background: rgba(26, 26, 26, 0.08);
+    color: var(--color-charcoal);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition:
+      background-color 0.25s ease,
+      transform 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .gallery-teaser__cta:hover {
+    background: rgba(26, 26, 26, 0.14);
+    border-color: rgba(26, 26, 26, 0.24);
+    transform: translateY(-1px);
+  }
+  .gallery-teaser--floating[open] {
+    z-index: 65;
+  }
+  .gallery-teaser--floating[open] .gallery-teaser__expanded,
+  .gallery-teaser--floating:focus-within .gallery-teaser__expanded {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+  .gallery-teaser--floating[open] > .gallery-teaser__summary,
+  .gallery-teaser--floating:focus-within > .gallery-teaser__summary {
+    box-shadow:
+      0 18px 42px rgba(26, 26, 26, 0.18),
+      0 14px 34px rgba(225, 255, 0, 0.26);
+  }
+  /* ── Pointer: desktop mouse hover interactions ── */
+  @media (hover: hover) and (pointer: fine) {
+    .gallery-teaser--floating:hover .gallery-teaser__expanded {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .gallery-teaser--floating:hover > .gallery-teaser__summary {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow:
+        0 18px 42px rgba(26, 26, 26, 0.18),
+        0 14px 34px rgba(225, 255, 0, 0.26);
+    }
+  }
+  /* ── Mobile portrait: iPhone SE (375×667), iPhone 14/15 (390×844), Pixel 7 (412×915), Galaxy S24 (360×780) ── */
+  @media (max-width: 639px) {
+    .gallery-teaser--floating {
+      width: 3.75rem;
+      height: 3.75rem;
+      right: max(0.625rem, calc(env(safe-area-inset-right) + 0.625rem));
+      bottom: max(0.625rem, calc(env(safe-area-inset-bottom) + 0.625rem));
+    }
+    .gallery-teaser__expanded {
+      width: min(17.25rem, calc(100vw - 0.75rem));
+      bottom: calc(100% + 0.45rem);
+      padding: 0.9rem;
+    }
   }
   .sparkle {
     animation: sparkle-float 3s ease-in-out infinite alternate;
   }
-  .sparkle:nth-child(2) { animation-delay: 1s; }
-  .sparkle:nth-child(3) { animation-delay: 2s; }
+  .sparkle:nth-child(2) {
+    animation-delay: 1s;
+  }
+  .sparkle:nth-child(3) {
+    animation-delay: 2s;
+  }
   @keyframes sparkle-float {
-    0% { transform: translateY(0) scale(1); opacity: 0.3; }
-    100% { transform: translateY(-6px) scale(1.2); opacity: 0.6; }
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-6px) scale(1.2);
+      opacity: 0.6;
+    }
   }
 
   /* ── Map card hover ── */
@@ -965,8 +1467,9 @@ import Layout from '../layouts/Layout.astro';
 
   /* ── Footer ── */
   .footer-logo {
-    transition: letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                color 0.3s ease;
+    transition:
+      letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.3s ease;
     cursor: default;
   }
   .footer-logo:hover {
@@ -976,8 +1479,13 @@ import Layout from '../layouts/Layout.astro';
     animation: pulse-dot 2s ease-in-out infinite;
   }
   @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(225, 255, 0, 0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(225, 255, 0, 0); }
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(225, 255, 0, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(225, 255, 0, 0);
+    }
   }
 
   /* ── Hero ── */
@@ -994,17 +1502,18 @@ import Layout from '../layouts/Layout.astro';
     left: 0;
     right: 0;
     bottom: -1px;
-    height: 50%;
-    background: url('/assets/gunung.png') center bottom / cover no-repeat;
+    height: 60%;
+    background: url('/assets/gunung.webp') center bottom / cover no-repeat;
   }
   .hero-scene__couple {
     position: absolute;
-    top: 63%;
+    top: 60%;
     left: 0;
     bottom: auto;
     width: 100%;
     max-width: none;
     transform: none;
+    background-repeat: no-repeat;
   }
   .hero-content {
     z-index: 1;
@@ -1034,16 +1543,16 @@ import Layout from '../layouts/Layout.astro';
   .lang-mix {
     display: inline;
   }
-  :global([data-lang="en"]) .lang-en {
+  :global([data-lang='en']) .lang-en {
     display: inline;
   }
-  :global([data-lang="en"]) .lang-mix {
+  :global([data-lang='en']) .lang-mix {
     display: none;
   }
-  :global([data-lang="en"]) .lang-label-en {
+  :global([data-lang='en']) .lang-label-en {
     display: inline !important;
   }
-  :global([data-lang="en"]) .lang-label-mix {
+  :global([data-lang='en']) .lang-label-mix {
     display: none !important;
   }
 
@@ -1054,7 +1563,6 @@ import Layout from '../layouts/Layout.astro';
     transform: scale(0.95);
   }
 
-  #gallery,
   #introduction,
   #details,
   #schedule,
@@ -1065,26 +1573,30 @@ import Layout from '../layouts/Layout.astro';
   footer[data-auto-scroll-section] {
     padding-block: clamp(3rem, 8svh, 4.5rem);
   }
-  .calendar-card__body {
-    gap: 1.5rem;
-  }
   .calendar-countdown {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
     margin-top: 1rem;
+    justify-content: flex-start;
   }
   .calendar-countdown > span {
-    display: none;
+    display: block;
   }
   .calendar-countdown > div {
+    min-width: 3.25rem;
     padding-top: 0.75rem;
     border-top: 1px solid rgba(26, 26, 26, 0.14);
   }
   .calendar-card__footer {
+    display: flex;
     gap: 1rem;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+    text-align: center;
   }
   .timeline-item {
     gap: clamp(0.9rem, 4vw, 1.25rem);
@@ -1103,7 +1615,7 @@ import Layout from '../layouts/Layout.astro';
     justify-content: center;
   }
 
-  /* ── Reduce motion ── */
+  /* ── Accessibility: users who prefer reduced motion ── */
   @media (prefers-reduced-motion: reduce) {
     .reveal {
       opacity: 1;
@@ -1115,27 +1627,43 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
-  /* ── Cat images on the couple illustration ── */
+  /* ── Mobile + tablet (≤1023px): hide hero cats on small screens — iPhone, Galaxy, iPad Mini/Air ── */
   @media (max-width: 1023px) {
     .hero-scene__cat {
       display: none;
     }
   }
+  /* ── Small tablet + up (≥640px): iPad Mini (768), iPad Air (820), Surface Duo (540) ── */
+  @media (min-width: 640px) {
+    .calendar-card {
+      background: rgba(174, 209, 93, 0.94);
+    }
+    #gallery {
+      background: transparent !important;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+  /* ── Tablet portrait (640px–1023px): iPad Mini (768×1024), iPad Air (820×1180), Surface Pro (912×1368) ── */
   @media (min-width: 640px) and (max-width: 1023px) {
     .hero-shell,
     .hero-content {
       width: min(100%, 31rem);
     }
+    .hero-content {
+      padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
+      padding-bottom: 8rem;
+    }
     .hero-scene__couple {
-      top: 60%;
+      top: 63%;
+      left: 0;
       width: 100%;
+      transform: none;
     }
-    .calendar-countdown {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    .calendar-card__footer {
-      flex-wrap: nowrap;
-      align-items: center;
+    .hero-scene__mountain {
+      top: auto;
+      bottom: -1px;
+      height: 65%;
     }
     .couple-card__portrait-image {
       width: min(100%, 24rem);
@@ -1144,33 +1672,69 @@ import Layout from '../layouts/Layout.astro';
       aspect-ratio: 16 / 10;
     }
     #greeting {
-      padding-top: clamp(22rem, 42svh, 28rem);
-      padding-bottom: clamp(3.5rem, 7svh, 5rem);
+      --greeting-scene-height: clamp(14rem, 34svh, 19rem);
+      padding-top: calc(
+        var(--greeting-scene-height) + clamp(0.35rem, 1.4svh, 0.9rem)
+      );
+      padding-bottom: clamp(2rem, 5svh, 3rem);
+    }
+    .greeting-panel {
+      background: transparent;
+    }
+    .greeting-panel__scene {
+      display: none;
+    }
+    .greeting-panel__art {
+      display: none;
     }
     .greeting-content {
-      width: min(100%, 32rem);
+      width: min(100%, 29rem);
       padding-top: 0;
       padding-bottom: 0;
     }
-    .greeting-cats {
-      height: clamp(19rem, 36svh, 25rem);
+    .greeting-content > p:first-child {
+      font-size: clamp(0.98rem, 3.15vw, 1.08rem);
+      line-height: 1.8;
     }
     .greeting-cat--gio {
-      left: clamp(2rem, 7vw, 3rem);
-      top: clamp(9rem, 18svh, 12rem);
-      width: clamp(5rem, 14vw, 6rem);
+      left: clamp(1.75rem, 6vw, 2.75rem);
+      top: clamp(6.25rem, 17svh, 10rem);
+      width: clamp(4.75rem, 21vw, 6.25rem);
     }
     .greeting-cat--coco {
       right: clamp(2.5rem, 8vw, 3.25rem);
-      top: clamp(5rem, 10svh, 7rem);
-      width: clamp(6rem, 15vw, 7rem);
+      top: clamp(3.75rem, 10svh, 7rem);
+      width: clamp(5.5rem, 24vw, 7.5rem);
     }
     .greeting-cat--ucil {
-      top: clamp(12rem, 24svh, 16rem);
-      width: clamp(6rem, 15vw, 7rem);
+      top: clamp(9rem, 21.5svh, 13.5rem);
+      width: clamp(5.5rem, 24vw, 7.25rem);
+    }
+    .calendar-card {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    #gallery {
+      background: #aed15d !important;
+      padding-top: clamp(2.5rem, 7svh, 4rem);
+      padding-bottom: clamp(2.5rem, 7svh, 4rem);
+    }
+    .calendar-card__body {
+      gap: 1.5rem;
+    }
+    .calendar-countdown {
+      gap: 0.65rem;
+      margin-top: 1rem;
     }
   }
+  /* ── Small phones + short viewports (≤389px wide or ≤739px tall): iPhone SE (375×667), iPhone 13 mini (375×812 landscape) ── */
   @media (max-width: 389px), (max-height: 739px) {
+    #greeting {
+      --greeting-scene-height: clamp(12.5rem, 31svh, 16rem);
+    }
     .hero-scene__couple {
       top: 61%;
     }
@@ -1181,22 +1745,37 @@ import Layout from '../layouts/Layout.astro';
       margin-top: 2rem;
     }
     #greeting {
-      padding-top: clamp(17rem, 44svh, 22rem);
+      padding-top: calc(
+        var(--greeting-scene-height) + clamp(0.35rem, 1.2svh, 0.75rem)
+      );
     }
-    .greeting-cats {
-      height: clamp(15rem, 38svh, 20rem);
+    .greeting-panel__art {
+      top: -18.5rem;
     }
     .greeting-cat--gio {
-      top: clamp(8.25rem, 22svh, 11rem);
+      top: clamp(5.9rem, 15.5svh, 8.4rem);
     }
     .greeting-cat--coco {
       top: clamp(3.25rem, 9svh, 5rem);
     }
     .greeting-cat--ucil {
-      top: clamp(10.5rem, 28svh, 14rem);
+      top: clamp(8rem, 19.5svh, 11.25rem);
+    }
+    .calendar-countdown {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem 1rem;
+    }
+    .calendar-countdown > span {
+      display: none;
+    }
+    .calendar-countdown > div {
+      min-width: 0;
+      text-align: center;
     }
   }
 
+  /* ── Desktop (≥1024px): iPad Pro portrait (1024×1366), MacBook 13" (1280×800), 1080p (1920×1080), 2K/4K monitors ── */
   @media (min-width: 1024px) {
     .desktop-shell {
       max-width: 1280px;
@@ -1214,7 +1793,6 @@ import Layout from '../layouts/Layout.astro';
     .ambient-spacer--after-greeting {
       height: 0;
     }
-    #gallery,
     #introduction,
     #details,
     #schedule,
@@ -1228,24 +1806,20 @@ import Layout from '../layouts/Layout.astro';
     .content-card + .content-card {
       margin-top: clamp(1.5rem, 2vw, 2.25rem);
     }
-    #gallery {
-      position: relative;
-      z-index: 5;
-    }
-
     .hero-section {
       justify-content: flex-start;
       overflow: visible;
       align-items: center;
-      z-index: 2;
+      z-index: 0;
     }
-    
-    .main-bg-image {
-      object-position: 68% 22%;
-      transform: scale(1.025);
+
+    .main-bg-image,
+    .story-background__image {
+      object-position: 72% 20%;
+      transform: scale(1);
     }
     .hero-shell {
-      width: min(38rem, 42vw);
+      width: min(40rem, 38vw);
       max-width: 38rem;
       margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
       margin-right: auto;
@@ -1272,18 +1846,28 @@ import Layout from '../layouts/Layout.astro';
       z-index: 1;
     }
     .hero-scene__mountain {
-      display: none;
+      display: block;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 65%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center bottom;
+      opacity: 0.98;
+      -webkit-mask-image: none;
+      mask-image: none;
     }
     .hero-scene__couple {
       display: block;
-      top: -15%;
-      left: 50%;
+      top: 40%;
+      left: 0;
       right: auto;
-      bottom: clamp(-18rem, -10vw, -8rem);
-      width: min(100vw, 106rem);
+      bottom: auto;
+      width: 100%;
       max-width: none;
       filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
-      transform: translateX(-50%);
+      transform: none;
       -webkit-mask-image: none;
       mask-image: none;
     }
@@ -1291,12 +1875,62 @@ import Layout from '../layouts/Layout.astro';
       display: none;
     }
 
+    /* ── Desktop landscape (≥1024px wide AND wider than tall): MacBook, iMac, 1080p, 2K, 4K — side-by-side hero layout ── */
+    @media (min-aspect-ratio: 4/3) {
+      .hero-shell {
+        width: min(40rem, 38vw);
+        max-width: 38rem;
+        margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+        margin-right: auto;
+        text-align: left;
+      }
+      .hero-content {
+        display: block;
+      }
+      .hero-shell h1 {
+        max-width: 32rem;
+        font-size: clamp(5.75rem, 8vw, 8rem);
+        line-height: 0.92;
+      }
+      .hero-shell .space-y-2 {
+        align-items: flex-start;
+      }
+      .hero-scene__mountain {
+        height: clamp(22rem, 32vw, 34rem);
+        -webkit-mask-image: linear-gradient(
+          to top,
+          #000 0%,
+          #000 40%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to top,
+          #000 0%,
+          #000 40%,
+          transparent 100%
+        );
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+      }
+      .hero-scene__couple {
+        top: -40%;
+        left: 50%;
+        bottom: clamp(-20rem, -11vw, -10rem);
+        transform: translateX(-50%);
+        filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
+      }
+    }
+
     #greeting {
-      min-height: 100vh;
-      min-height: 100dvh;
+      min-height: clamp(34rem, 52vw, 44rem);
+      padding-block: clamp(5rem, 7vw, 7rem);
       padding-inline: 0;
       overflow: hidden;
+      align-items: center;
       justify-content: flex-start;
+    }
+    .greeting-panel__scene {
+      display: none;
     }
     .greeting-panel {
       display: none;
@@ -1306,7 +1940,7 @@ import Layout from '../layouts/Layout.astro';
       max-width: 40rem;
       margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
       margin-right: auto;
-      margin-bottom: clamp(4rem, 7vw, 5.5rem);
+      margin-bottom: 0;
       padding: clamp(2rem, 3vw, 3rem);
       text-align: left;
       background: rgba(174, 209, 93, 0.94);
@@ -1319,15 +1953,20 @@ import Layout from '../layouts/Layout.astro';
     .greeting-cats {
       display: grid;
       position: absolute;
-      left: calc(max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 42vw) + clamp(1.5rem, 3vw, 3rem));
-      bottom: clamp(4rem, 7vw, 6rem);
-      width: clamp(15rem, 18vw, 19rem);
-      grid-template-columns: 0.9fr 1.05fr;
+      left: calc(
+        max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 38vw) +
+          clamp(0.85rem, 1.8vw, 1.85rem)
+      );
+      top: 50%;
+      bottom: auto;
+      width: clamp(19rem, 21vw, 24rem);
+      grid-template-columns: 0.95fr 1.1fr;
       grid-template-areas:
-        "gio coco"
-        "ucil coco";
+        'gio coco'
+        'ucil coco';
       align-items: end;
-      gap: clamp(0.5rem, 1vw, 0.9rem);
+      gap: clamp(0.75rem, 1.2vw, 1.1rem);
+      transform: translateY(-50%);
       z-index: 2;
       pointer-events: none;
     }
@@ -1343,20 +1982,21 @@ import Layout from '../layouts/Layout.astro';
     }
     .greeting-cat--gio {
       grid-area: gio;
-      width: 86%;
+      width: 98%;
       justify-self: start;
-      transform: translateY(0.35rem) rotate(-3deg);
+      transform: translateY(-1rem) rotate(-3deg);
     }
     .greeting-cat--coco {
       grid-area: coco;
-      width: 100%;
+      width: 112%;
       align-self: center;
+      justify-self: center;
     }
     .greeting-cat--ucil {
       grid-area: ucil;
-      width: 98%;
+      width: 108%;
       justify-self: end;
-      transform: translateY(0.4rem);
+      transform: translateY(-1rem);
     }
     .greeting-content > p:first-child {
       max-width: 32rem;
@@ -1372,136 +2012,126 @@ import Layout from '../layouts/Layout.astro';
       display: none;
     }
 
-    .calendar-shell {
-      max-width: 1180px;
+    .gallery-teaser--floating {
+      width: 4.25rem;
+      height: 4.25rem;
+      bottom: max(1rem, calc(env(safe-area-inset-bottom) + 1rem));
+      right: max(1rem, calc(env(safe-area-inset-right) + 1rem));
     }
-    .calendar-card__layout {
-      display: grid;
-      grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
-      align-items: stretch;
+    .gallery-teaser__expanded {
+      width: min(21rem, calc(100vw - 2rem));
+      bottom: calc(100% + 0.65rem);
+      padding: 1.1rem;
     }
-    .calendar-card__visual {
-      width: auto;
-      min-height: 100%;
-      margin: clamp(1.5rem, 2vw, 1.75rem);
-      border-radius: 1.75rem;
+    .gallery-teaser__expanded .calendar-card__title {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
     }
-    .calendar-card__body {
-      gap: 2rem;
-      padding: clamp(2rem, 3vw, 3rem);
-      text-align: left;
+    .gallery-teaser__expanded .calendar-card__copy {
+      font-size: 0.95rem;
     }
-    .calendar-card__title {
-      font-size: clamp(2.25rem, 3vw, 3.35rem);
-      margin-bottom: 0.75rem;
-    }
-    .calendar-card__copy {
-      max-width: 28rem;
-      font-size: 0.98rem;
-    }
-    .calendar-countdown {
-      display: grid;
+    .gallery-teaser__expanded .calendar-countdown {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.75rem;
-      max-width: 28rem;
+      gap: 0.85rem;
     }
-    .calendar-countdown > span {
-      display: none;
-    }
-    .calendar-countdown > div {
-      text-align: left;
-      padding-top: 0.9rem;
-      border-top: 1px solid rgba(26, 26, 26, 0.14);
-    }
-    .calendar-card__footer {
-      margin-top: auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(26, 26, 26, 0.12);
-      align-items: flex-end;
+    .gallery-teaser__expanded .calendar-countdown > div {
+      text-align: center;
+      padding-top: 0.85rem;
     }
 
     .couple-shell {
       max-width: 1280px;
     }
+    #introduction {
+      border-top: none;
+      overflow: hidden;
+      isolation: isolate;
+    }
     #introduction .grid {
-      gap: clamp(4rem, 7vw, 6rem);
+      gap: clamp(6rem, 10vw, 10rem);
     }
     .couple-card-group {
-      --couple-group-gap: clamp(2rem, 4vw, 4rem);
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: clamp(2rem, 3vw, 3.5rem);
       align-items: end;
     }
-    .couple-card-group > .couple-card,
-    .couple-card__portrait {
-      max-width: none;
+    .couple-card-group--reverse {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     }
-    .couple-card {
-      padding: clamp(2.25rem, 3vw, 3rem);
+    .couple-card__image-frame--single {
+      width: 100%;
+      justify-self: start;
     }
-    .couple-card-group .couple-card__eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.24em;
+    .couple-card-group--reverse .couple-card__image-frame--single {
+      order: 2;
+      justify-self: end;
     }
-    .couple-card-group .couple-card__name {
-      font-size: clamp(2.75rem, 4vw, 4rem);
-      line-height: 1.05;
-      letter-spacing: 0.04em;
+    .couple-card-group--reverse .couple-card__text {
+      order: 1;
+      justify-self: end;
+      text-align: right;
     }
-    .couple-card-group .couple-card__meta {
-      font-size: clamp(1rem, 1.15vw, 1.1rem);
-      line-height: 1.75;
+    .couple-card__text {
+      width: 100%;
+      max-width: 32rem;
+      padding-bottom: clamp(1rem, 3vw, 2.5rem);
+      justify-self: start;
     }
     .couple-card__name {
-      font-size: clamp(2.75rem, 4vw, 4rem);
-      letter-spacing: 0.04em;
+      font-size: clamp(4.5rem, 6vw, 6.5rem);
     }
     .couple-card__meta {
-      font-size: clamp(1rem, 1.15vw, 1.1rem);
-      line-height: 1.75;
+      font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+      line-height: 1.8;
+      max-width: 22rem;
     }
-    .couple-card__portrait {
-      min-height: clamp(28rem, 40vw, 38rem);
+    .couple-card-group--reverse .couple-card__meta {
+      margin-left: auto;
     }
-    .couple-card__portrait-image {
-      width: min(100%, 34rem);
+    .couple-card__image-frame--single {
+      aspect-ratio: 3 / 4;
+    }
+    #introduction
+      .couple-card-group:nth-of-type(1)
+      .couple-card__image-frame--single {
+      max-width: 28rem;
+    }
+    #introduction
+      .couple-card-group:nth-of-type(2)
+      .couple-card__image-frame--single {
+      max-width: 28rem;
     }
 
     .details-layout {
-      max-width: 1280px;
+    }
+    .details-composition {
+      gap: clamp(3rem, 7vw, 6rem);
+    }
+    .details-line {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem clamp(1.5rem, 2.6vw, 2.5rem);
-      align-items: stretch;
+      grid-template-columns: minmax(11rem, 0.42fr) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 4.5rem);
+      align-items: center;
     }
-    .details-header {
-      grid-column: 1 / -1;
-      margin-bottom: 0.5rem;
+    .details-line__intro {
+      align-self: center;
     }
-    .details-grid {
-      grid-column: 1 / span 2;
-      gap: clamp(1.5rem, 2vw, 2rem);
+    .details-line__value--date {
+      justify-self: end;
+      text-align: right;
+      font-size: clamp(5rem, 7.8vw, 7.4rem);
     }
-    .details-grid .detail-card {
-      height: 100%;
-      background: rgba(255, 255, 255, 0.32);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+    .details-line__value--time {
+      justify-self: end;
+      text-align: right;
+      font-size: clamp(4rem, 6vw, 5.4rem);
     }
-    .details-dress {
-      grid-column: 3;
-      margin-top: 0;
-      padding: 2.25rem;
-      border-top: none;
-      text-align: left;
-      background: rgba(255, 255, 255, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .details-line--secondary {
+      margin-top: clamp(0.5rem, 1.5vw, 1.5rem);
+    }
+    .details-venue {
+      margin-top: 0.5rem;
+      padding-top: 1.75rem;
     }
 
     .schedule-shell {
@@ -1527,30 +2157,34 @@ import Layout from '../layouts/Layout.astro';
 
     .access-layout {
       max-width: 1280px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.85fr);
-      gap: clamp(1.5rem, 2.5vw, 2.5rem);
-      align-items: start;
     }
-    .access-header {
-      grid-column: 1 / -1;
-      margin-bottom: 0.5rem;
+    .access-composition {
+      position: relative;
     }
-    .access-map {
-      grid-column: 1;
-      margin-bottom: 0;
-      min-height: 30rem;
-      aspect-ratio: auto;
+    .access-composition__top {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: block;
     }
-    .access-grid {
-      grid-column: 2;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      align-content: start;
+    .access-composition__label-block {
+      text-align: right;
     }
-    .access-card {
-      background: rgba(255, 255, 255, 0.22);
-      border: 1px solid rgba(255, 255, 255, 0.28);
+    .access-composition__title {
+      font-size: clamp(5.2rem, 8vw, 7.6rem);
+      max-width: 8.5ch;
+    }
+    .access-composition__body {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.75rem 2rem;
+    }
+    .access-composition__address {
+      font-size: clamp(1.7rem, 2.3vw, 2.3rem);
+      max-width: 34rem;
+    }
+    .access-composition__notes {
+      max-width: 52rem;
+      font-size: clamp(1.1rem, 1.45vw, 1.35rem);
     }
 
     .rsvp-shell {
@@ -1562,36 +2196,13 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
-  @media (min-width: 1440px) {
-    .hero-shell {
-      width: min(40rem, 38vw);
-    }
-    .main-bg-image {
-      object-position: 72% 20%;
-    }
-    .hero-scene__couple {
-      width: 100%;
-      top: -40%;
-      bottom: clamp(-20rem, -11vw, -10rem);
-    }
-    .greeting-content {
-      margin-bottom: clamp(5rem, 8vw, 7rem);
-    }
-    .calendar-shell {
-      max-width: 1240px;
-    }
-    .greeting-cats {
-      left: calc(max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 38vw) + clamp(2rem, 3.2vw, 3.5rem));
-      bottom: clamp(5rem, 7vw, 7rem);
-      width: clamp(17rem, 18.5vw, 21rem);
-    }
-  }
-
+  /* ── Phones + iPad Mini exact width (≤768px): iPhone SE (375), iPhone 14/15 (390), Pixel 7 (412), Galaxy S24 (360), iPad Mini (768) ── */
   @media (max-width: 768px) {
     .hero-scene__mountain {
-      height: 50%;
+      height: 60%;
       background-position: center bottom;
     }
+
     .couple-card-group {
       --couple-group-gap: 1.25rem;
     }
@@ -1615,12 +2226,14 @@ import Layout from '../layouts/Layout.astro';
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
   );
   reveals.forEach((el) => revealObserver.observe(el));
 
   // ── Hero parallax + fade on scroll ──
-  const heroContent = document.querySelector('.hero-content') as HTMLElement | null;
+  const heroContent = document.querySelector(
+    '.hero-content',
+  ) as HTMLElement | null;
   const nav = document.getElementById('main-nav');
 
   let ticking = false;
@@ -1699,6 +2312,25 @@ import Layout from '../layouts/Layout.astro';
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
+  // ── Floating gallery widget ──
+  const galleryWidget = document.querySelector(
+    '.gallery-teaser--floating',
+  ) as HTMLDetailsElement | null;
+  if (galleryWidget) {
+    document.addEventListener('click', (event) => {
+      const target = event.target as Node | null;
+      if (target && !galleryWidget.contains(target)) {
+        galleryWidget.removeAttribute('open');
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        galleryWidget.removeAttribute('open');
+      }
+    });
+  }
+
   // ── Language toggle ──
   const langToggle = document.getElementById('lang-toggle');
   if (langToggle) {
@@ -1721,7 +2353,9 @@ import Layout from '../layouts/Layout.astro';
   }
 
   // ── Section heading tilt on mouse move ──
-  const tiltSections = document.querySelectorAll('#details, #access') as NodeListOf<HTMLElement>;
+  const tiltSections = document.querySelectorAll(
+    '#details, #access',
+  ) as NodeListOf<HTMLElement>;
   tiltSections.forEach((section) => {
     const heading = section.querySelector('h2') as HTMLElement | null;
     if (!heading) return;
@@ -1734,7 +2368,9 @@ import Layout from '../layouts/Layout.astro';
     section.addEventListener('mouseleave', () => {
       heading.style.transform = '';
       heading.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      setTimeout(() => { heading.style.transition = ''; }, 500);
+      setTimeout(() => {
+        heading.style.transition = '';
+      }, 500);
     });
   });
 </script>

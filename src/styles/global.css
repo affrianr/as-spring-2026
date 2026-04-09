@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-lime: #e1ff00;
@@ -8,16 +8,26 @@
   --color-warm-gray: #f0eeeb;
   --color-muted: #6b6b6b;
 
-  --font-sans: "Inter", "Noto Sans JP", sans-serif;
-  --font-serif: "Playfair Display", "Noto Serif JP", serif;
+  --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+  --font-serif: 'Playfair Display', 'Noto Serif JP', serif;
+  --font-display:
+    'Bethany Elingston', 'Playfair Display', 'Noto Serif JP', serif;
 }
 
 @font-face {
-  font-family: "Inter";
+  font-family: 'Bethany Elingston';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/bethany_elingston/Bethany%20Elingston.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+  src: local('Inter');
 }
 
 html {
