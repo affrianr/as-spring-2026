@@ -991,7 +991,7 @@ try {
         class="content-card py-16 px-6 text-center"
       >
         <div class="footer-shell desktop-reading-block space-y-4 font-serif">
-          <p class="text-xs mt-8">
+          <p class="text-5xl mt-8">
             Thank you for being part of our special day
           </p>
           <div class="flex items-center justify-center gap-4 mt-6">
@@ -1000,7 +1000,13 @@ try {
             <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
           </div>
 
-          <p class="text-xs">© 2026 · Made with love ❤️</p>
+          <p class="text-md">
+            © 2026 · Artwork by my dearest <a
+              href="https://www.instagram.com/syafazeer"
+              target="_blank"
+              rel="noopener noreferrer">@syafaazer</a
+            > ❤️
+          </p>
         </div>
       </footer>
     </div><!-- .content-cards -->
@@ -3099,7 +3105,6 @@ try {
 </style>
 
 <script>
-
   // ── Scroll reveal with IntersectionObserver ──
   const reveals = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver(
@@ -3119,16 +3124,13 @@ try {
   // Wait for loader panels to finish before starting hero text reveals.
   // Non-hero reveals (below the fold) start immediately since they won't
   // fire until the user scrolls to them anyway.
-  const heroReveals = Array.from(reveals).filter((el) =>
-    el.closest('#home')
-  );
-  const otherReveals = Array.from(reveals).filter((el) =>
-    !el.closest('#home')
-  );
+  const heroReveals = Array.from(reveals).filter((el) => el.closest('#home'));
+  const otherReveals = Array.from(reveals).filter((el) => !el.closest('#home'));
 
   otherReveals.forEach((el) => revealObserver.observe(el));
 
-  const startHeroReveals = () => heroReveals.forEach((el) => revealObserver.observe(el));
+  const startHeroReveals = () =>
+    heroReveals.forEach((el) => revealObserver.observe(el));
   window.addEventListener('intro-done', startHeroReveals, { once: true });
 
   // ── Cats appear on scroll ──
@@ -3268,7 +3270,9 @@ try {
 
     // Music starts when cover "Open" is clicked (Layout dispatches 'music-started').
     // If already playing, just sync UI.
-    window.addEventListener('music-started', () => syncMuteUi(), { once: true });
+    window.addEventListener('music-started', () => syncMuteUi(), {
+      once: true,
+    });
 
     musicToggle.addEventListener('click', () => {
       bgMusic.muted = !bgMusic.muted;
