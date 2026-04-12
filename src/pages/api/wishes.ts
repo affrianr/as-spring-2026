@@ -17,11 +17,26 @@ const json = (payload: unknown, status = 200) =>
     },
   });
 
-const parseBody = async (request: Request) => {
+const parseBody = async (
+  request: Request,
+): Promise<{ name: unknown; message: unknown }> => {
   const contentType = request.headers.get('content-type') ?? '';
 
   if (contentType.includes('application/json')) {
-    return request.json();
+    const payload: unknown = await request.json();
+
+    if (payload && typeof payload === 'object') {
+      const body = payload as Record<string, unknown>;
+      return {
+        name: body.name,
+        message: body.message,
+      };
+    }
+
+    return {
+      name: undefined,
+      message: undefined,
+    };
   }
 
   const formData = await request.formData();

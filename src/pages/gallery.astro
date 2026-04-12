@@ -1,37 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
 ---
 
 <Layout title="Gallery | A & S Wedding">
-  <nav
-    data-auto-scroll-header
-    class="fixed top-0 left-0 right-0 z-50 gallery-nav transition-all duration-500"
-  >
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a
-        href="/"
-        class="group flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300"
-      >
-        <svg
-          class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        <span class="text-xs tracking-widest uppercase">Back</span>
-      </a>
-      <span
-        class="font-display text-sm tracking-widest uppercase text-white drop-shadow-sm"
-        >Gallery</span
-      >
-    </div>
-  </nav>
+  <SiteNav
+    currentPage="gallery"
+    useRootAnchors={true}
+    forceScrolled={true}
+    showMusicToggle={true}
+  />
 
   <section
     class="relative min-h-screen flex items-center justify-center overflow-hidden px-6"
@@ -100,10 +78,24 @@ import Layout from '../layouts/Layout.astro';
   </section>
 </Layout>
 
-<style>
-  .gallery-nav {
-    background: rgba(26, 26, 26, 0.35);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+<script>
+  const langToggle = document.getElementById('lang-toggle');
+
+  if (langToggle) {
+    document.documentElement.setAttribute('data-lang', 'en');
+    localStorage.setItem('wedding-lang', 'en');
+
+    langToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-lang');
+      const next = current === 'en' ? 'mix' : 'en';
+
+      if (next === 'en') {
+        document.documentElement.setAttribute('data-lang', 'en');
+      } else {
+        document.documentElement.removeAttribute('data-lang');
+      }
+
+      localStorage.setItem('wedding-lang', next);
+    });
   }
-</style>
+</script>

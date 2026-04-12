@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
 import type { WeddingWish } from '../lib/wedding-wishes';
 import { listWeddingWishes } from '../lib/wedding-wishes';
 
@@ -30,125 +31,9 @@ try {
 ---
 
 <Layout>
-  <audio
-    id="bg-music"
-    src="/music/love-wins-all.mp3"
-    preload="auto"
-    autoplay
-    loop
-    playsinline></audio>
-
   <!-- Scrollable content layer -->
   <div id="content-layer" class="relative z-10">
-    <!-- Navigation -->
-    <nav
-      id="main-nav"
-      data-auto-scroll-header
-      class="fixed top-0 left-0 right-0 z-9999 transition-all duration-500"
-    >
-      <div
-        class="nav-shell desktop-shell max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"
-      >
-        <span
-          class="font-display text-sm tracking-widest uppercase nav-logo text-white drop-shadow-sm"
-          >A & S</span
-        >
-        <div class="flex items-center gap-6">
-          <div
-            class="hidden md:flex gap-8 text-xs tracking-widest uppercase text-white/70"
-          >
-            <a
-              href="#home"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              >Top</a
-            >
-            <a
-              href="#greeting"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              >Greeting</a
-            >
-            <a
-              href="/gallery"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              >Gallery</a
-            >
-            <a
-              href="#details"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              >Details</a
-            >
-            <a
-              href="#schedule"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              >Timeline</a
-            >
-            <a
-              href="#access"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              >Access</a
-            >
-            <a
-              href="#wishes"
-              class="nav-link relative hover:text-white transition-colors duration-300"
-              ><span class="lang-mix">Ucapan</span><span class="lang-en"
-                >Wish</span
-              ></a
-            >
-          </div>
-          <!-- Language toggle -->
-          <div class="flex items-center gap-2.5">
-            <button
-              id="music-toggle"
-              type="button"
-              class="music-toggle"
-              aria-label="Mute"
-              data-state="playing"
-            >
-              <span class="music-toggle__pulse" aria-hidden="true"></span>
-              <!-- Sound on icon -->
-              <svg
-                class="music-toggle__icon music-toggle__icon--on"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="1.8"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.536 8.464a5 5 0 010 7.072M17.95 6.05a8 8 0 010 11.9M6.5 8.5H4a1 1 0 00-1 1v5a1 1 0 001 1h2.5l4.5 4V4.5l-4.5 4z"
-                ></path>
-              </svg>
-              <!-- Muted icon -->
-              <svg
-                class="music-toggle__icon music-toggle__icon--off"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="1.8"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6.5 8.5H4a1 1 0 00-1 1v5a1 1 0 001 1h2.5l4.5 4V4.5l-4.5 4zM17 9.5l5 5m0-5l-5 5"
-                ></path>
-              </svg>
-            </button>
-
-            <button
-              id="lang-toggle"
-              class="lang-toggle flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-300"
-              aria-label="Toggle language"
-            >
-              <span class="lang-label-mix">ID / EN</span>
-              <span class="lang-label-en hidden">EN</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <SiteNav currentPage="home" showMusicToggle={true} />
 
     <!-- Hero Section — transparent, shows background -->
     <section
@@ -173,29 +58,29 @@ try {
       <div class="hero-scene" aria-hidden="true">
         <div class="hero-scene__mountain"></div>
         <img
-          src="/assets/p1%20b%20crop.webp"
+          src="/assets/p1b-r1-crop-smaller.webp"
           alt=""
-          class="hero-scene__couple translateY-30"
+          class="hero-scene__couple"
           loading="eager"
           decoding="async"
         />
         <div class="">
           <img
-            src="/assets/gio2.webp"
+            src="/assets/gio2-smaller.webp"
             alt=""
             class="hero-scene__cat hero-scene__cat--left"
             loading="lazy"
             decoding="async"
           />
           <img
-            src="/assets/coco2.webp"
+            src="/assets/coco2-smaller.webp"
             alt=""
             class="hero-scene__cat hero-scene__cat--right"
             loading="lazy"
             decoding="async"
           />
           <img
-            src="/assets/ucil2.webp"
+            src="/assets/ucil2-smaller.webp"
             alt=""
             class="hero-scene__cat hero-scene__cat--center"
             loading="lazy"
@@ -269,7 +154,7 @@ try {
         <div class="greeting-panel" aria-hidden="true">
           <div class="greeting-panel__scene">
             <img
-              src="/assets/p1%20b%20crop.webp"
+              src="/assets/p1b-r1-crop-smaller.webp"
               alt=""
               class="greeting-panel__art"
               loading="lazy"
@@ -343,13 +228,22 @@ try {
           <p
             class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal"
           >
-            &ldquo;Dan di antara tanda-tanda (kebesaran)-Nya ialah<br />
-            Dia menciptakan pasangan-pasangan untukmu dari<br />
-            jenismu sendiri, agar kamu cenderung dan merasa<br />
-            tenteram kepadanya, dan Dia menjadikan di antaramu rasa<br />
-            kasih dan sayang. Sesungguhnya pada yang demikian itu<br />
-            benar-benar terdapat tanda-tanda (kebesaran Allah) bagi<br />
-            kaum yang berpikir.&rdquo;
+            <span class="lang-mix">
+              &ldquo;Dan di antara tanda-tanda (kebesaran)-Nya ialah<br />
+              Dia menciptakan pasangan-pasangan untukmu dari<br />
+              jenismu sendiri, agar kamu cenderung dan merasa<br />
+              tenteram kepadanya, dan Dia menjadikan di antaramu rasa<br />
+              kasih dan sayang. Sesungguhnya pada yang demikian itu<br />
+              benar-benar terdapat tanda-tanda (kebesaran Allah) bagi<br />
+              kaum yang berpikir.&rdquo;</span
+            >
+
+            <span class="lang-en"
+              >&rdquo;And one of His signs is that He created for you spouses
+              from among yourselves so that you may find comfort in them. And He
+              has placed between you compassion and mercy. Surely in this are
+              signs for people who reflect&rdquo;</span
+            >
           </p>
           <p
             class="font-serif text-sm md:text-base leading-relaxed tracking-[0.02em] reveal"
@@ -359,21 +253,21 @@ try {
         </div>
         <div class="greeting-cats" aria-hidden="true">
           <img
-            src="/assets/gio2.webp"
+            src="/assets/gio2-smaller.webp"
             alt=""
             class="greeting-cat greeting-cat--gio"
             loading="lazy"
             decoding="async"
           />
           <img
-            src="/assets/coco2.webp"
+            src="/assets/coco2-smaller.webp"
             alt=""
             class="greeting-cat greeting-cat--coco"
             loading="lazy"
             decoding="async"
           />
           <img
-            src="/assets/ucil2.webp"
+            src="/assets/ucil2-smaller.webp"
             alt=""
             class="greeting-cat greeting-cat--ucil"
             loading="lazy"
@@ -578,37 +472,55 @@ try {
             <div class="grid gap-28 md:gap-20">
               <div class="couple-card-group couple-card-group--reverse reveal">
                 <figure
-                  class="couple-card__image-frame couple-card__image-frame--single"
+                  class="couple-card__image-frame couple-card__image-frame--single couple-card__image-frame--sherly"
                   aria-hidden="true"
                 >
                   <img
-                    src="/assets/sherly.webp"
+                    src="/assets/sherly-r1.webp"
                     alt=""
                     class="couple-card__image couple-card__image--single"
                     loading="lazy"
                     decoding="async"
                   />
                 </figure>
-                <div class="couple-card__text text-left">
-                  <h3 class="couple-card__name font-serif italic">
+                <div class="couple-card__text couple-card__text--sherly">
+                  <h3 class="couple-card__name font-serif italic text-left">
                     Syafazerlinda
                   </h3>
-                  <p class="lang-mix couple-card__meta">
-                    Putri kedua dari Bpk. Moch. Syafi'i &amp; Ibu Fatimah Umar
+                  <p class="lang-mix couple-card__meta text-center">
+                    <span class="couple-card__meta-line"
+                      >Putri kedua dari<br /> Bpk. Moch. Syafi'i</span
+                    >
+                    <span
+                      class="couple-card__meta-line couple-card__meta-line--amp"
+                      >&amp;</span
+                    >
+                    <span class="couple-card__meta-line"
+                      >Ibu Fatimah Umar Kuddah</span
+                    >
                   </p>
-                  <p class="lang-en couple-card__meta">
-                    Second daughter of Mr. Moch. Syafi'i &amp; Mrs. Fatimah Umar
+                  <p class="lang-en couple-card__meta text-center">
+                    <span class="couple-card__meta-line"
+                      >Second daughter of<br /> Mr. Moch. Syafi'i</span
+                    >
+                    <span
+                      class="couple-card__meta-line couple-card__meta-line--amp"
+                      >&amp;</span
+                    >
+                    <span class="couple-card__meta-line"
+                      >Mrs. Fatimah Umar Kuddah</span
+                    >
                   </p>
                 </div>
               </div>
 
               <div class="couple-card-group reveal">
                 <figure
-                  class="couple-card__image-frame couple-card__image-frame--single"
+                  class="couple-card__image-frame couple-card__image-frame--single couple-card__image-frame--rian"
                   aria-hidden="true"
                 >
                   <img
-                    src="/assets/rian.webp"
+                    src="/assets/rian-r1.webp"
                     alt=""
                     class="couple-card__image couple-card__image--single"
                     loading="lazy"
@@ -616,17 +528,27 @@ try {
                   />
                 </figure>
 
-                <div class="couple-card__text text-left">
-                  <h3 class="couple-card__name font-serif italic">
+                <div class="couple-card__text couple-card__text--rian">
+                  <h3 class="couple-card__name font-serif italic text-left">
                     Affrian Rachmansyah
                   </h3>
-                  <p class="lang-mix couple-card__meta">
-                    Putra pertama dari Bpk. Yanuk Fatchorrahman (Alm.) &amp; Ibu
-                    Dinar Rahmawati
+                  <p class="lang-mix couple-card__meta text-center">
+                    <span class="couple-card__meta-line"
+                      >Putra pertama dari<br /> Bpk. Yanuk Fatchorrahman (Alm.)</span
+                    >
+                    <span class="">&amp;</span>
+                    <span class="couple-card__meta-line"
+                      >Ibu Dinar Rahmawati</span
+                    >
                   </p>
-                  <p class="lang-en couple-card__meta">
-                    First son of Mr. Yanuk Fatchorrahman (late) &amp; Mrs. Dinar
-                    Rahmawati
+                  <p class="lang-en couple-card__meta text-center">
+                    <span class="couple-card__meta-line"
+                      >First son of<br /> Mr. Yanuk Fatchorrahman (late)</span
+                    >
+                    <span class="">&amp;</span>
+                    <span class="couple-card__meta-line"
+                      >Mrs. Dinar Rahmawati</span
+                    >
                   </p>
                 </div>
               </div>
@@ -665,7 +587,7 @@ try {
                 <div class="details-line__intro">
                   <p class="details-line__label font-serif">
                     <span class="lang-mix">Akad</span>
-                    <span class="lang-en">Ceremony</span>
+                    <span class="lang-en">Akad</span>
                   </p>
                   <p class="details-line__meta">
                     <span class="lang-mix">Wedding</span>
@@ -757,2000 +679,1900 @@ try {
                     Please use Google Maps for the best route to the venue.
                   </span>
                 </p>
+                <a
+                  href="https://www.instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="access-composition__title-row"
+                  aria-label="Watch live on Instagram"
+                >
+                  <p class="access- font-serif">
+                    <span class="lang-mix">
+                      Momen akad kami akan disiarkan langsung di Instagram
+                    </span>
+                    <span class="lang-en">
+                      Our ceremony will be broadcast live on Instagram
+                    </span>
+                  </p>
+                  <span
+                    class="access-composition__link-instagram"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      class="w-8 h-8"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="rgba(174, 209, 93, 0.94)"
+                      stroke-width="1.8"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M14 5h5m0 0v5m0-5L10 14"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 14v4a1 1 0 01-1 1h-12a1 1 0 01-1-1V6a1 1 0 011-1h4"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
               </div>
             </div>
           </div>
-        </section>
 
-        <!-- Wedding Wish Section -->
-        <section
-          id="wishes"
-          data-auto-scroll-section
-          class="content-card content-card--transparent wish-section py-32 px-6"
-        >
-          <div class="wish-scene reveal" aria-hidden="true">
-            <img
-              src="/assets/p4a%20crop.webp"
-              alt=""
-              class="wish-scene__image"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          <!-- Wedding Wish Section -->
+          <section
+            id="wishes"
+            data-auto-scroll-section
+            class="content-card content-card--transparent wish-section py-32 px-6"
+          >
+            <div class="wish-scene reveal" aria-hidden="true">
+              <img
+                src="/assets/p4b-crop-smaller.webp"
+                alt=""
+                class="wish-scene__image"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
 
-          <div class="wish-shell">
-            <div class="wish-shell__inner mx-auto">
-              <div class="wish-grid">
-                <div class="wish-panel wish-panel--form reveal">
-                  <div class="wish-panel__body">
-                    <div class="wish-panel__heading">
-                      <h3 class="wish-panel__title font-serif">
-                        <span class="lang-mix"
-                          >Tuliskan doa dan ucapan manis untuk hari kami</span
-                        >
-                        <span class="lang-en"
-                          >Leave a sweet note for our day</span
-                        >
-                      </h3>
-
-                      <p class="wish-panel__copy">
-                        <span class="lang-mix">
-                          Nama dan pesan Anda akan langsung tampil di buku
-                          ucapan ini.
-                        </span>
-                        <span class="lang-en">
-                          Your name and message will appear instantly in this
-                          guestbook.
-                        </span>
-                      </p>
-                    </div>
-
-                    <form
-                      id="wish-form"
-                      class="wish-form"
-                      method="post"
-                      action="/api/wishes"
-                    >
-                      <label class="wish-field">
-                        <span class="wish-field__label">
-                          <span class="lang-mix">Nama</span>
-                          <span class="lang-en">Name</span>
-                        </span>
-                        <input
-                          id="wish-name"
-                          name="name"
-                          type="text"
-                          maxlength="80"
-                          autocomplete="name"
-                          required
-                          class="wish-input"
-                          data-placeholder-mix="Nama Anda"
-                          data-placeholder-en="Your name"
-                        />
-                      </label>
-
-                      <label class="wish-field">
-                        <span class="wish-field__label">
-                          <span class="lang-mix">Ucapan</span>
-                          <span class="lang-en">Message</span>
-                        </span>
-                        <textarea
-                          id="wish-message"
-                          name="message"
-                          rows="5"
-                          maxlength="500"
-                          required
-                          class="wish-textarea"
-                          data-placeholder-mix="Tuliskan doa, harapan, atau pesan manis Anda di sini."
-                          data-placeholder-en="Write your prayer, blessing, or a short note here."
-                        ></textarea>
-                      </label>
-
-                      <div class="wish-form__footer">
-                        <button
-                          type="submit"
-                          class="wish-submit rsvp-btn inline-flex items-center gap-3 px-10 py-4 rounded-full text-sm font-medium tracking-widest uppercase transition-all duration-300"
-                        >
-                          <span class="lang-mix">Kirim Ucapan</span>
-                          <span class="lang-en">Send Wish</span>
-                          <svg
-                            class="w-4 h-4 rsvp-arrow transition-transform duration-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
+            <div class="wish-shell">
+              <div class="wish-shell__inner mx-auto">
+                <div class="wish-grid">
+                  <div class="wish-panel wish-panel--form reveal">
+                    <div class="wish-panel__body">
+                      <div class="wish-panel__heading">
+                        <h3 class="wish-panel__title font-serif">
+                          <span class="lang-mix"
+                            >Tuliskan doa dan ucapan manis untuk hari kami</span
                           >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                          </svg>
-                        </button>
+                          <span class="lang-en"
+                            >Leave a sweet note for our day</span
+                          >
+                        </h3>
 
-                        <p class="wish-form__note">
+                        <p class="wish-panel__copy">
                           <span class="lang-mix">
-                            Ucapan akan tampil segera setelah berhasil dikirim.
+                            Nama dan pesan Anda akan langsung tampil di buku
+                            ucapan ini.
                           </span>
                           <span class="lang-en">
-                            Your note will show up here as soon as it is sent.
+                            Your name and message will appear instantly in this
+                            guestbook.
                           </span>
                         </p>
                       </div>
 
-                      <p
-                        id="wish-status"
-                        class="wish-status hidden"
-                        role="status"
-                        aria-live="polite"
+                      <form
+                        id="wish-form"
+                        class="wish-form"
+                        method="post"
+                        action="/api/wishes"
                       >
-                      </p>
-                    </form>
-                  </div>
-                </div>
+                        <label class="wish-field">
+                          <span class="wish-field__label">
+                            <span class="lang-mix">Nama</span>
+                            <span class="lang-en">Name</span>
+                          </span>
+                          <input
+                            id="wish-name"
+                            name="name"
+                            type="text"
+                            maxlength="80"
+                            autocomplete="name"
+                            required
+                            class="wish-input"
+                            data-placeholder-mix="Nama Anda"
+                            data-placeholder-en="Your name"
+                          />
+                        </label>
 
-                <div
-                  class="wish-panel wish-panel--list reveal"
-                  data-delay="120"
-                >
-                  <div class="wish-list__top">
-                    <div>
-                      <h3 class="wish-list__title font-serif">
-                        <span class="lang-mix"
-                          >Ucapan hangat yang sudah sampai ke kami</span
-                        >
-                        <span class="lang-en"
-                          >Warm wishes that have already reached us</span
-                        >
-                      </h3>
+                        <label class="wish-field">
+                          <span class="wish-field__label">
+                            <span class="lang-mix">Ucapan</span>
+                            <span class="lang-en">Message</span>
+                          </span>
+                          <textarea
+                            id="wish-message"
+                            name="message"
+                            rows="5"
+                            maxlength="500"
+                            required
+                            class="wish-textarea"
+                            data-placeholder-mix="Tuliskan doa, harapan, atau pesan manis Anda di sini."
+                            data-placeholder-en="Write your prayer, blessing, or a short note here."
+                          ></textarea>
+                        </label>
 
-                      <p class="wish-list__deck">
-                        <span class="lang-mix">
-                          Geser kartu untuk melihat ucapan lainnya.
-                        </span>
-                        <span class="lang-en">
-                          Swipe through the cards to see more wishes.
-                        </span>
-                      </p>
-                    </div>
-                  </div>
+                        <div class="wish-form__footer">
+                          <button
+                            type="submit"
+                            class="wish-submit rsvp-btn inline-flex items-center gap-3 px-10 py-4 rounded-full text-sm font-medium tracking-widest uppercase transition-all duration-300"
+                          >
+                            <span class="lang-mix">Kirim Ucapan</span>
+                            <span class="lang-en">Send Wish</span>
+                            <svg
+                              class="w-4 h-4 rsvp-arrow transition-transform duration-300"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                          </button>
 
-                  <div id="wish-stage" class="wish-stage">
-                    <div id="wish-list" class="wish-list">
-                      {
-                        initialWishes.map((wish) => (
-                          <article class="wish-card" data-wish-id={wish.id}>
-                            <div class="wish-card__head">
-                              <div>
-                                <p class="wish-card__name">{wish.name}</p>
-                                <p class="wish-card__date">
-                                  <span class="lang-mix">
-                                    {formatWishDate(wish.createdAt, 'id')}
-                                  </span>
-                                  <span class="lang-en">
-                                    {formatWishDate(wish.createdAt, 'en')}
-                                  </span>
-                                </p>
-                              </div>
-
-                              <span class="wish-card__glyph" aria-hidden="true">
-                                ✦
-                              </span>
-                            </div>
-
-                            <p class="wish-card__message">{wish.message}</p>
-                          </article>
-                        ))
-                      }
-                    </div>
-
-                    <p
-                      id="wish-empty"
-                      class={initialWishes.length > 0
-                        ? 'wish-empty hidden'
-                        : 'wish-empty'}
-                    >
-                      <span class="lang-mix">
-                        Jadilah orang pertama yang meninggalkan ucapan untuk
-                        kami.
-                      </span>
-                      <span class="lang-en">
-                        Be the first to leave a note for our celebration.
-                      </span>
-                    </p>
-                  </div>
-
-                  <template id="wish-card-template">
-                    <article class="wish-card" data-wish-id="">
-                      <div class="wish-card__head">
-                        <div>
-                          <p class="wish-card__name"></p>
-                          <p class="wish-card__date">
-                            <span class="lang-mix"></span>
-                            <span class="lang-en"></span>
+                          <p class="wish-form__note">
+                            <span class="lang-mix">
+                              Ucapan akan tampil segera setelah berhasil
+                              dikirim.
+                            </span>
+                            <span class="lang-en">
+                              Your note will show up here as soon as it is sent.
+                            </span>
                           </p>
                         </div>
 
-                        <span class="wish-card__glyph" aria-hidden="true"
-                          >✦</span
+                        <p
+                          id="wish-status"
+                          class="wish-status hidden"
+                          role="status"
+                          aria-live="polite"
                         >
+                        </p>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div
+                    class="wish-panel wish-panel--list reveal"
+                    data-delay="120"
+                  >
+                    <div class="wish-list__top">
+                      <div>
+                        <h3 class="wish-list__title font-serif">
+                          <span class="lang-mix"
+                            >Ucapan hangat yang sudah sampai ke kami</span
+                          >
+                          <span class="lang-en"
+                            >Warm wishes that have already reached us</span
+                          >
+                        </h3>
+
+                        <p class="wish-list__deck">
+                          <span class="lang-mix">
+                            Geser kartu untuk melihat ucapan lainnya.
+                          </span>
+                          <span class="lang-en">
+                            Swipe through the cards to see more wishes.
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div id="wish-stage" class="wish-stage">
+                      <div id="wish-list" class="wish-list">
+                        {
+                          initialWishes.map((wish) => (
+                            <article class="wish-card" data-wish-id={wish.id}>
+                              <div class="wish-card__head">
+                                <div>
+                                  <p class="wish-card__name">{wish.name}</p>
+                                  <p class="wish-card__date">
+                                    <span class="lang-mix">
+                                      {formatWishDate(wish.createdAt, 'id')}
+                                    </span>
+                                    <span class="lang-en">
+                                      {formatWishDate(wish.createdAt, 'en')}
+                                    </span>
+                                  </p>
+                                </div>
+
+                                <span
+                                  class="wish-card__glyph"
+                                  aria-hidden="true"
+                                >
+                                  ✦
+                                </span>
+                              </div>
+
+                              <p class="wish-card__message">{wish.message}</p>
+                            </article>
+                          ))
+                        }
                       </div>
 
-                      <p class="wish-card__message"></p>
-                    </article>
-                  </template>
+                      <p
+                        id="wish-empty"
+                        class={initialWishes.length > 0
+                          ? 'wish-empty hidden'
+                          : 'wish-empty'}
+                      >
+                        <span class="lang-mix">
+                          Jadilah orang pertama yang meninggalkan ucapan untuk
+                          kami.
+                        </span>
+                        <span class="lang-en">
+                          Be the first to leave a note for our celebration.
+                        </span>
+                      </p>
+                    </div>
+
+                    <template id="wish-card-template">
+                      <article class="wish-card" data-wish-id="">
+                        <div class="wish-card__head">
+                          <div>
+                            <p class="wish-card__name"></p>
+                            <p class="wish-card__date">
+                              <span class="lang-mix"></span>
+                              <span class="lang-en"></span>
+                            </p>
+                          </div>
+
+                          <span class="wish-card__glyph" aria-hidden="true"
+                            >✦</span
+                          >
+                        </div>
+
+                        <p class="wish-card__message"></p>
+                      </article>
+                    </template>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </section>
-      </div>
 
-      <!-- Footer -->
-      <footer
-        data-auto-scroll-section
-        class="content-card py-16 px-6 text-center"
-      >
-        <div class="footer-shell desktop-reading-block space-y-4 font-serif">
-          <p class="text-5xl mt-8">
-            Thank you for being part of our special day
-          </p>
-          <div class="flex items-center justify-center gap-4 mt-6">
-            <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
-            <div class="w-2 h-2 rounded-full bg-lime footer-dot"></div>
-            <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
+        <!-- Footer -->
+        <footer
+          data-auto-scroll-section
+          class="content-card py-16 px-6 text-center"
+        >
+          <div class="footer-shell desktop-reading-block space-y-4 font-serif">
+            <p class="text-5xl mt-8">
+              Thank you for being part of this little chapter of our love
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-6">
+              <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
+              <div class="w-2 h-2 rounded-full bg-lime footer-dot"></div>
+              <div class="h-px w-16 bg-charcoal/10 divider-line"></div>
+            </div>
+
+            <p class="text-md">
+              © 2026 · Artwork by my dearest <a
+                href="https://www.instagram.com/syafazeer"
+                target="_blank"
+                rel="noopener noreferrer">@syafazeer</a
+              > ❤️
+            </p>
           </div>
+        </footer>
+      </div><!-- .content-cards -->
+    </div><!-- #content-layer -->
+  </div>
 
-          <p class="text-md">
-            © 2026 · Artwork by my dearest <a
-              href="https://www.instagram.com/syafazeer"
-              target="_blank"
-              rel="noopener noreferrer">@syafazeer</a
-            > ❤️
-          </p>
-        </div>
-      </footer>
-    </div><!-- .content-cards -->
-  </div><!-- #content-layer -->
-</Layout>
-
-<style>
-  :root {
-    --mobile-section-padding: clamp(4.5rem, 10svh, 6.5rem);
-  }
-
-  /* ── Fixed background artwork ── */
-  #bg-main {
-    background: linear-gradient(180deg, #92d8e0 0%, #1489af 52%, #a6e4db 100%);
-    will-change: auto;
-  }
-  .main-bg-image,
-  .story-background__image {
-    object-position: center center;
-  }
-
-  /* ── Content cards float above background ── */
-  .content-card {
-    background: rgba(250, 249, 246, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    position: relative;
-  }
-  .content-card + .content-card {
-    margin-top: clamp(1.5rem, 3vw, 2.5rem);
-  }
-  .content-cards {
-    position: relative;
-    z-index: 1;
-  }
-  .content-card--dark {
-    background: rgba(26, 26, 26, 0.88);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  .content-card--transparent {
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-top: none;
-  }
-  .ambient-spacer {
-    height: clamp(6rem, 15svh, 10rem);
-  }
-  .ambient-spacer--after-greeting {
-    height: clamp(2rem, 8svh, 5rem);
-  }
-  .hero-section {
-    min-height: 100vh;
-    min-height: 100svh;
-  }
-  @supports (min-height: 100dvh) {
-    .hero-section {
-      min-height: 100dvh;
+  <style>
+    :root {
+      --mobile-section-padding: clamp(4.5rem, 10svh, 6.5rem);
     }
-  }
-  .hero-section {
-    overflow: visible;
-    align-items: center;
-    z-index: 0;
-  }
-  .hero-shell {
-    width: min(100%, 28rem);
-  }
-  .hero-shell h1 {
-    font-size: clamp(3.35rem, 13vw, 5.15rem);
-    line-height: 0.94;
-  }
-  #gallery {
-    padding-top: clamp(2.5rem, 7svh, 4rem);
-    padding-bottom: clamp(2.5rem, 7svh, 4rem);
-  }
-  #greeting {
-    --greeting-scene-height: clamp(14rem, 34svh, 19rem);
-    position: relative;
-    min-height: unset;
-    padding-top: calc(
-      var(--greeting-scene-height) + clamp(0.35rem, 1.4svh, 0.9rem)
-    );
-    padding-bottom: clamp(2rem, 5svh, 3rem);
-    align-items: flex-start;
-    overflow: hidden;
-    /* background: #aed15d; */
-  }
-  .greeting-panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background: #aed15d;
-    z-index: 0;
-  }
-  .greeting-panel__scene {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .greeting-panel__mountain {
-    position: absolute;
-    inset: 0;
-    background: url('/assets/gunung.webp') center top / cover no-repeat;
-  }
-  .greeting-panel__art {
-    position: absolute;
-    top: -23.25rem;
-    left: 0;
-    width: 100%;
-    height: auto;
-    max-width: none;
-  }
-  .greeting-content {
-    position: relative;
-    z-index: 50;
-    width: min(100%, 29rem);
-    margin-inline: auto;
-    padding-inline: clamp(0.9rem, 4vw, 1.35rem);
-    padding-top: 2;
-    padding-bottom: 0;
-  }
-  .greeting-content > p:first-child {
-    font-size: clamp(0.98rem, 3.15vw, 1.08rem);
-    line-height: 1.8;
-    text-wrap: pretty;
-  }
-  .greeting-content > p:last-child {
-    margin-top: 0.75rem;
-    font-size: clamp(0.92rem, 3vw, 1rem);
-  }
-  .greeting-content br {
-    display: none;
-  }
-  .greeting-cats {
-    position: absolute;
-    inset: 0 0 auto;
-    height: var(--greeting-scene-height);
-    z-index: 20;
-    pointer-events: none;
-  }
-  .greeting-cat {
-    position: absolute;
-    display: block;
-    width: auto;
-    max-width: none;
-    filter: drop-shadow(0 14px 20px rgba(26, 26, 26, 0.16));
-  }
-  .greeting-cat--gio {
-    left: clamp(1.25rem, 5vw, 2rem);
-    top: clamp(6.25rem, 17svh, 10rem);
-    width: clamp(4.75rem, 21vw, 6.25rem);
-    transform: rotate(-10deg);
-  }
-  .greeting-cat--coco {
-    right: clamp(2rem, 8vw, 3rem);
-    top: clamp(3.75rem, 10svh, 7rem);
-    width: clamp(5.5rem, 24vw, 7.5rem);
-  }
-  .greeting-cat--ucil {
-    left: 50%;
-    top: clamp(9rem, 21.5svh, 13.5rem);
-    width: clamp(5.5rem, 24vw, 7.25rem);
-    transform: translateX(-50%) rotate(-4deg);
-  }
-  .couple-card {
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    box-shadow:
-      0 18px 48px rgba(9, 71, 96, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.28);
-    backdrop-filter: blur(18px) saturate(135%);
-    -webkit-backdrop-filter: blur(18px) saturate(135%);
-    transition:
-      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 0.4s ease;
-  }
-  .couple-card:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 24px 58px rgba(9, 71, 96, 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.32);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-  .couple-card-group {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    width: 100%;
-    gap: clamp(1.25rem, 4vw, 1.75rem);
-    align-items: start;
-  }
-  .story-background {
-    position: relative;
-    isolation: isolate;
-  }
-  .story-background__backdrop {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    height: 100svh;
-    margin-bottom: -100vh;
-    margin-bottom: -100svh;
-    pointer-events: none;
-    z-index: 0;
-  }
-  @supports (height: 100dvh) {
-    .story-background__backdrop {
-      height: 100dvh;
-      margin-bottom: -100dvh;
-    }
-  }
-  .story-background__image {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .story-background > section {
-    position: relative;
-    z-index: 1;
-  }
-  .couple-card__image-frame {
-    overflow: hidden;
-  }
-  .couple-card__image-frame--single {
-    aspect-ratio: 3 / 4;
-    width: min(100%, 22rem);
-  }
-  .couple-card__image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .couple-card__image--single {
-    object-position: center 14%;
-  }
-  .couple-card__text {
-    width: min(100%, 18rem);
-    min-width: 0;
-    text-align: left;
-  }
-  .couple-card__name {
-    font-size: clamp(3.2rem, 12vw, 5rem);
-    line-height: 0.9;
-    letter-spacing: 0;
-    color: white;
-    text-wrap: balance;
-  }
-  .couple-card__meta {
-    margin-top: 1.25rem;
-    font-family: var(--font-serif);
-    font-size: clamp(1rem, 3.8vw, 1.15rem);
-    line-height: 1.85;
-    color: rgba(255, 255, 255, 0.84);
-    max-width: 16rem;
-  }
-  .couple-separator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-serif);
-    font-size: clamp(3.5rem, 8vw, 5rem);
-    line-height: 1;
-    color: rgba(255, 255, 255, 0.8);
-  }
 
-  /* ── Scroll reveal animations ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── Nav ── */
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: #e1ff00;
-    transition:
-      width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .nav-link:hover::after {
-    width: 100%;
-    left: 0;
-  }
-  .nav-logo {
-    transition: letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .nav-logo:hover {
-    letter-spacing: 0.15em;
-  }
-  #main-nav.scrolled {
-    background: rgba(26, 26, 26, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .details-layout {
-    max-width: 72rem;
-    width: 100%;
-    margin-inline: auto;
-  }
-  .details-composition {
-    display: grid;
-    gap: clamp(2.5rem, 6vw, 4.5rem);
-    width: 100%;
-  }
-  .details-line {
-    display: block;
-    width: 100%;
-  }
-  .details-line__intro {
-    display: grid;
-    gap: 0.4rem;
-    transform: translateY(2rem);
-  }
-  .details-line__label {
-    font-size: clamp(2.4rem, 8vw, 4.2rem);
-    line-height: 0.95;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.34);
-  }
-  .details-line__meta {
-    font-size: clamp(1rem, 2.6vw, 1.4rem);
-    line-height: 1.2;
-    color: rgba(255, 255, 255, 0.34);
-  }
-  .details-line__value {
-    font-style: italic;
-    font-weight: 400;
-    line-height: 0.92;
-    color: rgba(255, 255, 255, 0.98);
-    text-wrap: balance;
-    text-align: right;
-    display: block;
-    width: 100%;
-  }
-  .details-line__value--date {
-    font-size: clamp(3.5rem, 12vw, 6rem);
-  }
-  .details-line__value--time {
-    font-size: clamp(3.2rem, 10vw, 5rem);
-  }
-  .details-venue {
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  .details-venue__name {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    color: rgba(255, 255, 255, 0.94);
-  }
-  .details-venue__copy {
-    margin-top: 0.75rem;
-    font-size: 0.96rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.58);
-    max-width: 34rem;
-  }
-
-  .access-layout {
-    max-width: 72rem;
-  }
-  .access-composition {
-    display: grid;
-    gap: clamp(2rem, 5vw, 4rem);
-  }
-  .access-composition__top {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .access-composition__label-block {
-    display: grid;
-    gap: 0.25rem;
-    text-align: right;
-    transform: translateY(3rem);
-  }
-  .access-composition__label {
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    line-height: 0.95;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.34);
-  }
-  .access-composition__meta {
-    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
-    line-height: 1.2;
-    color: rgba(255, 255, 255, 0.34);
-  }
-  .access-composition__title-row {
-    display: flex;
-    align-items: flex-end;
-    gap: 1rem;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
-
-  .access-composition__title-row {
-    transition: transform 0.25s ease;
-  }
-  .access-composition__title-row:hover .access-composition__title {
-    color: rgba(174, 209, 93, 0.94);
-    transform: translateY(-4px);
-  }
-  .access-composition__title-row:hover .access-composition__link {
-    transform: translateY(-4px);
-  }
-  .access-composition__title {
-    transition:
-      color 0.25s ease,
-      transform 0.25s ease;
-  }
-  .access-composition__title {
-    font-size: clamp(3.8rem, 15vw, 6.4rem);
-    line-height: 0.88;
-    color: rgba(255, 255, 255, 0.98);
-    text-wrap: balance;
-    flex: 1;
-  }
-  .access-composition__body {
-    display: grid;
-    gap: 1.25rem;
-  }
-  .access-composition__address {
-    font-size: clamp(1.55rem, 4.5vw, 2.2rem);
-    line-height: 1.15;
-    color: rgba(255, 255, 255, 0.92);
-  }
-  .access-composition__link {
-    display: inline-flex;
-    width: 3rem;
-    height: 3rem;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-lime);
-    text-decoration: none;
-    transition:
-      transform 0.25s ease,
-      background-color 0.25s ease,
-      border-color 0.25s ease;
-  }
-  /* .access-composition__link:hover {
-    transform: translateY(-2px);
-    background: rgba(225, 255, 0, 0.06);
-  } */
-  .access-composition__notes {
-    grid-column: 1 / -1;
-    max-width: 46rem;
-    font-size: clamp(1rem, 2.4vw, 1.25rem);
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.76);
-  }
-
-  /* ── Gallery teaser card ── */
-  .gallery-anchor {
-    height: 0;
-  }
-  .gallery-teaser {
-    color: inherit;
-  }
-  .calendar-card {
-    /* background: #aed15d; */
-  }
-  .calendar-card__body {
-    gap: 1.5rem;
-  }
-  .calendar-card__header {
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.9rem;
-  }
-  .calendar-card__copy-wrap {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  .calendar-card__arrow {
-    flex: 0 0 auto;
-    width: 2.75rem;
-    height: 2.75rem;
-    margin-top: 0.1rem;
-  }
-  .gallery-teaser--floating {
-    position: fixed;
-    right: max(0.875rem, calc(env(safe-area-inset-right) + 0.875rem));
-    bottom: max(0.875rem, calc(env(safe-area-inset-bottom) + 0.875rem));
-    z-index: 55;
-    width: 4rem;
-    height: 4rem;
-    overflow: visible;
-  }
-  .gallery-teaser__summary {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.32);
-    background: rgba(225, 255, 0, 0.94);
-    backdrop-filter: blur(18px) saturate(135%);
-    -webkit-backdrop-filter: blur(18px) saturate(135%);
-    box-shadow:
-      0 14px 36px rgba(26, 26, 26, 0.16),
-      0 10px 30px rgba(225, 255, 0, 0.22);
-    transition:
-      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.35s ease,
-      background-color 0.35s ease;
-  }
-  .gallery-teaser__summary::-webkit-details-marker {
-    display: none;
-  }
-  .gallery-teaser__summary::marker {
-    content: '';
-  }
-  .gallery-teaser__summary-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-charcoal);
-    opacity: 0.78;
-  }
-  .gallery-teaser__expanded {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% + 0.5rem);
-    z-index: 1;
-    width: min(19rem, calc(100vw - 1rem));
-    padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.32);
-    border-radius: 1rem;
-    background: rgba(225, 255, 0, 0.94);
-    backdrop-filter: blur(18px) saturate(135%);
-    -webkit-backdrop-filter: blur(18px) saturate(135%);
-    box-shadow:
-      0 18px 46px rgba(26, 26, 26, 0.16),
-      0 12px 30px rgba(225, 255, 0, 0.22);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(0.75rem) scale(0.96);
-    transform-origin: bottom right;
-    transition:
-      opacity 0.28s ease,
-      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0.28s ease;
-  }
-  .gallery-teaser__expanded .calendar-card__title {
-    font-size: 1.55rem;
-    line-height: 1.08;
-    margin-bottom: 0.5rem;
-  }
-  .gallery-teaser__expanded .calendar-card__copy {
-    max-width: none;
-    font-size: 0.88rem;
-  }
-  .gallery-teaser__expanded .calendar-card__footer {
-    margin-top: 0.9rem;
-    padding-top: 0.9rem;
-    border-top: 1px solid rgba(26, 26, 26, 0.12);
-  }
-  .gallery-teaser__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(26, 26, 26, 0.14);
-    border-radius: 0.5rem;
-    background: rgba(26, 26, 26, 0.08);
-    color: var(--color-charcoal);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition:
-      background-color 0.25s ease,
-      transform 0.25s ease,
-      border-color 0.25s ease;
-  }
-  .gallery-teaser__cta:hover {
-    background: rgba(26, 26, 26, 0.14);
-    border-color: rgba(26, 26, 26, 0.24);
-    transform: translateY(-1px);
-  }
-  .gallery-teaser--floating[open] {
-    z-index: 65;
-  }
-  .gallery-teaser--floating[open] .gallery-teaser__expanded,
-  .gallery-teaser--floating:focus-within .gallery-teaser__expanded {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0) scale(1);
-  }
-  .gallery-teaser--floating[open] > .gallery-teaser__summary,
-  .gallery-teaser--floating:focus-within > .gallery-teaser__summary {
-    box-shadow:
-      0 18px 42px rgba(26, 26, 26, 0.18),
-      0 14px 34px rgba(225, 255, 0, 0.26);
-  }
-  /* ── Pointer: desktop mouse hover interactions ── */
-  @media (hover: hover) and (pointer: fine) {
-    .gallery-teaser--floating:hover .gallery-teaser__expanded {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateY(0) scale(1);
-    }
-    .gallery-teaser--floating:hover > .gallery-teaser__summary {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow:
-        0 18px 42px rgba(26, 26, 26, 0.18),
-        0 14px 34px rgba(225, 255, 0, 0.26);
-    }
-  }
-  /* ── Mobile portrait: iPhone SE (375×667), iPhone 14/15 (390×844), Pixel 7 (412×915), Galaxy S24 (360×780) ── */
-  @media (max-width: 639px) {
-    .gallery-teaser--floating {
-      width: 3.75rem;
-      height: 3.75rem;
-      right: max(0.625rem, calc(env(safe-area-inset-right) + 0.625rem));
-      bottom: max(0.625rem, calc(env(safe-area-inset-bottom) + 0.625rem));
-    }
-    .gallery-teaser__expanded {
-      width: min(17.25rem, calc(100vw - 0.75rem));
-      bottom: calc(100% + 0.45rem);
-      padding: 0.9rem;
-    }
-  }
-  .sparkle {
-    animation: sparkle-float 3s ease-in-out infinite alternate;
-  }
-  .sparkle:nth-child(2) {
-    animation-delay: 1s;
-  }
-  .sparkle:nth-child(3) {
-    animation-delay: 2s;
-  }
-  @keyframes sparkle-float {
-    0% {
-      transform: translateY(0) scale(1);
-      opacity: 0.3;
-    }
-    100% {
-      transform: translateY(-6px) scale(1.2);
-      opacity: 0.6;
-    }
-  }
-
-  /* ── Map card hover ── */
-  .map-card:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-  }
-
-  /* ── Wedding wish guestbook ── */
-  .wish-section {
-    overflow: visible;
-    background: transparent;
-    border-top: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-  #wishes.wish-section {
-    padding-bottom: 0;
-  }
-  .wish-shell {
-    position: relative;
-    width: 100vw;
-    max-width: none;
-    margin-inline: calc(50% - 50vw);
-    margin-top: -1px;
-    padding: clamp(1.15rem, 3vw, 1.6rem)
-      max(1.5rem, calc(env(safe-area-inset-right) + 1.5rem))
-      clamp(2.5rem, 5vw, 3.5rem)
-      max(1.5rem, calc(env(safe-area-inset-left) + 1.5rem));
-    background: rgba(174, 209, 93, 1);
-    border-top: none;
-    overflow: hidden;
-  }
-  .wish-shell__inner {
-    position: relative;
-    max-width: min(100%, 74rem);
-    margin-inline: auto;
-    isolation: isolate;
-    --wish-accent: #b8cf92;
-    --wish-accent-strong: #dbe8b3;
-    --wish-accent-ink: #273618;
-    --wish-accent-soft: #eef4dd;
-    --wish-accent-line: rgba(61, 86, 28, 0.16);
-    --wish-paper: #fffdf5;
-    --wish-paper-soft: rgba(255, 252, 243, 0.72);
-    --wish-shadow: rgba(74, 99, 40, 0.16);
-  }
-  .wish-shell__inner::before,
-  .wish-shell__inner::after {
-    content: '';
-    position: absolute;
-    inset: auto;
-    border-radius: 999px;
-    pointer-events: none;
-    z-index: -1;
-    filter: blur(24px);
-    opacity: 0.75;
-  }
-  .wish-shell__inner::before {
-    width: 14rem;
-    height: 14rem;
-    top: -3rem;
-    right: -2rem;
-    /* background: radial-gradient(
-      circle,
-      rgba(249, 248, 231, 0.6) 0%,
-      rgba(249, 248, 231, 0) 72%
-    ); */
-  }
-  .wish-shell__inner::after {
-    width: 13rem;
-    height: 13rem;
-    bottom: -2rem;
-    left: -1rem;
-    background: radial-gradient(
-      circle,
-      rgba(142, 183, 76, 0.18) 0%,
-      rgba(142, 183, 76, 0) 72%
-    );
-  }
-  .wish-grid {
-    display: grid;
-    gap: 1.35rem;
-    align-items: start;
-  }
-  .wish-panel {
-    position: relative;
-    overflow: hidden;
-    /* border-radius: 2rem; */
-    /* border: 1px solid var(--wish-accent-line); */
-    /* background: var(--wish-paper-soft); */
-    padding: clamp(1.35rem, 3vw, 2rem);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .wish-panel::after {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 1px;
-  }
-  .wish-panel:hover {
-    transform: translateY(-2px);
-  }
-  .wish-panel--form {
-    padding: 0;
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
-  }
-  .wish-panel--form::after {
-    display: none;
-  }
-  .wish-panel--form:hover {
-    transform: none;
-    border-color: transparent;
-  }
-  .wish-panel--list {
-    background: rgba(174, 209, 93, 1);
-  }
-  .wish-panel__body {
-    display: grid;
-    gap: 1.35rem;
-    padding: clamp(1.35rem, 3vw, 2rem);
-    position: relative;
-    z-index: 1;
-  }
-  .wish-scene {
-    position: relative;
-    z-index: 2;
-    width: 100vw;
-    max-width: none;
-    margin-inline: calc(50% - 50vw);
-    margin-bottom: 0;
-    pointer-events: none;
-  }
-  .wish-scene::before {
-    content: '';
-    position: absolute;
-    inset: 8% 20% 12%;
-    border-radius: 999px;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.34) 0%,
-      rgba(255, 255, 255, 0) 72%
-    );
-    filter: blur(26px);
-    z-index: -1;
-  }
-  .wish-scene__image {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: none;
-    /* filter: drop-shadow(0 24px 28px rgba(72, 95, 33, 0.22)); */
-  }
-  .wish-panel__heading {
-    display: grid;
-    gap: 0.6rem;
-  }
-  .wish-panel__eyebrow,
-  .wish-list__eyebrow {
-    font-size: 0.72rem;
-    line-height: 1.6;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(39, 54, 24, 0.54);
-  }
-  .wish-panel__title {
-    font-size: clamp(2.35rem, 9vw, 3.8rem);
-    line-height: 0.92;
-    max-width: 10ch;
-    color: var(--wish-accent-ink);
-  }
-  .wish-panel__copy,
-  .wish-list__deck {
-    margin-top: 0.9rem;
-    color: rgba(39, 54, 24, 0.7);
-    line-height: 1.75;
-    text-align: left;
-  }
-  .wish-form {
-    display: grid;
-    gap: 1rem;
-  }
-  .wish-field {
-    display: grid;
-    gap: 0.6rem;
-    text-align: left;
-  }
-  .wish-field__label {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(39, 54, 24, 0.6);
-  }
-  .wish-input,
-  .wish-textarea {
-    width: 100%;
-    border-radius: 1.1rem;
-    border: 1px solid rgba(61, 86, 28, 0.12);
-    background: rgba(255, 255, 255, 0.96);
-    color: var(--wish-accent-ink);
-    padding: 1rem 1.1rem;
-    font-size: 0.95rem;
-    transition:
-      border-color 0.25s ease,
-      box-shadow 0.25s ease,
-      background 0.25s ease;
-  }
-  .wish-input::placeholder,
-  .wish-textarea::placeholder {
-    color: rgba(39, 54, 24, 0.36);
-  }
-  .wish-input:focus,
-  .wish-textarea:focus {
-    outline: none;
-    border-color: rgba(61, 86, 28, 0.26);
-    box-shadow:
-      0 0 0 4px rgba(131, 161, 63, 0.12),
-      0 14px 28px rgba(74, 99, 40, 0.1);
-    background: #fff;
-  }
-  .wish-textarea {
-    min-height: 9.5rem;
-    resize: vertical;
-    background-image:
-      linear-gradient(
+    /* ── Fixed background artwork ── */
+    #bg-main {
+      background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.96),
-        rgba(255, 255, 255, 0.96)
-      ),
-      repeating-linear-gradient(
-        180deg,
-        rgba(39, 54, 24, 0) 0,
-        rgba(39, 54, 24, 0) 1.82rem,
-        rgba(61, 86, 28, 0.07) 1.82rem,
-        rgba(61, 86, 28, 0.07) 1.9rem
+        #92d8e0 0%,
+        #1489af 52%,
+        #a6e4db 100%
       );
-  }
-  .wish-form__footer {
-    display: grid;
-    gap: 0.85rem;
-    justify-items: start;
-    margin-top: 0.25rem;
-  }
-  .wish-submit {
-    width: 100%;
-    justify-content: center;
-  }
-  .wish-submit[disabled] {
-    opacity: 0.7;
-    cursor: wait;
-    box-shadow: none;
-  }
-  .wish-submit {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(180deg, #445d25 0%, #31451a 100%);
-    color: #faf8ef;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      0 16px 28px rgba(66, 90, 28, 0.18);
-  }
-  .wish-submit::before {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    border-radius: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    pointer-events: none;
-  }
-  .wish-form__note {
-    font-size: 0.75rem;
-    line-height: 1.7;
-    color: rgba(39, 54, 24, 0.58);
-    text-align: left;
-  }
-  .wish-status {
-    border-radius: 1rem;
-    padding: 0.85rem 1rem;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    text-align: left;
-  }
-  .wish-status[data-state='pending'] {
-    border: 1px solid rgba(61, 86, 28, 0.1);
-    background: rgba(255, 255, 255, 0.68);
-    color: rgba(39, 54, 24, 0.78);
-  }
-  .wish-status[data-state='success'] {
-    border: 1px solid rgba(61, 86, 28, 0.12);
-    background: rgba(68, 93, 37, 0.1);
-    color: rgba(39, 54, 24, 0.9);
-  }
-  .wish-status[data-state='error'] {
-    border: 1px solid rgba(177, 84, 56, 0.16);
-    background: rgba(215, 146, 120, 0.14);
-    color: rgba(113, 44, 22, 0.9);
-  }
-  .wish-list__top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    text-align: left;
-  }
-  .wish-list__tools {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-  .wish-list__title {
-    margin-top: 0.4rem;
-    font-size: clamp(2.15rem, 7vw, 3.4rem);
-    line-height: 1.05;
-    max-width: 12ch;
-  }
-
-  .wish-stage {
-    position: relative;
-    overflow: hidden;
-    margin-top: 1.2rem;
-    --wish-peek: clamp(2.6rem, 9vw, 4.75rem);
-    --wish-gap: clamp(0.85rem, 2vw, 1.1rem);
-    touch-action: pan-y;
-    user-select: none;
-  }
-  .wish-stage::before,
-  .wish-stage::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 1.1rem;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .wish-stage::before {
-    left: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(227, 236, 196, 0.95),
-      rgba(227, 236, 196, 0)
-    );
-  }
-  .wish-stage::after {
-    right: 0;
-    background: linear-gradient(
-      270deg,
-      rgba(227, 236, 196, 0.95),
-      rgba(227, 236, 196, 0)
-    );
-  }
-  .wish-list {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    will-change: transform;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .wish-list:not(.wish-list--solo) {
-    gap: var(--wish-gap);
-  }
-  .wish-empty {
-    border-radius: 1.15rem;
-    border: 1px dashed rgba(61, 86, 28, 0.18);
-    background: rgba(255, 255, 255, 0.54);
-    padding: 1.15rem 1.2rem;
-    color: rgba(39, 54, 24, 0.68);
-    line-height: 1.8;
-    text-align: left;
-  }
-  .wish-card {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 calc(100% - var(--wish-peek));
-    min-height: clamp(17rem, 42vw, 19.5rem);
-    max-height: clamp(17rem, 42vw, 19.5rem);
-    border-radius: 1.35rem;
-    border: 1px solid rgba(61, 86, 28, 0.12);
-    background: linear-gradient(180deg, #fffdf6 0%, #f8f6ec 100%);
-    padding: 1.2rem 1.25rem 1.15rem;
-    margin-inline: 0;
-
-    transition:
-      transform 0.3s ease,
-      border-color 0.25s ease;
-  }
-  .wish-list--solo .wish-card {
-    flex-basis: 100%;
-  }
-  .wish-card::before {
-    content: '';
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 3px;
-    background: linear-gradient(
-      180deg,
-      rgba(127, 154, 69, 0.88) 0%,
-      rgba(127, 154, 69, 0) 100%
-    );
-    opacity: 0.72;
-  }
-  .wish-card::after {
-    content: '';
-    position: absolute;
-    top: 0.85rem;
-    right: 1rem;
-    width: 2.2rem;
-    height: 0.55rem;
-    border-radius: 999px;
-    background: rgba(186, 208, 129, 0.34);
-    transform: rotate(10deg);
-    pointer-events: none;
-  }
-  .wish-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(61, 86, 28, 0.18);
-  }
-  .wish-card__head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.85rem;
-    flex-shrink: 0;
-  }
-  .wish-card__name {
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--wish-accent-ink);
-  }
-  .wish-card__date {
-    margin-top: 0.35rem;
-    font-size: 0.73rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(39, 54, 24, 0.42);
-  }
-  .wish-card__glyph {
-    color: rgba(127, 154, 69, 0.82);
-    font-size: 1rem;
-    transform: translateY(0.15rem);
-  }
-  .wish-card__message {
-    margin-top: 0.9rem;
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding-right: 0.35rem;
-    color: rgba(39, 54, 24, 0.84);
-    line-height: 1.8;
-    white-space: pre-line;
-    text-wrap: pretty;
-    overflow-wrap: anywhere;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(127, 154, 69, 0.42) rgba(61, 86, 28, 0.06);
-  }
-  .wish-card__message::-webkit-scrollbar {
-    width: 0.35rem;
-  }
-  .wish-card__message::-webkit-scrollbar-track {
-    background: rgba(61, 86, 28, 0.06);
-    border-radius: 999px;
-  }
-  .wish-card__message::-webkit-scrollbar-thumb {
-    background: rgba(127, 154, 69, 0.42);
-    border-radius: 999px;
-  }
-  .rsvp-btn:hover {
-    background: linear-gradient(180deg, #c9dbab 0%, #b1c788 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(68, 99, 79, 0.22);
-  }
-  .rsvp-btn:hover .rsvp-arrow {
-    transform: translateX(4px);
-  }
-  .rsvp-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(68, 99, 79, 0.14);
-  }
-
-  /* ── Divider line expand ── */
-  .divider-line {
-    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-  }
-  .reveal:not(.visible) .divider-line {
-    width: 0;
-  }
-
-  /* ── Footer ── */
-  .footer-logo {
-    transition:
-      letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      color 0.3s ease;
-    cursor: default;
-  }
-  .footer-logo:hover {
-    letter-spacing: 0.2em;
-  }
-  .footer-dot {
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-  @keyframes pulse-dot {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 rgba(225, 255, 0, 0.4);
+      will-change: auto;
     }
-    50% {
-      box-shadow: 0 0 0 6px rgba(225, 255, 0, 0);
+    .main-bg-image,
+    .story-background__image {
+      object-position: center center;
     }
-  }
 
-  /* ── Hero ── */
-  .hero-section {
-    --hero-couple-transform: translateX(0);
-  }
-  .hero-scene {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-  /* ── Hero load sequence: bg → mountain → couple → cats → text ── */
-  .hero-bg-image {
-    opacity: 0;
-    transform: scale(1.04);
-    transition:
-      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .hero-scene__mountain {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 60%;
-    background: url('/assets/gunung.webp') center bottom / cover no-repeat;
-    opacity: 0;
-    transform: translate3d(0, 2.4rem, 0) scale(1.04);
-    transition:
-      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s,
-      transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
-  }
-  .hero-scene__couple {
-    position: absolute;
-    top: 60%;
-    left: 0;
-    bottom: auto;
-    width: 100%;
-    max-width: none;
-    opacity: 0;
-    transform: var(--hero-couple-transform) translate3d(0, 3rem, 0) scale(0.94);
-    filter: blur(12px);
-    background-repeat: no-repeat;
-    transition:
-      opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 1s,
-      transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1s,
-      filter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s;
-  }
-  .hero-scene__cat {
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0) scale(0.92);
-    filter: blur(10px);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
-      filter 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .hero-scene__cat--left {
-    transition-delay: 0s;
-  }
-  .hero-scene__cat--right {
-    transition-delay: 0.1s;
-  }
-  .hero-scene__cat--center {
-    transition-delay: 0.2s;
-  }
-  .hero-scene__cat--visible {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
-  }
-  .hero-section--loaded .hero-bg-image {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .hero-section--loaded .hero-scene__mountain {
-    opacity: 0.98;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  .hero-section--loaded .hero-scene__couple {
-    opacity: 1;
-    transform: var(--hero-couple-transform) translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
-  }
-  /* cats are revealed on scroll via .hero-scene__cat--visible */
-  .hero-content {
-    z-index: 1;
-    display: flex;
-    width: min(100%, 28rem);
-    margin-inline: auto;
-    flex-direction: column;
-    align-items: center;
-    will-change: transform;
-    padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
-    padding-bottom: 10.5rem;
-    text-shadow: 0 10px 30px rgba(16, 66, 86, 0.18);
-  }
-  .hero-content .space-y-2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .hero-content [data-auto-scroll-next] {
-    margin-top: clamp(2.5rem, 8svh, 5rem);
-  }
-
-  /* ── Music toggle ── */
-  .music-toggle {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.9rem;
-    height: 2.9rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.68);
-    transition:
-      transform 0.25s ease,
-      background 0.25s ease,
-      border-color 0.25s ease,
-      color 0.25s ease,
-      box-shadow 0.25s ease;
-  }
-  .music-toggle__icon {
-    width: 1rem;
-    height: 1rem;
-  }
-  .music-toggle__icon--off {
-    display: none;
-  }
-  .music-toggle[data-state='muted'] .music-toggle__icon--on {
-    display: none;
-  }
-  .music-toggle[data-state='muted'] .music-toggle__icon--off {
-    display: block;
-  }
-  .music-toggle__pulse {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.58rem;
-    width: 0.42rem;
-    height: 0.42rem;
-    border-radius: 999px;
-    background: rgba(184, 207, 146, 0.9);
-    opacity: 0;
-    box-shadow: 0 0 0 0 rgba(184, 207, 146, 0.32);
-    transition: opacity 0.2s ease;
-  }
-  .music-toggle[data-state='playing'] {
-    color: rgba(244, 248, 234, 0.92);
-    border-color: rgba(184, 207, 146, 0.28);
-    background: rgba(184, 207, 146, 0.12);
-    box-shadow: 0 8px 22px rgba(68, 99, 79, 0.14);
-  }
-  .music-toggle[data-state='playing'] .music-toggle__pulse {
-    opacity: 1;
-    animation: music-pulse 1.8s ease-in-out infinite;
-  }
-  .music-toggle:hover {
-    transform: translateY(-1px);
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.34);
-    background: rgba(255, 255, 255, 0.08);
-  }
-  .music-toggle:active {
-    transform: scale(0.96);
-  }
-  @keyframes music-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 rgba(184, 207, 146, 0.32);
+    /* ── Content cards float above background ── */
+    .content-card {
+      background: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
     }
-    50% {
-      box-shadow: 0 0 0 6px rgba(184, 207, 146, 0);
+    .content-card + .content-card {
+      margin-top: clamp(1.5rem, 3vw, 2.5rem);
     }
-  }
-
-  /* ── Language toggle ── */
-  .lang-en {
-    display: none;
-  }
-  .lang-mix {
-    display: inline;
-  }
-  :global([data-lang='en']) .lang-en {
-    display: inline;
-  }
-  :global([data-lang='en']) .lang-mix {
-    display: none;
-  }
-  :global([data-lang='en']) .lang-label-en {
-    display: inline !important;
-  }
-  :global([data-lang='en']) .lang-label-mix {
-    display: none !important;
-  }
-
-  .lang-toggle:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-  .lang-toggle:active {
-    transform: scale(0.95);
-  }
-
-  #introduction,
-  #details,
-  #schedule,
-  #access,
-  #wishes {
-    padding-block: var(--mobile-section-padding);
-  }
-  footer[data-auto-scroll-section] {
-    padding-block: clamp(3rem, 8svh, 4.5rem);
-    background: rgba(174, 209, 93, 1);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-top: none;
-  }
-  .calendar-countdown {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-    margin-top: 1rem;
-    justify-content: flex-start;
-  }
-  .calendar-countdown > span {
-    display: block;
-  }
-  .calendar-countdown > div {
-    min-width: 3.25rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(26, 26, 26, 0.14);
-  }
-  .calendar-card__footer {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    text-align: center;
-  }
-  .timeline-item {
-    gap: clamp(0.9rem, 4vw, 1.25rem);
-  }
-  .timeline-item > div:first-child {
-    width: 4.75rem;
-  }
-  .timeline-item > div:last-child {
-    padding-bottom: 2.5rem;
-  }
-  .access-map {
-    aspect-ratio: 4 / 5;
-  }
-  .rsvp-btn {
-    justify-content: center;
-  }
-
-  /* ── Accessibility: users who prefer reduced motion ── */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
+    .content-cards {
+      position: relative;
+      z-index: 1;
     }
-    .hero-bg-image,
-    .hero-scene__mountain,
-    .hero-scene__cat {
-      opacity: 1;
-      transform: none;
-      filter: none;
-      transition: none;
+    .content-card--dark {
+      background: rgba(26, 26, 26, 0.88);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .hero-scene__couple {
-      opacity: 1;
-      transform: var(--hero-couple-transform);
-      filter: none;
-      transition: none;
+    .content-card--transparent {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border-top: none;
+      isolation: auto;
     }
-    .footer-dot {
-      animation: none;
+    .ambient-spacer {
+      height: clamp(6rem, 15svh, 10rem);
     }
-  }
-
-  /* ── Mobile + tablet (≤1023px): hide hero cats on small screens — iPhone, Galaxy, iPad Mini/Air ── */
-  @media (max-width: 1023px) {
-    .hero-scene__cat {
-      display: none;
+    .ambient-spacer--after-greeting {
+      height: clamp(2rem, 8svh, 5rem);
     }
-    .wish-hero__caption {
-      position: static;
-      margin-top: 1rem;
-      text-align: center;
+    .hero-section {
+      min-height: 100vh;
+      min-height: 100svh;
     }
-  }
-  /* ── Small tablet + up (≥640px): iPad Mini (768), iPad Air (820), Surface Duo (540) ── */
-  @media (min-width: 640px) {
-    .calendar-card {
-      background: rgba(174, 209, 93, 0.94);
+    @supports (min-height: 100dvh) {
+      .hero-section {
+        min-height: 100dvh;
+      }
+    }
+    .hero-section {
+      overflow: visible;
+      align-items: center;
+      z-index: 0;
+      width: 100%;
+    }
+    .hero-shell {
+      width: min(100%, 28rem);
+    }
+    .hero-shell h1 {
+      font-size: clamp(3.35rem, 13vw, 5.15rem);
+      line-height: 0.94;
     }
     #gallery {
-      background: transparent !important;
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
-  }
-  /* ── Tablet portrait (640px–1023px): iPad Mini (768×1024), iPad Air (820×1180), Surface Pro (912×1368) ── */
-  @media (min-width: 640px) and (max-width: 1023px) {
-    .hero-shell,
-    .hero-content {
-      width: min(100%, 31rem);
-    }
-    .hero-content {
-      padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
-      padding-bottom: 8rem;
-    }
-    .hero-scene__couple {
-      top: 63%;
-      left: 0;
-      width: 100%;
-      transform: none;
-    }
-    .hero-scene__mountain {
-      top: auto;
-      bottom: -1px;
-      height: 65%;
-    }
-    .couple-card__portrait-image {
-      width: min(100%, 24rem);
-    }
-    .access-map {
-      aspect-ratio: 16 / 10;
+      padding-top: clamp(2.5rem, 7svh, 4rem);
+      padding-bottom: clamp(2.5rem, 7svh, 4rem);
     }
     #greeting {
       --greeting-scene-height: clamp(14rem, 34svh, 19rem);
+      position: relative;
+      min-height: unset;
       padding-top: calc(
         var(--greeting-scene-height) + clamp(0.35rem, 1.4svh, 0.9rem)
       );
       padding-bottom: clamp(2rem, 5svh, 3rem);
+      align-items: flex-start;
+      overflow: hidden;
+      /* background: #aed15d; */
     }
     .greeting-panel {
-      background: transparent;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: #aed15d;
+      z-index: 0;
     }
     .greeting-panel__scene {
-      display: none;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .greeting-panel__mountain {
+      position: absolute;
+      inset: 0;
+      background: url('/assets/gunung.webp') center top / cover no-repeat;
     }
     .greeting-panel__art {
-      display: none;
+      position: absolute;
+      top: -23.25rem;
+      left: 0;
+      width: 100%;
+      height: auto;
+      max-width: none;
     }
     .greeting-content {
+      position: relative;
+      z-index: 50;
       width: min(100%, 29rem);
-      padding-top: 0;
+      margin-inline: auto;
+      padding-inline: clamp(0.9rem, 4vw, 1.35rem);
+      padding-top: 2;
       padding-bottom: 0;
     }
     .greeting-content > p:first-child {
       font-size: clamp(0.98rem, 3.15vw, 1.08rem);
       line-height: 1.8;
+      text-wrap: pretty;
+    }
+    .greeting-content > p:last-child {
+      margin-top: 0.75rem;
+      font-size: clamp(0.92rem, 3vw, 1rem);
+    }
+    .greeting-content br {
+      display: none;
+    }
+    .greeting-cats {
+      position: absolute;
+      inset: 0 0 auto;
+      height: var(--greeting-scene-height);
+      z-index: 20;
+      pointer-events: none;
+    }
+    .greeting-cat {
+      position: absolute;
+      display: block;
+      width: auto;
+      max-width: none;
+      filter: drop-shadow(0 14px 20px rgba(26, 26, 26, 0.16));
     }
     .greeting-cat--gio {
-      left: clamp(1.75rem, 6vw, 2.75rem);
+      left: clamp(1.25rem, 5vw, 2rem);
       top: clamp(6.25rem, 17svh, 10rem);
       width: clamp(4.75rem, 21vw, 6.25rem);
+      transform: rotate(-10deg);
     }
     .greeting-cat--coco {
-      right: clamp(2.5rem, 8vw, 3.25rem);
+      right: clamp(2rem, 8vw, 3rem);
       top: clamp(3.75rem, 10svh, 7rem);
       width: clamp(5.5rem, 24vw, 7.5rem);
     }
     .greeting-cat--ucil {
+      left: 50%;
       top: clamp(9rem, 21.5svh, 13.5rem);
       width: clamp(5.5rem, 24vw, 7.25rem);
+      transform: translateX(-50%) rotate(-4deg);
+    }
+    .couple-card {
+      box-sizing: border-box;
+      width: 100%;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow:
+        0 18px 48px rgba(9, 71, 96, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(18px) saturate(135%);
+      -webkit-backdrop-filter: blur(18px) saturate(135%);
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease;
+    }
+    .couple-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 24px 58px rgba(9, 71, 96, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .couple-card-group {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      gap: clamp(1.25rem, 4vw, 1.75rem);
+      align-items: start;
+    }
+    .story-background {
+      position: relative;
+      isolation: isolate;
+    }
+    .story-background__backdrop {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .story-background__image {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .story-background > section {
+      position: relative;
+      z-index: 1;
+    }
+    .couple-card__image-frame {
+      overflow: hidden;
+    }
+    .couple-card__image-frame--single {
+      aspect-ratio: 3 / 4;
+      width: min(100%, 22rem);
+    }
+    .couple-card__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .couple-card__image--single {
+      object-position: center 14%;
+    }
+    .couple-card__text {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      row-gap: clamp(1rem, 3vw, 1.6rem);
+      width: min(100%, 18rem);
+      min-width: 0;
+      text-align: center;
+    }
+    .couple-card__name {
+      margin: 0;
+      font-size: clamp(3.2rem, 12vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+      color: white;
+      text-wrap: balance;
+    }
+    .couple-card__meta {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 3.8vw, 1.15rem);
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 16rem;
+      margin-inline: auto;
+    }
+    .couple-card__meta-line {
+      display: block;
+    }
+    .couple-card__meta-line--amp {
+      text-align: center;
+      line-height: 1.1;
+    }
+    .couple-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 8vw, 5rem);
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ── Scroll reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .details-layout {
+      max-width: 72rem;
+      width: 100%;
+      margin-inline: auto;
+    }
+    .details-composition {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 4.5rem);
+      width: 100%;
+    }
+    .details-line {
+      display: block;
+      width: 100%;
+    }
+    .details-line__intro {
+      display: grid;
+      gap: 0.4rem;
+      transform: translateY(2rem);
+    }
+    .details-line__label {
+      font-size: clamp(2.4rem, 8vw, 4.2rem);
+      line-height: 0.95;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.34);
+    }
+    .details-line__meta {
+      font-size: clamp(1rem, 2.6vw, 1.4rem);
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.34);
+    }
+    .details-line__value {
+      font-style: italic;
+      font-weight: 400;
+      line-height: 0.92;
+      color: rgba(255, 255, 255, 0.98);
+      text-wrap: balance;
+      text-align: right;
+      display: block;
+      width: 100%;
+    }
+    .details-line__value--date {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+    }
+    .details-line__value--time {
+      font-size: clamp(3.2rem, 10vw, 5rem);
+    }
+    .details-venue {
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .details-venue__name {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: rgba(255, 255, 255, 0.94);
+    }
+    .details-venue__copy {
+      margin-top: 0.75rem;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.58);
+      max-width: 34rem;
+    }
+
+    .access-layout {
+      max-width: 72rem;
+    }
+    .access-composition {
+      display: grid;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+    .access-composition__top {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .access-composition__label-block {
+      display: grid;
+      gap: 0.25rem;
+      text-align: right;
+      transform: translateY(3rem);
+    }
+    .access-composition__label {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 0.95;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.34);
+    }
+    .access-composition__meta {
+      font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.34);
+    }
+    .access-composition__title-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .access-composition__title-row {
+      transition: transform 0.25s ease;
+    }
+    .access-composition__title-row:hover .access-composition__title,
+    .access-composition__title-row:hover .access- {
+      color: rgba(174, 209, 93, 0.94);
+      transform: translateY(-4px);
+    }
+    .access-composition__title-row:hover .access-composition__link,
+    .access-composition__title-row:hover .access-composition__link-instagram {
+      transform: translateY(-4px);
+    }
+    .access-composition__title {
+      transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+    }
+    .access-composition__title {
+      font-size: clamp(3.8rem, 15vw, 6.4rem);
+      line-height: 0.88;
+      color: rgba(255, 255, 255, 0.98);
+      text-wrap: balance;
+      flex: 1;
+    }
+    .access-composition__body {
+      display: grid;
+      gap: 1.25rem;
+    }
+    .access-composition__address {
+      font-size: clamp(1.55rem, 4.5vw, 2.2rem);
+      line-height: 1.15;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .access-composition__link {
+      display: inline-flex;
+      width: 3rem;
+      height: 3rem;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-lime);
+      text-decoration: none;
+      transition: transform 0.25s ease;
+    }
+
+    .access-composition__link-instagram {
+      display: inline-flex;
+      width: 2.25rem;
+      height: 2.25rem;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease;
+    }
+    /* .access-composition__link:hover {
+    transform: translateY(-2px);
+    background: rgba(225, 255, 0, 0.06);
+  } */
+    .access-composition__notes {
+      grid-column: 1 / -1;
+      max-width: 46rem;
+      font-size: clamp(1rem, 2.4vw, 1.25rem);
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .access- {
+      font-size: clamp(1.55rem, 4.5vw, 2.2rem);
+      line-height: 1.15;
+      color: rgba(255, 255, 255, 0.92);
+      transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    /* ── Gallery teaser card ── */
+    .gallery-anchor {
+      height: 0;
+    }
+    .gallery-teaser {
+      color: inherit;
     }
     .calendar-card {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-    #gallery {
-      background: #aed15d !important;
-      padding-top: clamp(2.5rem, 7svh, 4rem);
-      padding-bottom: clamp(2.5rem, 7svh, 4rem);
+      /* background: #aed15d; */
     }
     .calendar-card__body {
       gap: 1.5rem;
     }
-    .calendar-countdown {
-      gap: 0.65rem;
-      margin-top: 1rem;
+    .calendar-card__header {
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.9rem;
     }
-  }
-  /* ── Small phones + short viewports (≤389px wide or ≤739px tall): iPhone SE (375×667), iPhone 13 mini (375×812 landscape) ── */
-  @media (max-width: 389px), (max-height: 739px) {
-    #greeting {
-      --greeting-scene-height: clamp(12.5rem, 31svh, 16rem);
+    .calendar-card__copy-wrap {
+      flex: 1 1 auto;
+      min-width: 0;
     }
-    .hero-scene__couple {
-      top: 61%;
+    .calendar-card__arrow {
+      flex: 0 0 auto;
+      width: 2.75rem;
+      height: 2.75rem;
+      margin-top: 0.1rem;
     }
-    .hero-content {
-      padding-bottom: 8rem;
+    .gallery-teaser--floating {
+      position: fixed;
+      right: max(0.875rem, calc(env(safe-area-inset-right) + 0.875rem));
+      bottom: max(0.875rem, calc(env(safe-area-inset-bottom) + 0.875rem));
+      z-index: 55;
+      width: 4rem;
+      height: 4rem;
+      overflow: visible;
     }
-    .hero-content [data-auto-scroll-next] {
-      margin-top: 2rem;
+    .gallery-teaser__summary {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(225, 255, 0, 0.94);
+      backdrop-filter: blur(18px) saturate(135%);
+      -webkit-backdrop-filter: blur(18px) saturate(135%);
+      box-shadow:
+        0 14px 36px rgba(26, 26, 26, 0.16),
+        0 10px 30px rgba(225, 255, 0, 0.22);
+      transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.35s ease,
+        background-color 0.35s ease;
     }
-    #greeting {
-      padding-top: calc(
-        var(--greeting-scene-height) + clamp(0.35rem, 1.2svh, 0.75rem)
-      );
-    }
-    .greeting-panel__art {
-      top: -18.5rem;
-    }
-    .greeting-cat--gio {
-      top: clamp(5.9rem, 15.5svh, 8.4rem);
-    }
-    .greeting-cat--coco {
-      top: clamp(3.25rem, 9svh, 5rem);
-    }
-    .greeting-cat--ucil {
-      top: clamp(8rem, 19.5svh, 11.25rem);
-    }
-    .calendar-countdown {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.8rem 1rem;
-    }
-    .calendar-countdown > span {
+    .gallery-teaser__summary::-webkit-details-marker {
       display: none;
     }
-    .calendar-countdown > div {
-      min-width: 0;
-      text-align: center;
+    .gallery-teaser__summary::marker {
+      content: '';
     }
-    .wish-hero__title {
-      font-size: clamp(2.2rem, 12vw, 3rem);
+    .gallery-teaser__summary-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-charcoal);
+      opacity: 0.78;
     }
-    .wish-card:nth-child(2n),
-    .wish-card:nth-child(3n) {
+    .gallery-teaser__expanded {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 0.5rem);
+      z-index: 1;
+      width: min(19rem, calc(100vw - 1rem));
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 1rem;
+      background: rgba(225, 255, 0, 0.94);
+      backdrop-filter: blur(18px) saturate(135%);
+      -webkit-backdrop-filter: blur(18px) saturate(135%);
+      box-shadow:
+        0 18px 46px rgba(26, 26, 26, 0.16),
+        0 12px 30px rgba(225, 255, 0, 0.22);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(0.75rem) scale(0.96);
+      transform-origin: bottom right;
+      transition:
+        opacity 0.28s ease,
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.28s ease;
+    }
+    .gallery-teaser__expanded .calendar-card__title {
+      font-size: 1.55rem;
+      line-height: 1.08;
+      margin-bottom: 0.5rem;
+    }
+    .gallery-teaser__expanded .calendar-card__copy {
+      max-width: none;
+      font-size: 0.88rem;
+    }
+    .gallery-teaser__expanded .calendar-card__footer {
+      margin-top: 0.9rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(26, 26, 26, 0.12);
+    }
+    .gallery-teaser__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(26, 26, 26, 0.14);
+      border-radius: 0.5rem;
+      background: rgba(26, 26, 26, 0.08);
+      color: var(--color-charcoal);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition:
+        background-color 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+    .gallery-teaser__cta:hover {
+      background: rgba(26, 26, 26, 0.14);
+      border-color: rgba(26, 26, 26, 0.24);
+      transform: translateY(-1px);
+    }
+    .gallery-teaser--floating[open] {
+      z-index: 65;
+    }
+    .gallery-teaser--floating[open] .gallery-teaser__expanded,
+    .gallery-teaser--floating:focus-within .gallery-teaser__expanded {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .gallery-teaser--floating[open] > .gallery-teaser__summary,
+    .gallery-teaser--floating:focus-within > .gallery-teaser__summary {
+      box-shadow:
+        0 18px 42px rgba(26, 26, 26, 0.18),
+        0 14px 34px rgba(225, 255, 0, 0.26);
+    }
+    /* ── Pointer: desktop mouse hover interactions ── */
+    @media (hover: hover) and (pointer: fine) {
+      .gallery-teaser--floating:hover .gallery-teaser__expanded {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+      .gallery-teaser--floating:hover > .gallery-teaser__summary {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow:
+          0 18px 42px rgba(26, 26, 26, 0.18),
+          0 14px 34px rgba(225, 255, 0, 0.26);
+      }
+    }
+    /* ── Mobile portrait: iPhone SE (375×667), iPhone 14/15 (390×844), Pixel 7 (412×915), Galaxy S24 (360×780) ── */
+    @media (max-width: 639px) {
+      .gallery-teaser--floating {
+        width: 3.75rem;
+        height: 3.75rem;
+        right: max(0.625rem, calc(env(safe-area-inset-right) + 0.625rem));
+        bottom: max(0.625rem, calc(env(safe-area-inset-bottom) + 0.625rem));
+      }
+      .gallery-teaser__expanded {
+        width: min(17.25rem, calc(100vw - 0.75rem));
+        bottom: calc(100% + 0.45rem);
+        padding: 0.9rem;
+      }
+    }
+    .sparkle {
+      animation: sparkle-float 3s ease-in-out infinite alternate;
+    }
+    .sparkle:nth-child(2) {
+      animation-delay: 1s;
+    }
+    .sparkle:nth-child(3) {
+      animation-delay: 2s;
+    }
+    @keyframes sparkle-float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-6px) scale(1.2);
+        opacity: 0.6;
+      }
+    }
+
+    /* ── Map card hover ── */
+    .map-card:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ── Wedding wish guestbook ── */
+    .wish-section {
+      overflow: visible;
+      background: transparent;
+      border-top: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    #wishes.wish-section {
+      padding-bottom: 0;
+    }
+    .wish-shell {
+      position: relative;
+      width: 100vw;
+      max-width: none;
+      margin-inline: calc(50% - 50vw);
+      margin-top: -1px;
+      padding: clamp(1.15rem, 3vw, 1.6rem)
+        max(1.5rem, calc(env(safe-area-inset-right) + 1.5rem))
+        clamp(2.5rem, 5vw, 3.5rem)
+        max(1.5rem, calc(env(safe-area-inset-left) + 1.5rem));
+      background: rgba(174, 209, 93, 1);
+      border-top: none;
+      overflow: hidden;
+    }
+    .wish-shell__inner {
+      position: relative;
+      max-width: min(100%, 74rem);
+      margin-inline: auto;
+      isolation: isolate;
+      --wish-accent: #b8cf92;
+      --wish-accent-strong: #dbe8b3;
+      --wish-accent-ink: #273618;
+      --wish-accent-soft: #eef4dd;
+      --wish-accent-line: rgba(61, 86, 28, 0.16);
+      --wish-paper: #fffdf5;
+      --wish-paper-soft: rgba(255, 252, 243, 0.72);
+      --wish-shadow: rgba(74, 99, 40, 0.16);
+    }
+    .wish-shell__inner::before,
+    .wish-shell__inner::after {
+      content: '';
+      position: absolute;
+      inset: auto;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(24px);
+      opacity: 0.75;
+    }
+    .wish-shell__inner::before {
+      width: 14rem;
+      height: 14rem;
+      top: -3rem;
+      right: -2rem;
+      /* background: radial-gradient(
+      circle,
+      rgba(249, 248, 231, 0.6) 0%,
+      rgba(249, 248, 231, 0) 72%
+    ); */
+    }
+    .wish-shell__inner::after {
+      width: 13rem;
+      height: 13rem;
+      bottom: -2rem;
+      left: -1rem;
+      background: radial-gradient(
+        circle,
+        rgba(142, 183, 76, 0.18) 0%,
+        rgba(142, 183, 76, 0) 72%
+      );
+    }
+    .wish-grid {
+      display: grid;
+      gap: 1.35rem;
+      align-items: start;
+    }
+    .wish-panel {
+      position: relative;
+      overflow: hidden;
+      /* border-radius: 2rem; */
+      /* border: 1px solid var(--wish-accent-line); */
+      /* background: var(--wish-paper-soft); */
+      padding: clamp(1.35rem, 3vw, 2rem);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .wish-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+    }
+    .wish-panel:hover {
+      transform: translateY(-2px);
+    }
+    .wish-panel--form {
+      padding: 0;
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+    .wish-panel--form::after {
+      display: none;
+    }
+    .wish-panel--form:hover {
       transform: none;
+      border-color: transparent;
+    }
+    .wish-panel--list {
+      background: rgba(174, 209, 93, 1);
+    }
+    .wish-panel__body {
+      display: grid;
+      gap: 1.35rem;
+      padding: clamp(1.35rem, 3vw, 2rem);
+      position: relative;
+      z-index: 1;
+    }
+    .wish-scene {
+      position: relative;
+      z-index: 2;
+      width: 100vw;
+      max-width: none;
+      margin-inline: calc(50% - 50vw);
+      margin-bottom: 0;
+      pointer-events: none;
+    }
+    .wish-scene::before {
+      content: '';
+      position: absolute;
+      inset: 8% 20% 12%;
+      border-radius: 999px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.34) 0%,
+        rgba(255, 255, 255, 0) 72%
+      );
+      filter: blur(26px);
+      z-index: -1;
+    }
+    .wish-scene__image {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: none;
+      /* filter: drop-shadow(0 24px 28px rgba(72, 95, 33, 0.22)); */
+    }
+    .wish-panel__heading {
+      display: grid;
+      gap: 0.6rem;
+    }
+    .wish-panel__eyebrow,
+    .wish-list__eyebrow {
+      font-size: 0.72rem;
+      line-height: 1.6;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(39, 54, 24, 0.54);
+    }
+    .wish-panel__title {
+      font-size: clamp(2.35rem, 9vw, 3.8rem);
+      line-height: 0.92;
+      max-width: 10ch;
+      color: var(--wish-accent-ink);
+    }
+    .wish-panel__copy,
+    .wish-list__deck {
+      margin-top: 0.9rem;
+      color: rgba(39, 54, 24, 0.7);
+      line-height: 1.75;
+      text-align: left;
+    }
+    .wish-form {
+      display: grid;
+      gap: 1rem;
+    }
+    .wish-field {
+      display: grid;
+      gap: 0.6rem;
+      text-align: left;
+    }
+    .wish-field__label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(39, 54, 24, 0.6);
+    }
+    .wish-input,
+    .wish-textarea {
+      width: 100%;
+      border-radius: 1.1rem;
+      border: 1px solid rgba(61, 86, 28, 0.12);
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--wish-accent-ink);
+      padding: 1rem 1.1rem;
+      font-size: 0.95rem;
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+    .wish-input::placeholder,
+    .wish-textarea::placeholder {
+      color: rgba(39, 54, 24, 0.36);
+    }
+    .wish-input:focus,
+    .wish-textarea:focus {
+      outline: none;
+      border-color: rgba(61, 86, 28, 0.26);
+      box-shadow:
+        0 0 0 4px rgba(131, 161, 63, 0.12),
+        0 14px 28px rgba(74, 99, 40, 0.1);
+      background: #fff;
+    }
+    .wish-textarea {
+      min-height: 9.5rem;
+      resize: vertical;
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(255, 255, 255, 0.96)
+        ),
+        repeating-linear-gradient(
+          180deg,
+          rgba(39, 54, 24, 0) 0,
+          rgba(39, 54, 24, 0) 1.82rem,
+          rgba(61, 86, 28, 0.07) 1.82rem,
+          rgba(61, 86, 28, 0.07) 1.9rem
+        );
+    }
+    .wish-form__footer {
+      display: grid;
+      gap: 0.85rem;
+      justify-items: start;
+      margin-top: 0.25rem;
+    }
+    .wish-submit {
+      width: 100%;
+      justify-content: center;
+    }
+    .wish-submit[disabled] {
+      opacity: 0.7;
+      cursor: wait;
+      box-shadow: none;
+    }
+    .wish-submit {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #445d25 0%, #31451a 100%);
+      color: #faf8ef;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 16px 28px rgba(66, 90, 28, 0.18);
+    }
+    .wish-submit::before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      pointer-events: none;
+    }
+    .wish-form__note {
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: rgba(39, 54, 24, 0.58);
+      text-align: left;
+    }
+    .wish-status {
+      border-radius: 1rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .wish-status[data-state='pending'] {
+      border: 1px solid rgba(61, 86, 28, 0.1);
+      background: rgba(255, 255, 255, 0.68);
+      color: rgba(39, 54, 24, 0.78);
+    }
+    .wish-status[data-state='success'] {
+      border: 1px solid rgba(61, 86, 28, 0.12);
+      background: rgba(68, 93, 37, 0.1);
+      color: rgba(39, 54, 24, 0.9);
+    }
+    .wish-status[data-state='error'] {
+      border: 1px solid rgba(177, 84, 56, 0.16);
+      background: rgba(215, 146, 120, 0.14);
+      color: rgba(113, 44, 22, 0.9);
+    }
+    .wish-list__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+    .wish-list__tools {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .wish-list__title {
+      margin-top: 0.4rem;
+      font-size: clamp(2.15rem, 7vw, 3.4rem);
+      line-height: 1.05;
+      max-width: 12ch;
+    }
+
+    .wish-stage {
+      position: relative;
+      overflow: hidden;
+      margin-top: 1.2rem;
+      --wish-peek: clamp(2.6rem, 9vw, 4.75rem);
+      --wish-gap: clamp(0.85rem, 2vw, 1.1rem);
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .wish-stage::before,
+    .wish-stage::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1.1rem;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .wish-stage::before {
+      left: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(227, 236, 196, 0.95),
+        rgba(227, 236, 196, 0)
+      );
+    }
+    .wish-stage::after {
+      right: 0;
+      background: linear-gradient(
+        270deg,
+        rgba(227, 236, 196, 0.95),
+        rgba(227, 236, 196, 0)
+      );
+    }
+    .wish-list {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      will-change: transform;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .wish-list:not(.wish-list--solo) {
+      gap: var(--wish-gap);
+    }
+    .wish-empty {
+      border-radius: 1.15rem;
+      border: 1px dashed rgba(61, 86, 28, 0.18);
+      background: rgba(255, 255, 255, 0.54);
+      padding: 1.15rem 1.2rem;
+      color: rgba(39, 54, 24, 0.68);
+      line-height: 1.8;
+      text-align: left;
     }
     .wish-card {
-      min-height: 18.5rem;
-      max-height: 18.5rem;
-    }
-  }
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 calc(100% - var(--wish-peek));
+      min-height: clamp(17rem, 42vw, 19.5rem);
+      max-height: clamp(17rem, 42vw, 19.5rem);
+      border-radius: 1.35rem;
+      border: 1px solid rgba(61, 86, 28, 0.12);
+      background: linear-gradient(180deg, #fffdf6 0%, #f8f6ec 100%);
+      padding: 1.2rem 1.25rem 1.15rem;
+      margin-inline: 0;
 
-  /* ── Desktop (≥1024px): iPad Pro portrait (1024×1366), MacBook 13" (1280×800), 1080p (1920×1080), 2K/4K monitors ── */
-  @media (min-width: 1024px) {
-    .desktop-shell {
-      max-width: 1280px;
+      transition:
+        transform 0.3s ease,
+        border-color 0.25s ease;
     }
-    .desktop-reading-block {
-      max-width: 40rem;
+    .wish-list--solo .wish-card {
+      flex-basis: 100%;
     }
-    .nav-shell {
-      max-width: 1280px;
-      padding-inline: clamp(2rem, 3vw, 3rem);
+    .wish-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(
+        180deg,
+        rgba(127, 154, 69, 0.88) 0%,
+        rgba(127, 154, 69, 0) 100%
+      );
+      opacity: 0.72;
     }
-    .ambient-spacer {
-      height: clamp(10rem, 18vw, 15rem);
+    .wish-card::after {
+      content: '';
+      position: absolute;
+      top: 0.85rem;
+      right: 1rem;
+      width: 2.2rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: rgba(186, 208, 129, 0.34);
+      transform: rotate(10deg);
+      pointer-events: none;
     }
-    .ambient-spacer--after-greeting {
-      height: 0;
+    .wish-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(61, 86, 28, 0.18);
     }
+    .wish-card__head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.85rem;
+      flex-shrink: 0;
+    }
+    .wish-card__name {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--wish-accent-ink);
+    }
+    .wish-card__date {
+      margin-top: 0.35rem;
+      font-size: 0.73rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(39, 54, 24, 0.42);
+    }
+    .wish-card__glyph {
+      color: rgba(127, 154, 69, 0.82);
+      font-size: 1rem;
+      transform: translateY(0.15rem);
+    }
+    .wish-card__message {
+      margin-top: 0.9rem;
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding-right: 0.35rem;
+      color: rgba(39, 54, 24, 0.84);
+      line-height: 1.8;
+      white-space: pre-line;
+      text-wrap: pretty;
+      overflow-wrap: anywhere;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(127, 154, 69, 0.42) rgba(61, 86, 28, 0.06);
+    }
+    .wish-card__message::-webkit-scrollbar {
+      width: 0.35rem;
+    }
+    .wish-card__message::-webkit-scrollbar-track {
+      background: rgba(61, 86, 28, 0.06);
+      border-radius: 999px;
+    }
+    .wish-card__message::-webkit-scrollbar-thumb {
+      background: rgba(127, 154, 69, 0.42);
+      border-radius: 999px;
+    }
+    .rsvp-btn:hover {
+      background: linear-gradient(180deg, #c9dbab 0%, #b1c788 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(68, 99, 79, 0.22);
+    }
+    .rsvp-btn:hover .rsvp-arrow {
+      transform: translateX(4px);
+    }
+    .rsvp-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(68, 99, 79, 0.14);
+    }
+
+    /* ── Divider line expand ── */
+    .divider-line {
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+    .reveal:not(.visible) .divider-line {
+      width: 0;
+    }
+
+    /* ── Footer ── */
+    .footer-logo {
+      transition:
+        letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        color 0.3s ease;
+      cursor: default;
+    }
+    .footer-logo:hover {
+      letter-spacing: 0.2em;
+    }
+    .footer-dot {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(225, 255, 0, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(225, 255, 0, 0);
+      }
+    }
+
+    /* ── Hero ── */
+    .hero-section {
+      --hero-couple-transform: translateX(0);
+    }
+    .hero-scene {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* ── Hero load sequence: bg → mountain → couple → cats → text ── */
+    .hero-bg-image {
+      opacity: 0;
+      transform: scale(1.04);
+      transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-scene__mountain {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 60%;
+      background: url('/assets/gunung.webp') center bottom / cover no-repeat;
+      opacity: 0;
+      transform: translate3d(0, 2.4rem, 0) scale(1.04);
+      transition:
+        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s,
+        transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    }
+    .hero-scene__couple {
+      position: absolute;
+      top: 60%;
+      left: 0;
+      bottom: auto;
+      width: 100%;
+      max-width: none;
+      opacity: 0;
+      transform: var(--hero-couple-transform) translate3d(0, 3rem, 0)
+        scale(0.94);
+      filter: blur(12px);
+      background-repeat: no-repeat;
+      transition:
+        opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 1s,
+        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1s,
+        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s;
+    }
+    .hero-scene__cat {
+      opacity: 0;
+      transform: translate3d(0, 1.4rem, 0) scale(0.92);
+      filter: blur(10px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-scene__cat--left {
+      transition-delay: 0s;
+    }
+    .hero-scene__cat--right {
+      transition-delay: 0.1s;
+    }
+    .hero-scene__cat--center {
+      transition-delay: 0.2s;
+    }
+    .hero-scene__cat--visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+    }
+    .hero-section--loaded .hero-bg-image {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .hero-section--loaded .hero-scene__mountain {
+      opacity: 0.98;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    .hero-section--loaded .hero-scene__couple {
+      opacity: 1;
+      transform: var(--hero-couple-transform) translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+    }
+    /* cats are revealed on scroll via .hero-scene__cat--visible */
+    .hero-content {
+      z-index: 1;
+      display: flex;
+      width: min(100%, 28rem);
+      margin-inline: auto;
+      flex-direction: column;
+      align-items: center;
+      will-change: transform;
+      padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
+      padding-bottom: 10.5rem;
+      text-shadow: 0 10px 30px rgba(16, 66, 86, 0.18);
+    }
+    .hero-content .space-y-2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-content [data-auto-scroll-next] {
+      margin-top: clamp(2.5rem, 8svh, 5rem);
+    }
+
     #introduction,
     #details,
     #schedule,
     #access,
     #wishes {
-      padding-block: clamp(5.25rem, 8vw, 7rem);
+      padding-block: var(--mobile-section-padding);
+    }
+    #introduction {
+      overflow: hidden;
+    }
+    #access {
+      padding-bottom: 0;
+    }
+    #access + footer {
+      margin-top: 0;
     }
     footer[data-auto-scroll-section] {
-      padding-block: clamp(3.25rem, 5vw, 4.5rem);
+      padding-block: clamp(3rem, 8svh, 4.5rem);
+      background: rgba(174, 209, 93, 1);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-top: none;
     }
-    .content-card + .content-card {
-      margin-top: clamp(1.5rem, 2vw, 2.25rem);
-    }
-    .hero-section {
-      justify-content: flex-start;
-      overflow: visible;
-      align-items: center;
-      z-index: 0;
-    }
-
-    .main-bg-image,
-    .story-background__image {
-      object-position: 72% 20%;
-      transform: scale(1);
-    }
-    .hero-shell {
-      width: min(40rem, 38vw);
-      max-width: 38rem;
-      margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
-      margin-right: auto;
-      padding-inline: 0;
-      padding-top: clamp(5rem, 10vh, 7rem);
-      padding-bottom: clamp(7rem, 12vw, 10rem);
-      text-align: left;
-      z-index: 2;
-    }
-    .hero-content {
-      display: block;
-    }
-    .hero-shell h1 {
-      max-width: 32rem;
-      font-size: clamp(5.75rem, 8vw, 8rem);
-      line-height: 0.92;
-    }
-    .hero-shell .space-y-2 {
+    .calendar-countdown {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+      justify-content: flex-start;
     }
-    .hero-scene {
-      z-index: 1;
-    }
-    .hero-scene__mountain {
+    .calendar-countdown > span {
       display: block;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center bottom;
-      opacity: 0.98;
-      -webkit-mask-image: none;
-      mask-image: none;
     }
-    .hero-scene__couple {
-      display: block;
-      top: 40%;
-      left: 0;
-      right: auto;
-      bottom: auto;
-      width: 100%;
-      max-width: none;
-      filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
-      --hero-couple-transform: translateX(0);
-      -webkit-mask-image: none;
-      mask-image: none;
+    .calendar-countdown > div {
+      min-width: 3.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(26, 26, 26, 0.14);
     }
-    .hero-scene__cat {
-      display: none;
+    .calendar-card__footer {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .timeline-item {
+      gap: clamp(0.9rem, 4vw, 1.25rem);
+    }
+    .timeline-item > div:first-child {
+      width: 4.75rem;
+    }
+    .timeline-item > div:last-child {
+      padding-bottom: 2.5rem;
+    }
+    .access-map {
+      aspect-ratio: 4 / 5;
+    }
+    .rsvp-btn {
+      justify-content: center;
     }
 
-    /* ── Desktop landscape (≥1024px wide AND wider than tall): MacBook, iMac, 1080p, 2K, 4K — side-by-side hero layout ── */
-    @media (min-aspect-ratio: 4/3) {
+    /* ── Accessibility: users who prefer reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .hero-bg-image,
+      .hero-scene__mountain,
+      .hero-scene__cat {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+      }
+      .hero-scene__couple {
+        opacity: 1;
+        transform: var(--hero-couple-transform);
+        filter: none;
+        transition: none;
+      }
+      .footer-dot {
+        animation: none;
+      }
+    }
+
+    /* ── Mobile + tablet (≤1023px): hide hero cats on small screens — iPhone, Galaxy, iPad Mini/Air ── */
+    @media (max-width: 1023px) {
+      .hero-scene__cat {
+        display: none;
+      }
+      .wish-hero__caption {
+        position: static;
+        margin-top: 1rem;
+        text-align: center;
+      }
+    }
+    /* ── Small tablet + up (≥640px): iPad Mini (768), iPad Air (820), Surface Duo (540) ── */
+    @media (min-width: 640px) {
+      .calendar-card {
+        background: rgba(174, 209, 93, 0.94);
+      }
+      #gallery {
+        background: transparent !important;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+    }
+    /* ── Tablet portrait (640px–1023px): iPad Mini (768×1024), iPad Air (820×1180), Surface Pro (912×1368) ── */
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .couple-card__text--rian {
+        justify-self: end;
+        justify-items: end;
+        text-align: right;
+        width: 100%;
+        padding-right: 1.5rem;
+        box-sizing: border-box;
+      }
+      .hero-shell,
+      .hero-content {
+        width: min(100%, 31rem);
+      }
+      .hero-content {
+        padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
+        padding-bottom: 8rem;
+      }
+      .hero-scene__couple {
+        top: 56%;
+        left: 0;
+        width: 100%;
+        transform: none;
+      }
+      .hero-scene__mountain {
+        top: auto;
+        bottom: -1px;
+        height: 65%;
+      }
+      .couple-card__portrait-image {
+        width: min(100%, 24rem);
+      }
+      .access-map {
+        aspect-ratio: 16 / 10;
+      }
+      #greeting {
+        --greeting-scene-height: clamp(14rem, 34svh, 19rem);
+        padding-top: calc(
+          var(--greeting-scene-height) + clamp(0.35rem, 1.4svh, 0.9rem)
+        );
+        padding-bottom: clamp(2rem, 5svh, 3rem);
+      }
+      .greeting-panel {
+        background: transparent;
+      }
+      .greeting-panel__scene {
+        display: none;
+      }
+      .greeting-panel__art {
+        display: none;
+      }
+      .greeting-content {
+        width: min(100%, 29rem);
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .greeting-content > p:first-child {
+        font-size: clamp(0.98rem, 3.15vw, 1.08rem);
+        line-height: 1.8;
+      }
+      .greeting-cat--gio {
+        left: clamp(1.75rem, 6vw, 2.75rem);
+        top: clamp(6.25rem, 17svh, 10rem);
+        width: clamp(4.75rem, 21vw, 6.25rem);
+      }
+      .greeting-cat--coco {
+        right: clamp(2.5rem, 8vw, 3.25rem);
+        top: clamp(3.75rem, 10svh, 7rem);
+        width: clamp(5.5rem, 24vw, 7.5rem);
+      }
+      .greeting-cat--ucil {
+        top: clamp(9rem, 21.5svh, 13.5rem);
+        width: clamp(5.5rem, 24vw, 7.25rem);
+      }
+      .calendar-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+      #gallery {
+        background: #aed15d !important;
+        padding-top: clamp(2.5rem, 7svh, 4rem);
+        padding-bottom: clamp(2.5rem, 7svh, 4rem);
+      }
+      .calendar-card__body {
+        gap: 1.5rem;
+      }
+      .calendar-countdown {
+        gap: 0.65rem;
+        margin-top: 1rem;
+      }
+    }
+    /* ── Small phones + short viewports (≤389px wide or ≤739px tall): iPhone SE (375×667), iPhone 13 mini (375×812 landscape) ── */
+    @media (max-width: 389px), (max-height: 739px) {
+      #greeting {
+        --greeting-scene-height: clamp(12.5rem, 31svh, 16rem);
+      }
+      .hero-scene__couple {
+        top: 67%;
+      }
+      .hero-content {
+        padding-bottom: 8rem;
+      }
+      .hero-content [data-auto-scroll-next] {
+        margin-top: 2rem;
+      }
+      #greeting {
+        padding-top: calc(
+          var(--greeting-scene-height) + clamp(0.35rem, 1.2svh, 0.75rem)
+        );
+      }
+      .greeting-panel__art {
+        top: -18.5rem;
+      }
+      .greeting-cat--gio {
+        top: clamp(5.9rem, 15.5svh, 8.4rem);
+      }
+      .greeting-cat--coco {
+        top: clamp(3.25rem, 9svh, 5rem);
+      }
+      .greeting-cat--ucil {
+        top: clamp(8rem, 19.5svh, 11.25rem);
+      }
+      .calendar-countdown {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem 1rem;
+      }
+      .calendar-countdown > span {
+        display: none;
+      }
+      .calendar-countdown > div {
+        min-width: 0;
+        text-align: center;
+      }
+      .wish-hero__title {
+        font-size: clamp(2.2rem, 12vw, 3rem);
+      }
+      .wish-card:nth-child(2n),
+      .wish-card:nth-child(3n) {
+        transform: none;
+      }
+      .wish-card {
+        min-height: 18.5rem;
+        max-height: 18.5rem;
+      }
+    }
+
+    /* ── Desktop (≥1024px): iPad Pro portrait (1024×1366), MacBook 13" (1280×800), 1080p (1920×1080), 2K/4K monitors ── */
+    @media (min-width: 1024px) {
+      .desktop-shell {
+        max-width: 1280px;
+      }
+      .desktop-reading-block {
+        max-width: 40rem;
+      }
+      .ambient-spacer {
+        height: clamp(10rem, 18vw, 15rem);
+      }
+      .ambient-spacer--after-greeting {
+        height: 0;
+      }
+      #introduction,
+      #details,
+      #schedule,
+      #access,
+      #wishes {
+        padding-block: clamp(5.25rem, 8vw, 7rem);
+      }
+      #access {
+        padding-bottom: 0;
+      }
+      footer[data-auto-scroll-section] {
+        padding-block: clamp(3.25rem, 5vw, 4.5rem);
+      }
+      .content-card + .content-card {
+        margin-top: clamp(1.5rem, 2vw, 2.25rem);
+      }
+      .hero-section {
+        justify-content: flex-start;
+        overflow: visible;
+        align-items: center;
+        z-index: 0;
+      }
+
+      .main-bg-image,
+      .story-background__image {
+        object-position: 72% 20%;
+        transform: scale(1);
+      }
       .hero-shell {
         width: min(40rem, 38vw);
         max-width: 38rem;
         margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
         margin-right: auto;
+        padding-inline: 0;
+        padding-top: clamp(5rem, 10vh, 7rem);
+        padding-bottom: clamp(7rem, 12vw, 10rem);
         text-align: left;
+        z-index: 2;
       }
       .hero-content {
         display: block;
@@ -2761,821 +2583,911 @@ try {
         line-height: 0.92;
       }
       .hero-shell .space-y-2 {
+        display: flex;
+        flex-direction: column;
         align-items: flex-start;
       }
+      .hero-scene {
+        z-index: 1;
+      }
       .hero-scene__mountain {
-        top: 40%;
-        opacity: 1;
+        display: block;
+        left: 0;
+        right: 0;
+        width: 100%;
         height: 100%;
-        -webkit-mask-image: linear-gradient(
-          to top,
-          #000 0%,
-          #000 40%,
-          transparent 100%
-        );
-        mask-image: linear-gradient(
-          to top,
-          #000 0%,
-          #000 40%,
-          transparent 100%
-        );
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center bottom;
+        opacity: 0.98;
+        -webkit-mask-image: none;
+        mask-image: none;
       }
       .hero-scene__couple {
-        top: -40%;
-        left: 50%;
-        bottom: clamp(-20rem, -11vw, -10rem);
-        --hero-couple-transform: translateX(-50%);
+        display: block;
+        top: 55%;
+        left: 0;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        max-width: none;
         filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
+        --hero-couple-transform: translateX(0);
+        -webkit-mask-image: none;
+        mask-image: none;
       }
-    }
+      .hero-scene__cat {
+        display: none;
+      }
 
-    #greeting {
-      min-height: clamp(34rem, 52vw, 44rem);
-      padding-block: clamp(5rem, 7vw, 7rem);
-      padding-inline: 0;
-      overflow: hidden;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    .greeting-panel__scene {
-      display: none;
-    }
-    .greeting-panel {
-      display: none;
-    }
-    .greeting-content {
-      width: min(40rem, 42vw);
-      max-width: 40rem;
-      margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
-      margin-right: auto;
-      margin-bottom: 0;
-      padding: clamp(2rem, 3vw, 3rem);
-      text-align: left;
-      background: rgba(174, 209, 93, 0.94);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 2rem;
-      box-shadow: 0 24px 60px rgba(32, 72, 48, 0.18);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .greeting-cats {
-      display: grid;
-      position: absolute;
-      left: calc(
-        max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 38vw) +
-          clamp(0.85rem, 1.8vw, 1.85rem)
-      );
-      top: 50%;
-      bottom: auto;
-      width: clamp(19rem, 21vw, 24rem);
-      grid-template-columns: 0.95fr 1.1fr;
-      grid-template-areas:
-        'gio coco'
-        'ucil coco';
-      align-items: end;
-      gap: clamp(0.75rem, 1.2vw, 1.1rem);
-      transform: translateY(-50%);
-      z-index: 2;
-      pointer-events: none;
-    }
-    .greeting-cat {
-      display: block;
-      position: relative;
-      left: auto;
-      right: auto;
-      top: auto;
-      width: 100%;
-      max-width: none;
-      filter: drop-shadow(0 16px 24px rgba(26, 26, 26, 0.14));
-    }
-    .greeting-cat--gio {
-      grid-area: gio;
-      width: 98%;
-      justify-self: start;
-      transform: translateY(-1rem) rotate(-3deg);
-    }
-    .greeting-cat--coco {
-      grid-area: coco;
-      width: 112%;
-      align-self: center;
-      justify-self: center;
-    }
-    .greeting-cat--ucil {
-      grid-area: ucil;
-      width: 108%;
-      justify-self: end;
-      transform: translateY(-1rem);
-    }
-    .greeting-content > p:first-child {
-      max-width: 32rem;
-      font-size: clamp(1.2rem, 1.45vw, 1.45rem);
-      line-height: 1.7;
-    }
-    .greeting-content > p:last-child {
-      font-size: 0.95rem;
-      margin-top: 1rem;
-      letter-spacing: 0.08em;
-    }
-    .greeting-content br {
-      display: none;
-    }
-
-    .gallery-teaser--floating {
-      width: 4.25rem;
-      height: 4.25rem;
-      bottom: max(1rem, calc(env(safe-area-inset-bottom) + 1rem));
-      right: max(1rem, calc(env(safe-area-inset-right) + 1rem));
-    }
-    .gallery-teaser__expanded {
-      width: min(21rem, calc(100vw - 2rem));
-      bottom: calc(100% + 0.65rem);
-      padding: 1.1rem;
-    }
-    .gallery-teaser__expanded .calendar-card__title {
-      font-size: 1.8rem;
-      margin-bottom: 0.6rem;
-    }
-    .gallery-teaser__expanded .calendar-card__copy {
-      font-size: 0.95rem;
-    }
-    .gallery-teaser__expanded .calendar-countdown {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.85rem;
-    }
-    .gallery-teaser__expanded .calendar-countdown > div {
-      text-align: center;
-      padding-top: 0.85rem;
-    }
-
-    .couple-shell {
-      max-width: 1280px;
-    }
-    #introduction {
-      border-top: none;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    #introduction .grid {
-      gap: clamp(6rem, 10vw, 10rem);
-    }
-    .couple-card-group {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-      gap: clamp(2rem, 3vw, 3.5rem);
-      align-items: end;
-    }
-    .couple-card-group--reverse {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    }
-    .couple-card__image-frame--single {
-      width: 100%;
-      justify-self: start;
-    }
-    .couple-card-group--reverse .couple-card__image-frame--single {
-      order: 2;
-      justify-self: end;
-    }
-    .couple-card-group--reverse .couple-card__text {
-      order: 1;
-      justify-self: end;
-      text-align: right;
-    }
-    .couple-card__text {
-      width: 100%;
-      max-width: 32rem;
-      padding-bottom: clamp(1rem, 3vw, 2.5rem);
-      justify-self: start;
-    }
-    .couple-card__name {
-      font-size: clamp(4.5rem, 6vw, 6.5rem);
-    }
-    .couple-card__meta {
-      font-size: clamp(1.05rem, 1.2vw, 1.18rem);
-      line-height: 1.8;
-      max-width: 22rem;
-    }
-    .couple-card-group--reverse .couple-card__meta {
-      margin-left: auto;
-    }
-    .couple-card__image-frame--single {
-      aspect-ratio: 3 / 4;
-    }
-    #introduction
-      .couple-card-group:nth-of-type(1)
-      .couple-card__image-frame--single {
-      max-width: 28rem;
-    }
-    #introduction
-      .couple-card-group:nth-of-type(2)
-      .couple-card__image-frame--single {
-      max-width: 28rem;
-    }
-
-    .details-layout {
-    }
-    .details-composition {
-      gap: clamp(3rem, 7vw, 6rem);
-    }
-    .details-line {
-      display: grid;
-      grid-template-columns: minmax(11rem, 0.42fr) minmax(0, 1fr);
-      gap: clamp(2rem, 4vw, 4.5rem);
-      align-items: center;
-    }
-    .details-line__intro {
-      align-self: center;
-    }
-    .details-line__value--date {
-      justify-self: end;
-      text-align: right;
-      font-size: clamp(5rem, 7.8vw, 7.4rem);
-    }
-    .details-line__value--time {
-      justify-self: end;
-      text-align: right;
-      font-size: clamp(4rem, 6vw, 5.4rem);
-    }
-    .details-line--secondary {
-      margin-top: clamp(0.5rem, 1.5vw, 1.5rem);
-    }
-    .details-venue {
-      margin-top: 0.5rem;
-      padding-top: 1.75rem;
-    }
-
-    .schedule-shell {
-      max-width: 56rem;
-    }
-    .schedule-shell > .text-center {
-      margin-bottom: clamp(2.75rem, 4vw, 3.5rem);
-    }
-    #schedule .space-y-0 {
-      max-width: 44rem;
-      margin: 0 auto;
-    }
-    .timeline-item {
-      gap: clamp(1.5rem, 2vw, 2rem);
-    }
-    .timeline-item > div:first-child {
-      width: 6rem;
-    }
-    .timeline-item > div:last-child {
-      max-width: 26rem;
-      padding-bottom: 3rem;
-    }
-
-    .access-layout {
-      max-width: 1280px;
-    }
-    .access-composition {
-      position: relative;
-    }
-    .access-composition__top {
-      position: absolute;
-      top: 0;
-      right: 0;
-      display: block;
-    }
-    .access-composition__label-block {
-      text-align: right;
-    }
-    .access-composition__title {
-      font-size: clamp(5.2rem, 8vw, 7.6rem);
-      max-width: 8.5ch;
-    }
-    .access-composition__body {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1.75rem 2rem;
-    }
-    .access-composition__address {
-      font-size: clamp(1.7rem, 2.3vw, 2.3rem);
-      max-width: 34rem;
-    }
-    .access-composition__notes {
-      max-width: 52rem;
-      font-size: clamp(1.1rem, 1.45vw, 1.35rem);
-    }
-
-    .wish-grid {
-      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-      gap: clamp(1.5rem, 2.4vw, 2rem);
-      align-items: start;
-    }
-    .wish-scene {
-      margin-bottom: 0;
-    }
-    .wish-hero {
-      grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
-      align-items: center;
-      text-align: left;
-      padding: clamp(1.9rem, 3vw, 2.6rem);
-    }
-    .wish-hero__labels {
-      justify-content: flex-start;
-    }
-    .wish-hero__lead {
-      margin-inline: 0;
-    }
-    .wish-hero__art {
-      min-height: 14rem;
-    }
-    .wish-hero__caption {
-      right: 0.5rem;
-      bottom: 0.5rem;
-    }
-    .footer-shell {
-      max-width: 30rem;
-      margin-inline: auto;
-    }
-  }
-
-  /* ── Phones + iPad Mini exact width (≤768px): iPhone SE (375), iPhone 14/15 (390), Pixel 7 (412), Galaxy S24 (360), iPad Mini (768) ── */
-  @media (max-width: 768px) {
-    .hero-scene__mountain {
-      height: 60%;
-      background-position: center bottom;
-    }
-
-    .couple-card-group {
-      --couple-group-gap: 1.25rem;
-    }
-    .couple-separator {
-      margin-block: -0.5rem;
-    }
-  }
-</style>
-
-<script>
-  // ── Scroll reveal with IntersectionObserver ──
-  const reveals = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          const delay = parseInt(el.dataset.delay || '0', 10);
-          setTimeout(() => el.classList.add('visible'), delay);
-          revealObserver.unobserve(el);
+      /* ── Desktop landscape (≥1024px wide AND wider than tall): MacBook, iMac, 1080p, 2K, 4K — side-by-side hero layout ── */
+      @media (min-aspect-ratio: 4/3) {
+        .hero-shell {
+          width: min(40rem, 38vw);
+          max-width: 38rem;
+          margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+          margin-right: auto;
+          text-align: left;
         }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
-  );
-
-  // Wait for loader panels to finish before starting hero text reveals.
-  // Non-hero reveals (below the fold) start immediately since they won't
-  // fire until the user scrolls to them anyway.
-  const heroReveals = Array.from(reveals).filter((el) => el.closest('#home'));
-  const otherReveals = Array.from(reveals).filter((el) => !el.closest('#home'));
-
-  otherReveals.forEach((el) => revealObserver.observe(el));
-
-  const startHeroReveals = () =>
-    heroReveals.forEach((el) => revealObserver.observe(el));
-  window.addEventListener('intro-done', startHeroReveals, { once: true });
-
-  // ── Cats appear on scroll ──
-  const heroCats = document.querySelectorAll<HTMLElement>('.hero-scene__cat');
-  let catsRevealed = false;
-  const revealCats = () => {
-    if (catsRevealed) return;
-    catsRevealed = true;
-    heroCats.forEach((cat) => cat.classList.add('hero-scene__cat--visible'));
-    window.removeEventListener('scroll', revealCats);
-  };
-  window.addEventListener('scroll', revealCats, { passive: true });
-
-  // ── Hero parallax + fade on scroll ──
-  const heroContent = document.querySelector(
-    '.hero-content',
-  ) as HTMLElement | null;
-  const nav = document.getElementById('main-nav');
-
-  let ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const scrollY = window.scrollY;
-
-      // Hero text drifts up and fades as you scroll
-      if (heroContent) {
-        heroContent.style.transform = `translate3d(0, ${scrollY * 0.25}px, 0)`;
-        heroContent.style.opacity = String(Math.max(0, 1 - scrollY / 500));
+        .hero-content {
+          display: block;
+        }
+        .hero-shell h1 {
+          max-width: 32rem;
+          font-size: clamp(5.75rem, 8vw, 8rem);
+          line-height: 0.92;
+        }
+        .hero-shell .space-y-2 {
+          align-items: flex-start;
+        }
+        .hero-scene__mountain {
+          top: 40%;
+          opacity: 1;
+          height: 100%;
+          -webkit-mask-image: linear-gradient(
+            to top,
+            #000 0%,
+            #000 40%,
+            transparent 100%
+          );
+          mask-image: linear-gradient(
+            to top,
+            #000 0%,
+            #000 40%,
+            transparent 100%
+          );
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+        }
+        .hero-scene__couple {
+          top: 15%;
+          left: 50%;
+          bottom: clamp(-20rem, -11vw, -10rem);
+          --hero-couple-transform: translateX(-50%);
+          filter: drop-shadow(0 26px 44px rgba(17, 59, 77, 0.18));
+        }
       }
 
-      // Nav background on scroll
-      if (nav) {
-        nav.classList.toggle('scrolled', scrollY > 80);
+      #greeting {
+        min-height: clamp(34rem, 52vw, 44rem);
+        padding-block: clamp(5rem, 7vw, 7rem);
+        padding-inline: 0;
+        overflow: hidden;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .greeting-panel__scene {
+        display: none;
+      }
+      .greeting-panel {
+        display: none;
+      }
+      .greeting-content {
+        width: min(40rem, 42vw);
+        max-width: 40rem;
+        margin-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+        margin-right: auto;
+        margin-bottom: 0;
+        padding: clamp(2rem, 3vw, 3rem);
+        text-align: left;
+        background: rgba(174, 209, 93, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 2rem;
+        box-shadow: 0 24px 60px rgba(32, 72, 48, 0.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      .greeting-cats {
+        display: grid;
+        position: absolute;
+        left: calc(
+          max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 38vw) +
+            clamp(0.85rem, 1.8vw, 1.85rem)
+        );
+        top: 50%;
+        bottom: auto;
+        width: clamp(19rem, 21vw, 24rem);
+        grid-template-columns: 0.95fr 1.1fr;
+        grid-template-areas:
+          'gio coco'
+          'ucil coco';
+        align-items: end;
+        gap: clamp(0.75rem, 1.2vw, 1.1rem);
+        transform: translateY(-50%);
+        z-index: 2;
+        pointer-events: none;
+      }
+      .greeting-cat {
+        display: block;
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        width: 100%;
+        max-width: none;
+        filter: drop-shadow(0 16px 24px rgba(26, 26, 26, 0.14));
+      }
+      .greeting-cat--gio {
+        grid-area: gio;
+        width: 98%;
+        justify-self: start;
+        transform: translateY(-1rem) rotate(-3deg);
+      }
+      .greeting-cat--coco {
+        grid-area: coco;
+        width: 112%;
+        align-self: center;
+        justify-self: center;
+      }
+      .greeting-cat--ucil {
+        grid-area: ucil;
+        width: 108%;
+        justify-self: end;
+        transform: translateY(-1rem);
+      }
+      .greeting-content > p:first-child {
+        max-width: 32rem;
+        font-size: clamp(1.2rem, 1.45vw, 1.45rem);
+        line-height: 1.7;
+      }
+      .greeting-content > p:last-child {
+        font-size: 0.95rem;
+        margin-top: 1rem;
+        letter-spacing: 0.08em;
+      }
+      .greeting-content br {
+        display: none;
       }
 
-      ticking = false;
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // ── Magnetic hover on wish button ──
-  const rsvpBtn = document.querySelector('.rsvp-btn') as HTMLElement | null;
-  if (rsvpBtn) {
-    rsvpBtn.addEventListener('mousemove', (e: MouseEvent) => {
-      const rect = rsvpBtn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      rsvpBtn.style.transform = `translate(${x * 0.08}px, ${y * 0.08 - 2}px)`;
-    });
-    rsvpBtn.addEventListener('mouseleave', () => {
-      rsvpBtn.style.transform = '';
-    });
-  }
-
-  // ── Wedding countdown ──
-  const WEDDING_DATE = new Date('2026-05-02T09:00:00+07:00');
-  const cdDays = document.getElementById('cd-days');
-  const cdHours = document.getElementById('cd-hours');
-  const cdMins = document.getElementById('cd-mins');
-  const cdSecs = document.getElementById('cd-secs');
-  let weddingPassed = false;
-
-  function updateCountdown() {
-    const now = new Date();
-    const diff = WEDDING_DATE.getTime() - now.getTime();
-
-    if (diff <= 0) {
-      if (!weddingPassed) {
-        weddingPassed = true;
+      .gallery-teaser--floating {
+        width: 4.25rem;
+        height: 4.25rem;
+        bottom: max(1rem, calc(env(safe-area-inset-bottom) + 1rem));
+        right: max(1rem, calc(env(safe-area-inset-right) + 1rem));
       }
-      if (cdDays) cdDays.textContent = '0';
-      if (cdHours) cdHours.textContent = '0';
-      if (cdMins) cdMins.textContent = '0';
-      if (cdSecs) cdSecs.textContent = '0';
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const mins = Math.floor((diff / (1000 * 60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
-
-    if (cdDays) cdDays.textContent = String(days);
-    if (cdHours) cdHours.textContent = String(hours).padStart(2, '0');
-    if (cdMins) cdMins.textContent = String(mins).padStart(2, '0');
-    if (cdSecs) cdSecs.textContent = String(secs).padStart(2, '0');
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  // ── Floating gallery widget ──
-  const galleryWidget = document.querySelector(
-    '.gallery-teaser--floating',
-  ) as HTMLDetailsElement | null;
-  if (galleryWidget) {
-    document.addEventListener('click', (event) => {
-      const target = event.target as Node | null;
-      if (target && !galleryWidget.contains(target)) {
-        galleryWidget.removeAttribute('open');
+      .gallery-teaser__expanded {
+        width: min(21rem, calc(100vw - 2rem));
+        bottom: calc(100% + 0.65rem);
+        padding: 1.1rem;
       }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        galleryWidget.removeAttribute('open');
+      .gallery-teaser__expanded .calendar-card__title {
+        font-size: 1.8rem;
+        margin-bottom: 0.6rem;
       }
-    });
-  }
-
-  const getActiveLanguage = () =>
-    document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'mix';
-
-  const bgMusic = document.getElementById(
-    'bg-music',
-  ) as HTMLAudioElement | null;
-  const musicToggle = document.getElementById(
-    'music-toggle',
-  ) as HTMLButtonElement | null;
-  const MUTE_PREF_KEY = 'wedding-music-muted';
-
-  const syncMuteUi = () => {
-    if (!bgMusic || !musicToggle) return;
-    const isMuted = bgMusic.muted;
-    musicToggle.dataset.state = isMuted ? 'muted' : 'playing';
-    musicToggle.setAttribute('aria-label', isMuted ? 'Unmute' : 'Mute');
-  };
-
-  if (bgMusic && musicToggle) {
-    // Restore mute preference
-    bgMusic.muted = window.localStorage.getItem(MUTE_PREF_KEY) === 'true';
-    syncMuteUi();
-
-    // Music starts when cover "Open" is clicked (Layout dispatches 'music-started').
-    // If already playing, just sync UI.
-    window.addEventListener('music-started', () => syncMuteUi(), {
-      once: true,
-    });
-
-    musicToggle.addEventListener('click', () => {
-      bgMusic.muted = !bgMusic.muted;
-      window.localStorage.setItem(MUTE_PREF_KEY, String(bgMusic.muted));
-      syncMuteUi();
-    });
-  }
-
-  const syncWishFieldPlaceholders = () => {
-    const fields = document.querySelectorAll<
-      HTMLInputElement | HTMLTextAreaElement
-    >('[data-placeholder-mix][data-placeholder-en]');
-
-    fields.forEach((field) => {
-      field.placeholder =
-        getActiveLanguage() === 'en'
-          ? (field.dataset.placeholderEn ?? '')
-          : (field.dataset.placeholderMix ?? '');
-    });
-  };
-
-  // ── Language toggle ──
-  const langToggle = document.getElementById('lang-toggle');
-  if (langToggle) {
-    // Restore saved preference
-    const saved = localStorage.getItem('wedding-lang');
-    if (saved === 'en') {
-      document.documentElement.setAttribute('data-lang', 'en');
-    }
-
-    syncWishFieldPlaceholders();
-
-    langToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-lang');
-      const next = current === 'en' ? 'mix' : 'en';
-      if (next === 'en') {
-        document.documentElement.setAttribute('data-lang', 'en');
-      } else {
-        document.documentElement.removeAttribute('data-lang');
+      .gallery-teaser__expanded .calendar-card__copy {
+        font-size: 0.95rem;
       }
-      localStorage.setItem('wedding-lang', next);
-      syncWishFieldPlaceholders();
-    });
-  }
+      .gallery-teaser__expanded .calendar-countdown {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.85rem;
+      }
+      .gallery-teaser__expanded .calendar-countdown > div {
+        text-align: center;
+        padding-top: 0.85rem;
+      }
 
-  // ── Wedding wish form ──
-  const wishForm = document.getElementById(
-    'wish-form',
-  ) as HTMLFormElement | null;
-  const wishList = document.getElementById('wish-list') as HTMLElement | null;
-  const wishStage = document.getElementById('wish-stage') as HTMLElement | null;
-  const wishEmpty = document.getElementById('wish-empty') as HTMLElement | null;
-  const wishStatus = document.getElementById(
-    'wish-status',
-  ) as HTMLElement | null;
-  const wishPrev = document.getElementById(
-    'wish-prev',
-  ) as HTMLButtonElement | null;
-  const wishNext = document.getElementById(
-    'wish-next',
-  ) as HTMLButtonElement | null;
-  const wishCardTemplate = document.getElementById(
-    'wish-card-template',
-  ) as HTMLTemplateElement | null;
-  const wishSubmit = wishForm?.querySelector(
-    '.wish-submit',
-  ) as HTMLButtonElement | null;
-  let activeWishIndex = 0;
+      .couple-shell {
+        max-width: 1280px;
+      }
+      #introduction {
+        border-top: none;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      #introduction .grid {
+        gap: clamp(6rem, 10vw, 10rem);
+      }
+      .couple-card-group {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: clamp(2rem, 3vw, 3.5rem);
+        align-items: end;
+      }
+      .couple-card-group--reverse {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      }
+      .couple-card__image-frame--single {
+        width: 100%;
+        justify-self: start;
+      }
+      .couple-card-group--reverse .couple-card__image-frame--single {
+        order: 2;
+        justify-self: end;
+      }
+      .couple-card-group--reverse .couple-card__text {
+        order: 1;
+        justify-self: center;
+        text-align: center;
+      }
+      .couple-card__text {
+        width: 100%;
+        max-width: 32rem;
+        padding-bottom: clamp(1rem, 3vw, 2.5rem);
+        justify-self: center;
+      }
+      .couple-card__name {
+        font-size: clamp(4.5rem, 6vw, 6.5rem);
+      }
+      .couple-card__meta {
+        font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+        line-height: 1.8;
+        max-width: 22rem;
+      }
+      .couple-card__image-frame--single {
+        aspect-ratio: 3 / 4;
+      }
+      #introduction
+        .couple-card-group:nth-of-type(1)
+        .couple-card__image-frame--single {
+        max-width: 28rem;
+      }
+      #introduction
+        .couple-card-group:nth-of-type(2)
+        .couple-card__image-frame--single {
+        max-width: 28rem;
+      }
 
-  const wishMessages = {
-    mix: {
-      validation: 'Mohon isi nama dan ucapan terlebih dahulu.',
-      pending: 'Ucapan Anda sedang kami kirim...',
-      success: 'Terima kasih. Ucapan Anda sudah tampil di buku ucapan.',
-      error: 'Maaf, ucapan belum bisa dikirim sekarang.',
-    },
-    en: {
-      validation: 'Please enter your name and message first.',
-      pending: 'Sending your wish...',
-      success: 'Thank you. Your note is now live in the guestbook.',
-      error: 'Sorry, your wish could not be sent right now.',
-    },
-  } as const;
+      .details-layout {
+      }
+      .details-composition {
+        gap: clamp(3rem, 7vw, 6rem);
+      }
+      .details-line {
+        display: grid;
+        grid-template-columns: minmax(11rem, 0.42fr) minmax(0, 1fr);
+        gap: clamp(2rem, 4vw, 4.5rem);
+        align-items: center;
+      }
+      .details-line__intro {
+        align-self: center;
+      }
+      .details-line__value--date {
+        justify-self: end;
+        text-align: right;
+        font-size: clamp(5rem, 7.8vw, 7.4rem);
+      }
+      .details-line__value--time {
+        justify-self: end;
+        text-align: right;
+        font-size: clamp(4rem, 6vw, 5.4rem);
+      }
+      .details-line--secondary {
+        margin-top: clamp(0.5rem, 1.5vw, 1.5rem);
+      }
+      .details-venue {
+        margin-top: 0.5rem;
+        padding-top: 1.75rem;
+      }
 
-  const setWishStatus = (state: 'idle' | 'pending' | 'success' | 'error') => {
-    if (!wishStatus) return;
+      .schedule-shell {
+        max-width: 56rem;
+      }
+      .schedule-shell > .text-center {
+        margin-bottom: clamp(2.75rem, 4vw, 3.5rem);
+      }
+      #schedule .space-y-0 {
+        max-width: 44rem;
+        margin: 0 auto;
+      }
+      .timeline-item {
+        gap: clamp(1.5rem, 2vw, 2rem);
+      }
+      .timeline-item > div:first-child {
+        width: 6rem;
+      }
+      .timeline-item > div:last-child {
+        max-width: 26rem;
+        padding-bottom: 3rem;
+      }
 
-    if (state === 'idle') {
-      wishStatus.textContent = '';
-      wishStatus.classList.add('hidden');
-      wishStatus.removeAttribute('data-state');
-      return;
+      .access-layout {
+        max-width: 1280px;
+      }
+      .access-composition {
+        position: relative;
+      }
+      .access-composition__top {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+      }
+      .access-composition__label-block {
+        text-align: right;
+      }
+      .access-composition__title {
+        font-size: clamp(5.2rem, 8vw, 7.6rem);
+        max-width: 8.5ch;
+      }
+      .access-composition__body {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1.75rem 2rem;
+      }
+      .access-composition__address {
+        font-size: clamp(1.7rem, 2.3vw, 2.3rem);
+        max-width: 34rem;
+      }
+      .access-composition__notes {
+        max-width: 52rem;
+        font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+      }
+
+      .wish-grid {
+        grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+        gap: clamp(1.5rem, 2.4vw, 2rem);
+        align-items: start;
+      }
+      .wish-scene {
+        margin-bottom: 0;
+      }
+      .wish-hero {
+        grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
+        align-items: center;
+        text-align: left;
+        padding: clamp(1.9rem, 3vw, 2.6rem);
+      }
+      .wish-hero__labels {
+        justify-content: flex-start;
+      }
+      .wish-hero__lead {
+        margin-inline: 0;
+      }
+      .wish-hero__art {
+        min-height: 14rem;
+      }
+      .wish-hero__caption {
+        right: 0.5rem;
+        bottom: 0.5rem;
+      }
+      .footer-shell {
+        max-width: 30rem;
+        margin-inline: auto;
+      }
     }
 
-    wishStatus.dataset.state = state;
-    wishStatus.textContent = wishMessages[getActiveLanguage()][state];
-    wishStatus.classList.remove('hidden');
-  };
-
-  const getWishCards = () =>
-    wishList
-      ? Array.from(wishList.querySelectorAll<HTMLElement>('[data-wish-id]'))
-      : [];
-
-  const syncWishDeck = () => {
-    if (!wishList) return;
-
-    const cards = getWishCards();
-    const total = cards.length;
-
-    if (wishEmpty) {
-      wishEmpty.classList.toggle('hidden', total > 0);
+    /* ── Phones + iPad Mini exact width (≤768px): iPhone SE (375), iPhone 14/15 (390), Pixel 7 (412), Galaxy S24 (360), iPad Mini (768) ── */
+    @media (max-width: 1023px) {
+      .couple-card__image-frame--sherly {
+        justify-self: end;
+        margin-left: 0;
+        margin-right: -1.5rem;
+      }
+      .couple-card__image-frame--rian {
+        justify-self: start;
+        margin-left: -1.5rem;
+        margin-right: 0;
+      }
+      .couple-card__text--sherly {
+        justify-self: start;
+        justify-items: start;
+        text-align: left;
+      }
     }
+    @media (max-width: 768px) {
+      .hero-scene__mountain {
+        height: 60%;
+        background-position: center bottom;
+      }
 
-    if (total === 0) {
-      activeWishIndex = 0;
-      wishList.style.transform = 'translate3d(0, 0, 0)';
-      wishList.classList.add('wish-list--solo');
-      if (wishPrev) wishPrev.disabled = true;
-      if (wishNext) wishNext.disabled = true;
-      return;
+      .couple-card-group {
+        --couple-group-gap: 1.25rem;
+      }
+      .couple-card__image-frame--sherly {
+        justify-self: end;
+        margin-right: -1.5rem;
+      }
+      .couple-card__image-frame--rian {
+        justify-self: start;
+        margin-left: -1.5rem;
+      }
+      .couple-card__text--sherly,
+      .couple-card__text--rian {
+        justify-self: center;
+        justify-items: center;
+        text-align: center;
+        width: min(100%, 22rem);
+      }
+      .couple-card__text--sherly .couple-card__meta,
+      .couple-card__text--rian .couple-card__meta {
+        margin-inline: auto;
+      }
+      .couple-separator {
+        margin-block: -0.5rem;
+      }
     }
+  </style>
 
-    activeWishIndex = ((activeWishIndex % total) + total) % total;
-    wishList.classList.toggle('wish-list--solo', total === 1);
+  <script>
+    // ── Scroll reveal with IntersectionObserver ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const delay = parseInt(el.dataset.delay || '0', 10);
+            setTimeout(() => el.classList.add('visible'), delay);
+            revealObserver.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
+    );
 
-    const activeCard = cards[activeWishIndex];
-    const offset = activeCard?.offsetLeft ?? 0;
-    wishList.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    // Wait for loader panels to finish before starting hero text reveals.
+    // Non-hero reveals (below the fold) start immediately since they won't
+    // fire until the user scrolls to them anyway.
+    const heroReveals = Array.from(reveals).filter((el) => el.closest('#home'));
+    const otherReveals = Array.from(reveals).filter(
+      (el) => !el.closest('#home'),
+    );
 
-    cards.forEach((card, index) => {
-      card.setAttribute(
-        'aria-hidden',
-        index === activeWishIndex ? 'false' : 'true',
-      );
-    });
+    otherReveals.forEach((el) => revealObserver.observe(el));
 
-    const canCycle = total > 1;
-    if (wishPrev) wishPrev.disabled = !canCycle;
-    if (wishNext) wishNext.disabled = !canCycle;
-  };
+    const startHeroReveals = () =>
+      heroReveals.forEach((el) => revealObserver.observe(el));
+    window.addEventListener('intro-done', startHeroReveals, { once: true });
 
-  const formatWishCardDate = (timestamp: number, language: 'mix' | 'en') =>
-    new Intl.DateTimeFormat(language === 'en' ? 'en-US' : 'id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(new Date(timestamp));
-
-  const createWishCard = (wish: {
-    id: string;
-    name: string;
-    message: string;
-    createdAt: number;
-  }) => {
-    const card =
-      wishCardTemplate?.content.firstElementChild?.cloneNode(true) ??
-      document.createElement('article');
-
-    if (!(card instanceof HTMLElement)) {
-      throw new Error('Failed to create wedding wish card');
-    }
-
-    card.dataset.wishId = wish.id;
-
-    const name = card.querySelector('.wish-card__name');
-    const dateMix = card.querySelector('.wish-card__date .lang-mix');
-    const dateEn = card.querySelector('.wish-card__date .lang-en');
-    const message = card.querySelector('.wish-card__message');
-
-    if (name) name.textContent = wish.name;
-    if (dateMix) {
-      dateMix.textContent = formatWishCardDate(Number(wish.createdAt), 'mix');
-    }
-    if (dateEn) {
-      dateEn.textContent = formatWishCardDate(Number(wish.createdAt), 'en');
-    }
-    if (message) message.textContent = wish.message;
-
-    return card;
-  };
-
-  if (wishForm && wishList && wishSubmit) {
-    syncWishDeck();
-
-    const moveWishDeck = (direction: -1 | 1) => {
-      const total = getWishCards().length;
-      if (total < 2) return;
-      activeWishIndex = (activeWishIndex + direction + total) % total;
-      syncWishDeck();
+    // ── Cats appear on scroll ──
+    const heroCats = document.querySelectorAll<HTMLElement>('.hero-scene__cat');
+    let catsRevealed = false;
+    const revealCats = () => {
+      if (catsRevealed) return;
+      catsRevealed = true;
+      heroCats.forEach((cat) => cat.classList.add('hero-scene__cat--visible'));
+      window.removeEventListener('scroll', revealCats);
     };
+    window.addEventListener('scroll', revealCats, { passive: true });
 
-    wishPrev?.addEventListener('click', () => moveWishDeck(-1));
-    wishNext?.addEventListener('click', () => moveWishDeck(1));
+    // ── Hero parallax + fade on scroll ──
+    const heroContent = document.querySelector(
+      '.hero-content',
+    ) as HTMLElement | null;
+    const nav = document.getElementById('main-nav');
 
-    let touchStartX = 0;
-    let touchStartY = 0;
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
 
-    wishStage?.addEventListener(
-      'touchstart',
-      (event) => {
-        const touch = event.changedTouches[0];
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-      },
-      { passive: true },
-    );
-
-    wishStage?.addEventListener(
-      'touchend',
-      (event) => {
-        const total = getWishCards().length;
-        if (total < 2) return;
-
-        const touch = event.changedTouches[0];
-        const deltaX = touch.clientX - touchStartX;
-        const deltaY = touch.clientY - touchStartY;
-
-        if (Math.abs(deltaX) < 40 || Math.abs(deltaX) <= Math.abs(deltaY)) {
-          return;
+        // Hero text drifts up and fades as you scroll
+        if (heroContent) {
+          heroContent.style.transform = `translate3d(0, ${scrollY * 0.25}px, 0)`;
+          heroContent.style.opacity = String(Math.max(0, 1 - scrollY / 500));
         }
 
-        moveWishDeck(deltaX < 0 ? 1 : -1);
-      },
-      { passive: true },
-    );
-
-    window.addEventListener('resize', syncWishDeck);
-
-    wishForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      setWishStatus('idle');
-
-      const formData = new FormData(wishForm);
-      const name = String(formData.get('name') ?? '').trim();
-      const message = String(formData.get('message') ?? '').trim();
-
-      if (!name || !message) {
-        setWishStatus('error');
-        if (wishStatus) {
-          wishStatus.textContent = wishMessages[getActiveLanguage()].validation;
+        // Nav background on scroll
+        if (nav) {
+          nav.classList.toggle('scrolled', scrollY > 80);
         }
+
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Magnetic hover on wish button ──
+    const rsvpBtn = document.querySelector('.rsvp-btn') as HTMLElement | null;
+    if (rsvpBtn) {
+      rsvpBtn.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = rsvpBtn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        rsvpBtn.style.transform = `translate(${x * 0.08}px, ${y * 0.08 - 2}px)`;
+      });
+      rsvpBtn.addEventListener('mouseleave', () => {
+        rsvpBtn.style.transform = '';
+      });
+    }
+
+    // ── Wedding countdown ──
+    const WEDDING_DATE = new Date('2026-05-02T09:00:00+07:00');
+    const cdDays = document.getElementById('cd-days');
+    const cdHours = document.getElementById('cd-hours');
+    const cdMins = document.getElementById('cd-mins');
+    const cdSecs = document.getElementById('cd-secs');
+    let weddingPassed = false;
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = WEDDING_DATE.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        if (!weddingPassed) {
+          weddingPassed = true;
+        }
+        if (cdDays) cdDays.textContent = '0';
+        if (cdHours) cdHours.textContent = '0';
+        if (cdMins) cdMins.textContent = '0';
+        if (cdSecs) cdSecs.textContent = '0';
         return;
       }
 
-      wishSubmit.disabled = true;
-      wishSubmit.setAttribute('aria-busy', 'true');
-      setWishStatus('pending');
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
 
-      try {
-        const response = await fetch(wishForm.action, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({ name, message }),
-        });
+      if (cdDays) cdDays.textContent = String(days);
+      if (cdHours) cdHours.textContent = String(hours).padStart(2, '0');
+      if (cdMins) cdMins.textContent = String(mins).padStart(2, '0');
+      if (cdSecs) cdSecs.textContent = String(secs).padStart(2, '0');
+    }
 
-        const payload = await response.json().catch(() => null);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-        if (!response.ok || !payload?.wish) {
-          throw new Error('Guestbook submission failed');
+    // ── Floating gallery widget ──
+    const galleryWidget = document.querySelector(
+      '.gallery-teaser--floating',
+    ) as HTMLDetailsElement | null;
+    if (galleryWidget) {
+      document.addEventListener('click', (event) => {
+        const target = event.target as Node | null;
+        if (target && !galleryWidget.contains(target)) {
+          galleryWidget.removeAttribute('open');
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          galleryWidget.removeAttribute('open');
+        }
+      });
+    }
+
+    const getActiveLanguage = () =>
+      document.documentElement.getAttribute('data-lang') === 'en'
+        ? 'en'
+        : 'mix';
+
+    const syncWishFieldPlaceholders = () => {
+      const fields = document.querySelectorAll<
+        HTMLInputElement | HTMLTextAreaElement
+      >('[data-placeholder-mix][data-placeholder-en]');
+
+      fields.forEach((field) => {
+        field.placeholder =
+          getActiveLanguage() === 'en'
+            ? (field.dataset.placeholderEn ?? '')
+            : (field.dataset.placeholderMix ?? '');
+      });
+    };
+
+    // ── Language toggle ──
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+      document.documentElement.setAttribute('data-lang', 'en');
+      localStorage.setItem('wedding-lang', 'en');
+
+      syncWishFieldPlaceholders();
+
+      langToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-lang');
+        const next = current === 'en' ? 'mix' : 'en';
+        if (next === 'en') {
+          document.documentElement.setAttribute('data-lang', 'en');
+        } else {
+          document.documentElement.removeAttribute('data-lang');
+        }
+        localStorage.setItem('wedding-lang', next);
+        syncWishFieldPlaceholders();
+      });
+    }
+
+    // ── Wedding wish form ──
+    const wishForm = document.getElementById(
+      'wish-form',
+    ) as HTMLFormElement | null;
+    const wishList = document.getElementById('wish-list') as HTMLElement | null;
+    const wishStage = document.getElementById(
+      'wish-stage',
+    ) as HTMLElement | null;
+    const wishEmpty = document.getElementById(
+      'wish-empty',
+    ) as HTMLElement | null;
+    const wishStatus = document.getElementById(
+      'wish-status',
+    ) as HTMLElement | null;
+    const wishPrev = document.getElementById(
+      'wish-prev',
+    ) as HTMLButtonElement | null;
+    const wishNext = document.getElementById(
+      'wish-next',
+    ) as HTMLButtonElement | null;
+    const wishCardTemplate = document.getElementById(
+      'wish-card-template',
+    ) as HTMLTemplateElement | null;
+    const wishSubmit = wishForm?.querySelector(
+      '.wish-submit',
+    ) as HTMLButtonElement | null;
+    let activeWishIndex = 0;
+
+    const wishMessages = {
+      mix: {
+        validation: 'Mohon isi nama dan ucapan terlebih dahulu.',
+        pending: 'Ucapan Anda sedang kami kirim...',
+        success: 'Terima kasih. Ucapan Anda sudah tampil di buku ucapan.',
+        error: 'Maaf, ucapan belum bisa dikirim sekarang.',
+      },
+      en: {
+        validation: 'Please enter your name and message first.',
+        pending: 'Sending your wish...',
+        success: 'Thank you. Your note is now live in the guestbook.',
+        error: 'Sorry, your wish could not be sent right now.',
+      },
+    } as const;
+
+    const setWishStatus = (state: 'idle' | 'pending' | 'success' | 'error') => {
+      if (!wishStatus) return;
+
+      if (state === 'idle') {
+        wishStatus.textContent = '';
+        wishStatus.classList.add('hidden');
+        wishStatus.removeAttribute('data-state');
+        return;
+      }
+
+      wishStatus.dataset.state = state;
+      wishStatus.textContent = wishMessages[getActiveLanguage()][state];
+      wishStatus.classList.remove('hidden');
+    };
+
+    const getWishCards = () =>
+      wishList
+        ? Array.from(wishList.querySelectorAll<HTMLElement>('[data-wish-id]'))
+        : [];
+
+    const syncWishDeck = () => {
+      if (!wishList) return;
+
+      const cards = getWishCards();
+      const total = cards.length;
+
+      if (wishEmpty) {
+        wishEmpty.classList.toggle('hidden', total > 0);
+      }
+
+      if (total === 0) {
+        activeWishIndex = 0;
+        wishList.style.transform = 'translate3d(0, 0, 0)';
+        wishList.classList.add('wish-list--solo');
+        if (wishPrev) wishPrev.disabled = true;
+        if (wishNext) wishNext.disabled = true;
+        return;
+      }
+
+      activeWishIndex = ((activeWishIndex % total) + total) % total;
+      wishList.classList.toggle('wish-list--solo', total === 1);
+
+      const activeCard = cards[activeWishIndex];
+      const offset = activeCard?.offsetLeft ?? 0;
+      wishList.style.transform = `translate3d(${-offset}px, 0, 0)`;
+
+      cards.forEach((card, index) => {
+        card.setAttribute(
+          'aria-hidden',
+          index === activeWishIndex ? 'false' : 'true',
+        );
+      });
+
+      const canCycle = total > 1;
+      if (wishPrev) wishPrev.disabled = !canCycle;
+      if (wishNext) wishNext.disabled = !canCycle;
+    };
+
+    const formatWishCardDate = (timestamp: number, language: 'mix' | 'en') =>
+      new Intl.DateTimeFormat(language === 'en' ? 'en-US' : 'id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      }).format(new Date(timestamp));
+
+    const createWishCard = (wish: {
+      id: string;
+      name: string;
+      message: string;
+      createdAt: number;
+    }) => {
+      const card =
+        wishCardTemplate?.content.firstElementChild?.cloneNode(true) ??
+        document.createElement('article');
+
+      if (!(card instanceof HTMLElement)) {
+        throw new Error('Failed to create wedding wish card');
+      }
+
+      card.dataset.wishId = wish.id;
+
+      const name = card.querySelector('.wish-card__name');
+      const dateMix = card.querySelector('.wish-card__date .lang-mix');
+      const dateEn = card.querySelector('.wish-card__date .lang-en');
+      const message = card.querySelector('.wish-card__message');
+
+      if (name) name.textContent = wish.name;
+      if (dateMix) {
+        dateMix.textContent = formatWishCardDate(Number(wish.createdAt), 'mix');
+      }
+      if (dateEn) {
+        dateEn.textContent = formatWishCardDate(Number(wish.createdAt), 'en');
+      }
+      if (message) message.textContent = wish.message;
+
+      return card;
+    };
+
+    const isWishSubmissionPayload = (
+      value: unknown,
+    ): value is {
+      wish: {
+        id: string;
+        name: string;
+        message: string;
+        createdAt: number;
+      };
+    } => {
+      if (!value || typeof value !== 'object') return false;
+
+      const maybeWish = (value as { wish?: unknown }).wish;
+      if (!maybeWish || typeof maybeWish !== 'object') return false;
+
+      const wish = maybeWish as Record<string, unknown>;
+      return (
+        typeof wish.id === 'string' &&
+        typeof wish.name === 'string' &&
+        typeof wish.message === 'string' &&
+        typeof wish.createdAt === 'number'
+      );
+    };
+
+    if (wishForm && wishList && wishSubmit) {
+      syncWishDeck();
+
+      const moveWishDeck = (direction: -1 | 1) => {
+        const total = getWishCards().length;
+        if (total < 2) return;
+        activeWishIndex = (activeWishIndex + direction + total) % total;
+        syncWishDeck();
+      };
+
+      wishPrev?.addEventListener('click', () => moveWishDeck(-1));
+      wishNext?.addEventListener('click', () => moveWishDeck(1));
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      wishStage?.addEventListener(
+        'touchstart',
+        (event) => {
+          const touch = event.changedTouches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true },
+      );
+
+      wishStage?.addEventListener(
+        'touchend',
+        (event) => {
+          const total = getWishCards().length;
+          if (total < 2) return;
+
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+
+          if (Math.abs(deltaX) < 40 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+            return;
+          }
+
+          moveWishDeck(deltaX < 0 ? 1 : -1);
+        },
+        { passive: true },
+      );
+
+      window.addEventListener('resize', syncWishDeck);
+
+      wishForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        setWishStatus('idle');
+
+        const formData = new FormData(wishForm);
+        const name = String(formData.get('name') ?? '').trim();
+        const message = String(formData.get('message') ?? '').trim();
+
+        if (!name || !message) {
+          setWishStatus('error');
+          if (wishStatus) {
+            wishStatus.textContent =
+              wishMessages[getActiveLanguage()].validation;
+          }
+          return;
         }
 
-        wishEmpty?.classList.add('hidden');
-        wishList.prepend(createWishCard(payload.wish));
-        activeWishIndex = 0;
-        syncWishDeck();
-        wishForm.reset();
-        syncWishFieldPlaceholders();
-        setWishStatus('success');
-      } catch (error) {
-        console.error('Failed to submit wedding wish', error);
-        setWishStatus('error');
-      } finally {
-        wishSubmit.disabled = false;
-        wishSubmit.removeAttribute('aria-busy');
-      }
-    });
-  }
+        wishSubmit.disabled = true;
+        wishSubmit.setAttribute('aria-busy', 'true');
+        setWishStatus('pending');
 
-  // ── Section heading tilt on mouse move ──
-  const tiltSections = document.querySelectorAll(
-    '#details, #access',
-  ) as NodeListOf<HTMLElement>;
-  tiltSections.forEach((section) => {
-    const heading = section.querySelector('h2') as HTMLElement | null;
-    if (!heading) return;
-    section.addEventListener('mousemove', (e: MouseEvent) => {
-      const rect = section.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      heading.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 2}deg)`;
+        try {
+          const response = await fetch(wishForm.action, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({ name, message }),
+          });
+
+          const payload: unknown = await response.json().catch(() => null);
+
+          if (!response.ok || !isWishSubmissionPayload(payload)) {
+            throw new Error('Guestbook submission failed');
+          }
+
+          wishEmpty?.classList.add('hidden');
+          wishList.insertAdjacentElement(
+            'afterbegin',
+            createWishCard(payload.wish),
+          );
+          activeWishIndex = 0;
+          syncWishDeck();
+          wishForm.reset();
+          syncWishFieldPlaceholders();
+          setWishStatus('success');
+        } catch (error) {
+          console.error('Failed to submit wedding wish', error);
+          setWishStatus('error');
+        } finally {
+          wishSubmit.disabled = false;
+          wishSubmit.removeAttribute('aria-busy');
+        }
+      });
+    }
+
+    // ── Section heading tilt on mouse move ──
+    const tiltSections = document.querySelectorAll(
+      '#details, #access',
+    ) as NodeListOf<HTMLElement>;
+    tiltSections.forEach((section) => {
+      const heading = section.querySelector('h2') as HTMLElement | null;
+      if (!heading) return;
+      section.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = section.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heading.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 2}deg)`;
+      });
+      section.addEventListener('mouseleave', () => {
+        heading.style.transform = '';
+        heading.style.transition =
+          'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        setTimeout(() => {
+          heading.style.transition = '';
+        }, 500);
+      });
     });
-    section.addEventListener('mouseleave', () => {
-      heading.style.transform = '';
-      heading.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      setTimeout(() => {
-        heading.style.transition = '';
-      }, 500);
-    });
-  });
-</script>
+  </script>
+</Layout>

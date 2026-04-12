@@ -13,7 +13,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang="en" data-lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -34,7 +34,12 @@ const {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(160deg, #f5f6ef 0%, #eef2e4 40%, #e8edda 100%);
+        background: linear-gradient(
+          160deg,
+          #f5f6ef 0%,
+          #eef2e4 40%,
+          #e8edda 100%
+        );
         color: #1a1a1a;
         text-align: center;
         cursor: default;
@@ -109,19 +114,36 @@ const {
         animation: cover-btn-out 0.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
       }
       .cover--exiting {
-        animation: cover-bg-fade 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.3s forwards;
+        animation: cover-bg-fade 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.3s
+          forwards;
       }
       @keyframes cover-text-up {
-        0%   { opacity: 1; transform: translateY(0); }
-        100% { opacity: 0; transform: translateY(-2rem); }
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-2rem);
+        }
       }
       @keyframes cover-btn-out {
-        0%   { opacity: 1; transform: scale(1); }
-        100% { opacity: 0; transform: scale(0.9); }
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
       }
       @keyframes cover-bg-fade {
-        0%   { opacity: 1; }
-        100% { opacity: 0; }
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
       }
 
       /* ── Intro panels (behind cover, revealed after cover exits) ── */
@@ -153,12 +175,20 @@ const {
         animation-delay: 0.06s;
       }
       @keyframes intro-panel-left {
-        0%   { transform: translateX(0); }
-        100% { transform: translateX(-102%); }
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-102%);
+        }
       }
       @keyframes intro-panel-right {
-        0%   { transform: translateX(0); }
-        100% { transform: translateX(102%); }
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(102%);
+        }
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -169,6 +199,13 @@ const {
     />
   </head>
   <body class="min-h-screen overflow-hidden">
+    <audio
+      id="bg-music"
+      src="/music/love-wins-all-classic.mp3"
+      preload="auto"
+      loop
+      playsinline></audio>
+
     <!-- Cover page — user must click to enter -->
     <div id="page-cover">
       <p class="cover__greeting">With joy & love</p>
@@ -176,8 +213,16 @@ const {
       <p class="cover__subtitle">We invite you to celebrate our special day</p>
       <button id="cover-open" class="cover__open" type="button">
         <span>Open Invitation</span>
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        <svg
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
         </svg>
       </button>
     </div>
@@ -192,19 +237,116 @@ const {
     <script>
       // ── Cover: read guest name from ?to= query param ──
       const pageCover = document.getElementById('page-cover');
-      const guestEl   = document.getElementById('cover-guest-name');
-      const openBtn   = document.getElementById('cover-open');
+      const guestEl = document.getElementById('cover-guest-name');
+      const openBtn = document.getElementById('cover-open');
+      const COVER_DISMISSED_KEY = 'wedding-cover-dismissed';
+      const GUEST_NAME_KEY = 'wedding-guest-name';
+      const MUTE_PREF_KEY = 'wedding-music-muted';
+      const bgMusic = document.getElementById(
+        'bg-music',
+      ) as HTMLAudioElement | null;
+      const musicToggle = document.getElementById(
+        'music-toggle',
+      ) as HTMLButtonElement | null;
 
-      const params    = new URLSearchParams(window.location.search);
+      const syncMuteUi = () => {
+        if (!bgMusic || !musicToggle) return;
+        const isMuted = bgMusic.muted;
+        musicToggle.dataset.state = isMuted ? 'muted' : 'playing';
+        musicToggle.setAttribute('aria-label', isMuted ? 'Unmute' : 'Mute');
+      };
+
+      const startBackgroundMusic = () => {
+        if (!bgMusic) return;
+        bgMusic.volume = 0.42;
+        bgMusic.play().catch(() => {});
+        window.dispatchEvent(new CustomEvent('music-started'));
+        syncMuteUi();
+      };
+
+      if (bgMusic) {
+        bgMusic.muted = window.localStorage.getItem(MUTE_PREF_KEY) === 'true';
+      }
+
+      if (musicToggle && bgMusic) {
+        syncMuteUi();
+        musicToggle.addEventListener('click', () => {
+          bgMusic.muted = !bgMusic.muted;
+          window.localStorage.setItem(MUTE_PREF_KEY, String(bgMusic.muted));
+          syncMuteUi();
+        });
+      }
+
+      const params = new URLSearchParams(window.location.search);
       const guestName = params.get('to');
-      if (guestEl && guestName) {
-        guestEl.textContent = decodeURIComponent(guestName);
+      let persistedGuestName = guestName?.trim() ?? '';
+
+      if (!persistedGuestName) {
+        try {
+          persistedGuestName =
+            window.sessionStorage.getItem(GUEST_NAME_KEY)?.trim() ?? '';
+        } catch {}
+      } else {
+        try {
+          window.sessionStorage.setItem(GUEST_NAME_KEY, persistedGuestName);
+        } catch {}
+      }
+
+      if (guestEl && persistedGuestName) {
+        guestEl.textContent = decodeURIComponent(persistedGuestName);
+      }
+
+      if (persistedGuestName && !guestName) {
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.set('to', persistedGuestName);
+        window.history.replaceState({}, '', nextUrl);
+      }
+
+      if (persistedGuestName) {
+        document
+          .querySelectorAll<HTMLAnchorElement>('a[href]')
+          .forEach((anchor) => {
+            const href = anchor.getAttribute('href');
+            if (
+              !href ||
+              href.startsWith('#') ||
+              href.startsWith('mailto:') ||
+              href.startsWith('tel:') ||
+              href.startsWith('javascript:')
+            ) {
+              return;
+            }
+
+            const targetUrl = new URL(href, window.location.origin);
+            if (targetUrl.origin !== window.location.origin) return;
+
+            targetUrl.searchParams.set('to', persistedGuestName);
+            anchor.href =
+              targetUrl.pathname + targetUrl.search + targetUrl.hash;
+          });
       }
 
       // ── Intro panels ──
-      const panelLeft  = document.querySelector('.page-intro__panel--left') as HTMLElement | null;
-      const panelRight = document.querySelector('.page-intro__panel--right') as HTMLElement | null;
-      const pageIntro  = document.getElementById('page-intro');
+      const panelLeft = document.querySelector(
+        '.page-intro__panel--left',
+      ) as HTMLElement | null;
+      const panelRight = document.querySelector(
+        '.page-intro__panel--right',
+      ) as HTMLElement | null;
+      const pageIntro = document.getElementById('page-intro');
+      const heroSection = document.getElementById('home');
+
+      const finishEntryWithoutCover = () => {
+        pageCover?.remove();
+        pageIntro?.remove();
+        document.body.classList.remove('overflow-hidden');
+        heroSection?.classList.add('hero-section--loaded');
+        startBackgroundMusic();
+
+        window.setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('intro-done'));
+        }, 0);
+      };
 
       const runIntro = () => {
         // slide panels open
@@ -214,7 +356,6 @@ const {
 
           // panels halfway → trigger hero bg → mountain → couple
           window.setTimeout(() => {
-            const heroSection = document.getElementById('home');
             heroSection?.classList.add('hero-section--loaded');
           }, 400);
 
@@ -228,15 +369,23 @@ const {
         }, 300);
       };
 
+      let hasDismissedCover = false;
+      try {
+        hasDismissedCover =
+          window.sessionStorage.getItem(COVER_DISMISSED_KEY) === 'true';
+      } catch {}
+
+      if (hasDismissedCover) {
+        finishEntryWithoutCover();
+      }
+
       // ── Open button: start music → fade cover → run intro ──
       openBtn?.addEventListener('click', () => {
-        // start music
-        const bgMusic = document.getElementById('bg-music') as HTMLAudioElement | null;
-        if (bgMusic) {
-          bgMusic.volume = 0.42;
-          bgMusic.play().catch(() => {});
-          window.dispatchEvent(new CustomEvent('music-started'));
-        }
+        try {
+          window.sessionStorage.setItem(COVER_DISMISSED_KEY, 'true');
+        } catch {}
+
+        startBackgroundMusic();
 
         // animate cover out
         pageCover?.classList.add('cover--exiting');
@@ -258,6 +407,7 @@ const {
 
       if (sections.length > 1) {
         const AUTO_SNAP_ENABLED = !prefersReducedMotion.matches;
+        const SNAP_THRESHOLD = 0.35;
         const SNAP_LOCK_MS = 700;
 
         let currentSnapIndex = 0;
