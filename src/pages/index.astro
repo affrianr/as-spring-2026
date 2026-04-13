@@ -162,65 +162,6 @@ try {
             />
           </div>
         </div>
-        <!-- <div class="max-w-2xl mx-auto text-center">
-          <div class="inline-block bg-lime/20 px-4 py-1.5 rounded-full mb-12 reveal">
-            <span class="text-xs tracking-[0.2em] uppercase font-medium">Greeting</span>
-          </div>
-
-          <div class="lang-mix">
-            <p class="font-serif text-lg md:text-xl leading-loose tracking-wide reveal">
-              Dengan penuh kebahagiaan kami<br />
-              akan melangsungkan pernikahan
-            </p>
-
-            <p class="mt-8 text-sm leading-loose text-muted tracking-wide reveal">
-              Bersama keluarga tercinta kami bermaksud<br />
-              mengundang Bapak/Ibu/Saudara/i<br />
-              untuk hadir menyaksikan hari bahagia kami
-            </p>
-
-            <p class="mt-8 text-sm leading-loose text-muted tracking-wide reveal">
-              Merupakan kebahagiaan yang besar bagi kami<br />
-              apabila Anda berkenan hadir<br />
-              dan memberikan doa restu
-            </p>
-
-            <div class="mt-12 flex items-center justify-center gap-4 reveal">
-              <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
-              <p class="text-xs tracking-[0.3em] text-muted">Musim Semi 2026</p>
-              <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
-            </div>
-          </div>
-
-          <div class="lang-en">
-            <p class="font-serif text-lg md:text-xl leading-relaxed tracking-wide reveal">
-              We are delighted to announce<br />
-              that we are getting married
-            </p>
-
-            <p class="mt-8 text-sm leading-relaxed text-muted tracking-wide reveal">
-              We would be honored to have you,<br />
-              our dear family and friends,<br />
-              join us as we celebrate our ceremony.
-            </p>
-
-            <p class="mt-8 text-sm leading-relaxed text-muted tracking-wide reveal">
-              We know how precious your time is,<br />
-              and it would mean the world to us<br />
-              if you could be there.
-            </p>
-
-            <div class="mt-12 flex items-center justify-center gap-4 reveal">
-              <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
-              <p class="text-xs tracking-[0.3em] text-muted">Spring, 2026</p>
-              <div class="h-px w-12 bg-charcoal/20 divider-line"></div>
-            </div>
-
-            <p class="mt-6 font-serif text-sm tracking-widest reveal">
-              Affrian & Sherly
-            </p>
-          </div>
-        </div> -->
 
         <div
           class="greeting-content desktop-reading-block mx-auto max-w-full text-center"
@@ -461,6 +402,56 @@ try {
           >
           </div>
         </div>
+
+        <section
+          class="content-card content-card--transparent py-32 px-6 text-center"
+        >
+          <div
+            data-lang-block="mix"
+            class="grid justify-items-center gap-4 max-w-[38rem] mx-auto"
+          >
+            <p class="story-intro__lead font-serif leading-relaxed">
+              Dengan penuh sukacita, kami mengumumkan
+              <br />
+              bahwa kami akan menikah
+            </p>
+
+            <p class="story-intro__body leading-relaxed">
+              Saat kami mulai berlayar menuju masa depan yang dipenuhi cinta,
+              doa, dan kebahagiaan, tiada yang lebih berarti selain kehadiran
+              orang-orang terkasih di sisi kami. Merupakan suatu kehormatan bagi
+              kami apabila Anda berkenan hadir dan menyaksikan hari istimewa
+              ini.
+            </p>
+
+            <p class="story-intro__body leading-relaxed">
+              Sampai jumpa di hari bahagia kami.
+            </p>
+          </div>
+          <div
+            data-lang-block="en"
+            class="grid justify-items-center gap-4 max-w-[38rem] mx-auto"
+            hidden
+          >
+            <p class="story-intro__lead font-serif leading-relaxed">
+              We are delighted to announce
+              <br />
+              that we are getting married
+            </p>
+
+            <p class="story-intro__body leading-relaxed">
+              As we set sail toward a future filled with love, blessings, and
+              lasting happiness, there is nothing more meaningful than sharing
+              this special moment with those we hold dear. Your presence would
+              truly honor us and make our day even more unforgettable.
+            </p>
+
+            <p class="story-intro__body leading-relaxed">
+              We look forward to celebrating with you.
+            </p>
+          </div>
+        </section>
+
         <!-- Couple Introduction -->
         <section
           id="introduction"
@@ -1438,6 +1429,114 @@ try {
       transition:
         color 0.25s ease,
         transform 0.25s ease;
+    }
+
+    .story-intro {
+      max-width: 72rem;
+    }
+    .story-intro__composition {
+      display: grid;
+      gap: clamp(1.75rem, 5vw, 3rem);
+    }
+    .story-intro__label-block {
+      display: grid;
+      gap: 0.25rem;
+      justify-items: end;
+      text-align: right;
+    }
+    .story-intro__label {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 0.95;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.34);
+    }
+    .story-intro__meta {
+      font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.34);
+    }
+    .story-intro__panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(2rem, 6vw, 3.25rem);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: linear-gradient(
+        180deg,
+        rgba(16, 43, 54, 0.32) 0%,
+        rgba(12, 30, 39, 0.58) 100%
+      );
+      box-shadow: 0 28px 60px rgba(7, 26, 34, 0.18);
+      backdrop-filter: blur(14px) saturate(120%);
+      -webkit-backdrop-filter: blur(14px) saturate(120%);
+    }
+    .story-intro__panel::before {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: clamp(5rem, 14vw, 8rem);
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        rgba(174, 209, 93, 0.85),
+        rgba(174, 209, 93, 0)
+      );
+      opacity: 0.85;
+    }
+    .story-intro__panel::after {
+      content: '';
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      width: clamp(4.5rem, 12vw, 7rem);
+      height: clamp(4.5rem, 12vw, 7rem);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      opacity: 0.5;
+    }
+    .story-intro__lead {
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(2.3rem, 7.5vw, 4.6rem);
+      line-height: 0.96;
+      color: rgba(255, 255, 255, 0.98);
+      text-wrap: balance;
+    }
+    .story-intro__body {
+      margin: 0;
+      max-width: 33rem;
+      font-size: clamp(1rem, 2.5vw, 1.18rem);
+      line-height: 1.85;
+      letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.78);
+    }
+    .story-intro__footer {
+      display: flex;
+      width: fit-content;
+      max-width: 100%;
+      align-items: center;
+      gap: 1rem;
+      margin-top: clamp(0.5rem, 2vw, 1rem);
+    }
+    .story-intro__divider {
+      width: clamp(2.5rem, 8vw, 4.5rem);
+      height: 1px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+    .story-intro__season {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      white-space: nowrap;
+    }
+    .story-intro__signature {
+      margin: 0;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
     }
 
     /* ── Gallery teaser card ── */
@@ -2902,6 +3001,26 @@ try {
       .access-layout {
         max-width: 1280px;
       }
+      .story-intro {
+        max-width: 1280px;
+      }
+      .story-intro__composition {
+        position: relative;
+        gap: clamp(2rem, 4vw, 3.5rem);
+      }
+      .story-intro__label-block {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translateY(1.25rem);
+      }
+      .story-intro__panel {
+        display: flex;
+        min-height: clamp(22rem, 40vw, 30rem);
+        width: min(100%, 48rem);
+        align-items: flex-end;
+        padding-top: clamp(6rem, 10vw, 8.5rem);
+      }
       .access-composition {
         position: relative;
       }
@@ -2986,6 +3105,27 @@ try {
       .hero-scene__mountain {
         height: 60%;
         background-position: center bottom;
+      }
+
+      .story-intro__label-block {
+        justify-items: center;
+        text-align: center;
+      }
+      .story-intro__panel {
+        padding: 1.75rem 1.5rem 2rem;
+      }
+      .story-intro__lead,
+      .story-intro__body {
+        max-width: none;
+      }
+      .story-intro__footer {
+        gap: 0.75rem;
+      }
+      .story-intro__season {
+        letter-spacing: 0.22em;
+      }
+      .story-intro__signature {
+        letter-spacing: 0.24em;
       }
 
       .couple-card-group {
@@ -3177,6 +3317,16 @@ try {
       });
     };
 
+    const syncLanguageBlocks = () => {
+      const activeLanguage = getActiveLanguage();
+      const blocks =
+        document.querySelectorAll<HTMLElement>('[data-lang-block]');
+
+      blocks.forEach((block) => {
+        block.hidden = block.dataset.langBlock !== activeLanguage;
+      });
+    };
+
     // ── Language toggle ──
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
@@ -3184,6 +3334,7 @@ try {
       localStorage.setItem('wedding-lang', 'en');
 
       syncWishFieldPlaceholders();
+      syncLanguageBlocks();
 
       langToggle.addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-lang');
@@ -3195,6 +3346,7 @@ try {
         }
         localStorage.setItem('wedding-lang', next);
         syncWishFieldPlaceholders();
+        syncLanguageBlocks();
       });
     }
 
