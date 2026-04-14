@@ -82,10 +82,25 @@ const {
         cursor: pointer;
         transition: all 0.3s ease;
       }
+      .cover__open:disabled {
+        cursor: wait;
+        opacity: 0.55;
+        border-color: rgba(26, 26, 26, 0.12);
+        color: rgba(26, 26, 26, 0.42);
+        transform: none;
+      }
+      .cover__open[data-state='loading'] svg {
+        animation: cover-open-spin 1s linear infinite;
+      }
       .cover__open:hover {
         border-color: rgba(26, 26, 26, 0.4);
         color: rgba(26, 26, 26, 0.9);
         transform: translateY(-2px);
+      }
+      .cover__open:disabled:hover {
+        border-color: rgba(26, 26, 26, 0.12);
+        color: rgba(26, 26, 26, 0.42);
+        transform: none;
       }
       .cover__open svg {
         width: 1rem;
@@ -143,6 +158,14 @@ const {
         }
         100% {
           opacity: 0;
+        }
+      }
+      @keyframes cover-open-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
         }
       }
 
@@ -211,8 +234,15 @@ const {
       <p class="cover__greeting">With joy & love</p>
       <p class="cover__guest" id="cover-guest-name">Guest</p>
       <p class="cover__subtitle">We invite you to celebrate our special day</p>
-      <button id="cover-open" class="cover__open" type="button">
-        <span>Open Invitation</span>
+      <button
+        id="cover-open"
+        class="cover__open"
+        type="button"
+        disabled
+        data-state="loading"
+        aria-busy="true"
+      >
+        <span id="cover-open-label">Preparing invitation...</span>
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -239,6 +269,7 @@ const {
       const pageCover = document.getElementById('page-cover');
       const guestEl = document.getElementById('cover-guest-name');
       const openBtn = document.getElementById('cover-open');
+      const openBtnLabel = document.getElementById('cover-open-label');
       const COVER_DISMISSED_KEY = 'wedding-cover-dismissed';
       const GUEST_NAME_KEY = 'wedding-guest-name';
       const MUTE_PREF_KEY = 'wedding-music-muted';
@@ -336,6 +367,59 @@ const {
       const pageIntro = document.getElementById('page-intro');
       const heroSection = document.getElementById('home');
 
+      const setCoverButtonReadyState = (isReady: boolean) => {
+        if (!openBtn || !openBtnLabel) return;
+
+        openBtn.disabled = !isReady;
+        openBtn.dataset.state = isReady ? 'ready' : 'loading';
+        openBtn.setAttribute('aria-busy', isReady ? 'false' : 'true');
+        openBtnLabel.textContent = isReady
+          ? 'Open Invitation'
+          : 'Preparing invitation...';
+      };
+
+      const waitForImageSource = (src: string) =>
+        new Promise<void>((resolve) => {
+          const image = new Image();
+          image.decoding = 'async';
+          image.onload = () => resolve();
+          image.onerror = () => resolve();
+          image.src = src;
+
+          if (image.complete) {
+            resolve();
+          }
+        });
+
+      const waitForAudioSource = (audio: HTMLAudioElement | null) =>
+        new Promise<void>((resolve) => {
+          if (!audio) {
+            resolve();
+            return;
+          }
+
+          const done = () => resolve();
+          audio.addEventListener('canplaythrough', done, { once: true });
+          audio.addEventListener('error', done, { once: true });
+          audio.load();
+
+          if (audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+            resolve();
+          }
+        });
+
+      const waitForCriticalAssets = async () => {
+        const fontsReady = document.fonts?.ready ?? Promise.resolve();
+
+        await Promise.all([
+          fontsReady,
+          waitForImageSource('/assets/p1.webp'),
+          waitForImageSource('/assets/p1b-r1-crop-smaller.webp'),
+          waitForImageSource('/assets/gunung.webp'),
+          waitForAudioSource(bgMusic),
+        ]);
+      };
+
       const finishEntryWithoutCover = () => {
         pageCover?.remove();
         pageIntro?.remove();
@@ -377,10 +461,16 @@ const {
 
       if (hasDismissedCover) {
         finishEntryWithoutCover();
+      } else {
+        waitForCriticalAssets().finally(() => {
+          setCoverButtonReadyState(true);
+        });
       }
 
       // ── Open button: start music → fade cover → run intro ──
       openBtn?.addEventListener('click', () => {
+        if (openBtn.disabled) return;
+
         try {
           window.sessionStorage.setItem(COVER_DISMISSED_KEY, 'true');
         } catch {}

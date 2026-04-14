@@ -406,49 +406,48 @@ try {
         <section
           class="content-card content-card--transparent py-32 px-6 text-center"
         >
-          <div
-            data-lang-block="mix"
-            class="grid justify-items-center gap-4 max-w-[38rem] mx-auto"
-          >
-            <p class="story-intro__lead font-serif leading-relaxed">
-              Dengan penuh sukacita, kami mengumumkan
-              <br />
-              bahwa kami akan menikah
-            </p>
+          <div class="max-w-[38rem] mx-auto reveal">
+            <div data-lang-block="mix" class="grid justify-items-center gap-4">
+              <p class="story-intro__lead font-serif leading-relaxed">
+                Dengan penuh sukacita, kami mengumumkan
+                <br />
+                bahwa kami akan menikah
+              </p>
 
-            <p class="story-intro__body leading-relaxed">
-              Saat kami mulai berlayar menuju masa depan yang dipenuhi cinta,
-              doa, dan kebahagiaan, tiada yang lebih berarti selain kehadiran
-              orang-orang terkasih di sisi kami. Merupakan suatu kehormatan bagi
-              kami apabila Anda berkenan hadir dan menyaksikan hari istimewa
-              ini.
-            </p>
+              <p class="story-intro__body leading-relaxed">
+                Saat kami mulai berlayar menuju masa depan yang dipenuhi cinta,
+                doa, dan kebahagiaan, tiada yang lebih berarti selain kehadiran
+                orang-orang terkasih di sisi kami. Merupakan suatu kehormatan
+                bagi kami apabila Anda berkenan hadir dan menyaksikan hari
+                istimewa ini.
+              </p>
 
-            <p class="story-intro__body leading-relaxed">
-              Sampai jumpa di hari bahagia kami.
-            </p>
-          </div>
-          <div
-            data-lang-block="en"
-            class="grid justify-items-center gap-4 max-w-[38rem] mx-auto"
-            hidden
-          >
-            <p class="story-intro__lead font-serif leading-relaxed">
-              We are delighted to announce
-              <br />
-              that we are getting married
-            </p>
+              <p class="story-intro__body leading-relaxed">
+                Sampai jumpa di hari bahagia kami.
+              </p>
+            </div>
+            <div
+              data-lang-block="en"
+              class="grid justify-items-center gap-4"
+              hidden
+            >
+              <p class="story-intro__lead font-serif leading-relaxed">
+                We are delighted to announce
+                <br />
+                that we are getting married
+              </p>
 
-            <p class="story-intro__body leading-relaxed">
-              As we set sail toward a future filled with love, blessings, and
-              lasting happiness, there is nothing more meaningful than sharing
-              this special moment with those we hold dear. Your presence would
-              truly honor us and make our day even more unforgettable.
-            </p>
+              <p class="story-intro__body leading-relaxed">
+                As we set sail toward a future filled with love, blessings, and
+                lasting happiness, there is nothing more meaningful than sharing
+                this special moment with those we hold dear. Your presence would
+                truly honor us and make our day even more unforgettable.
+              </p>
 
-            <p class="story-intro__body leading-relaxed">
-              We look forward to celebrating with you.
-            </p>
+              <p class="story-intro__body leading-relaxed">
+                We look forward to celebrating with you.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -461,9 +460,12 @@ try {
         >
           <div class="couple-shell desktop-shell max-w-5xl mx-auto">
             <div class="grid gap-28 md:gap-20">
-              <div class="couple-card-group couple-card-group--reverse reveal">
+              <div
+                class="couple-card-group couple-card-group--reverse reveal"
+                data-delay="80"
+              >
                 <figure
-                  class="couple-card__image-frame couple-card__image-frame--single couple-card__image-frame--sherly"
+                  class="couple-card__image-frame couple-card__image-frame--single couple-card__image-frame--sherly couple-card__image-frame--enter-right"
                   aria-hidden="true"
                 >
                   <img
@@ -505,9 +507,9 @@ try {
                 </div>
               </div>
 
-              <div class="couple-card-group reveal">
+              <div class="couple-card-group reveal" data-delay="180">
                 <figure
-                  class="couple-card__image-frame couple-card__image-frame--single couple-card__image-frame--rian"
+                  class="couple-card__image-frame couple-card__image-frame--single couple-card__image-frame--rian couple-card__image-frame--enter-left"
                   aria-hidden="true"
                 >
                   <img
@@ -1189,19 +1191,38 @@ try {
     }
     .couple-card__image-frame {
       overflow: hidden;
+      opacity: 0.2;
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .couple-card__image-frame--single {
       aspect-ratio: 3 / 4;
       width: min(100%, 22rem);
+    }
+    .couple-card__image-frame--enter-left {
+      transform: translate3d(-56px, 0, 0);
+    }
+    .couple-card__image-frame--enter-right {
+      transform: translate3d(56px, 0, 0);
     }
     .couple-card__image {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .couple-card__image--single {
       object-position: center 14%;
+    }
+    .couple-card-group.visible .couple-card__image-frame {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    .couple-card-group.visible .couple-card__image {
+      transform: scale(1);
     }
     .couple-card__text {
       display: grid;
