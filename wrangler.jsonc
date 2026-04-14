@@ -1,21 +1,33 @@
 {
-	"name": "as-spring-2026",
-	"compatibility_date": "2026-03-07", // Update to the day you deploy
-	"main": "./dist/_worker.js/index.js",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist",
-	},
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "as-spring-2026-wishes",
-			"database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d",
-			"preview_database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d",
-		},
-	],
+  "name": "as-spring-2026",
+  "compatibility_date": "2026-03-07", // Update to the day you deploy
+  "main": "./dist/_worker.js/index.js",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "as-spring-2026-wishes",
+      "database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d",
+      "preview_database_id": "2c0b80cc-877a-4470-854d-7458d233fe5d",
+    },
+  ],
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true,
+    },
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1,
+    },
+  },
 }

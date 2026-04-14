@@ -278,6 +278,10 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <slot />
 
     <script>
+      // Always start at the top on reload
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+
       // ── Cover: read guest name from ?to= query param ──
       const pageCover = document.getElementById('page-cover');
       const guestEl = document.getElementById('cover-guest-name');
@@ -433,17 +437,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         ]);
       };
 
-      const finishEntryWithoutCover = () => {
-        pageCover?.remove();
-        pageIntro?.remove();
-        document.body.classList.remove('overflow-hidden');
-        heroSection?.classList.add('hero-section--loaded');
-        startBackgroundMusic();
 
-        window.setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('intro-done'));
-        }, 0);
-      };
 
       const runIntro = () => {
         // slide panels open
@@ -466,19 +460,14 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         }, 300);
       };
 
-      let hasDismissedCover = false;
+      // Always show the cover on every page load — clear any previous dismissal.
       try {
-        hasDismissedCover =
-          window.sessionStorage.getItem(COVER_DISMISSED_KEY) === 'true';
+        window.sessionStorage.removeItem(COVER_DISMISSED_KEY);
       } catch {}
 
-      if (hasDismissedCover) {
-        finishEntryWithoutCover();
-      } else {
-        waitForCriticalAssets().finally(() => {
-          setCoverButtonReadyState(true);
-        });
-      }
+      waitForCriticalAssets().finally(() => {
+        setCoverButtonReadyState(true);
+      });
 
       // ── Open button: start music → fade cover → run intro ──
       openBtn?.addEventListener('click', () => {
