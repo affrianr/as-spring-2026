@@ -27,7 +27,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/assets/rich-preview.webp" />
+    <meta property="og:image" content={new URL('/assets/rich-preview.webp', Astro.url).href} />
     <meta property="og:image:width" content="375" />
     <meta property="og:image:height" content="375" />
     <meta property="og:image:alt" content={`${title} — Wedding Invitation`} />
@@ -36,7 +36,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/assets/rich-preview.webp" />
+    <meta name="twitter:image" content={new URL('/assets/rich-preview.webp', Astro.url).href} />
     <style>
       /* ── Cover page ── */
       #page-cover {

@@ -673,7 +673,7 @@ try {
                   </span>
                 </p>
                 <a
-                  href="https://www.instagram.com"
+                  href="https://www.instagram.com/syafazeer"
                   target="_blank"
                   rel="noreferrer"
                   class="access-composition__title-row"
@@ -2479,6 +2479,22 @@ try {
         margin-top: 1rem;
         text-align: center;
       }
+
+      /* ── Details: 2-col layout on mobile so label/value don't overlap ── */
+      .details-line__intro {
+        transform: none;
+      }
+      .details-line {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.75rem clamp(1rem, 4vw, 2rem);
+        align-items: start;
+      }
+
+      /* ── Access: neutralise translateY so label doesn't slide into venue title ── */
+      .access-composition__label-block {
+        transform: none;
+      }
     }
     /* ── Small tablet + up (≥640px): iPad Mini (768), iPad Air (820), Surface Duo (540) ── */
     @media (min-width: 640px) {
@@ -2822,7 +2838,7 @@ try {
         position: absolute;
         left: calc(
           max(2rem, ((100vw - 1280px) / 2 + 2rem)) + min(40rem, 38vw) +
-            clamp(0.85rem, 1.8vw, 1.85rem)
+            clamp(4rem, 7vw, 7rem)
         );
         top: 50%;
         bottom: auto;
