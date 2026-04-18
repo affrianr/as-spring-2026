@@ -278,24 +278,89 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <slot />
 
     <script>
-      // Always start at the top on reload
+      import { gsap } from 'gsap';
+
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       window.scrollTo(0, 0);
 
-      // ── Cover: read guest name from ?to= query param ──
-      const pageCover = document.getElementById('page-cover');
-      const guestEl = document.getElementById('cover-guest-name');
-      const openBtn = document.getElementById('cover-open');
-      const openBtnLabel = document.getElementById('cover-open-label');
-      const COVER_DISMISSED_KEY = 'wedding-cover-dismissed';
-      const GUEST_NAME_KEY = 'wedding-guest-name';
-      const MUTE_PREF_KEY = 'wedding-music-muted';
-      const bgMusic = document.getElementById(
-        'bg-music',
-      ) as HTMLAudioElement | null;
+      const pageCover = document.getElementById('page-cover') as HTMLDivElement | null;
+      const guestEl = document.getElementById('cover-guest-name') as HTMLElement | null;
+      const openBtn = document.getElementById('cover-open') as HTMLButtonElement | null;
+      const openBtnLabel = document.getElementById('cover-open-label') as HTMLElement | null;
+      const pageIntro = document.getElementById('page-intro') as HTMLDivElement | null;
+      const panelLeft = document.querySelector(
+        '.page-intro__panel--left',
+      ) as HTMLDivElement | null;
+      const panelRight = document.querySelector(
+        '.page-intro__panel--right',
+      ) as HTMLDivElement | null;
+      const heroSection = document.getElementById('home') as HTMLElement | null;
+      const bgMusic = document.getElementById('bg-music') as HTMLAudioElement | null;
       const musicToggle = document.getElementById(
         'music-toggle',
       ) as HTMLButtonElement | null;
+      const coverCopy = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '.cover__greeting, .cover__guest, .cover__subtitle',
+        ),
+      );
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      );
+      const liteMotionMedia = window.matchMedia('(max-width: 767px), (pointer: coarse)');
+
+      const COVER_DISMISSED_KEY = 'wedding-cover-dismissed';
+      const GUEST_NAME_KEY = 'wedding-guest-name';
+      const MUTE_PREF_KEY = 'wedding-music-muted';
+
+      const getIntroTier = () =>
+        prefersReducedMotion.matches ? 'reduced' : liteMotionMedia.matches ? 'lite' : 'full';
+
+      let coverScrollY = 0;
+      const coverScrollKeys = new Set([
+        'ArrowUp',
+        'ArrowDown',
+        'PageUp',
+        'PageDown',
+        'Home',
+        'End',
+        ' ',
+      ]);
+      const preventCoverScroll = (event: Event) => {
+        event.preventDefault();
+      };
+      const preventCoverKeyScroll = (event: KeyboardEvent) => {
+        if (coverScrollKeys.has(event.key)) {
+          event.preventDefault();
+        }
+      };
+      const lockCoverScroll = () => {
+        coverScrollY = 0;
+        window.scrollTo(0, 0);
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.inset = `-${coverScrollY}px 0 0 0`;
+        document.body.style.width = '100%';
+        window.addEventListener('wheel', preventCoverScroll, { passive: false });
+        window.addEventListener('touchmove', preventCoverScroll, {
+          passive: false,
+        });
+        window.addEventListener('keydown', preventCoverKeyScroll, {
+          passive: false,
+        });
+      };
+      const unlockCoverScroll = () => {
+        window.removeEventListener('wheel', preventCoverScroll);
+        window.removeEventListener('touchmove', preventCoverScroll);
+        window.removeEventListener('keydown', preventCoverKeyScroll);
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.inset = '';
+        document.body.style.width = '';
+        window.scrollTo(0, coverScrollY);
+      };
 
       const syncMuteUi = () => {
         if (!bgMusic || !musicToggle) return;
@@ -374,16 +439,6 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           });
       }
 
-      // ── Intro panels ──
-      const panelLeft = document.querySelector(
-        '.page-intro__panel--left',
-      ) as HTMLElement | null;
-      const panelRight = document.querySelector(
-        '.page-intro__panel--right',
-      ) as HTMLElement | null;
-      const pageIntro = document.getElementById('page-intro');
-      const heroSection = document.getElementById('home');
-
       const setCoverButtonReadyState = (isReady: boolean) => {
         if (!openBtn || !openBtnLabel) return;
 
@@ -437,39 +492,87 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         ]);
       };
 
-
-
-      const runIntro = () => {
-        // slide panels open
-        window.setTimeout(() => {
-          panelLeft?.classList.add('page-intro__panel--exit-left');
-          panelRight?.classList.add('page-intro__panel--exit-right');
-
-          // panels halfway → trigger hero bg → mountain → couple
-          window.setTimeout(() => {
-            heroSection?.classList.add('hero-section--loaded');
-          }, 400);
-
-          // after scene elements done → trigger text reveals
-          window.setTimeout(() => {
-            window.dispatchEvent(new CustomEvent('intro-done'));
-          }, 2200);
-
-          // remove overlay
-          window.setTimeout(() => pageIntro?.remove(), 1200);
-        }, 300);
+      const finishIntro = (tier: 'reduced' | 'lite' | 'full') => {
+        heroSection?.classList.add('hero-section--loaded');
+        document.body.classList.remove('overflow-hidden');
+        unlockCoverScroll();
+        pageCover?.remove();
+        pageIntro?.remove();
+        window.dispatchEvent(
+          new CustomEvent('intro-done', { detail: { tier, reduced: tier === 'reduced' } }),
+        );
       };
 
-      // Always show the cover on every page load — clear any previous dismissal.
+      const playIntroTimeline = () => {
+        const tier = getIntroTier();
+
+        if (tier === 'reduced' || !pageCover || !pageIntro || !panelLeft || !panelRight) {
+          finishIntro(tier);
+          return;
+        }
+
+        const panelDuration = tier === 'lite' ? 0.72 : 0.96;
+        const introTimeline = gsap.timeline({
+          defaults: { ease: 'power4.inOut' },
+          onComplete: () => finishIntro(tier),
+        });
+
+        introTimeline
+          .to(coverCopy, {
+            y: -28,
+            autoAlpha: 0,
+            duration: 0.42,
+            stagger: 0.06,
+          })
+          .to(
+            openBtn,
+            {
+              scale: 0.92,
+              autoAlpha: 0,
+              duration: 0.34,
+            },
+            '<+0.04',
+          )
+          .to(
+            pageCover,
+            {
+              autoAlpha: 0,
+              duration: 0.38,
+            },
+            '-=0.12',
+          )
+          .set(pageCover, { display: 'none' })
+          .call(() => {
+            heroSection?.classList.add('hero-section--loaded');
+          })
+          .to(
+            panelLeft,
+            {
+              xPercent: -102,
+              duration: panelDuration,
+            },
+            '>-0.02',
+          )
+          .to(
+            panelRight,
+            {
+              xPercent: 102,
+              duration: panelDuration,
+            },
+            '<+0.04',
+          );
+      };
+
       try {
         window.sessionStorage.removeItem(COVER_DISMISSED_KEY);
       } catch {}
+
+      lockCoverScroll();
 
       waitForCriticalAssets().finally(() => {
         setCoverButtonReadyState(true);
       });
 
-      // ── Open button: start music → fade cover → run intro ──
       openBtn?.addEventListener('click', () => {
         if (openBtn.disabled) return;
 
@@ -477,22 +580,11 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           window.sessionStorage.setItem(COVER_DISMISSED_KEY, 'true');
         } catch {}
 
+        openBtn.disabled = true;
         startBackgroundMusic();
-
-        // animate cover out
-        pageCover?.classList.add('cover--exiting');
-        window.setTimeout(() => {
-          pageCover?.remove();
-          // unlock scroll
-          document.body.classList.remove('overflow-hidden');
-          // run the panel intro sequence
-          runIntro();
-        }, 800);
+        playIntroTimeline();
       });
 
-      const prefersReducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      );
       const sections = Array.from(
         document.querySelectorAll<HTMLElement>('[data-auto-scroll-section]'),
       );
