@@ -896,13 +896,13 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
 
         const VOUCHER_LABEL = 'Just for you,';
         const FILENAME = 'voucher-suvenir.png';
-        const EXPORT_FONT_MAX = 88;
-        const EXPORT_FONT_MIN = 52;
-        const EXPORT_SIDE_INSET = 110;
-        const EXPORT_BOTTOM_BAND = 220;
-        const EXPORT_LINE_HEIGHT = 1.2;
-        const EXPORT_LABEL_SIZE = 34;
-        const EXPORT_LABEL_GAP = 22;
+        const EXPORT_FONT_MAX = 168;
+        const EXPORT_FONT_MIN = 96;
+        const EXPORT_SIDE_INSET = 84;
+        const EXPORT_BOTTOM_BAND = 360;
+        const EXPORT_LINE_HEIGHT = 1.08;
+        const EXPORT_LABEL_SIZE = 40;
+        const EXPORT_LABEL_GAP = 18;
 
         const setDownloadState = (label: string, disabled: boolean) => {
           downloadButton.textContent = label;
@@ -920,7 +920,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         };
 
         const setCanvasFont = (ctx: CanvasRenderingContext2D, size: number) => {
-          ctx.font = `italic ${size}px 'Playfair Display', Georgia, serif`;
+          ctx.font = `italic 500 ${size}px 'Playfair Display', Georgia, serif`;
         };
 
         const measureLineWidth = (ctx: CanvasRenderingContext2D, line: string, size: number) => {
