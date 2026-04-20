@@ -123,7 +123,7 @@ try {
         <button
           type="button"
           data-auto-scroll-next
-          class="mt-20 inline-flex items-center justify-center animate-bounce reveal cursor-pointer bg-transparent p-0 text-white/40 transition-colors duration-300 hover:text-white focus:outline-none"
+          class="hero-scroll-cue mt-20 inline-flex items-center justify-center reveal cursor-pointer bg-transparent p-0 text-white/40 transition-colors duration-300 hover:text-white focus:outline-none"
           data-delay="1200"
           aria-label="Scroll to next section"
         >
@@ -406,7 +406,7 @@ try {
         <section
           class="content-card content-card--transparent py-32 px-6 text-center"
         >
-          <div class="max-w-[38rem] mx-auto reveal">
+          <div class="max-w-[56rem] mx-auto reveal">
             <div data-lang-block="mix" class="grid justify-items-center gap-4">
               <p class="story-intro__lead font-serif leading-relaxed">
                 Dengan rahmat dan kasih sayang Allah SWT,
@@ -415,16 +415,16 @@ try {
               </p>
 
               <p class="story-intro__body leading-relaxed">
-                Seiring kami menapaki perjalanan indah ini untuk
-                menyempurnakan separuh agama, kami berdoa agar kehidupan kami
-                bersama dipenuhi berkah yang tak terhingga dan ketenangan yang
-                abadi. Berbagi momen suci ini bersama keluarga dan sahabat
-                terkasih adalah harapan terbesar kami.
+                Seiring kami menapaki perjalanan indah ini untuk menyempurnakan
+                separuh agama, kami berdoa agar kehidupan kami bersama dipenuhi
+                berkah yang tak terhingga dan ketenangan yang abadi. Berbagi
+                momen suci ini bersama keluarga dan sahabat terkasih adalah
+                harapan terbesar kami.
               </p>
 
               <p class="story-intro__body leading-relaxed">
-                Kehadiran dan doa Anda akan menjadi kehormatan bagi kami di
-                hari istimewa ini.
+                Kehadiran dan doa Anda akan menjadi kehormatan bagi kami di hari
+                istimewa ini.
               </p>
             </div>
             <div
@@ -573,8 +573,8 @@ try {
                 <p
                   class="details-line__value details-line__value--date font-serif"
                 >
-                  <span class="lang-mix">02.05.2026<br/>Sabtu</span>
-                  <span class="lang-en">02.05.2026<br/>Saturday</span>
+                  <span class="lang-mix">02.05.2026<br />Sabtu</span>
+                  <span class="lang-en">02.05.2026<br />Saturday</span>
                 </p>
               </div>
 
@@ -678,7 +678,7 @@ try {
                   href="https://www.instagram.com/syafazeer"
                   target="_blank"
                   rel="noreferrer"
-                  class="access-composition__title-row"
+                  class="access-composition__title-row access-composition__title-row--live"
                   aria-label="Watch live on Instagram"
                 >
                   <p class="access- font-serif">
@@ -1527,7 +1527,7 @@ try {
     }
     .story-intro__body {
       margin: 0;
-      max-width: 33rem;
+      max-width: 46rem;
       font-size: clamp(1rem, 2.5vw, 1.18rem);
       line-height: 1.85;
       letter-spacing: 0.01em;
@@ -1758,6 +1758,11 @@ try {
       100% {
         transform: translateY(-6px) scale(1.2);
         opacity: 0.6;
+      }
+    }
+    @media (max-width: 767px), (pointer: coarse) {
+      .sparkle {
+        animation: none;
       }
     }
 
@@ -2037,26 +2042,74 @@ try {
       text-align: left;
     }
     .wish-status {
+      position: relative;
+      overflow: hidden;
       border-radius: 1rem;
-      padding: 0.85rem 1rem;
+      padding: 0.95rem 1.05rem;
       font-size: 0.82rem;
       line-height: 1.6;
       text-align: left;
+      box-shadow: 0 12px 26px rgba(69, 89, 39, 0.08);
+    }
+    .wish-status::before {
+      content: '';
+      position: absolute;
+      inset: 1px 1px auto;
+      height: 1px;
+      border-radius: 999px;
+      opacity: 0.8;
+      pointer-events: none;
     }
     .wish-status[data-state='pending'] {
       border: 1px solid rgba(61, 86, 28, 0.1);
       background: rgba(255, 255, 255, 0.68);
       color: rgba(39, 54, 24, 0.78);
     }
+    .wish-status[data-state='pending']::before {
+      background: linear-gradient(
+        90deg,
+        rgba(173, 191, 128, 0.72),
+        rgba(173, 191, 128, 0)
+      );
+    }
     .wish-status[data-state='success'] {
-      border: 1px solid rgba(61, 86, 28, 0.12);
-      background: rgba(68, 93, 37, 0.1);
-      color: rgba(39, 54, 24, 0.9);
+      border: 1px solid rgba(78, 106, 44, 0.14);
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(255, 252, 236, 0.88),
+          rgba(255, 252, 236, 0) 42%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(255, 252, 241, 0.96),
+          rgba(241, 246, 221, 0.98)
+        );
+      color: rgba(39, 54, 24, 0.92);
+      padding-inline: 1.1rem 1.2rem;
+      box-shadow:
+        0 18px 34px rgba(74, 99, 40, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+    .wish-status[data-state='success']::before {
+      background: linear-gradient(
+        90deg,
+        rgba(133, 162, 83, 0.94),
+        rgba(214, 228, 176, 0.18),
+        rgba(133, 162, 83, 0)
+      );
     }
     .wish-status[data-state='error'] {
       border: 1px solid rgba(177, 84, 56, 0.16);
       background: rgba(215, 146, 120, 0.14);
       color: rgba(113, 44, 22, 0.9);
+    }
+    .wish-status[data-state='error']::before {
+      background: linear-gradient(
+        90deg,
+        rgba(177, 84, 56, 0.64),
+        rgba(177, 84, 56, 0)
+      );
     }
     .wish-list__top {
       display: flex;
@@ -2118,7 +2171,6 @@ try {
       align-items: stretch;
       gap: 0;
       will-change: transform;
-      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .wish-list:not(.wish-list--solo) {
       gap: var(--wish-gap);
@@ -2149,6 +2201,14 @@ try {
       transition:
         transform 0.3s ease,
         border-color 0.25s ease;
+    }
+    .wish-card[aria-hidden='true'] {
+      opacity: 0.68;
+      transform: scale(0.965);
+    }
+    .wish-card[aria-hidden='false'] {
+      opacity: 1;
+      transform: scale(1);
     }
     .wish-list--solo .wish-card {
       flex-basis: 100%;
@@ -2379,6 +2439,9 @@ try {
     }
     .hero-content [data-auto-scroll-next] {
       margin-top: clamp(2.5rem, 8svh, 5rem);
+    }
+    .hero-scroll-cue {
+      transform: translate3d(0, 0, 0);
     }
 
     #introduction,
@@ -3196,93 +3259,589 @@ try {
   </style>
 
   <script>
-    // ── Scroll reveal with IntersectionObserver ──
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            const delay = parseInt(el.dataset.delay || '0', 10);
-            setTimeout(() => el.classList.add('visible'), delay);
-            revealObserver.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    );
+    const liteMotionMedia = window.matchMedia(
+      '(max-width: 767px), (pointer: coarse)',
+    );
+    const finePointerMedia = window.matchMedia(
+      '(hover: hover) and (pointer: fine)',
     );
 
-    // Wait for loader panels to finish before starting hero text reveals.
-    // Non-hero reveals (below the fold) start immediately since they won't
-    // fire until the user scrolls to them anyway.
-    const heroReveals = Array.from(reveals).filter((el) => el.closest('#home'));
-    const otherReveals = Array.from(reveals).filter(
-      (el) => !el.closest('#home'),
-    );
-
-    otherReveals.forEach((el) => revealObserver.observe(el));
-
-    const startHeroReveals = () =>
-      heroReveals.forEach((el) => revealObserver.observe(el));
-    window.addEventListener('intro-done', startHeroReveals, { once: true });
-
-    // ── Cats appear on scroll ──
-    const heroCats = document.querySelectorAll<HTMLElement>('.hero-scene__cat');
-    let catsRevealed = false;
-    const revealCats = () => {
-      if (catsRevealed) return;
-      catsRevealed = true;
-      heroCats.forEach((cat) => cat.classList.add('hero-scene__cat--visible'));
-      window.removeEventListener('scroll', revealCats);
+    const getMotionTier = (): 'reduced' | 'lite' | 'full' => {
+      if (prefersReducedMotion.matches) return 'reduced';
+      return liteMotionMedia.matches ? 'lite' : 'full';
     };
-    window.addEventListener('scroll', revealCats, { passive: true });
 
-    // ── Hero parallax + fade on scroll ──
+    const revealElements = Array.from(
+      document.querySelectorAll<HTMLElement>('.reveal'),
+    );
+    const heroReveals = revealElements.filter((element) =>
+      element.closest('#home'),
+    );
+    const heroSection = document.getElementById('home') as HTMLElement | null;
     const heroContent = document.querySelector(
       '.hero-content',
     ) as HTMLElement | null;
-    const nav = document.getElementById('main-nav');
+    const heroBgImage = document.querySelector(
+      '.hero-bg-image',
+    ) as HTMLElement | null;
+    const heroCouple = document.querySelector(
+      '.hero-scene__couple',
+    ) as HTMLElement | null;
+    const heroCats = Array.from(
+      document.querySelectorAll<HTMLElement>('.hero-scene__cat'),
+    );
+    const nav = document.getElementById('main-nav') as HTMLElement | null;
+    const heroScrollCue = document.querySelector(
+      '.hero-scroll-cue',
+    ) as HTMLElement | null;
+    const syncNavState = () => {
+      nav?.classList.toggle('scrolled', window.scrollY > 80);
+    };
 
-    let ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
+    const markVisible = (elements: HTMLElement[]) => {
+      elements.forEach((element) => element.classList.add('visible'));
+    };
 
-        // Hero text drifts up and fades as you scroll
-        if (heroContent) {
-          heroContent.style.transform = `translate3d(0, ${scrollY * 0.25}px, 0)`;
-          heroContent.style.opacity = String(Math.max(0, 1 - scrollY / 500));
-        }
+    const showImmediately = (elements: HTMLElement[]) => {
+      if (!elements.length) return;
+      markVisible(elements);
+      gsap.set(elements, { clearProps: 'all' });
+    };
 
-        // Nav background on scroll
-        if (nav) {
-          nav.classList.toggle('scrolled', scrollY > 80);
-        }
+    const createRevealTrigger = (
+      trigger: HTMLElement | null,
+      targets: HTMLElement[],
+      options?: {
+        start?: string;
+        y?: number;
+        duration?: number;
+        stagger?: number;
+      },
+    ) => {
+      if (!trigger || targets.length === 0) return;
 
-        ticking = false;
+      gsap.set(targets, { autoAlpha: 0, y: options?.y ?? 30 });
+
+      ScrollTrigger.create({
+        trigger,
+        start: options?.start ?? 'top 84%',
+        once: true,
+        onEnter: () => {
+          gsap.to(targets, {
+            autoAlpha: 1,
+            y: 0,
+            duration: options?.duration ?? 0.7,
+            stagger: options?.stagger ?? 0.08,
+            ease: 'power3.out',
+            onComplete: () => markVisible(targets),
+          });
+        },
       });
-    }
+    };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    const setupHeroScrollMotion = (tier: 'lite' | 'full') => {
+      if (!heroSection || !nav) return;
 
-    // ── Magnetic hover on wish button ──
-    const rsvpBtn = document.querySelector('.rsvp-btn') as HTMLElement | null;
-    if (rsvpBtn) {
-      rsvpBtn.addEventListener('mousemove', (e: MouseEvent) => {
+      ScrollTrigger.create({
+        trigger: heroSection,
+        start: 'top top',
+        end: 'bottom top',
+        onUpdate: syncNavState,
+        onRefresh: syncNavState,
+      });
+
+      if (tier !== 'full' || !heroContent) return;
+
+      const heroTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroSection,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.8,
+        },
+      });
+
+      heroTimeline.to(
+        heroContent,
+        {
+          yPercent: 18,
+          autoAlpha: 0.18,
+          ease: 'none',
+        },
+        0,
+      );
+
+      if (heroBgImage) {
+        heroTimeline.to(
+          heroBgImage,
+          {
+            scale: 1.08,
+            ease: 'none',
+          },
+          0,
+        );
+      }
+
+      if (heroCouple) {
+        heroTimeline.to(
+          heroCouple,
+          {
+            yPercent: -7,
+            scale: 1.03,
+            ease: 'none',
+          },
+          0,
+        );
+      }
+    };
+
+    const setupHeroScrollCue = (tier: 'lite' | 'full') => {
+      if (!heroScrollCue) return;
+
+      if (tier === 'full') {
+        gsap.to(heroScrollCue, {
+          y: 12,
+          duration: 1.15,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+        });
+        return;
+      }
+
+      gsap.set(heroScrollCue, { clearProps: 'transform' });
+    };
+
+    const setupCoupleTimelines = (tier: 'lite' | 'full') => {
+      const groups = Array.from(
+        document.querySelectorAll<HTMLElement>('.couple-card-group'),
+      );
+
+      groups.forEach((group, index) => {
+        const frame = group.querySelector(
+          '.couple-card__image-frame',
+        ) as HTMLElement | null;
+        const image = group.querySelector(
+          '.couple-card__image',
+        ) as HTMLElement | null;
+        const text = group.querySelector(
+          '.couple-card__text',
+        ) as HTMLElement | null;
+        const textChildren = text
+          ? Array.from(text.children).filter(
+              (child): child is HTMLElement => child instanceof HTMLElement,
+            )
+          : [];
+
+        const offsetX = tier === 'full' ? (index % 2 === 0 ? 52 : -52) : 28;
+
+        if (frame) {
+          gsap.set(frame, { autoAlpha: 0.18, x: offsetX });
+        }
+        if (image) {
+          gsap.set(image, { scale: 1.06 });
+        }
+        if (textChildren.length > 0) {
+          gsap.set(textChildren, {
+            autoAlpha: 0,
+            y: tier === 'full' ? 24 : 18,
+          });
+        }
+
+        const timeline = gsap.timeline({
+          paused: true,
+          defaults: { ease: 'power3.out' },
+          onComplete: () => group.classList.add('visible'),
+        });
+
+        if (frame) {
+          timeline.to(frame, { autoAlpha: 1, x: 0, duration: 0.75 }, 0);
+        }
+        if (image) {
+          timeline.to(image, { scale: 1, duration: 0.95 }, 0);
+        }
+        if (textChildren.length > 0) {
+          timeline.to(
+            textChildren,
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: tier === 'full' ? 0.55 : 0.45,
+              stagger: 0.08,
+            },
+            tier === 'full' ? 0.18 : 0.08,
+          );
+        }
+
+        ScrollTrigger.create({
+          trigger: group,
+          start: 'top 82%',
+          once: true,
+          onEnter: () => timeline.play(),
+        });
+      });
+    };
+
+    const setupDetailsTimeline = (tier: 'lite' | 'full') => {
+      const composition = document.querySelector(
+        '.details-composition',
+      ) as HTMLElement | null;
+      const intros = Array.from(
+        document.querySelectorAll<HTMLElement>('.details-line__intro'),
+      );
+      const values = Array.from(
+        document.querySelectorAll<HTMLElement>('.details-line__value'),
+      );
+
+      if (!composition) return;
+
+      if (tier === 'lite') {
+        createRevealTrigger(composition, [...intros, ...values], {
+          y: 20,
+          duration: 0.5,
+          stagger: 0.08,
+        });
+        return;
+      }
+
+      gsap.set(intros, { autoAlpha: 0, y: 28 });
+      gsap.set(values, { autoAlpha: 0, y: 38 });
+
+      const timeline = gsap.timeline({
+        paused: true,
+        defaults: { ease: 'power3.out' },
+        onComplete: () => composition.classList.add('visible'),
+      });
+
+      timeline
+        .to(intros, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.12,
+        })
+        .to(
+          values,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.68,
+            stagger: 0.14,
+          },
+          '-=0.38',
+        );
+
+      ScrollTrigger.create({
+        trigger: composition,
+        start: 'top 82%',
+        once: true,
+        onEnter: () => timeline.play(),
+      });
+    };
+
+    const setupAccessTimeline = (tier: 'lite' | 'full') => {
+      const composition = document.querySelector(
+        '.access-composition',
+      ) as HTMLElement | null;
+      const labelBlock = document.querySelector(
+        '.access-composition__label-block',
+      ) as HTMLElement | null;
+      const primaryTitleRow = document.querySelector(
+        '.access-composition__title-row:not(.access-composition__title-row--live)',
+      ) as HTMLElement | null;
+      const liveTitleRow = document.querySelector(
+        '.access-composition__title-row--live',
+      ) as HTMLElement | null;
+      const body = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '.access-composition__address, .access-composition__notes, .access-map',
+        ),
+      );
+
+      if (!composition) return;
+
+      const targets = [labelBlock, primaryTitleRow, ...body].filter(
+        (element): element is HTMLElement => Boolean(element),
+      );
+
+      if (tier === 'lite') {
+        createRevealTrigger(composition, targets, {
+          y: 22,
+          duration: 0.5,
+          stagger: 0.08,
+        });
+        return;
+      }
+
+      if (labelBlock) {
+        gsap.set(labelBlock, { autoAlpha: 0, y: 28 });
+      }
+      if (primaryTitleRow) {
+        gsap.set(primaryTitleRow, { autoAlpha: 0, y: 34 });
+      }
+      if (liveTitleRow) {
+        gsap.set(liveTitleRow, { autoAlpha: 0, y: 30 });
+      }
+      gsap.set(body, { autoAlpha: 0, y: 24 });
+
+      const timeline = gsap.timeline({
+        paused: true,
+        defaults: { ease: 'power3.out' },
+        onComplete: () => composition.classList.add('visible'),
+      });
+
+      if (labelBlock) {
+        timeline.to(labelBlock, { autoAlpha: 1, y: 0, duration: 0.52 });
+      }
+      if (primaryTitleRow) {
+        timeline.to(
+          primaryTitleRow,
+          { autoAlpha: 1, y: 0, duration: 0.68 },
+          '-=0.18',
+        );
+      }
+      if (body.length > 0) {
+        timeline.to(
+          body,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.55,
+            stagger: 0.1,
+          },
+          '-=0.22',
+        );
+      }
+
+      ScrollTrigger.create({
+        trigger: composition,
+        start: 'top 80%',
+        once: true,
+        onEnter: () => timeline.play(),
+      });
+
+      if (liveTitleRow) {
+        createRevealTrigger(liveTitleRow, [liveTitleRow], {
+          start: 'top 88%',
+          y: tier === 'full' ? 26 : 16,
+          duration: tier === 'full' ? 0.58 : 0.38,
+          stagger: 0,
+        });
+      }
+    };
+
+    const setupWishTimeline = (tier: 'lite' | 'full') => {
+      const wishSection = document.getElementById(
+        'wishes',
+      ) as HTMLElement | null;
+      const wishScene = document.querySelector(
+        '.wish-scene',
+      ) as HTMLElement | null;
+      const wishPanels = Array.from(
+        document.querySelectorAll<HTMLElement>('.wish-panel'),
+      );
+
+      if (!wishSection || !wishScene || wishPanels.length === 0) return;
+
+      if (tier === 'lite') {
+        createRevealTrigger(wishSection, [wishScene, ...wishPanels], {
+          y: 20,
+          duration: 0.5,
+          stagger: 0.08,
+        });
+        return;
+      }
+
+      gsap.set(wishScene, { autoAlpha: 0, y: 30 });
+      gsap.set(wishPanels[0], { autoAlpha: 0, x: -24, y: 20 });
+      if (wishPanels[1]) {
+        gsap.set(wishPanels[1], { autoAlpha: 0, x: 24, y: 20 });
+      }
+
+      const timeline = gsap.timeline({
+        paused: true,
+        defaults: { ease: 'power3.out' },
+      });
+
+      timeline
+        .to(wishScene, { autoAlpha: 1, y: 0, duration: 0.7 })
+        .to(
+          wishPanels,
+          {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            duration: 0.62,
+            stagger: 0.1,
+          },
+          '-=0.34',
+        )
+        .call(() => markVisible([wishScene, ...wishPanels]));
+
+      ScrollTrigger.create({
+        trigger: wishSection,
+        start: 'top 82%',
+        once: true,
+        onEnter: () => timeline.play(),
+      });
+    };
+
+    const setupSignatureMotion = (tier: 'lite' | 'full') => {
+      createRevealTrigger(
+        document.getElementById('greeting') as HTMLElement | null,
+        Array.from(document.querySelectorAll<HTMLElement>('#greeting .reveal')),
+        {
+          y: tier === 'full' ? 28 : 18,
+          duration: tier === 'full' ? 0.72 : 0.5,
+        },
+      );
+
+      createRevealTrigger(
+        document.getElementById('gallery') as HTMLElement | null,
+        Array.from(document.querySelectorAll<HTMLElement>('#gallery .reveal')),
+        {
+          y: tier === 'full' ? 28 : 18,
+          duration: tier === 'full' ? 0.66 : 0.5,
+        },
+      );
+
+      createRevealTrigger(
+        document.querySelector(
+          '.story-background > section .reveal',
+        ) as HTMLElement | null,
+        Array.from(
+          document.querySelectorAll<HTMLElement>(
+            '.story-background > section .reveal',
+          ),
+        ),
+        {
+          y: tier === 'full' ? 26 : 16,
+          duration: tier === 'full' ? 0.72 : 0.5,
+        },
+      );
+
+      setupCoupleTimelines(tier);
+      setupDetailsTimeline(tier);
+      setupAccessTimeline(tier);
+      setupWishTimeline(tier);
+
+      createRevealTrigger(
+        document.querySelector('.footer-shell') as HTMLElement | null,
+        Array.from(document.querySelectorAll<HTMLElement>('.footer-shell')),
+        { y: 18, duration: 0.5, stagger: 0 },
+      );
+    };
+
+    const setupMagneticButton = (tier: 'lite' | 'full') => {
+      const rsvpBtn = document.querySelector('.rsvp-btn') as HTMLElement | null;
+      if (!rsvpBtn || tier !== 'full' || !finePointerMedia.matches) return;
+
+      const moveX = gsap.quickTo(rsvpBtn, 'x', {
+        duration: 0.24,
+        ease: 'power3.out',
+      });
+      const moveY = gsap.quickTo(rsvpBtn, 'y', {
+        duration: 0.24,
+        ease: 'power3.out',
+      });
+
+      rsvpBtn.addEventListener('mousemove', (event: MouseEvent) => {
         const rect = rsvpBtn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        rsvpBtn.style.transform = `translate(${x * 0.08}px, ${y * 0.08 - 2}px)`;
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        moveX(x * 0.07);
+        moveY(y * 0.06 - 2);
       });
-      rsvpBtn.addEventListener('mouseleave', () => {
-        rsvpBtn.style.transform = '';
-      });
-    }
 
-    // ── Wedding countdown ──
+      rsvpBtn.addEventListener('mouseleave', () => {
+        moveX(0);
+        moveY(0);
+      });
+    };
+
+    const applyReducedMotionState = () => {
+      heroSection?.classList.add('hero-section--loaded');
+      showImmediately(revealElements);
+      showImmediately(heroCats);
+      syncNavState();
+      window.addEventListener('scroll', syncNavState, { passive: true });
+    };
+
+    window.addEventListener(
+      'intro-done',
+      (event) => {
+        const eventTier =
+          event instanceof CustomEvent && typeof event.detail?.tier === 'string'
+            ? (event.detail.tier as 'reduced' | 'lite' | 'full')
+            : getMotionTier();
+
+        if (eventTier === 'reduced') {
+          applyReducedMotionState();
+          return;
+        }
+
+        const heroRevealDistance = eventTier === 'full' ? 34 : 18;
+
+        gsap.set(heroReveals, { autoAlpha: 0, y: heroRevealDistance });
+        if (eventTier === 'full') {
+          gsap.set(heroCats, {
+            autoAlpha: 0,
+            y: 16,
+            scale: 0.92,
+            filter: 'blur(8px)',
+          });
+        } else {
+          gsap.set(heroCats, { autoAlpha: 1, y: 0, scale: 1, filter: 'none' });
+        }
+
+        const heroTimeline = gsap.timeline({
+          defaults: { ease: 'power3.out' },
+          onComplete: () => {
+            markVisible(heroReveals);
+            if (eventTier !== 'full') {
+              markVisible(heroCats);
+            }
+            setupHeroScrollMotion(eventTier);
+            setupHeroScrollCue(eventTier);
+            setupSignatureMotion(eventTier);
+            setupMagneticButton(eventTier);
+            window.requestAnimationFrame(() => ScrollTrigger.refresh());
+          },
+        });
+
+        heroTimeline.to(heroReveals, {
+          autoAlpha: 1,
+          y: 0,
+          duration: eventTier === 'full' ? 0.75 : 0.52,
+          stagger: eventTier === 'full' ? 0.12 : 0.08,
+        });
+
+        if (eventTier === 'full' && heroCats.length > 0) {
+          heroTimeline.to(
+            heroCats,
+            {
+              autoAlpha: 1,
+              y: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+              duration: 0.72,
+              stagger: 0.08,
+            },
+            '-=0.42',
+          );
+        }
+      },
+      { once: true },
+    );
+
     const WEDDING_DATE = new Date('2026-05-02T09:00:00+07:00');
     const cdDays = document.getElementById('cd-days');
     const cdHours = document.getElementById('cd-hours');
@@ -3319,25 +3878,6 @@ try {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ── Floating gallery widget ──
-    const galleryWidget = document.querySelector(
-      '.gallery-teaser--floating',
-    ) as HTMLDetailsElement | null;
-    if (galleryWidget) {
-      document.addEventListener('click', (event) => {
-        const target = event.target as Node | null;
-        if (target && !galleryWidget.contains(target)) {
-          galleryWidget.removeAttribute('open');
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          galleryWidget.removeAttribute('open');
-        }
-      });
-    }
-
     const getActiveLanguage = () =>
       document.documentElement.getAttribute('data-lang') === 'en'
         ? 'en'
@@ -3366,7 +3906,6 @@ try {
       });
     };
 
-    // ── Language toggle ──
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
       document.documentElement.setAttribute('data-lang', 'en');
@@ -3389,7 +3928,6 @@ try {
       });
     }
 
-    // ── Wedding wish form ──
     const wishForm = document.getElementById(
       'wish-form',
     ) as HTMLFormElement | null;
@@ -3415,19 +3953,20 @@ try {
     const wishSubmit = wishForm?.querySelector(
       '.wish-submit',
     ) as HTMLButtonElement | null;
-    let activeWishIndex = 0;
+    let wishDeckTween: gsap.core.Tween | null = null;
+    let wishAutoAdvanceTimer: number | null = null;
 
     const wishMessages = {
       mix: {
         validation: 'Mohon isi nama dan ucapan terlebih dahulu.',
         pending: 'Ucapan Anda sedang kami kirim...',
-        success: 'Terima kasih. Ucapan Anda sudah tampil di buku ucapan.',
+        success: 'Terima kasih. Ucapan Anda kini hadir di buku ucapan kami.',
         error: 'Maaf, ucapan belum bisa dikirim sekarang.',
       },
       en: {
         validation: 'Please enter your name and message first.',
         pending: 'Sending your wish...',
-        success: 'Thank you. Your note is now live in the guestbook.',
+        success: 'Thank you. Your note now lives in our guestbook.',
         error: 'Sorry, your wish could not be sent right now.',
       },
     } as const;
@@ -3436,15 +3975,35 @@ try {
       if (!wishStatus) return;
 
       if (state === 'idle') {
+        gsap.killTweensOf(wishStatus);
         wishStatus.textContent = '';
         wishStatus.classList.add('hidden');
         wishStatus.removeAttribute('data-state');
+        gsap.set(wishStatus, { clearProps: 'all' });
         return;
       }
 
       wishStatus.dataset.state = state;
       wishStatus.textContent = wishMessages[getActiveLanguage()][state];
       wishStatus.classList.remove('hidden');
+
+      gsap.killTweensOf(wishStatus);
+      gsap.fromTo(
+        wishStatus,
+        {
+          autoAlpha: 0,
+          y: state === 'success' ? 18 : 10,
+          scale: state === 'success' ? 0.985 : 0.995,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: state === 'success' ? 0.46 : 0.26,
+          ease: state === 'success' ? 'power3.out' : 'power2.out',
+          overwrite: 'auto',
+        },
+      );
     };
 
     const getWishCards = () =>
@@ -3452,42 +4011,149 @@ try {
         ? Array.from(wishList.querySelectorAll<HTMLElement>('[data-wish-id]'))
         : [];
 
+    const applyWishCardStates = (
+      cards: HTMLElement[],
+      motionTier: 'reduced' | 'lite' | 'full',
+    ) => {
+      cards.forEach((card, index) => {
+        card.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+      });
+
+      if (motionTier === 'reduced') {
+        gsap.set(cards, {
+          scale: (index: number) => (index === 0 ? 1 : 0.965),
+          opacity: (index: number) => (index === 0 ? 1 : 0.68),
+        });
+        return;
+      }
+
+      gsap.to(cards, {
+        scale: (index: number) => (index === 0 ? 1 : 0.965),
+        opacity: (index: number) => (index === 0 ? 1 : 0.68),
+        duration: motionTier === 'full' ? 0.26 : 0.18,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    };
+
+    const getWishStep = (cards: HTMLElement[]) => {
+      if (cards.length < 2) {
+        return cards[0]?.getBoundingClientRect().width ?? 0;
+      }
+
+      return cards[1].offsetLeft - cards[0].offsetLeft;
+    };
+
     const syncWishDeck = () => {
       if (!wishList) return;
 
       const cards = getWishCards();
       const total = cards.length;
+      const motionTier = getMotionTier();
 
       if (wishEmpty) {
         wishEmpty.classList.toggle('hidden', total > 0);
       }
 
       if (total === 0) {
-        activeWishIndex = 0;
-        wishList.style.transform = 'translate3d(0, 0, 0)';
+        wishDeckTween?.kill();
+        gsap.set(wishList, { x: 0 });
         wishList.classList.add('wish-list--solo');
         if (wishPrev) wishPrev.disabled = true;
         if (wishNext) wishNext.disabled = true;
         return;
       }
 
-      activeWishIndex = ((activeWishIndex % total) + total) % total;
       wishList.classList.toggle('wish-list--solo', total === 1);
 
-      const activeCard = cards[activeWishIndex];
-      const offset = activeCard?.offsetLeft ?? 0;
-      wishList.style.transform = `translate3d(${-offset}px, 0, 0)`;
-
-      cards.forEach((card, index) => {
-        card.setAttribute(
-          'aria-hidden',
-          index === activeWishIndex ? 'false' : 'true',
-        );
-      });
+      wishDeckTween?.kill();
+      gsap.set(wishList, { x: 0 });
+      applyWishCardStates(cards, motionTier);
 
       const canCycle = total > 1;
       if (wishPrev) wishPrev.disabled = !canCycle;
       if (wishNext) wishNext.disabled = !canCycle;
+    };
+
+    const rotateWishDeck = (
+      direction: -1 | 1,
+      options?: { restartAuto?: boolean },
+    ) => {
+      if (!wishList) return;
+
+      const total = getWishCards().length;
+      if (total < 2) {
+        if (options?.restartAuto) startWishAutoAdvance();
+        return;
+      }
+
+      const motionTier = getMotionTier();
+      const immediate = motionTier === 'reduced';
+
+      wishDeckTween?.kill();
+
+      if (direction === 1) {
+        const cards = getWishCards();
+        const firstCard = cards[0];
+        const step = getWishStep(cards);
+
+        if (!firstCard || step === 0) {
+          wishList.appendChild(firstCard);
+          syncWishDeck();
+          if (options?.restartAuto) startWishAutoAdvance();
+          return;
+        }
+
+        if (immediate) {
+          wishList.appendChild(firstCard);
+          syncWishDeck();
+          if (options?.restartAuto) startWishAutoAdvance();
+          return;
+        }
+
+        wishDeckTween = gsap.to(wishList, {
+          x: -step,
+          duration: motionTier === 'full' ? 0.34 : 0.22,
+          ease: motionTier === 'full' ? 'power3.inOut' : 'power2.out',
+          overwrite: 'auto',
+          onComplete: () => {
+            wishList.appendChild(firstCard);
+            gsap.set(wishList, { x: 0 });
+            syncWishDeck();
+            if (options?.restartAuto) startWishAutoAdvance();
+          },
+        });
+        return;
+      }
+
+      const lastCard = getWishCards().at(-1);
+      if (!lastCard) {
+        if (options?.restartAuto) startWishAutoAdvance();
+        return;
+      }
+
+      wishList.insertBefore(lastCard, wishList.firstChild);
+      const cardsAfterPrepend = getWishCards();
+      const step = getWishStep(cardsAfterPrepend);
+
+      if (immediate || step === 0) {
+        gsap.set(wishList, { x: 0 });
+        syncWishDeck();
+        if (options?.restartAuto) startWishAutoAdvance();
+        return;
+      }
+
+      gsap.set(wishList, { x: -step });
+      wishDeckTween = gsap.to(wishList, {
+        x: 0,
+        duration: motionTier === 'full' ? 0.34 : 0.22,
+        ease: motionTier === 'full' ? 'power3.inOut' : 'power2.out',
+        overwrite: 'auto',
+        onComplete: () => {
+          syncWishDeck();
+          if (options?.restartAuto) startWishAutoAdvance();
+        },
+      });
     };
 
     const formatWishCardDate = (timestamp: number, language: 'mix' | 'en') =>
@@ -3530,6 +4196,66 @@ try {
       return card;
     };
 
+    const animateInsertedWishCard = (card: HTMLElement) => {
+      const motionTier = getMotionTier();
+      if (motionTier === 'reduced') return;
+
+      gsap.fromTo(
+        card,
+        {
+          autoAlpha: 0,
+          y: motionTier === 'full' ? 18 : 10,
+          scale: motionTier === 'full' ? 0.985 : 0.992,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: motionTier === 'full' ? 0.42 : 0.24,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        },
+      );
+    };
+
+    const animateWishSubmitRelease = () => {
+      if (!wishSubmit || getMotionTier() === 'reduced') return;
+
+      gsap.fromTo(
+        wishSubmit,
+        {
+          scale: 0.985,
+          y: 1,
+        },
+        {
+          scale: 1,
+          y: 0,
+          duration: 0.28,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        },
+      );
+    };
+
+    const stopWishAutoAdvance = () => {
+      if (wishAutoAdvanceTimer === null) return;
+      window.clearTimeout(wishAutoAdvanceTimer);
+      wishAutoAdvanceTimer = null;
+    };
+
+    const startWishAutoAdvance = () => {
+      if (!wishList) return;
+
+      stopWishAutoAdvance();
+
+      const total = getWishCards().length;
+      if (total < 2 || getMotionTier() === 'reduced') return;
+
+      wishAutoAdvanceTimer = window.setTimeout(() => {
+        rotateWishDeck(1, { restartAuto: true });
+      }, 4200);
+    };
+
     const isWishSubmissionPayload = (
       value: unknown,
     ): value is {
@@ -3560,8 +4286,8 @@ try {
       const moveWishDeck = (direction: -1 | 1) => {
         const total = getWishCards().length;
         if (total < 2) return;
-        activeWishIndex = (activeWishIndex + direction + total) % total;
-        syncWishDeck();
+        stopWishAutoAdvance();
+        rotateWishDeck(direction, { restartAuto: true });
       };
 
       wishPrev?.addEventListener('click', () => moveWishDeck(-1));
@@ -3600,10 +4326,28 @@ try {
       );
 
       window.addEventListener('resize', syncWishDeck);
+      window.addEventListener('resize', startWishAutoAdvance);
+
+      if (wishStage) {
+        wishStage.addEventListener('mouseenter', stopWishAutoAdvance);
+        wishStage.addEventListener('mouseleave', startWishAutoAdvance);
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stopWishAutoAdvance();
+          return;
+        }
+
+        startWishAutoAdvance();
+      });
+
+      startWishAutoAdvance();
 
       wishForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         setWishStatus('idle');
+        stopWishAutoAdvance();
 
         const formData = new FormData(wishForm);
         const name = String(formData.get('name') ?? '').trim();
@@ -3638,47 +4382,24 @@ try {
             throw new Error('Guestbook submission failed');
           }
 
+          const insertedCard = createWishCard(payload.wish);
           wishEmpty?.classList.add('hidden');
-          wishList.insertAdjacentElement(
-            'afterbegin',
-            createWishCard(payload.wish),
-          );
-          activeWishIndex = 0;
+          wishList.insertAdjacentElement('afterbegin', insertedCard);
           syncWishDeck();
           wishForm.reset();
           syncWishFieldPlaceholders();
           setWishStatus('success');
+          animateInsertedWishCard(insertedCard);
         } catch (error) {
           console.error('Failed to submit wedding wish', error);
           setWishStatus('error');
         } finally {
           wishSubmit.disabled = false;
           wishSubmit.removeAttribute('aria-busy');
+          animateWishSubmitRelease();
+          startWishAutoAdvance();
         }
       });
     }
-
-    // ── Section heading tilt on mouse move ──
-    const tiltSections = document.querySelectorAll(
-      '#details, #access',
-    ) as NodeListOf<HTMLElement>;
-    tiltSections.forEach((section) => {
-      const heading = section.querySelector('h2') as HTMLElement | null;
-      if (!heading) return;
-      section.addEventListener('mousemove', (e: MouseEvent) => {
-        const rect = section.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        heading.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 2}deg)`;
-      });
-      section.addEventListener('mouseleave', () => {
-        heading.style.transform = '';
-        heading.style.transition =
-          'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-        setTimeout(() => {
-          heading.style.transition = '';
-        }, 500);
-      });
-    });
   </script>
 </Layout>
