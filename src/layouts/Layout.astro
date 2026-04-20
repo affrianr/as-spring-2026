@@ -713,5 +713,204 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         syncCurrentIndex();
       }
     </script>
+
+    <!-- ── Souvenir Voucher FAB ── -->
+    <style>
+      #voucher-fab {
+        position: fixed;
+        bottom: calc(1.25rem + env(safe-area-inset-bottom));
+        left: calc(1.25rem + env(safe-area-inset-left));
+        z-index: 45;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        background: #e1ff00;
+        color: #1a1a1a;
+        font-size: 1.5rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      #voucher-fab:hover {
+        transform: scale(1.08) translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+      }
+      @media (max-width: 639px) {
+        #voucher-fab { width: 3.75rem; height: 3.75rem; font-size: 1.35rem; }
+      }
+
+      #voucher-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      #voucher-modal[hidden] { display: none; }
+
+      #voucher-modal__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.72);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      #voucher-modal__card {
+        position: relative;
+        z-index: 1;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        max-width: 320px;
+        width: 100%;
+      }
+
+      #voucher-modal__close {
+        align-self: flex-end;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 50%;
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      #voucher-modal__close:hover { background: rgba(255, 255, 255, 0.28); }
+
+      #voucher-polaroid {
+        background: #ffffff;
+        padding: 0.85rem 0.85rem 3rem;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        transform: rotate(-1.5deg);
+        width: 100%;
+      }
+      #voucher-polaroid__img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 1 / 1;
+      }
+      #voucher-polaroid__name {
+        margin-top: 0.6rem;
+        text-align: center;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-size: 1.05rem;
+        color: #1a1a1a;
+        min-height: 1.5em;
+        letter-spacing: 0.02em;
+      }
+
+      #voucher-modal__download {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: #e1ff00;
+        color: #1a1a1a;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 0.65rem 1.5rem;
+        border-radius: 2rem;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(225, 255, 0, 0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      #voucher-modal__download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(225, 255, 0, 0.4);
+      }
+    </style>
+
+    <button id="voucher-fab" aria-label="Lihat Voucher Suvenir" title="Voucher Suvenir">🎁</button>
+
+    <div id="voucher-modal" role="dialog" aria-modal="true" aria-label="Voucher Suvenir" hidden>
+      <div id="voucher-modal__backdrop"></div>
+      <div id="voucher-modal__card">
+        <button id="voucher-modal__close" aria-label="Tutup">✕</button>
+        <div id="voucher-polaroid">
+          <img id="voucher-polaroid__img" src="/assets/voucher.webp" alt="Voucher Suvenir" crossorigin="anonymous" />
+          <p id="voucher-polaroid__name"></p>
+        </div>
+        <a id="voucher-modal__download" download="voucher-suvenir.png">↓ Simpan Voucher</a>
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        const fab = document.getElementById('voucher-fab') as HTMLButtonElement;
+        const modal = document.getElementById('voucher-modal') as HTMLDivElement;
+        const closeBtn = document.getElementById('voucher-modal__close') as HTMLButtonElement;
+        const backdrop = document.getElementById('voucher-modal__backdrop') as HTMLDivElement;
+        const nameEl = document.getElementById('voucher-polaroid__name') as HTMLParagraphElement;
+        const downloadLink = document.getElementById('voucher-modal__download') as HTMLAnchorElement;
+
+        const params = new URLSearchParams(location.search);
+        const guestName =
+          params.get('to') ||
+          (() => { try { return sessionStorage.getItem('wedding-guest-name'); } catch { return null; } })() ||
+          '';
+        if (guestName) nameEl.textContent = guestName;
+
+        async function buildPolaroidDataUrl(name: string): Promise<string> {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.src = '/assets/voucher.webp';
+            img.onload = () => {
+              const PAD = 48;
+              const BOTTOM = 120;
+              const W = img.naturalWidth + PAD * 2;
+              const H = img.naturalHeight + PAD + BOTTOM;
+              const canvas = document.createElement('canvas');
+              canvas.width = W;
+              canvas.height = H;
+              const ctx = canvas.getContext('2d')!;
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, W, H);
+              ctx.drawImage(img, PAD, PAD, img.naturalWidth, img.naturalHeight);
+              if (name) {
+                ctx.fillStyle = '#1a1a1a';
+                ctx.font = `italic 36px 'Playfair Display', Georgia, serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(name, W / 2, img.naturalHeight + PAD + 70);
+              }
+              resolve(canvas.toDataURL('image/png'));
+            };
+            img.onerror = () => resolve('');
+          });
+        }
+
+        fab.addEventListener('click', async () => {
+          modal.hidden = false;
+          document.body.style.overflow = 'hidden';
+          const dataUrl = await buildPolaroidDataUrl(guestName);
+          if (dataUrl) downloadLink.href = dataUrl;
+        });
+
+        const closeModal = () => {
+          modal.hidden = true;
+          document.body.style.overflow = '';
+        };
+        closeBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+      })();
+    </script>
   </body>
 </html>
