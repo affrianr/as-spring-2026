@@ -793,7 +793,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
 
       #voucher-polaroid {
         background: #ffffff;
-        padding: 0.85rem 0.85rem 3rem;
+        padding: 0.85rem 0.85rem 4.35rem;
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
         transform: rotate(-1.5deg);
         width: 100%;
@@ -801,17 +801,30 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
       #voucher-polaroid__img {
         width: 100%;
         display: block;
-        object-fit: cover;
-        aspect-ratio: 1 / 1;
+        height: auto;
+        object-fit: contain;
+        aspect-ratio: auto;
+      }
+      #voucher-polaroid__label {
+        margin-top: 1.1rem;
+        text-align: center;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 0.82rem;
+        line-height: 1.1;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(26, 26, 26, 0.68);
       }
       #voucher-polaroid__name {
-        margin-top: 0.6rem;
+        margin-top: 0.45rem;
         text-align: center;
         font-family: 'Playfair Display', Georgia, serif;
         font-style: italic;
-        font-size: 1.05rem;
+        font-size: clamp(1.35rem, 3vw, 1.9rem);
+        line-height: 1.12;
         color: #1a1a1a;
-        min-height: 1.5em;
+        min-height: 2.3em;
+        white-space: pre-line;
         letter-spacing: 0.02em;
       }
 
@@ -853,6 +866,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         <button id="voucher-modal__close" aria-label="Tutup">✕</button>
         <div id="voucher-polaroid">
           <img id="voucher-polaroid__img" src="/assets/voucher.webp" alt="Voucher Suvenir" crossorigin="anonymous" />
+          <p id="voucher-polaroid__label">Just for you,</p>
           <p id="voucher-polaroid__name"></p>
         </div>
         <button id="voucher-modal__download" type="button" disabled>Menyiapkan Voucher...</button>
@@ -880,7 +894,15 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         let preparedName = '';
         let isPreparing = false;
 
+        const VOUCHER_LABEL = 'Just for you,';
         const FILENAME = 'voucher-suvenir.png';
+        const EXPORT_FONT_MAX = 88;
+        const EXPORT_FONT_MIN = 52;
+        const EXPORT_SIDE_INSET = 110;
+        const EXPORT_BOTTOM_BAND = 220;
+        const EXPORT_LINE_HEIGHT = 1.2;
+        const EXPORT_LABEL_SIZE = 34;
+        const EXPORT_LABEL_GAP = 22;
 
         const setDownloadState = (label: string, disabled: boolean) => {
           downloadButton.textContent = label;
@@ -893,6 +915,75 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           preparedUrl = '';
         };
 
+        const setVoucherNamePreview = (name: string, lines: string[]) => {
+          nameEl.textContent = lines.length > 0 ? lines.join('\n') : name;
+        };
+
+        const setCanvasFont = (ctx: CanvasRenderingContext2D, size: number) => {
+          ctx.font = `italic ${size}px 'Playfair Display', Georgia, serif`;
+        };
+
+        const measureLineWidth = (ctx: CanvasRenderingContext2D, line: string, size: number) => {
+          setCanvasFont(ctx, size);
+          return ctx.measureText(line).width;
+        };
+
+        const fitLineSize = (ctx: CanvasRenderingContext2D, line: string, maxWidth: number) => {
+          let size = EXPORT_FONT_MAX;
+          while (size > EXPORT_FONT_MIN && measureLineWidth(ctx, line, size) > maxWidth) size -= 2;
+          return size;
+        };
+
+        const pickTwoLineSplit = (ctx: CanvasRenderingContext2D, name: string, maxWidth: number) => {
+          const words = name.trim().split(/\s+/).filter(Boolean);
+          if (words.length < 2) return null;
+
+          let best: { lines: string[]; size: number; overflow: number; balance: number } | null = null;
+          for (let index = 1; index < words.length; index += 1) {
+            const lines = [
+              words.slice(0, index).join(' '),
+              words.slice(index).join(' '),
+            ];
+            const longestLine = Math.max(...lines.map((line) => line.length));
+            let size = EXPORT_FONT_MAX;
+            while (
+              size > EXPORT_FONT_MIN &&
+              lines.some((line) => measureLineWidth(ctx, line, size) > maxWidth)
+            ) {
+              size -= 2;
+            }
+            const widths = lines.map((line) => measureLineWidth(ctx, line, size));
+            const overflow = Math.max(...widths) - maxWidth;
+            const balance = Math.abs(lines[0].length - lines[1].length);
+            if (
+              !best ||
+              size > best.size ||
+              (size === best.size && overflow < best.overflow) ||
+              (size === best.size && overflow === best.overflow && balance < best.balance)
+            ) {
+              best = { lines, size, overflow, balance };
+            }
+          }
+          return best;
+        };
+
+        const getNameLayout = (ctx: CanvasRenderingContext2D, name: string, maxWidth: number) => {
+          const trimmedName = name.trim();
+          if (!trimmedName) return { lines: [], fontSize: EXPORT_FONT_MAX };
+
+          const singleLineSize = fitLineSize(ctx, trimmedName, maxWidth);
+          if (measureLineWidth(ctx, trimmedName, singleLineSize) <= maxWidth) {
+            return { lines: [trimmedName], fontSize: singleLineSize };
+          }
+
+          const splitLayout = pickTwoLineSplit(ctx, trimmedName, maxWidth);
+          if (splitLayout) {
+            return { lines: splitLayout.lines, fontSize: splitLayout.size };
+          }
+
+          return { lines: [trimmedName], fontSize: EXPORT_FONT_MIN };
+        };
+
         async function buildPolaroidBlob(name: string): Promise<Blob | null> {
           return new Promise((resolve) => {
             const img = new Image();
@@ -900,7 +991,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
             img.src = '/assets/voucher.webp';
             img.onload = async () => {
               const PAD = 48;
-              const BOTTOM = 120;
+              const BOTTOM = EXPORT_BOTTOM_BAND;
               const W = img.naturalWidth + PAD * 2;
               const H = img.naturalHeight + PAD + BOTTOM;
               const canvas = document.createElement('canvas');
@@ -911,10 +1002,27 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
               ctx.fillRect(0, 0, W, H);
               ctx.drawImage(img, PAD, PAD, img.naturalWidth, img.naturalHeight);
               if (name) {
+                const maxTextWidth = W - (EXPORT_SIDE_INSET * 2);
+                const layout = getNameLayout(ctx, name, maxTextWidth);
+                const labelLineHeight = EXPORT_LABEL_SIZE * 1.1;
+                const lineHeight = layout.fontSize * EXPORT_LINE_HEIGHT;
+                const bandTop = img.naturalHeight + PAD;
+                const textBlockHeight = labelLineHeight + EXPORT_LABEL_GAP + (lineHeight * layout.lines.length);
+                const labelY = bandTop + ((BOTTOM - textBlockHeight) / 2) + EXPORT_LABEL_SIZE;
+                const firstLineY = labelY + EXPORT_LABEL_GAP + layout.fontSize;
+
                 ctx.fillStyle = '#1a1a1a';
-                ctx.font = `italic 36px 'Playfair Display', Georgia, serif`;
                 ctx.textAlign = 'center';
-                ctx.fillText(name, W / 2, img.naturalHeight + PAD + 70);
+                ctx.textBaseline = 'alphabetic';
+                ctx.font = `${EXPORT_LABEL_SIZE}px 'Playfair Display', Georgia, serif`;
+                ctx.fillStyle = 'rgba(26, 26, 26, 0.68)';
+                ctx.fillText(VOUCHER_LABEL, W / 2, labelY);
+
+                ctx.fillStyle = '#1a1a1a';
+                setCanvasFont(ctx, layout.fontSize);
+                layout.lines.forEach((line, index) => {
+                  ctx.fillText(line, W / 2, firstLineY + (index * lineHeight));
+                });
               }
               resolve(await new Promise((blobResolve) => canvas.toBlob(blobResolve, 'image/png')));
             };
@@ -949,6 +1057,14 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         };
 
         fab.addEventListener('click', () => {
+          const previewCanvas = document.createElement('canvas');
+          const previewCtx = previewCanvas.getContext('2d');
+          if (previewCtx) {
+            const previewLayout = getNameLayout(previewCtx, guestName, 920);
+            setVoucherNamePreview(guestName, previewLayout.lines);
+          } else {
+            setVoucherNamePreview(guestName, []);
+          }
           modal.hidden = false;
           document.body.style.overflow = 'hidden';
           void prepareVoucher();
