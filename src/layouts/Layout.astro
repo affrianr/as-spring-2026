@@ -27,7 +27,10 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL('/assets/rich-preview.webp', Astro.url).href} />
+    <meta
+      property="og:image"
+      content={new URL('/assets/rich-preview.webp', Astro.url).href}
+    />
     <meta property="og:image:width" content="375" />
     <meta property="og:image:height" content="375" />
     <meta property="og:image:alt" content={`${title} — Wedding Invitation`} />
@@ -36,7 +39,10 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/assets/rich-preview.webp', Astro.url).href} />
+    <meta
+      name="twitter:image"
+      content={new URL('/assets/rich-preview.webp', Astro.url).href}
+    />
     <style>
       /* ── Cover page ── */
       #page-cover {
@@ -245,7 +251,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
     <!-- Cover page — user must click to enter -->
     <div id="page-cover">
       <p class="cover__greeting">With joy & love</p>
-      <p class="cover__guest" id="cover-guest-name">Guest</p>
+      <p class="cover__guest" id="cover-guest-name">Our dear friend</p>
       <p class="cover__subtitle">We invite you to celebrate our special day</p>
       <button
         id="cover-open"
@@ -283,11 +289,21 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       window.scrollTo(0, 0);
 
-      const pageCover = document.getElementById('page-cover') as HTMLDivElement | null;
-      const guestEl = document.getElementById('cover-guest-name') as HTMLElement | null;
-      const openBtn = document.getElementById('cover-open') as HTMLButtonElement | null;
-      const openBtnLabel = document.getElementById('cover-open-label') as HTMLElement | null;
-      const pageIntro = document.getElementById('page-intro') as HTMLDivElement | null;
+      const pageCover = document.getElementById(
+        'page-cover',
+      ) as HTMLDivElement | null;
+      const guestEl = document.getElementById(
+        'cover-guest-name',
+      ) as HTMLElement | null;
+      const openBtn = document.getElementById(
+        'cover-open',
+      ) as HTMLButtonElement | null;
+      const openBtnLabel = document.getElementById(
+        'cover-open-label',
+      ) as HTMLElement | null;
+      const pageIntro = document.getElementById(
+        'page-intro',
+      ) as HTMLDivElement | null;
       const panelLeft = document.querySelector(
         '.page-intro__panel--left',
       ) as HTMLDivElement | null;
@@ -295,7 +311,9 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         '.page-intro__panel--right',
       ) as HTMLDivElement | null;
       const heroSection = document.getElementById('home') as HTMLElement | null;
-      const bgMusic = document.getElementById('bg-music') as HTMLAudioElement | null;
+      const bgMusic = document.getElementById(
+        'bg-music',
+      ) as HTMLAudioElement | null;
       const musicToggle = document.getElementById(
         'music-toggle',
       ) as HTMLButtonElement | null;
@@ -307,14 +325,20 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
       const prefersReducedMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)',
       );
-      const liteMotionMedia = window.matchMedia('(max-width: 767px), (pointer: coarse)');
+      const liteMotionMedia = window.matchMedia(
+        '(max-width: 767px), (pointer: coarse)',
+      );
 
       const COVER_DISMISSED_KEY = 'wedding-cover-dismissed';
       const GUEST_NAME_KEY = 'wedding-guest-name';
       const MUTE_PREF_KEY = 'wedding-music-muted';
 
       const getIntroTier = () =>
-        prefersReducedMotion.matches ? 'reduced' : liteMotionMedia.matches ? 'lite' : 'full';
+        prefersReducedMotion.matches
+          ? 'reduced'
+          : liteMotionMedia.matches
+            ? 'lite'
+            : 'full';
 
       let coverScrollY = 0;
       const coverScrollKeys = new Set([
@@ -342,7 +366,9 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         document.body.style.position = 'fixed';
         document.body.style.inset = `-${coverScrollY}px 0 0 0`;
         document.body.style.width = '100%';
-        window.addEventListener('wheel', preventCoverScroll, { passive: false });
+        window.addEventListener('wheel', preventCoverScroll, {
+          passive: false,
+        });
         window.addEventListener('touchmove', preventCoverScroll, {
           passive: false,
         });
@@ -377,6 +403,8 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         syncMuteUi();
       };
 
+      const DEFAULT_GUEST_NAME = 'Our dear friend';
+
       if (bgMusic) {
         bgMusic.muted = window.localStorage.getItem(MUTE_PREF_KEY) === 'true';
       }
@@ -405,8 +433,10 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         } catch {}
       }
 
-      if (guestEl && persistedGuestName) {
-        guestEl.textContent = decodeURIComponent(persistedGuestName);
+      if (guestEl) {
+        guestEl.textContent = decodeURIComponent(
+          persistedGuestName || DEFAULT_GUEST_NAME,
+        );
       }
 
       if (persistedGuestName && !guestName) {
@@ -499,14 +529,22 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         pageCover?.remove();
         pageIntro?.remove();
         window.dispatchEvent(
-          new CustomEvent('intro-done', { detail: { tier, reduced: tier === 'reduced' } }),
+          new CustomEvent('intro-done', {
+            detail: { tier, reduced: tier === 'reduced' },
+          }),
         );
       };
 
       const playIntroTimeline = () => {
         const tier = getIntroTier();
 
-        if (tier === 'reduced' || !pageCover || !pageIntro || !panelLeft || !panelRight) {
+        if (
+          tier === 'reduced' ||
+          !pageCover ||
+          !pageIntro ||
+          !panelLeft ||
+          !panelRight
+        ) {
           finishIntro(tier);
           return;
         }
@@ -733,14 +771,20 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
       }
       #voucher-fab:hover {
         transform: scale(1.08) translateY(-2px);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
       }
       @media (max-width: 639px) {
-        #voucher-fab { width: 3.75rem; height: 3.75rem; font-size: 1.35rem; }
+        #voucher-fab {
+          width: 3.75rem;
+          height: 3.75rem;
+          font-size: 1.35rem;
+        }
       }
 
       #voucher-modal {
@@ -752,7 +796,9 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         justify-content: center;
         padding: 1rem;
       }
-      #voucher-modal[hidden] { display: none; }
+      #voucher-modal[hidden] {
+        display: none;
+      }
 
       #voucher-modal__backdrop {
         position: absolute;
@@ -789,7 +835,9 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         justify-content: center;
         transition: background 0.2s;
       }
-      #voucher-modal__close:hover { background: rgba(255, 255, 255, 0.28); }
+      #voucher-modal__close:hover {
+        background: rgba(255, 255, 255, 0.28);
+      }
 
       #voucher-polaroid {
         background: #ffffff;
@@ -842,7 +890,9 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         border-radius: 2rem;
         text-decoration: none;
         box-shadow: 0 4px 14px rgba(225, 255, 0, 0.3);
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         border: 0;
         cursor: pointer;
       }
@@ -858,43 +908,60 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
       }
     </style>
 
-    <button id="voucher-fab" aria-label="Lihat Voucher Suvenir" title="Voucher Suvenir">🎁</button>
+    <button
+      id="voucher-fab"
+      aria-label="Lihat Voucher Suvenir"
+      title="Voucher Suvenir">🎁</button
+    >
 
-    <div id="voucher-modal" role="dialog" aria-modal="true" aria-label="Voucher Suvenir" hidden>
+    <div
+      id="voucher-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Voucher Suvenir"
+      hidden
+    >
       <div id="voucher-modal__backdrop"></div>
       <div id="voucher-modal__card">
         <button id="voucher-modal__close" aria-label="Tutup">✕</button>
         <div id="voucher-polaroid">
-          <img id="voucher-polaroid__img" src="/assets/voucher.webp" alt="Voucher Suvenir" crossorigin="anonymous" />
+          <img
+            id="voucher-polaroid__img"
+            src="/assets/voucher.webp"
+            alt="Voucher Suvenir"
+            crossorigin="anonymous"
+          />
           <p id="voucher-polaroid__label">Just for you,</p>
           <p id="voucher-polaroid__name"></p>
         </div>
-        <button id="voucher-modal__download" type="button" disabled>Menyiapkan Voucher...</button>
+        <button id="voucher-modal__download" type="button" disabled
+          >Menyiapkan Voucher...</button
+        >
       </div>
     </div>
 
     <script>
       (() => {
         const fab = document.getElementById('voucher-fab') as HTMLButtonElement;
-        const modal = document.getElementById('voucher-modal') as HTMLDivElement;
-        const closeBtn = document.getElementById('voucher-modal__close') as HTMLButtonElement;
-        const backdrop = document.getElementById('voucher-modal__backdrop') as HTMLDivElement;
-        const nameEl = document.getElementById('voucher-polaroid__name') as HTMLParagraphElement;
-        const downloadButton = document.getElementById('voucher-modal__download') as HTMLButtonElement;
+        const modal = document.getElementById(
+          'voucher-modal',
+        ) as HTMLDivElement;
+        const closeBtn = document.getElementById(
+          'voucher-modal__close',
+        ) as HTMLButtonElement;
+        const backdrop = document.getElementById(
+          'voucher-modal__backdrop',
+        ) as HTMLDivElement;
+        const nameEl = document.getElementById(
+          'voucher-polaroid__name',
+        ) as HTMLParagraphElement;
+        const downloadButton = document.getElementById(
+          'voucher-modal__download',
+        ) as HTMLButtonElement;
 
         const params = new URLSearchParams(location.search);
-        const guestName =
-          params.get('to') ||
-          (() => { try { return sessionStorage.getItem('wedding-guest-name'); } catch { return null; } })() ||
-          '';
-        if (guestName) nameEl.textContent = guestName;
-
-        let preparedBlob: Blob | null = null;
-        let preparedUrl = '';
-        let preparedName = '';
-        let isPreparing = false;
-
         const VOUCHER_LABEL = 'Just for you,';
+        const DEFAULT_GUEST_NAME = 'Our dear friend';
         const FILENAME = 'voucher-suvenir.png';
         const EXPORT_FONT_MAX = 168;
         const EXPORT_FONT_MIN = 96;
@@ -903,6 +970,22 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         const EXPORT_LINE_HEIGHT = 1.08;
         const EXPORT_LABEL_SIZE = 40;
         const EXPORT_LABEL_GAP = 18;
+        const guestName =
+          params.get('to')?.trim() ||
+          (() => {
+            try {
+              return sessionStorage.getItem('wedding-guest-name')?.trim() ?? '';
+            } catch {
+              return '';
+            }
+          })() ||
+          DEFAULT_GUEST_NAME;
+        nameEl.textContent = guestName;
+
+        let preparedBlob: Blob | null = null;
+        let preparedUrl = '';
+        let preparedName = '';
+        let isPreparing = false;
 
         const setDownloadState = (label: string, disabled: boolean) => {
           downloadButton.textContent = label;
@@ -923,22 +1006,43 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           ctx.font = `italic 500 ${size}px 'Playfair Display', Georgia, serif`;
         };
 
-        const measureLineWidth = (ctx: CanvasRenderingContext2D, line: string, size: number) => {
+        const measureLineWidth = (
+          ctx: CanvasRenderingContext2D,
+          line: string,
+          size: number,
+        ) => {
           setCanvasFont(ctx, size);
           return ctx.measureText(line).width;
         };
 
-        const fitLineSize = (ctx: CanvasRenderingContext2D, line: string, maxWidth: number) => {
+        const fitLineSize = (
+          ctx: CanvasRenderingContext2D,
+          line: string,
+          maxWidth: number,
+        ) => {
           let size = EXPORT_FONT_MAX;
-          while (size > EXPORT_FONT_MIN && measureLineWidth(ctx, line, size) > maxWidth) size -= 2;
+          while (
+            size > EXPORT_FONT_MIN &&
+            measureLineWidth(ctx, line, size) > maxWidth
+          )
+            size -= 2;
           return size;
         };
 
-        const pickTwoLineSplit = (ctx: CanvasRenderingContext2D, name: string, maxWidth: number) => {
+        const pickTwoLineSplit = (
+          ctx: CanvasRenderingContext2D,
+          name: string,
+          maxWidth: number,
+        ) => {
           const words = name.trim().split(/\s+/).filter(Boolean);
           if (words.length < 2) return null;
 
-          let best: { lines: string[]; size: number; overflow: number; balance: number } | null = null;
+          let best: {
+            lines: string[];
+            size: number;
+            overflow: number;
+            balance: number;
+          } | null = null;
           for (let index = 1; index < words.length; index += 1) {
             const lines = [
               words.slice(0, index).join(' '),
@@ -952,14 +1056,18 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
             ) {
               size -= 2;
             }
-            const widths = lines.map((line) => measureLineWidth(ctx, line, size));
+            const widths = lines.map((line) =>
+              measureLineWidth(ctx, line, size),
+            );
             const overflow = Math.max(...widths) - maxWidth;
             const balance = Math.abs(lines[0].length - lines[1].length);
             if (
               !best ||
               size > best.size ||
               (size === best.size && overflow < best.overflow) ||
-              (size === best.size && overflow === best.overflow && balance < best.balance)
+              (size === best.size &&
+                overflow === best.overflow &&
+                balance < best.balance)
             ) {
               best = { lines, size, overflow, balance };
             }
@@ -967,7 +1075,11 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           return best;
         };
 
-        const getNameLayout = (ctx: CanvasRenderingContext2D, name: string, maxWidth: number) => {
+        const getNameLayout = (
+          ctx: CanvasRenderingContext2D,
+          name: string,
+          maxWidth: number,
+        ) => {
           const trimmedName = name.trim();
           if (!trimmedName) return { lines: [], fontSize: EXPORT_FONT_MAX };
 
@@ -1002,13 +1114,17 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
               ctx.fillRect(0, 0, W, H);
               ctx.drawImage(img, PAD, PAD, img.naturalWidth, img.naturalHeight);
               if (name) {
-                const maxTextWidth = W - (EXPORT_SIDE_INSET * 2);
+                const maxTextWidth = W - EXPORT_SIDE_INSET * 2;
                 const layout = getNameLayout(ctx, name, maxTextWidth);
                 const labelLineHeight = EXPORT_LABEL_SIZE * 1.1;
                 const lineHeight = layout.fontSize * EXPORT_LINE_HEIGHT;
                 const bandTop = img.naturalHeight + PAD;
-                const textBlockHeight = labelLineHeight + EXPORT_LABEL_GAP + (lineHeight * layout.lines.length);
-                const labelY = bandTop + ((BOTTOM - textBlockHeight) / 2) + EXPORT_LABEL_SIZE;
+                const textBlockHeight =
+                  labelLineHeight +
+                  EXPORT_LABEL_GAP +
+                  lineHeight * layout.lines.length;
+                const labelY =
+                  bandTop + (BOTTOM - textBlockHeight) / 2 + EXPORT_LABEL_SIZE;
                 const firstLineY = labelY + EXPORT_LABEL_GAP + layout.fontSize;
 
                 ctx.fillStyle = '#1a1a1a';
@@ -1021,10 +1137,14 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
                 ctx.fillStyle = '#1a1a1a';
                 setCanvasFont(ctx, layout.fontSize);
                 layout.lines.forEach((line, index) => {
-                  ctx.fillText(line, W / 2, firstLineY + (index * lineHeight));
+                  ctx.fillText(line, W / 2, firstLineY + index * lineHeight);
                 });
               }
-              resolve(await new Promise((blobResolve) => canvas.toBlob(blobResolve, 'image/png')));
+              resolve(
+                await new Promise((blobResolve) =>
+                  canvas.toBlob(blobResolve, 'image/png'),
+                ),
+              );
             };
             img.onerror = () => resolve(null);
           });
@@ -1032,24 +1152,24 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
 
         const prepareVoucher = async () => {
           if (preparedBlob && preparedName === guestName) {
-            setDownloadState('↓ Simpan Voucher', false);
+            setDownloadState('↓ Save Voucher', false);
             return preparedBlob;
           }
           if (isPreparing) return null;
 
           isPreparing = true;
-          setDownloadState('Menyiapkan Voucher...', true);
+          setDownloadState('Preparing Voucher...', true);
           revokePreparedUrl();
 
           try {
             preparedBlob = await buildPolaroidBlob(guestName);
             preparedName = guestName;
             if (!preparedBlob) {
-              setDownloadState('Gagal Menyiapkan Voucher', true);
+              setDownloadState('Failed to Prepare Voucher', true);
               return null;
             }
             preparedUrl = URL.createObjectURL(preparedBlob);
-            setDownloadState('↓ Simpan Voucher', false);
+            setDownloadState('↓ Save Voucher', false);
             return preparedBlob;
           } finally {
             isPreparing = false;
@@ -1071,32 +1191,21 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         });
 
         downloadButton.addEventListener('click', async () => {
-          const blob = preparedBlob ?? await prepareVoucher();
+          const blob = preparedBlob ?? (await prepareVoucher());
           if (!blob) return;
 
-          const file = new File([blob], FILENAME, { type: 'image/png' });
-          const canShareFile =
-            typeof navigator.share === 'function' &&
-            typeof navigator.canShare === 'function' &&
-            navigator.canShare({ files: [file] });
-
-          if (canShareFile) {
-            try {
-              await navigator.share({
-                files: [file],
-                title: 'Voucher Suvenir',
-              });
-              return;
-            } catch (error) {
-              if (error instanceof DOMException && error.name === 'AbortError') return;
-            }
-          }
-
+          const href = preparedUrl || URL.createObjectURL(blob);
+          const shouldRevokeHref = href !== preparedUrl;
           const link = document.createElement('a');
-          link.href = preparedUrl || URL.createObjectURL(blob);
+          link.href = href;
           link.download = FILENAME;
           link.rel = 'noopener';
+          document.body.appendChild(link);
           link.click();
+          link.remove();
+          if (shouldRevokeHref) {
+            window.setTimeout(() => URL.revokeObjectURL(href), 1000);
+          }
         });
 
         const closeModal = () => {
@@ -1105,7 +1214,9 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         };
         closeBtn.addEventListener('click', closeModal);
         backdrop.addEventListener('click', closeModal);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeModal();
+        });
         window.addEventListener('pagehide', revokePreparedUrl);
       })();
     </script>
