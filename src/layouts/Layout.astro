@@ -830,10 +830,18 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         text-decoration: none;
         box-shadow: 0 4px 14px rgba(225, 255, 0, 0.3);
         transition: transform 0.2s, box-shadow 0.2s;
+        border: 0;
+        cursor: pointer;
       }
       #voucher-modal__download:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(225, 255, 0, 0.4);
+      }
+      #voucher-modal__download:disabled {
+        opacity: 0.6;
+        cursor: wait;
+        transform: none;
+        box-shadow: 0 4px 14px rgba(225, 255, 0, 0.2);
       }
     </style>
 
@@ -847,7 +855,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           <img id="voucher-polaroid__img" src="/assets/voucher.webp" alt="Voucher Suvenir" crossorigin="anonymous" />
           <p id="voucher-polaroid__name"></p>
         </div>
-        <a id="voucher-modal__download" download="voucher-suvenir.png">↓ Simpan Voucher</a>
+        <button id="voucher-modal__download" type="button" disabled>Menyiapkan Voucher...</button>
       </div>
     </div>
 
@@ -858,7 +866,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         const closeBtn = document.getElementById('voucher-modal__close') as HTMLButtonElement;
         const backdrop = document.getElementById('voucher-modal__backdrop') as HTMLDivElement;
         const nameEl = document.getElementById('voucher-polaroid__name') as HTMLParagraphElement;
-        const downloadLink = document.getElementById('voucher-modal__download') as HTMLAnchorElement;
+        const downloadButton = document.getElementById('voucher-modal__download') as HTMLButtonElement;
 
         const params = new URLSearchParams(location.search);
         const guestName =
@@ -867,12 +875,30 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
           '';
         if (guestName) nameEl.textContent = guestName;
 
-        async function buildPolaroidDataUrl(name: string): Promise<string> {
+        let preparedBlob: Blob | null = null;
+        let preparedUrl = '';
+        let preparedName = '';
+        let isPreparing = false;
+
+        const FILENAME = 'voucher-suvenir.png';
+
+        const setDownloadState = (label: string, disabled: boolean) => {
+          downloadButton.textContent = label;
+          downloadButton.disabled = disabled;
+        };
+
+        const revokePreparedUrl = () => {
+          if (!preparedUrl) return;
+          URL.revokeObjectURL(preparedUrl);
+          preparedUrl = '';
+        };
+
+        async function buildPolaroidBlob(name: string): Promise<Blob | null> {
           return new Promise((resolve) => {
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.src = '/assets/voucher.webp';
-            img.onload = () => {
+            img.onload = async () => {
               const PAD = 48;
               const BOTTOM = 120;
               const W = img.naturalWidth + PAD * 2;
@@ -890,17 +916,71 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
                 ctx.textAlign = 'center';
                 ctx.fillText(name, W / 2, img.naturalHeight + PAD + 70);
               }
-              resolve(canvas.toDataURL('image/png'));
+              resolve(await new Promise((blobResolve) => canvas.toBlob(blobResolve, 'image/png')));
             };
-            img.onerror = () => resolve('');
+            img.onerror = () => resolve(null);
           });
         }
 
-        fab.addEventListener('click', async () => {
+        const prepareVoucher = async () => {
+          if (preparedBlob && preparedName === guestName) {
+            setDownloadState('↓ Simpan Voucher', false);
+            return preparedBlob;
+          }
+          if (isPreparing) return null;
+
+          isPreparing = true;
+          setDownloadState('Menyiapkan Voucher...', true);
+          revokePreparedUrl();
+
+          try {
+            preparedBlob = await buildPolaroidBlob(guestName);
+            preparedName = guestName;
+            if (!preparedBlob) {
+              setDownloadState('Gagal Menyiapkan Voucher', true);
+              return null;
+            }
+            preparedUrl = URL.createObjectURL(preparedBlob);
+            setDownloadState('↓ Simpan Voucher', false);
+            return preparedBlob;
+          } finally {
+            isPreparing = false;
+          }
+        };
+
+        fab.addEventListener('click', () => {
           modal.hidden = false;
           document.body.style.overflow = 'hidden';
-          const dataUrl = await buildPolaroidDataUrl(guestName);
-          if (dataUrl) downloadLink.href = dataUrl;
+          void prepareVoucher();
+        });
+
+        downloadButton.addEventListener('click', async () => {
+          const blob = preparedBlob ?? await prepareVoucher();
+          if (!blob) return;
+
+          const file = new File([blob], FILENAME, { type: 'image/png' });
+          const canShareFile =
+            typeof navigator.share === 'function' &&
+            typeof navigator.canShare === 'function' &&
+            navigator.canShare({ files: [file] });
+
+          if (canShareFile) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: 'Voucher Suvenir',
+              });
+              return;
+            } catch (error) {
+              if (error instanceof DOMException && error.name === 'AbortError') return;
+            }
+          }
+
+          const link = document.createElement('a');
+          link.href = preparedUrl || URL.createObjectURL(blob);
+          link.download = FILENAME;
+          link.rel = 'noopener';
+          link.click();
         });
 
         const closeModal = () => {
@@ -910,6 +990,7 @@ const { title = 'Affrian & Sherly', description = 'Saturday, May 2nd, 2026' } =
         closeBtn.addEventListener('click', closeModal);
         backdrop.addEventListener('click', closeModal);
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        window.addEventListener('pagehide', revokePreparedUrl);
       })();
     </script>
   </body>
