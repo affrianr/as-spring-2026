@@ -52,10 +52,12 @@ export const GET: APIRoute = async ({ locals, url }) => {
     return json({ error: 'Guestbook storage is not configured.' }, 503);
   }
 
-  const rawLimit = Number.parseInt(url.searchParams.get('limit') ?? '6', 10);
+  const limitParam = url.searchParams.get('limit');
 
   try {
-    const wishes = await listWeddingWishes(db, rawLimit);
+    const wishes = limitParam
+      ? await listWeddingWishes(db, Number.parseInt(limitParam, 10))
+      : await listWeddingWishes(db);
     return json({ wishes });
   } catch (error) {
     console.error('Failed to load wedding wishes', error);

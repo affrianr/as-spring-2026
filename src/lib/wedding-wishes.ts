@@ -20,8 +20,8 @@ interface WeddingWishRow {
 }
 
 const initializedDbs = new WeakSet<D1Database>();
-const DEFAULT_LIMIT = 6;
-const MAX_LIMIT = 20;
+const DEFAULT_LIMIT = 200;
+const MAX_LIMIT = 200;
 const MAX_NAME_LENGTH = 80;
 const MAX_MESSAGE_LENGTH = 500;
 const CREATE_WEDDING_WISHES_TABLE_SQL = `CREATE TABLE IF NOT EXISTS wedding_wishes (

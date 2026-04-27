@@ -5,7 +5,9 @@
       "Bash(rtk grep *)",
       "Bash(rtk wc *)",
       "Bash(rtk tree *)",
-      "Bash(bun run *)"
+      "Bash(bun run *)",
+      "Bash(rtk find *)",
+      "Bash(rtk git *)"
     ]
   }
 }
